@@ -1,0 +1,60 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-29
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+      - run:
+          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+          command: sudo chmod +x ./gradlew
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+      - run:
+          name: Run Tests
+          command: ./gradlew lint test
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: app/build/reports
+          destination: reports
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: app/build/test-results
+
+      # Send notification to messenger
+      - run:
+          name: Sending notification
+          when: on_success
+          command: |
+            if [[ true ]];  then
+              curl -X POST -H  "Content-Type: application/json" -d \
+                '{
+                  "recipient":{
+                    "id":"'$PSID_BOSS'"
+                  },
+                  "message":{
+                    "text":"✅✅✅Repository: '$CIRCLE_PROJECT_REPONAME' \n SUCCESSFULL 🍺🍺🍺 \n - Author: '$CIRCLE_USERNAME' \n - Branch: '$CIRCLE_BRANCH' \n - Pull request: '$CIRCLE_PULL_REQUEST' \n -> CI Detail: '$CIRCLE_BUILD_URL' "
+                  }
+                }' "https://graph.facebook.com/v2.6/me/messages?access_token=$PAGE_ACCESS_TOKEN"
+            fi
+      - run:
+          name: Sending notification
+          when: on_fail
+          command: |
+            if [[ true ]];  then
+              curl -X POST -H  "Content-Type: application/json" -d \
+                '{
+                  "recipient":{
+                    "id":"'$PSID_BOSS'"
+                  },
+                  "message":{
+                    "text":"❌❌❌Repository: '$CIRCLE_PROJECT_REPONAME' \n FAIL 😭😭😭 \n - Author: '$CIRCLE_USERNAME' \n - Branch: '$CIRCLE_BRANCH' \n - Pull request: '$CIRCLE_PULL_REQUEST' \n -> CI Detail: '$CIRCLE_BUILD_URL' "
+                  }
+                }' "https://graph.facebook.com/v2.6/me/messages?access_token=$PAGE_ACCESS_TOKEN"
+            fi
