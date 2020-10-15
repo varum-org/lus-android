@@ -4,12 +4,6 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-29
-    environment:
-      JVM_OPTS: -Xmx3200m
-      # Insert the page access token
-      PAGE_ACCESS_TOKEN: "EAAMUNHHPfWsBAFtScPZCqFBtRBGaf77YUBvNcYrF2N2FQ5rOavmZAjgLKUWtGRP9ePerbrEwXtA1n4qkKVGzFRicYSDHSk2qwTsePoXj3cPi307vk6i0iZBXY25NiZCNJs1qPqKF6DQltGCp1vk9KhZCAVcIHAaOkEQVxVmtNCwLk1HlP5VcVBbB3oaCWEZCcZD"
-      # Insert the  PSID messenger
-      PSID_BOSS: "3197739463674316"
     steps:
       - checkout
       - restore_cache:
@@ -45,7 +39,7 @@ jobs:
                     "id":"'$PSID_BOSS'"
                   },
                   "message":{
-                    "text":"💚 💚 💚 \n Tạo PR ok rồi nhé! 🤑 💸  ! \n - Repository name: '$CIRCLE_PROJECT_USERNAME'/'$CIRCLE_PROJECT_REPONAME' \n - Author: '$CIRCLE_USERNAME' \n - Branch: '$CIRCLE_BRANCH' \n - Pull request:'$CIRCLE_PULL_REQUEST' \n - CI Detail: '$CIRCLE_BUILD_URL' "
+                    "text":"✅✅✅Repository: '$CIRCLE_PROJECT_REPONAME' \n SUCCESSFULL 🍺🍺🍺 \n - Author: '$CIRCLE_USERNAME' \n - Branch: '$CIRCLE_BRANCH' \n - Pull request: '$CIRCLE_PULL_REQUEST' \n -> CI Detail: '$CIRCLE_BUILD_URL' "
                   }
                 }' "https://graph.facebook.com/v2.6/me/messages?access_token=$PAGE_ACCESS_TOKEN"
             fi
@@ -60,7 +54,7 @@ jobs:
                     "id":"'$PSID_BOSS'"
                   },
                   "message":{
-                    "text":" ❌ ❌ ❌  \n Lỗi rồi! Kiểm tra lại coi! 😨 😨 💔 ! \n - Repository name: '$CIRCLE_PROJECT_USERNAME'/'$CIRCLE_PROJECT_REPONAME' \n - Author: '$CIRCLE_USERNAME' \n - Branch: '$CIRCLE_BRANCH' \n - Pull request: '$CIRCLE_PULL_REQUEST' \n - CI Detail: '$CIRCLE_BUILD_URL' "
+                    "text":"❌❌❌Repository: '$CIRCLE_PROJECT_REPONAME' \n FAIL 😭😭😭 \n - Author: '$CIRCLE_USERNAME' \n - Branch: '$CIRCLE_BRANCH' \n - Pull request: '$CIRCLE_PULL_REQUEST' \n -> CI Detail: '$CIRCLE_BUILD_URL' "
                   }
                 }' "https://graph.facebook.com/v2.6/me/messages?access_token=$PAGE_ACCESS_TOKEN"
             fi
