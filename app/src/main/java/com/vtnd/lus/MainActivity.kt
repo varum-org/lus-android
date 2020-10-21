@@ -1,4 +1,4 @@
-package com.vtnplusd.lus
+package com.vtnd.lus
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

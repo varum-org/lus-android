@@ -1,4 +1,4 @@
-package com.vtnplusd.lus
+package com.vtnd.lus
 
 import org.junit.Test
 
