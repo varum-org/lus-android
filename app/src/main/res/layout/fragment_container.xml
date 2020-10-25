@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.vtnd.lus.ui.main.container.ContainerViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.vtnd.lus.shared.widget.SwipeLockableViewPager
+            android:id="@+id/containerViewPaper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/containerBottomNavigation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/containerBottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_gravity="bottom"
+            android:background="@android:color/white"
+            app:itemRippleColor="@color/pink_50"
+            android:theme="@style/Widget.BottomNavigationView"
+            app:labelVisibilityMode="unlabeled"
+            app:itemIconTint="@color/red_a400"
+            app:layout_behavior="com.vtnd.lus.shared.BottomNavigationBehavior"
+            app:itemTextColor="@color/red_a400"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/menu_container" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

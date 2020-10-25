@@ -11,4 +11,11 @@
 
     <!-- Date -->
     <string name="format_date_mm_dd_yyyy">MM/dd/yyyy</string>
+
+    <!-- Menu container-->
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="notification">Notification</string>
+    <string name="profile">Profile</string>
 </resources>
