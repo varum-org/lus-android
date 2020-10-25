@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="locate">en</string>
+    <!-- Common -->
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="no_data_available">No data available</string>
+    <string name="msg_error_time_out">Connection timeout!</string>
+    <string name="msg_error_no_internet">Not connect internet!</string>
+    <string name="msg_error_data_parse">Parse data error!</string>
+
+    <!-- Date -->
+    <string name="format_date_mm_dd_yyyy">MM/dd/yyyy</string>
 </resources>

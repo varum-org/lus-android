@@ -11,6 +11,7 @@ plugins {
 
 buildscript {
     apply(from = "../ktlint.gradle.kts")
+    apply(from = "../autodimension.gradle.kts")
 }
 
 //tasks {
@@ -135,9 +136,9 @@ dependencies {
     implementation(Deps.legacy_preference)
     //Json
     implementation(Deps.retrofit_runtime)
-    implementation(Deps.retrofit_gson)
     implementation(Deps.okhttp_logging_interceptor)
-    implementation(Deps.moshi)
+    implementation(Deps.okhttp)
+    implementation(Deps.moshiAdapter)
     implementation(Deps.moshiKotlin)
     implementation(Deps.converterMoshi)
     kapt(Deps.moshiCodegen)
@@ -151,6 +152,7 @@ dependencies {
     //Lifecycler
     implementation(Deps.lifecycle_extension)
     implementation(Deps.lifecycle_livedata_ktx)
+    implementation(Deps.lifecycle_viewmodel_ktx)
     kapt(Deps.lifecycle_compiler)
 
 
@@ -187,4 +189,7 @@ dependencies {
 
     //Circle ImageView
     implementation(Deps.circle_image)
+
+    //Timber
+    implementation(Deps.timber)
 }

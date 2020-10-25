@@ -18,13 +18,13 @@ object Versions {
     const val fragment = "1.2.0-rc02"
     const val glide = "4.11.0"
     const val junit = "4.12"
-    const val lifecycle = "2.2.0-alpha03"
+    const val lifecycle = "2.2.0"
     const val mockito = "2.25.0"
     const val powermock = "2.0.2"
     const val mockito_kotlin = "2.2.0"
     const val mockwebserver = "3.8.1"
     const val navigation = "2.2.0-rc02"
-    const val okhttp_logging_interceptor = "3.9.0"
+    const val okhttp = "4.5.0"
     const val retrofit = "2.6.2"
     const val moshi = "1.9.3"
     const val converter_moshi = "2.4.0"
@@ -54,7 +54,8 @@ object Versions {
     const val databinding = "2.3.1"
     const val circle_image = "3.1.0"
     const val preference= "1.1.1"
-    const val legacy_preference= "1.0.0"
+    const val legacy_preference = "1.0.0"
+    const val timber = "4.7.1"
 }
 
 @Suppress("unused")
@@ -129,8 +130,11 @@ object Deps {
     const val retrofit_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val retrofit_mock = "com.squareup.retrofit2:retrofit-mock:${Versions.retrofit}"
     const val okhttp_logging_interceptor =
-        "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp_logging_interceptor}"
+        "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+    const val okhttp =
+        "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
+    const val moshiAdapter = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
     const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
     const val converterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.converter_moshi}"
@@ -209,5 +213,7 @@ object Deps {
     const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     const val circle_image = "de.hdodenhof:circleimageview:${Versions.circle_image}"
     const val preference = "androidx.preference:preference-ktx:${Versions.preference}"
-    const val legacy_preference = "androidx.legacy:legacy-preference-v14:${Versions.legacy_preference}"
+    const val legacy_preference =
+        "androidx.legacy:legacy-preference-v14:${Versions.legacy_preference}"
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 }
