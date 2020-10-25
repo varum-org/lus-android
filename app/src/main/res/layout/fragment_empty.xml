@@ -24,7 +24,7 @@
         android:textAlignment="center"
         android:textColor="@color/grey_600"
         android:textSize="@dimen/sp_16"
-        app:fontFamily="@font/open_sans_light"
+        app:fontFamily="@font/segoe_ui_light"
         tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.helper.widget.Flow
