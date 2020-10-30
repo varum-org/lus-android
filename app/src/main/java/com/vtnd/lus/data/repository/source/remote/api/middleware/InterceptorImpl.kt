@@ -32,7 +32,7 @@ class InterceptorImpl(
         }
 
         val response = newRequest.newBuilder()
-            .removeHeader("@")
+            .removeHeader(KEY_VALUE)
             .build()
             .let(chain::proceed)
 

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Color Primary-->
+    <color name="red_a400">#FF3146</color> // Color primary
+    <color name="pink_50">#FCE8EA</color> // Color primary light
+    <color name="deep_purple_a200">#8142E1</color>
+    <color name="indigo_50">#EFF3FB</color> // Color background
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,6 +13,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
 
     <!-- Color Text Light-->
     <color name="grey_900">#212121</color>
