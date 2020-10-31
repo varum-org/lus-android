@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="locate">en</string>
     <!-- Common -->
@@ -18,4 +17,7 @@
     <string name="favorite">Favorite</string>
     <string name="notification">Notification</string>
     <string name="profile">Profile</string>
+    <string name="skip_intro">Skip intro</string>
+    <string name="next">Next</string>
+    <string name="lus">Lus</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.vtnd.lus.shared.widget
 
 import android.content.Context
-import com.sun.wsm.util.widget.DialogManager
 import java.lang.ref.WeakReference
 
 class DialogManagerImpl(ctx: Context?) : DialogManager {

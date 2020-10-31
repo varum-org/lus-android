@@ -1,4 +1,4 @@
-package com.sun.wsm.util.extension
+package com.vtnd.lus.shared.extensions
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.vtnd.lus.R
 import com.vtnd.lus.shared.AnimateType
-import com.vtnd.lus.shared.extensions.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 fun Fragment.replaceFragment(

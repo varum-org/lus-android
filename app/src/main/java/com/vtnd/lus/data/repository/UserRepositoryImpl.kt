@@ -5,7 +5,7 @@ import com.vtnd.lus.data.UserRepository
 import com.vtnd.lus.data.repository.source.UserDataSource
 
 class UserRepositoryImpl(
-    private val remote: UserDataSource.Remote,
+//    private val remote: UserDataSource.Remote,
     private val local: UserDataSource.Local
 ) : BaseRepository(), UserRepository {
 

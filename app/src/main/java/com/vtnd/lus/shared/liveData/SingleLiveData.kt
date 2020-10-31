@@ -20,7 +20,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.sun.wsm.util.liveData.SafeObserver
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 

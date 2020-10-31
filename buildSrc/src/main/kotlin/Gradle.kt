@@ -1,6 +1,6 @@
 @Suppress("unused")
 object Versions {
-    const val kotlin = "1.3.72"
+    const val kotlin = "1.4.10"
     const val android_gradle_plugin = "4.0.1"
 
     const val compile_sdk_version = 30
@@ -8,7 +8,7 @@ object Versions {
     const val min_sdk_version = 23
     const val target_sdk_version = 30
 
-    const val appcompat = "1.1.0"
+    const val appcompat = "1.2.0"
     const val security_crypto = "1.0.0-alpha02"
     const val arch_core = "2.1.0"
     const val androidx_test = "1.2.0"
@@ -31,7 +31,7 @@ object Versions {
     const val room = "2.2.5"
     const val room_coroutines = "2.1.0-alpha04"
     const val support = "1.0.0"
-    const val constraint_layout = "2.0.1"
+    const val constraint_layout = "2.0.2"
     const val material = "1.2.0-alpha02"
     const val work = "2.2.0"
     const val koin = "2.0.1"

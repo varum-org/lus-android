@@ -1,23 +1,21 @@
 package com.vtnd.lus.base
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.vtnd.lus.shared.extensions.getCalendar
-import com.sun.wsm.util.extension.hideChildFragment
-import com.sun.wsm.util.extension.showChildFragment
+import com.vtnd.lus.shared.extensions.hideChildFragment
+import com.vtnd.lus.shared.extensions.showChildFragment
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.shared.constants.Constants
 import com.vtnd.lus.shared.extensions.handleDefaultApiError
 import com.vtnd.lus.shared.widget.DialogManagerImpl
-import com.vtnd.lus.ui.empty.EmptyFragment
+import com.vtnd.lus.ui.main.empty.EmptyFragment
 
 abstract class BaseFragment<viewBinding : ViewBinding, viewModel : BaseViewModel> :
     Fragment(), BaseView {

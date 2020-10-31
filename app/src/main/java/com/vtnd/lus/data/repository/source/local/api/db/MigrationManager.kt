@@ -1,4 +1,4 @@
-package com.sun.wsm.data.repository.source.local.api.db
+package com.vtnd.lus.data.repository.source.local.api.db
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase

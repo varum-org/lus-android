@@ -1,13 +1,10 @@
-package com.sun.wsm.data.repository.source.local.api.pref
+package com.vtnd.lus.data.repository.source.local.api.pref
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.sun.wsm.data.repository.source.local.api.SharedPrefApi
-import com.vtnd.lus.data.repository.source.local.api.pref.SharedPrefKey
+import com.vtnd.lus.data.repository.source.local.api.SharedPrefApi
 
-class SharedPrefApiImpl(context: Context, private val gson: Gson) : SharedPrefApi {
+class SharedPrefApiImpl(context: Context) : SharedPrefApi {
 
     private val sharedPreferences by lazy {
         context.getSharedPreferences(SharedPrefKey.PREFS_NAME, Context.MODE_PRIVATE)
@@ -33,7 +30,10 @@ class SharedPrefApiImpl(context: Context, private val gson: Gson) : SharedPrefAp
             is Float -> editor.putFloat(key, data)
             is Int -> editor.putInt(key, data)
             is Long -> editor.putLong(key, data)
-            else -> editor.putString(key, gson.toJson(data))
+            is Set<*> -> editor.putStringSet(key, data.filterIsInstanceTo(mutableSetOf()))
+            else -> {
+                error("Not support for type clazz")
+            }
         }
         editor.apply()
     }
@@ -53,16 +53,11 @@ class SharedPrefApiImpl(context: Context, private val gson: Gson) : SharedPrefAp
         Long::class.java -> java.lang.Long.valueOf(
             sharedPreferences.getLong(key, default as? Long ?: 0L)
         ) as? T
-        else -> gson.fromJson(sharedPreferences.getString(key, default as? String), type)
-    }
-
-    override fun <T> putList(key: String, list: List<T>) {
-        sharedPreferences.edit().putString(key, gson.toJson(list)).apply()
-    }
-
-    override fun <T> getList(key: String, clazz: Class<T>): List<T>? {
-        val typeOfT = TypeToken.getParameterized(List::class.java, clazz).type
-        return gson.fromJson<List<T>>(get(key, String::class.java), typeOfT)
+        Set::class.java ->
+            sharedPreferences.getStringSet(key, default as Set<String>) as? T
+        else -> {
+            error("Not support for type clazz")
+        }
     }
 
     override fun removeKey(key: String) {
