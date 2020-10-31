@@ -1,4 +1,4 @@
-package com.sun.wsm.data.repository.source.remote.api.request
+package com.vtnd.lus.data.repository.source.remote.api.request
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -6,7 +6,8 @@ import com.google.gson.annotations.SerializedName
 data class SignInRequest(
     @Expose
     @SerializedName("sign_in")
-    val signIn: SignInInfo)
+    val signIn: SignInInfo
+)
 
 data class SignInInfo(
     @Expose

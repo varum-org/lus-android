@@ -1,4 +1,4 @@
-package com.vtnd.lus.ui.empty
+package com.vtnd.lus.ui.main.empty
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.vtnd.lus.shared.liveData.observeLiveData
-import com.sun.wsm.util.widget.*
 import com.vtnd.lus.shared.extensions.handleDefaultApiError
+import com.vtnd.lus.shared.widget.DialogManager
 import com.vtnd.lus.shared.widget.DialogManagerImpl
 
 abstract class BaseActivity<viewBinding : ViewBinding, viewModel : BaseViewModel> :

@@ -9,7 +9,6 @@ import timber.log.Timber
 import java.net.HttpURLConnection
 
 class InterceptorImpl(
-    private val application: Application,
     private var userRepository: UserRepository
 ) : Interceptor {
 

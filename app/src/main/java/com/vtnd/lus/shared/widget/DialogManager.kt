@@ -1,4 +1,4 @@
-package com.sun.wsm.util.widget
+package com.vtnd.lus.shared.widget
 
 interface DialogManager {
 

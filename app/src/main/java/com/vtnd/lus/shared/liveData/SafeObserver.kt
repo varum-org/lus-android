@@ -1,4 +1,4 @@
-package com.sun.wsm.util.liveData
+package com.vtnd.lus.shared.liveData
 
 import androidx.lifecycle.Observer
 

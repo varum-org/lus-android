@@ -32,7 +32,7 @@ val networkModule = module {
     }
 
     single<Interceptor> {
-        InterceptorImpl(application = get(), userRepository = get())
+        InterceptorImpl(userRepository = get())
     }
 
     single {
@@ -40,10 +40,7 @@ val networkModule = module {
             baseUrl = get(named(KEY_BASE_URL)),
             serviceClass = ApiService::class.java,
             moshi = get(),
-            interceptors = listOf(
-                buildHttpLog(),
-                InterceptorImpl(get(), get())
-            )
+            interceptors = listOf(buildHttpLog(), get())
         )
     }
 }
