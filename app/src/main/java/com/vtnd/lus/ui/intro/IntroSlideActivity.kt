@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
@@ -29,7 +30,6 @@ class IntroSlideActivity : BaseActivity<ActivityIntroSlideBinding, IntroSlideVie
         ActivityIntroSlideBinding.inflate(inflater)
 
     override fun initialize() {
-        setContentView(R.layout.activity_intro_slide)
         setupIntroSlide()
         setupIndicators()
         setupCurrentIndicator(0)
@@ -61,21 +61,21 @@ class IntroSlideActivity : BaseActivity<ActivityIntroSlideBinding, IntroSlideVie
                     IntroSlide(
                         "Sample 1",
                         "Sunlight is the light  and energy that comes from the Sun.",
-                        R.drawable.ic_logo
+                        R.drawable.ic_welcome
                     )
                 ),
                 ItemViewHolder(
                     IntroSlide(
                         "Sample 2",
                         "Sunlight is the light  and energy that comes from the Sun.",
-                        R.drawable.ic_logo
+                        R.drawable.ic_welcome
                     )
                 ),
                 ItemViewHolder(
                     IntroSlide(
                         "Sample 3",
                         "Sunlight is the light  and energy that comes from the Sun.",
-                        R.drawable.ic_logo
+                        R.drawable.ic_welcome
                     )
                 )
             )

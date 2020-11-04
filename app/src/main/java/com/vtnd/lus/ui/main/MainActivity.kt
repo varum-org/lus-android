@@ -2,6 +2,7 @@ package com.vtnd.lus.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatDelegate
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.databinding.ActivityMainBinding

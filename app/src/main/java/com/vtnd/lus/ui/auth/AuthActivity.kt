@@ -5,7 +5,7 @@ import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.databinding.ActivityAuthBinding
 import com.vtnd.lus.shared.extensions.addFragmentToActivity
-import com.vtnd.lus.ui.auth.login.LoginFragment
+import com.vtnd.lus.ui.auth.welcome.WelcomeFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
@@ -15,6 +15,6 @@ class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
         ActivityAuthBinding.inflate(inflater)
 
     override fun initialize() {
-        addFragmentToActivity(R.id.container, LoginFragment.newInstance(), false)
+        addFragmentToActivity(R.id.auth, WelcomeFragment.newInstance(), false)
     }
 }

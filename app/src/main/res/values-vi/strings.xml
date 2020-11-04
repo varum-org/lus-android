@@ -3,5 +3,8 @@
     <string name="locate">vi</string>
     <string name="skip_intro">Bỏ qua phần giới thiệu</string>
     <string name="next">Tiếp theo</string>
-    <string name="lus">Lus</string>i
+    <string name="lus">Lus</string>
+    <string name="login">Đăng nhập</string>
+    <string name="register">Đăng ký</string>
+    <string name="welcome_to_lus">Chào mừng bạn đến Lus</string>i
 </resources>

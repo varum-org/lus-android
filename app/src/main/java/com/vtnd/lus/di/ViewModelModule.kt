@@ -2,6 +2,7 @@ package com.vtnd.lus.di
 
 import com.vtnd.lus.ui.auth.AuthViewModel
 import com.vtnd.lus.ui.auth.login.LoginViewModel
+import com.vtnd.lus.ui.auth.welcome.WelcomeViewModel
 import com.vtnd.lus.ui.intro.IntroSlideViewModel
 import com.vtnd.lus.ui.main.MainViewModel
 import com.vtnd.lus.ui.main.container.ContainerViewModel
@@ -30,4 +31,5 @@ val viewModelModule = module {
     viewModel { NotificationViewModel() }
     viewModel { ProfileViewModel() }
     viewModel { LoginViewModel() }
+    viewModel { WelcomeViewModel() }
 }
