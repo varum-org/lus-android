@@ -1,5 +1,7 @@
 package com.vtnd.lus.di
 
+import com.vtnd.lus.ui.auth.AuthViewModel
+import com.vtnd.lus.ui.auth.login.LoginViewModel
 import com.vtnd.lus.ui.intro.IntroSlideViewModel
 import com.vtnd.lus.ui.main.MainViewModel
 import com.vtnd.lus.ui.main.container.ContainerViewModel
@@ -19,6 +21,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { SplashViewModel(repoRepository = get()) }
     viewModel { IntroSlideViewModel(repoRepository = get()) }
+    viewModel { AuthViewModel(repoRepository = get()) }
     viewModel { MainViewModel(userRepository = get()) }
     viewModel { ContainerViewModel() }
     viewModel { HomeViewModel() }
@@ -26,4 +29,5 @@ val viewModelModule = module {
     viewModel { FavoriteViewModel() }
     viewModel { NotificationViewModel() }
     viewModel { ProfileViewModel() }
+    viewModel { LoginViewModel() }
 }

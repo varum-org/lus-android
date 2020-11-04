@@ -13,6 +13,7 @@ import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.databinding.ActivityIntroSlideBinding
 import com.vtnd.lus.shared.extensions.safeClick
+import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.intro.adapter.IntroSlide
 import com.vtnd.lus.ui.intro.adapter.IntroSlideAdapter
 import com.vtnd.lus.ui.main.MainActivity
@@ -42,11 +43,13 @@ class IntroSlideActivity : BaseActivity<ActivityIntroSlideBinding, IntroSlideVie
             if (introSliderViewPaper.currentItem + 1 > introSlideAdapter.itemCount) {
                 introSliderViewPaper.currentItem += 1
             } else {
-                startActivity(Intent(applicationContext, MainActivity::class.java))
+                startActivity(Intent(applicationContext, AuthActivity::class.java))
+                finish()
             }
         }
         skipText.safeClick {
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+            startActivity(Intent(applicationContext, AuthActivity::class.java))
+            finish()
         }
     }
 

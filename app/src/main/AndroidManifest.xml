@@ -28,5 +28,6 @@
         </activity>
         <activity android:name=".ui.intro.IntroSlideActivity" />
         <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.auth.AuthActivity" />
     </application>
 </manifest>
