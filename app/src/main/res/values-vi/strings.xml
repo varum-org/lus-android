@@ -6,5 +6,9 @@
     <string name="lus">Lus</string>
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng ký</string>
-    <string name="welcome_to_lus">Chào mừng bạn đến Lus</string>i
+    <string name="welcome_to_lus">Chào mừng bạn đến Lus</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="don_t_have_an_account">Bạn chưa có tài khoản?</string>
+    <string name="sign_up">Đăng ký</string>
 </resources>

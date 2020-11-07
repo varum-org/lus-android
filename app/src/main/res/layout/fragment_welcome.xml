@@ -9,6 +9,10 @@
             name="viewModel"
             type="com.vtnd.lus.ui.auth.welcome.WelcomeViewModel" />
     </data>
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,12 +22,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/bg_welcome_top"
-            app:layout_constraintDimensionRatio="w,294:252"
+            android:backgroundTint="@color/pink_50"
+            app:layout_constraintDimensionRatio="w,7:6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.28" />
 
         <TextView
+            android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_32"
@@ -41,23 +47,25 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/ic_welcome"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="w,420:380"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/buttonLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleText"
             app:layout_constraintVertical_bias="0.3"
-            app:layout_constraintWidth_percent="0.8" />
+            app:layout_constraintWidth_percent="0.9" />
 
         <LinearLayout
+            android:id="@+id/buttonLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/welcomeBottomImage"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcomeImage"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/welcomeBottomImage"
-            app:layout_constraintWidth_percent="0.7">
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintWidth_percent="0.8">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/loginButton"
@@ -65,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:backgroundTint="@color/red_a400"
-                android:paddingVertical="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_12"
                 android:text="@string/login"
                 android:textColor="@color/white"
                 app:fontFamily="@font/segoe_ui_semibold" />
@@ -76,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:backgroundTint="@color/pink_50"
-                android:paddingVertical="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_12"
                 android:text="@string/register"
                 android:textColor="@color/grey_900"
                 app:fontFamily="@font/segoe_ui_regular" />
@@ -85,13 +93,13 @@
         <ImageView
             android:id="@+id/welcomeBottomImage"
             android:layout_width="0dp"
+            android:backgroundTint="@color/pink_50"
             android:layout_height="0dp"
             android:background="@drawable/bg_welcome_bottom"
-            app:layout_constraintBottom_toBottomOf="@+id/welcomeImage"
-            app:layout_constraintDimensionRatio="w,222:150"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/welcomeImage"
-            app:layout_constraintWidth_percent="0.2" />
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="w,1:0.676"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.15" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 </layout>

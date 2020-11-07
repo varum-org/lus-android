@@ -40,15 +40,17 @@ class IntroSlideActivity : BaseActivity<ActivityIntroSlideBinding, IntroSlideVie
             }
         })
         nextButton.safeClick {
-            if (introSliderViewPaper.currentItem + 1 > introSlideAdapter.itemCount) {
+            if (introSliderViewPaper.currentItem + 1 < introSlideAdapter.itemCount) {
                 introSliderViewPaper.currentItem += 1
             } else {
                 startActivity(Intent(applicationContext, AuthActivity::class.java))
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish()
             }
         }
         skipText.safeClick {
             startActivity(Intent(applicationContext, AuthActivity::class.java))
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             finish()
         }
     }

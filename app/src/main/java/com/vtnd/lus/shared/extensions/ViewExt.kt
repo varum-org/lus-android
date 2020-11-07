@@ -39,3 +39,7 @@ fun View.safeClick(blockInMillis: Long = 1000L, onClick: (View) -> Unit) {
         onClick(this)
     }
 }
+
+fun View.OnClickListener.listenToViews(vararg views: View) {
+    views.forEach { it.setOnClickListener(this) }
+}
