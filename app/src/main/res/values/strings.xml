@@ -20,4 +20,7 @@
     <string name="skip_intro">Skip intro</string>
     <string name="next">Next</string>
     <string name="lus">Lus</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="welcome_to_lus">Welcome to Lus</string>
 </resources>

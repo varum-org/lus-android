@@ -36,6 +36,7 @@
         android:layout_marginBottom="@dimen/dp_10"
         android:backgroundTint="@color/red_a400"
         android:minWidth="@dimen/dp_110"
+        android:textColor="@color/white"
         android:text="@string/next"
         app:fontFamily="@font/segoe_ui_bold"
         app:layout_constraintBottom_toTopOf="@+id/skipText"
