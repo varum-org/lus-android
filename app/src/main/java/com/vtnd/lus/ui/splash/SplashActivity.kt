@@ -19,11 +19,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     override fun initialize() {
         viewModel.isOpenFirstApp?.let {
             delayTask({
-                if (it) {
-                    viewModel.setOpenFirstApp()
-                    startActivity(Intent(applicationContext, IntroSlideActivity::class.java))
-                } else startActivity(Intent(applicationContext, AuthActivity::class.java))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                if (it) startActivity(Intent(applicationContext, IntroSlideActivity::class.java))
+                else startActivity(Intent(applicationContext, AuthActivity::class.java))
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 finish()
             })
         }
