@@ -16,7 +16,7 @@
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/loginLayout"
+            android:id="@+id/registerLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -49,7 +49,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/dp_16"
-                android:background="@drawable/ic_login"
+                android:background="@drawable/ic_register"
                 app:layout_constraintDimensionRatio="w,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,13 +111,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/loginButton"
+                        android:id="@+id/registerButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
                         android:backgroundTint="@color/red_a400"
                         android:paddingVertical="@dimen/dp_12"
-                        android:text="@string/login"
+                        android:text="@string/register"
                         android:textColor="@color/white"
                         app:fontFamily="@font/segoe_ui_semibold" />
 
@@ -132,35 +132,136 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@string/don_t_have_an_account"
+                            android:text="@string/already_have_an_account"
                             android:textColor="@color/grey_600"
                             app:fontFamily="@font/segoe_ui_semibold" />
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/signUpText"
+                            android:id="@+id/signInText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_8"
                             android:gravity="center"
-                            android:text="@string/sign_up"
+                            android:text="@string/sign_in"
                             android:textColor="@color/grey_600"
                             app:fontFamily="@font/segoe_ui_bold" />
                     </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp_1"
+                            android:layout_marginEnd="@dimen/dp_8"
+                            android:background="@color/grey_600"
+                            app:layout_constraintBottom_toBottomOf="@+id/orText"
+                            app:layout_constraintEnd_toStartOf="@+id/orText"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/orText" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/orText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/or"
+                            android:textColor="@color/grey_600"
+                            app:fontFamily="@font/segoe_ui_bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp_1"
+                            android:layout_marginStart="@dimen/dp_8"
+                            android:background="@color/grey_600"
+                            app:layout_constraintBottom_toBottomOf="@+id/orText"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/orText"
+                            app:layout_constraintTop_toTopOf="@+id/orText" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
             </ScrollView>
 
-            <ImageView
-                android:id="@+id/loginBottomImage"
+            <FrameLayout
+                android:id="@+id/facebookImage"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@drawable/bg_login"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:background="@drawable/ic_oval"
+                android:tint="@color/red_a400"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/twitterImage"
+                app:layout_constraintTop_toTopOf="@+id/twitterImage"
+                app:layout_constraintWidth_percent="0.12">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_22"
+                    android:layout_height="@dimen/dp_22"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_fb"
+                    android:backgroundTint="@color/red_a400" />
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/twitterImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@drawable/ic_oval"
+                android:src="@color/grey_600"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputScrollView"
+                app:layout_constraintWidth_percent="0.12">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_22"
+                    android:layout_height="@dimen/dp_22"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_twitter"
+                    android:backgroundTint="@color/red_a400" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/googleImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/dp_8"
+                android:background="@drawable/ic_oval"
+                android:src="@color/grey_600"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@+id/twitterImage"
+                app:layout_constraintTop_toTopOf="@+id/twitterImage"
+                app:layout_constraintWidth_percent="0.12">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_22"
+                    android:layout_height="@dimen/dp_22"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_google"
+                    android:backgroundTint="@color/red_a400" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/welcomeBottomImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_welcome_bottom"
                 android:backgroundTint="@color/pink_50"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="w,236:316"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputScrollView"
+                app:layout_constraintDimensionRatio="w,1:0.676"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/twitterImage"
                 app:layout_constraintVertical_bias="1"
-                app:layout_constraintWidth_percent="0.3" />
+                app:layout_constraintWidth_percent="0.15" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

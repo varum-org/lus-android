@@ -6,6 +6,7 @@ import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentWelcomeBinding
 import com.vtnd.lus.shared.extensions.replaceFragment
 import com.vtnd.lus.ui.auth.login.LoginFragment
+import com.vtnd.lus.ui.auth.register.RegisterFragment
 import kotlinx.android.synthetic.main.fragment_welcome.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,7 +22,7 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>()
             replaceFragment(R.id.auth, LoginFragment.newInstance(), true)
         }
         registerButton.setOnClickListener {
-
+            replaceFragment(R.id.auth, RegisterFragment.newInstance(), true)
         }
     }
 
