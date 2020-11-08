@@ -9,6 +9,9 @@
     <string name="welcome_to_lus">Chào mừng bạn đến Lus</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="don_t_have_an_account">Bạn chưa có tài khoản?</string>
+    <string name="don_t_have_an_account">Bạn chưa có tài khoản ?</string>
     <string name="sign_up">Đăng ký</string>
+    <string name="already_have_an_account">Bạn đã có tài khoản ?</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="or">OR</string>
 </resources>
