@@ -6,12 +6,16 @@ import android.widget.Toast
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentLoginBinding
+import com.vtnd.lus.shared.enum.AuthEnum
 import com.vtnd.lus.shared.extensions.listenToViews
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
+import com.vtnd.lus.shared.liveData.observeLiveData
+import com.vtnd.lus.ui.auth.AuthActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), View.OnClickListener {
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
+    View.OnClickListener {
 
     override val viewModel: LoginViewModel by viewModel()
 
@@ -26,13 +30,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), View
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.loginButton -> {
-                Toast.makeText(
-                    activity,
-                    "username:${usernameInput.editText?.text}-password:${passwordInput.editText?.text}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                viewModel.signIn(usernameInput.editText?.text.toString(),
+                    passwordInput.editText?.text.toString())
             }
             R.id.signUpText -> {
+                (activity as AuthActivity).switchFragment(AuthEnum.REGISTER)
+            }
+        }
+    }
+
+    override fun registerLiveData() {
+        super.registerLiveData()
+        viewModel.apply {
+            signInResponse.observeLiveData(viewLifecycleOwner) {
+                Toast.makeText(activity, it.user.userName, Toast.LENGTH_SHORT).show()
             }
         }
     }

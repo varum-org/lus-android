@@ -1,0 +1,143 @@
+[33mcommit 21290927b2de03c498974634580f0a5d272c6747[m[33m ([m[1;36mHEAD -> [m[1;32mFix/Auth/koin_moshi[m[33m, [m[1;31morigin/Fix/Auth/koin_moshi[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Mon Nov 9 00:04:05 2020 +0700
+
+    Refs[Fix]koin
+
+[33mcommit 2a58f9c37e3d69746865e9c7e8b403a6383c8f09[m[33m ([m[1;31morigin/Task/Auth/create_register_ui[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Sun Nov 8 09:47:57 2020 +0700
+
+    Refs[Task][Auth][Register] create ui
+
+[33mcommit 3fffd4568227abe6030384fc0dc87be84aa14742[m
+Merge: e78393f d042eea
+Author: Nguyễn Duy <58255731+olololoe110399@users.noreply.github.com>
+Date:   Sun Nov 8 02:31:07 2020 +0700
+
+    Merge pull request #9 from VTNPlusD/Task/Auth/create_login_ui
+    
+    Refs[Task][Auth][Login]create ui
+
+[33mcommit d042eea6bf4ab9b43750dd394a06e588a851645c[m[33m ([m[1;31morigin/Task/Auth/create_login_ui[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Sun Nov 8 01:10:08 2020 +0700
+
+    Refs[Task][Auth][Login]create ui
+
+[33mcommit e78393f34ffc2e80613534d66b40475ca3a7c863[m
+Merge: 219eb33 f384637
+Author: Nguyễn Duy <58255731+olololoe110399@users.noreply.github.com>
+Date:   Sat Nov 7 23:58:34 2020 +0700
+
+    Merge pull request #8 from VTNPlusD/Task/Auth/create_welcome
+    
+    Refs[Task][Auth]create welcome
+
+[33mcommit f3846375652379b84c5cfde8754bdfe31ad9572b[m[33m ([m[1;31morigin/Task/Auth/create_welcome[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Thu Nov 5 00:56:29 2020 +0700
+
+    Refs[Task][Auth]create welcome
+
+[33mcommit 219eb33c892d354d94a19bf5f37dcbf8b0779c87[m
+Merge: a5e54a6 c4e2993
+Author: Nguyễn Duy <58255731+olololoe110399@users.noreply.github.com>
+Date:   Wed Nov 4 19:37:01 2020 +0700
+
+    Merge pull request #7 from VTNPlusD/Task/Auth/Login/build_screen
+    
+    Refs[Task][Auth][Login]build screen
+
+[33mcommit c4e2993414d8c2baa0779219d9c73347ffc30de6[m[33m ([m[1;31morigin/Task/Auth/Login/build_screen[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Wed Nov 4 19:33:28 2020 +0700
+
+    Refs[Task][Auth][Login]build screen
+
+[33mcommit a5e54a69161e9c93e7cb69cdc62589a3257ec10e[m
+Merge: 6eaab39 cca3663
+Author: Nguyễn Duy <58255731+olololoe110399@users.noreply.github.com>
+Date:   Sun Nov 1 00:45:06 2020 +0700
+
+    Merge pull request #6 from VTNPlusD/Task/create_intro_slide_app
+    
+    Refs [Feature] create intro slide
+
+[33mcommit cca3663f625669e0a725302397cbe93acb3738c3[m[33m ([m[1;31morigin/Task/create_intro_slide_app[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Sat Oct 31 23:59:05 2020 +0700
+
+     Refs [Feature] create intro slide
+
+[33mcommit 6eaab3909fa20d09b7fee42fcada836ffcae0789[m
+Merge: 4440704 cd1bff0
+Author: Nguyễn Duy <58255731+olololoe110399@users.noreply.github.com>
+Date:   Fri Oct 30 19:33:52 2020 +0700
+
+    Merge pull request #5 from VTNPlusD/Feature/Menu/show_menu_application
+    
+    Refs[Feature][Container] Create menu application ui
+
+[33mcommit cd1bff0bc7ca2bfa2ca84c7338864fbcd426a562[m[33m ([m[1;31morigin/Feature/Menu/show_menu_application[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Sun Oct 25 23:05:32 2020 +0700
+
+    Refs[Feature][Container] show  menu application
+
+[33mcommit 4440704368b1777cf16547500cd6581ec84b0018[m
+Merge: 509c309 0110752
+Author: Nguyễn Duy <58255731+olololoe110399@users.noreply.github.com>
+Date:   Sun Oct 25 20:21:39 2020 +0700
+
+    Merge pull request #4 from VTNPlusD/Fix/font/open_sans_to_segoe_ui
+    
+    Refs[Fix][Font]Convert open sans to segoe ui
+
+[33mcommit 01107525a82ad097869a4f1c3ddcd19742b5dd67[m[33m ([m[1;31morigin/Fix/font/open_sans_to_segoe_ui[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Sun Oct 25 20:11:56 2020 +0700
+
+    Refs[Fix][Font]Convert open sans to segoe ui
+
+[33mcommit 509c3091e60d782f768b9ee3650943db623b8d7b[m
+Merge: c9f4711 a528f0c
+Author: Nguyễn Duy <58255731+olololoe110399@users.noreply.github.com>
+Date:   Sun Oct 25 18:17:36 2020 +0700
+
+    Merge pull request #3 from VTNPlusD/Task/Struct/add_base
+    
+    Refs[Task][Struct]Add base
+
+[33mcommit a528f0ca069d06fa73fcc965c36608ab32485aeb[m[33m ([m[1;31morigin/Task/Struct/add_base[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Sun Oct 25 16:11:26 2020 +0700
+
+     Refs[Task][Struct]Add base
+
+[33mcommit c9f4711dd8f963c2b6aa6e07b9adae4d2071b804[m
+Merge: 61eb25d caf1aeb
+Author: Nguyễn Duy <58255731+olololoe110399@users.noreply.github.com>
+Date:   Wed Oct 21 10:28:07 2020 +0700
+
+    Merge pull request #2 from VTNPlusD/build_struct
+    
+    Refs[Task][Struct] add Kotlin dsl and buildSrc
+
+[33mcommit caf1aeb126162a64e8344a9170f0ba6df085e74d[m[33m ([m[1;31morigin/build_struct[m[33m)[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Tue Oct 20 01:33:47 2020 +0700
+
+    Refs[Task][Struct] add Kotlin dsl and buildSrc
+
+[33mcommit 61eb25d1cb35cc31ebbfe693abd28b28bc12e39d[m
+Author: olololoe <olololoe1001st2@gmail.com>
+Date:   Fri Oct 16 01:14:53 2020 +0700
+
+    init project
+
+[33mcommit 31b3e0b2bfc51152d6d242665cfcafae1e078b82[m
+Author: duynn-1019 <nguyen.ngoc.duy@sun-asterisk.com>
+Date:   Thu Oct 15 21:17:24 2020 +0700
+
+    Add README

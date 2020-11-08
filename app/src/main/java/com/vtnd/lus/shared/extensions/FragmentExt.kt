@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -28,6 +29,25 @@ fun Fragment.replaceFragment(
             addToBackStack(tag)
         }
         replace(containerId, fragment, tag)
+    }, animateType)
+}
+
+fun Fragment.replaceOldFragment(
+    @IdRes containerId: Int,
+    showFragment: Fragment,
+    addToBackStack: Boolean = false,
+    tag: String = showFragment::class.java.simpleName,
+    animateType: AnimateType = AnimateType.FADE
+) {
+    val existFragment = activity?.supportFragmentManager?.findFragmentByTag(tag)
+    Log.i("1234","${existFragment}-$tag")
+    activity?.supportFragmentManager?.transact({
+        if (addToBackStack)
+            addToBackStack(tag)
+        if (existFragment != null && existFragment.isAdded){
+            replace(containerId, existFragment, tag)
+Log.i("1234","${existFragment}-$tag")
+        }
     }, animateType)
 }
 
@@ -83,6 +103,7 @@ fun Fragment.showChildFragment(
         commit()
     }
 }
+
 
 fun Fragment.hideChildFragment(hideFragments: Fragment) {
     val existFragment = childFragmentManager.findFragmentByTag(hideFragments.javaClass.simpleName)

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.vtnd.lus.ui.auth.login.LoginViewModel" />
+            type="com.vtnd.lus.ui.auth.register.RegisterViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -34,7 +34,7 @@
                 android:id="@+id/titleLoginText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_32"
+                android:layout_marginTop="@dimen/dp_16"
                 android:text="@string/login"
                 android:textAllCaps="true"
                 android:textColor="@color/grey_900"
@@ -54,13 +54,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleLoginText"
-                app:layout_constraintWidth_percent="0.8" />
+                app:layout_constraintWidth_percent="0.7" />
 
             <ScrollView
                 android:id="@+id/inputScrollView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/loginImage"
@@ -93,7 +93,6 @@
                         android:id="@+id/passwordInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
                         app:errorEnabled="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
                         android:backgroundTint="@color/red_a400"
-                        android:paddingVertical="@dimen/dp_12"
+                        android:paddingVertical="@dimen/dp_10"
                         android:text="@string/register"
                         android:textColor="@color/white"
                         app:fontFamily="@font/segoe_ui_semibold" />
@@ -125,7 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_8"
                         android:orientation="horizontal">
 
                         <com.google.android.material.textview.MaterialTextView

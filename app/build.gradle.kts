@@ -43,7 +43,7 @@ android {
             setDimension("appVariant")
             applicationIdSuffix = ".dev"
             resValue("string", "app_name", "LUS Dev")
-            buildConfigField("String", "BASE_URL", "\"lus-sever.herokuapp.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://lus-sever.herokuapp.com/\"")
         }
         create("prd") {
             setDimension("appVariant")
@@ -171,9 +171,7 @@ dependencies {
     //Koin
     implementation(Deps.koin_ext)
     implementation(Deps.koin_android)
-    implementation(Deps.koin_android)
     implementation(Deps.koin_viewmodel)
-    implementation(Deps.koin_ext)
     kapt(Deps.support_databinding)
 
     //Test

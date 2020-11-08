@@ -12,7 +12,7 @@ import com.vtnd.lus.ui.main.container.adapter.ContainerViewPagerAdapter
 import com.vtnd.lus.ui.main.container.favorite.FavoriteFragment
 import com.vtnd.lus.ui.main.container.home.HomeFragment
 import com.vtnd.lus.ui.main.container.notification.NotificationFragment
-import com.vtnd.lus.ui.main.container.profilte.ProfileFragment
+import com.vtnd.lus.ui.main.container.profile.ProfileFragment
 import com.vtnd.lus.ui.main.container.search.SearchFragment
 import kotlinx.android.synthetic.main.fragment_container.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
