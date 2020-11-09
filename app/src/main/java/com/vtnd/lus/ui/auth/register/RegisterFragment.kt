@@ -6,7 +6,10 @@ import android.widget.Toast
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentRegisterBinding
+import com.vtnd.lus.shared.enum.AuthEnum
+import com.vtnd.lus.shared.extensions.listenToViews
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
+import com.vtnd.lus.ui.auth.AuthActivity
 import kotlinx.android.synthetic.main.fragment_register.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +23,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     override fun initialize() {
         setupDismissKeyBoard(activity, registerLayout)
+        listenToViews(registerButton, signInText)
     }
 
     override fun onClick(view: View?) {
@@ -32,6 +36,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
                 ).show()
             }
             R.id.signInText -> {
+                (activity as AuthActivity).switchFragment(AuthEnum.LOGIN)
             }
         }
     }

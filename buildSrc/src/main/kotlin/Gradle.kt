@@ -18,7 +18,7 @@ object Versions {
     const val fragment = "1.2.0-rc02"
     const val glide = "4.11.0"
     const val junit = "4.12"
-    const val lifecycle = "2.2.0"
+    const val lifecycle = "2.3.0-alpha06"
     const val mockito = "2.25.0"
     const val powermock = "2.0.2"
     const val mockito_kotlin = "2.2.0"
@@ -34,7 +34,7 @@ object Versions {
     const val constraint_layout = "2.0.2"
     const val material = "1.2.0-alpha02"
     const val work = "2.2.0"
-    const val koin = "2.0.1"
+    const val koin = "2.1.6"
     const val firebase_analytics = "17.2.2"
     const val google_service_plugin = "4.3.3"
     const val dexter = "6.0.2"
@@ -119,7 +119,7 @@ object Deps {
     const val lifecycle_compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
     const val lifecycle_viewmodel_ktx =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
-    const val lifecycle_extension = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    const val lifecycle_extension = "androidx.lifecycle:lifecycle-extensions:2.2.0"
     const val lifecycle_livedata_ktx =
         "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
 

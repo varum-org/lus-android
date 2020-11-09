@@ -77,7 +77,7 @@ fun AppCompatActivity.switchFragment(
     @IdRes containerId: Int,
     currentFragment: Fragment,
     newFragment: Fragment,
-    addToBackStack: Boolean = true,
+    addToBackStack: Boolean = false,
     tag: String = newFragment::class.java.simpleName
 ) {
     supportFragmentManager.transact({

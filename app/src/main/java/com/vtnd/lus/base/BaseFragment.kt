@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.vtnd.lus.shared.constants.Constants
 import com.vtnd.lus.shared.extensions.getCalendar
+import com.vtnd.lus.shared.extensions.handleDefaultApiError
 import com.vtnd.lus.shared.extensions.hideChildFragment
 import com.vtnd.lus.shared.extensions.showChildFragment
 import com.vtnd.lus.shared.liveData.observeLiveData
-import com.vtnd.lus.shared.constants.Constants
-import com.vtnd.lus.shared.extensions.handleDefaultApiError
 import com.vtnd.lus.shared.widget.DialogManagerImpl
 import com.vtnd.lus.ui.main.empty.EmptyFragment
 
@@ -80,14 +80,12 @@ abstract class BaseFragment<viewBinding : ViewBinding, viewModel : BaseViewModel
         _viewBinding = null
     }
 
-    open fun registerLiveData() {
-        viewModel.run {
-            isLoading.observeLiveData(viewLifecycleOwner) {
-                showLoading(it)
-            }
-            exception.observeLiveData(viewLifecycleOwner) {
-                (activity as? BaseActivity<*, *>)?.handleDefaultApiError(it)
-            }
+    open fun registerLiveData() = with(viewModel) {
+        isLoading.observeLiveData(viewLifecycleOwner) {
+            showLoading(it)
+        }
+        exception.observeLiveData(viewLifecycleOwner) {
+            (activity as? BaseActivity<*, *>)?.handleDefaultApiError(it)
         }
     }
 }

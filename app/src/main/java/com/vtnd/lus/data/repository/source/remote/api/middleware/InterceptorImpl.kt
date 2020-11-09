@@ -1,6 +1,7 @@
 package com.vtnd.lus.data.repository.source.remote.api.middleware
 
 import android.app.Application
+import com.vtnd.lus.data.TokenRepository
 import com.vtnd.lus.data.UserRepository
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
@@ -8,9 +9,7 @@ import okhttp3.Response
 import timber.log.Timber
 import java.net.HttpURLConnection
 
-class InterceptorImpl(
-    private var userRepository: UserRepository
-) : Interceptor {
+class InterceptorImpl(private var tokenRepository: TokenRepository) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -19,7 +18,7 @@ class InterceptorImpl(
             in customHeaders -> request
             else -> {
                 when (val token =
-                    runBlocking { userRepository.getToken() }
+                    runBlocking { tokenRepository.getToken() }
                         .also { Timber.d("Current Token $it") }) {
                     null -> request
                     else -> request
@@ -41,7 +40,7 @@ class InterceptorImpl(
             )
         ) {
             Timber.d("remove User And Token")
-            runBlocking { userRepository.clearToken() }
+            runBlocking { tokenRepository.clearToken() }
         }
         return response
     }

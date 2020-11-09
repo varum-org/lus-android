@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.vtnd.lus.ui.main.container.profilte.ProfileViewModel" />
+            type="com.vtnd.lus.ui.main.container.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

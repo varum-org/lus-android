@@ -7,9 +7,8 @@ import com.vtnd.lus.shared.liveData.SingleLiveData
 import com.vtnd.lus.shared.scheduler.DataResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
 
-abstract class BaseViewModel : ViewModel(), KoinComponent {
+abstract class BaseViewModel : ViewModel() {
 
     val isLoading = SingleLiveData<Boolean>()
     val exception = SingleLiveData<Exception>()
@@ -31,7 +30,7 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
             when (val asynchronousTasks = onRequest(this)) {
                 is DataResult.Success -> {
                     onSuccess?.invoke(asynchronousTasks.data) ?: kotlin.run {
-                        liveData?.value = asynchronousTasks.data
+                        liveData?.value = asynchronousTasks.data!!
                     }
                 }
                 is DataResult.Error -> {

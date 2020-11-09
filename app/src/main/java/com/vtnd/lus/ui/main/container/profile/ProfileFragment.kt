@@ -1,4 +1,4 @@
-package com.vtnd.lus.ui.main.container.profilte
+package com.vtnd.lus.ui.main.container.profile
 
 import android.view.LayoutInflater
 import com.vtnd.lus.base.BaseFragment
