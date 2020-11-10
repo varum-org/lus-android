@@ -4,9 +4,9 @@ import com.squareup.moshi.Json
 
 data class SignInResponse(
     @Json(name = "is_admin")
-    val isAdmin: Boolean,
+    val isAdmin: Boolean?,
     @Json(name = "token")
-    val token: String,
+    val token: String?,
     @Json(name = "user")
-    val user: User
+    val user: User?
 )

@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentRegisterBinding
-import com.vtnd.lus.shared.enum.AuthEnum
+import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.extensions.listenToViews
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
 import com.vtnd.lus.ui.auth.AuthActivity
@@ -31,12 +31,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             R.id.registerButton -> {
                 Toast.makeText(
                     activity,
-                    "username:${usernameInput.editText?.text}-password:${passwordInput.editText?.text}",
+                    "username:${emailInput.editText?.text}-password:${passwordInput.editText?.text}",
                     Toast.LENGTH_SHORT
                 ).show()
             }
             R.id.signInText -> {
-                (activity as AuthActivity).switchFragment(AuthEnum.LOGIN)
+                (activity as AuthActivity).switchFragment(AuthType.LOGIN)
             }
         }
     }
