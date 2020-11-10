@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.databinding.ActivityAuthBinding
-import com.vtnd.lus.shared.enum.AuthEnum
+import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.extensions.addFragmentToActivity
 import com.vtnd.lus.shared.extensions.switchFragment
 import com.vtnd.lus.ui.auth.login.LoginFragment
@@ -37,16 +37,16 @@ class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
         }
     }
 
-    fun switchFragment(authType: AuthEnum) = when (authType) {
-        AuthEnum.LOGIN -> {
+    fun switchFragment(authType: AuthType) = when (authType) {
+        AuthType.LOGIN -> {
             switchFragment(R.id.auth, currentFragment, loginFragment)
             currentFragment = loginFragment
         }
-        AuthEnum.WELCOME -> {
+        AuthType.WELCOME -> {
             switchFragment(R.id.auth, currentFragment, welcomeFragment)
             currentFragment = welcomeFragment
         }
-        AuthEnum.REGISTER -> {
+        AuthType.REGISTER -> {
             switchFragment(R.id.auth, currentFragment, registerFragment)
             currentFragment = registerFragment
         }

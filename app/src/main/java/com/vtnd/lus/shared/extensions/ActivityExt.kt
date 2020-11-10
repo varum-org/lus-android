@@ -15,6 +15,7 @@ import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.shared.AnimateType
 import org.json.JSONObject
 import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
@@ -27,7 +28,9 @@ fun AppCompatActivity.replaceFragmentInActivity(
     animateType: AnimateType = AnimateType.FADE
 ) {
     supportFragmentManager.transact({
-        if (addToBackStack) addToBackStack(tag)
+        if (addToBackStack) {
+            addToBackStack(tag)
+        }
         replace(containerId, fragment, tag)
     }, animateType)
 }
@@ -40,14 +43,18 @@ fun AppCompatActivity.addFragmentToActivity(
     animateType: AnimateType? = AnimateType.FADE
 ) {
     supportFragmentManager.transact({
-        if (addToBackStack) addToBackStack(tag)
+        if (addToBackStack) {
+            addToBackStack(tag)
+        }
         add(containerId, fragment, tag)
     }, animateType)
 }
 
 fun AppCompatActivity.goBackFragment(): Boolean {
     val isShowPreviousPage = supportFragmentManager.backStackEntryCount > 0
-    if (isShowPreviousPage) supportFragmentManager.popBackStackImmediate()
+    if (isShowPreviousPage) {
+        supportFragmentManager.popBackStackImmediate()
+    }
     return isShowPreviousPage
 }
 
@@ -77,7 +84,7 @@ fun AppCompatActivity.switchFragment(
     @IdRes containerId: Int,
     currentFragment: Fragment,
     newFragment: Fragment,
-    addToBackStack: Boolean = false,
+    addToBackStack: Boolean = true,
     tag: String = newFragment::class.java.simpleName
 ) {
     supportFragmentManager.transact({
@@ -93,7 +100,9 @@ fun AppCompatActivity.switchFragment(
             )
         } else {
             hide(currentFragment)
-            if (addToBackStack) addToBackStack(tag)
+            if (addToBackStack) {
+                addToBackStack(tag)
+            }
             add(containerId, newFragment, tag)
         }
     })
@@ -122,14 +131,16 @@ fun Application.getContext(): Context {
 }
 
 fun Activity.showError(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
-    Snackbar.make(findViewById(R.id.content), message, duration).show()
+    Snackbar.make(findViewById(android.R.id.content), message, duration).show()
 }
 
 fun BaseActivity<*, *>?.handleDefaultApiError(apiError: Exception) {
     this?.let {
         when (apiError) {
             is HttpException -> {
+                Timber.i("aaaa")
                 getErrorMessage(apiError)?.let {
+                    Timber.i(it)
                     showError(it)
                 }
             }
@@ -158,6 +169,7 @@ fun BaseActivity<*, *>.getErrorMessage(e: Exception): String? {
             // Handle get message error when request api, depend on format json api
             val jsonObject = JSONObject(responseBody.string())
             val message = jsonObject.getString("messages")
+            Timber.i(message)
             if (!message.isNullOrBlank()) {
                 message
             } else {

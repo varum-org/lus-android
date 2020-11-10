@@ -6,7 +6,9 @@ import android.widget.Toast
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentLoginBinding
-import com.vtnd.lus.shared.enum.AuthEnum
+import com.vtnd.lus.shared.type.AuthType
+import com.vtnd.lus.shared.type.ValidateErrorType.EmailErrorType
+import com.vtnd.lus.shared.type.ValidateErrorType.PasswordErrorType
 import com.vtnd.lus.shared.extensions.listenToViews
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
 import com.vtnd.lus.shared.liveData.observeLiveData
@@ -30,23 +32,33 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.loginButton -> {
-                viewModel.signIn(usernameInput.editText?.text.toString(),
+                viewModel.signIn(emailInput.editText?.text.toString(),
                     passwordInput.editText?.text.toString())
             }
             R.id.signUpText -> {
-                (activity as AuthActivity).switchFragment(AuthEnum.REGISTER)
+                (activity as AuthActivity).switchFragment(AuthType.REGISTER)
             }
         }
     }
 
-    override fun registerLiveData() {
+    override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
-        viewModel.apply {
-            signInResponse.observeLiveData(viewLifecycleOwner) {
-                Toast.makeText(activity, it.user.userName, Toast.LENGTH_SHORT).show()
-            }
+        signInResponse.observeLiveData(viewLifecycleOwner) {
+//            Toast.makeText(activity, it?.user?.userName, Toast.LENGTH_SHORT).show()
         }
+        emailError.observeLiveData(viewLifecycleOwner, ::handleValidateEmail)
+        passwordError.observeLiveData(viewLifecycleOwner, ::handleValidatePassword)
     }
+
+    private fun handleValidateEmail(emailError: EmailErrorType) {
+        emailInput.error = emailError.message
+    }
+
+
+    private fun handleValidatePassword(passwordError: PasswordErrorType) {
+        passwordInput.error = passwordError.message
+    }
+
 
     companion object {
         fun newInstance() = LoginFragment()

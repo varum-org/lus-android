@@ -72,7 +72,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/usernameInput"
+                        android:id="@+id/emailInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:errorEnabled="true"
@@ -85,6 +85,8 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:maxLength="50"
+                            android:singleLine="true"
                             android:background="@color/pink_50"
                             android:hint="@string/username" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -105,6 +107,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/pink_50"
+                            android:maxLength="50"
+                            android:singleLine="true"
                             android:hint="@string/password"
                             android:inputType="textPassword" />
                     </com.google.android.material.textfield.TextInputLayout>
