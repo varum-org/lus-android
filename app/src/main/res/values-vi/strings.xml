@@ -14,4 +14,7 @@
     <string name="already_have_an_account">Bạn đã có tài khoản ?</string>
     <string name="sign_in">Đăng nhập</string>
     <string name="or">OR</string>
+    <string name="full_name">Tên đầy </string>
+    <string name="phone">Số điện thoại</string>
+    <string name="email">Email</string>
 </resources>

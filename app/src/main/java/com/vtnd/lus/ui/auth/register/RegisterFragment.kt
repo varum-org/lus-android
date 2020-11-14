@@ -2,13 +2,15 @@ package com.vtnd.lus.ui.auth.register
 
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
+import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.databinding.FragmentRegisterBinding
-import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.extensions.listenToViews
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
+import com.vtnd.lus.shared.liveData.observeLiveData
+import com.vtnd.lus.shared.type.AuthType
+import com.vtnd.lus.shared.type.ValidateErrorType.*
 import com.vtnd.lus.ui.auth.AuthActivity
 import kotlinx.android.synthetic.main.fragment_register.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,16 +31,50 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.registerButton -> {
-                Toast.makeText(
-                    activity,
-                    "username:${emailInput.editText?.text}-password:${passwordInput.editText?.text}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                viewModel.signUp(
+                    SignUpRequest(
+                        userNameInput.editText?.text.toString(),
+                        emailInput.editText?.text.toString(),
+                        passwordInput.editText?.text.toString(),
+                        phoneInput.editText?.text.toString()
+                    )
+                )
             }
             R.id.signInText -> {
                 (activity as AuthActivity).switchFragment(AuthType.LOGIN)
             }
         }
+    }
+
+    override fun registerLiveData() = with(viewModel) {
+        super.registerLiveData()
+        emailError.observeLiveData(viewLifecycleOwner, ::handleValidateEmail)
+        passwordError.observeLiveData(viewLifecycleOwner, ::handleValidatePassword)
+        userNameError.observeLiveData(viewLifecycleOwner, ::handleValidateUserName)
+        phoneError.observeLiveData(viewLifecycleOwner, ::handleValidatePhone)
+        signUpResponse.observeLiveData(viewLifecycleOwner){
+            handleSignUnSuccess()
+        }
+    }
+
+    private fun handleValidateEmail(emailError: EmailErrorType) {
+        emailInput.error = emailError.message
+    }
+
+    private fun handleValidateUserName(usernameError: UserNameErrorType) {
+        userNameInput.error = usernameError.message
+    }
+
+    private fun handleValidatePassword(passwordError: PasswordErrorType) {
+        passwordInput.error = passwordError.message
+    }
+
+    private fun handleValidatePhone(phoneError: PhoneErrorType) {
+        phoneInput.error = phoneError.message
+    }
+
+    private fun handleSignUnSuccess(){
+
     }
 
     companion object {

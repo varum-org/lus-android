@@ -190,4 +190,6 @@ dependencies {
 
     //Timber
     implementation(Deps.timber)
+    //OTP VIew
+    implementation( Deps.otp_view)
 }

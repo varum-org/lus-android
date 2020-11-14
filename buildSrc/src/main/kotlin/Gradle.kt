@@ -56,6 +56,7 @@ object Versions {
     const val preference= "1.1.1"
     const val legacy_preference = "1.0.0"
     const val timber = "4.7.1"
+    const val otp_view = "2.1.2"
 }
 
 @Suppress("unused")
@@ -216,4 +217,5 @@ object Deps {
     const val legacy_preference =
         "androidx.legacy:legacy-preference-v14:${Versions.legacy_preference}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    const val otp_view = "com.github.mukeshsolanki:android-otpview-pinview:${Versions.otp_view}"
 }
