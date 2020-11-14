@@ -54,7 +54,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleLoginText"
-                app:layout_constraintWidth_percent="0.7" />
+                app:layout_constraintWidth_percent="0.35" />
 
             <ScrollView
                 android:id="@+id/inputScrollView"
@@ -76,9 +76,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:errorEnabled="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/loginImage"
                         app:startIconDrawable="@drawable/ic_profile_bold"
                         app:startIconTint="@color/red_a400">
 
@@ -86,7 +83,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/pink_50"
-                            android:hint="@string/username" />
+                            android:hint="@string/email"
+                            android:maxLength="50"
+                            android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -94,9 +93,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:errorEnabled="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/loginImage"
                         app:passwordToggleEnabled="true"
                         app:startIconDrawable="@drawable/ic_lock"
                         app:startIconTint="@color/red_a400">
@@ -105,8 +101,47 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/pink_50"
+                            android:maxLength="30"
+                            android:singleLine="true"
                             android:hint="@string/password"
                             android:inputType="textPassword" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userNameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true"
+                        app:startIconDrawable="@drawable/ic_profile_light"
+                        app:startIconTint="@color/red_a400">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/pink_50"
+                            android:hint="@string/username"
+                            android:inputType="text"
+                            android:maxLength="30"
+                            android:singleLine="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/phoneInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true"
+                        app:startIconDrawable="@drawable/ic_phone"
+                        app:startIconTint="@color/red_a400">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/pink_50"
+                            android:hint="@string/phone"
+                            android:inputType="phone"
+                            android:maxLength="30"
+                            android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.button.MaterialButton

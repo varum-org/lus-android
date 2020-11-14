@@ -30,4 +30,7 @@
     <string name="already_have_an_account">Already have an Account ?</string>
     <string name="sign_in">Sign In</string>
     <string name="or">OR</string>
+    <string name="full_name">Full name</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
 </resources>

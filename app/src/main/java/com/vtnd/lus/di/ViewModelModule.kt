@@ -33,5 +33,5 @@ val viewModelModule = module {
     viewModel { ProfileViewModel() }
     viewModel { LoginViewModel(userRepository = get(), tokenRepository = get()) }
     viewModel { WelcomeViewModel() }
-    viewModel { RegisterViewModel() }
+    viewModel { RegisterViewModel(userRepository = get()) }
 }
