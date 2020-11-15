@@ -11,7 +11,7 @@ import com.vtnd.lus.shared.liveData.SingleLiveData
 import com.vtnd.lus.shared.type.ValidateErrorType.*
 
 class RegisterViewModel(private val userRepository: UserRepository) : BaseViewModel() {
-    val signUpResponse = SingleLiveData<Unit>()
+    val signUpResponse = SingleLiveData<Any>()
     private val validateInput = ValidateError()
     private val _emailError = MutableLiveData<EmailErrorType>()
     private val _passwordError = MutableLiveData<PasswordErrorType>()
@@ -38,9 +38,7 @@ class RegisterViewModel(private val userRepository: UserRepository) : BaseViewMo
         ) {
             viewModelScope(signUpResponse,
                 onRequest = { userRepository.signUp(signUpRequest) },
-                onSuccess = {
-                    signUpResponse.postValue(it)
-                },
+                onSuccess = { signUpResponse.postValue(it) },
                 onError = { exception.postValue(it) }
             )
         }

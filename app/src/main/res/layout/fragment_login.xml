@@ -109,11 +109,14 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/loginButton"
+                        android:paddingTop="@dimen/dp_14"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/dp_14"
                         android:layout_marginTop="@dimen/dp_8"
                         android:backgroundTint="@color/red_a400"
-                        android:paddingVertical="@dimen/dp_10"
+                        app:cornerRadius="@dimen/dp_24"
+                        app:rippleColor="@color/pink_50"
                         android:text="@string/login"
                         android:textColor="@color/white"
                         app:fontFamily="@font/segoe_ui_semibold" />

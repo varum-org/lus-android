@@ -33,4 +33,7 @@
     <string name="full_name">Full name</string>
     <string name="phone">Phone</string>
     <string name="email">Email</string>
+    <string name="you_will_get_a_otp_via_email">You will get a OTP via Email</string>
+    <string name="verification">Verification</string>
+    <string name="verify_email_success">Verify email success!</string>
 </resources>

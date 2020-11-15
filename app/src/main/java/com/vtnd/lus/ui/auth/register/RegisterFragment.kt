@@ -6,12 +6,15 @@ import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.databinding.FragmentRegisterBinding
+import com.vtnd.lus.shared.AnimateType
 import com.vtnd.lus.shared.extensions.listenToViews
+import com.vtnd.lus.shared.extensions.replaceFragment
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.type.ValidateErrorType.*
 import com.vtnd.lus.ui.auth.AuthActivity
+import com.vtnd.lus.ui.auth.verify.VerifyFragment
 import kotlinx.android.synthetic.main.fragment_register.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -52,9 +55,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         passwordError.observeLiveData(viewLifecycleOwner, ::handleValidatePassword)
         userNameError.observeLiveData(viewLifecycleOwner, ::handleValidateUserName)
         phoneError.observeLiveData(viewLifecycleOwner, ::handleValidatePhone)
-        signUpResponse.observeLiveData(viewLifecycleOwner){
+        signUpResponse.observeLiveData(viewLifecycleOwner) {
             handleSignUnSuccess()
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        onHideSoftKeyBoard()
     }
 
     private fun handleValidateEmail(emailError: EmailErrorType) {
@@ -73,8 +81,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         phoneInput.error = phoneError.message
     }
 
-    private fun handleSignUnSuccess(){
-
+    private fun handleSignUnSuccess() {
+        replaceFragment(R.id.auth,
+            VerifyFragment.newInstance(emailInput.editText?.text.toString()),
+            true,
+            animateType = AnimateType.SLIDE_TO_RIGHT)
     }
 
     companion object {

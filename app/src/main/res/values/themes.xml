@@ -28,5 +28,6 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="colorPrimary">@color/grey_600</item>
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
     </style>
 </resources>
