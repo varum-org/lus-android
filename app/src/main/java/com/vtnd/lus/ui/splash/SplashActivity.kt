@@ -8,6 +8,7 @@ import com.vtnd.lus.databinding.ActivitySplashBinding
 import com.vtnd.lus.shared.extensions.delayTask
 import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.intro.IntroSlideActivity
+import com.vtnd.lus.ui.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
@@ -20,7 +21,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         viewModel.isOpenFirstApp?.let {
             delayTask({
                 if (it) startActivity(Intent(applicationContext, IntroSlideActivity::class.java))
-                else startActivity(Intent(applicationContext, AuthActivity::class.java))
+                else {
+                    if (viewModel.token)
+                        startActivity(Intent(applicationContext, MainActivity::class.java))
+                    else startActivity(Intent(applicationContext, AuthActivity::class.java))
+                }
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 finish()
             })

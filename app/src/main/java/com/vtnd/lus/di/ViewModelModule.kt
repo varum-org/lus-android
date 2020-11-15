@@ -22,7 +22,7 @@ import org.koin.dsl.module
  * 1 ViewModel can be used by several LifeCycleOwners.
  */
 val viewModelModule = module {
-    viewModel { SplashViewModel(repoRepository = get()) }
+    viewModel { SplashViewModel(repoRepository = get(),tokenRepository = get()) }
     viewModel { IntroSlideViewModel(repoRepository = get()) }
     viewModel { AuthViewModel(repoRepository = get()) }
     viewModel { MainViewModel(userRepository = get()) }
