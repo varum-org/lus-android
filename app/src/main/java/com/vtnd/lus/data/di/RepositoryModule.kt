@@ -13,7 +13,8 @@ val repositoryModule = module {
     single<UserRepository> {
         UserRepositoryImpl(
             local = get(),
-            remote = get()
+            remote = get(),
+            tokenLocal = get()
         )
     }
     single<RepoRepository> {

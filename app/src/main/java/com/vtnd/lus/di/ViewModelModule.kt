@@ -10,6 +10,7 @@ import com.vtnd.lus.ui.main.MainViewModel
 import com.vtnd.lus.ui.main.container.ContainerViewModel
 import com.vtnd.lus.ui.main.container.favorite.FavoriteViewModel
 import com.vtnd.lus.ui.main.container.home.HomeViewModel
+import com.vtnd.lus.ui.main.container.idolDetail.IdolDetailViewModel
 import com.vtnd.lus.ui.main.container.notification.NotificationViewModel
 import com.vtnd.lus.ui.main.container.profile.ProfileViewModel
 import com.vtnd.lus.ui.main.container.search.SearchViewModel
@@ -22,18 +23,36 @@ import org.koin.dsl.module
  * 1 ViewModel can be used by several LifeCycleOwners.
  */
 val viewModelModule = module {
-    viewModel { SplashViewModel(repoRepository = get(),tokenRepository = get()) }
+    viewModel {
+        SplashViewModel(
+            repoRepository = get(),
+            tokenRepository = get(),
+            userRepository = get())
+    }
     viewModel { IntroSlideViewModel(repoRepository = get()) }
     viewModel { AuthViewModel(repoRepository = get()) }
-    viewModel { MainViewModel(userRepository = get()) }
+    viewModel {
+        MainViewModel(
+            userRepository = get(),
+            tokenRepository = get())
+    }
     viewModel { ContainerViewModel() }
-    viewModel { HomeViewModel() }
+    viewModel {
+        HomeViewModel(
+            userRepository = get(),
+            tokenRepository = get())
+    }
     viewModel { SearchViewModel() }
     viewModel { FavoriteViewModel() }
     viewModel { NotificationViewModel() }
-    viewModel { ProfileViewModel() }
-    viewModel { LoginViewModel(userRepository = get(), tokenRepository = get()) }
+    viewModel { ProfileViewModel(userRepository = get()) }
+    viewModel {
+        LoginViewModel(
+            userRepository = get(),
+            tokenRepository = get())
+    }
     viewModel { WelcomeViewModel() }
+    viewModel { IdolDetailViewModel() }
     viewModel { VerifyViewModel(userRepository = get()) }
     viewModel { RegisterViewModel(userRepository = get()) }
 }

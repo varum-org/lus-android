@@ -4,10 +4,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import com.vtnd.lus.R
-import com.vtnd.lus.base.BaseFragment
+import com.vtnd.lus.base.BaseFragment2
 import com.vtnd.lus.databinding.FragmentLoginBinding
+import com.vtnd.lus.shared.extensions.invisible
 import com.vtnd.lus.shared.extensions.listenToViews
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
+import com.vtnd.lus.shared.extensions.visible
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.type.ValidateErrorType.EmailErrorType
@@ -17,7 +19,7 @@ import com.vtnd.lus.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
+class LoginFragment : BaseFragment2<FragmentLoginBinding, LoginViewModel>(),
     View.OnClickListener {
 
     override val viewModel: LoginViewModel by viewModel()
@@ -27,8 +29,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
 
     override fun initialize() {
         setupDismissKeyBoard(activity, loginLayout)
-        listenToViews(loginButton, signUpText)
+        listenToViews(loginButton, signUpText, skipText)
     }
+
 
     override fun onClick(view: View?) {
         when (view?.id) {
@@ -39,6 +42,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
             R.id.signUpText -> {
                 (activity as AuthActivity).switchFragment(AuthType.REGISTER)
             }
+            R.id.skipText -> {
+                startActivity(Intent(activity, MainActivity::class.java))
+                activity?.apply {
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                    finish()
+                }
+            }
         }
     }
 
@@ -46,7 +56,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
         super.registerLiveData()
         signInResponse.observeLiveData(viewLifecycleOwner) {
             startActivity(Intent(activity, MainActivity::class.java))
-            (activity as AuthActivity).apply {
+            activity?.apply {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 finish()
             }
@@ -58,6 +68,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
     override fun onStop() {
         super.onStop()
         onHideSoftKeyBoard()
+    }
+
+    override fun showLoading() {
+        loginButton.invisible()
+        progress.visible()
+    }
+
+    override fun hideLoading() {
+        loginButton.visible()
+        progress.invisible()
     }
 
     private fun handleValidateEmail(emailError: EmailErrorType) {

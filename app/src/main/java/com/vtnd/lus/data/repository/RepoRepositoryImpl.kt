@@ -12,6 +12,6 @@ class RepoRepositoryImpl(
     override fun isOpenFirstApp() =
         local.isOpenFirstApp()
 
-    override fun setOpenFirstApp(isFirst: Boolean) =
-        local.setOpenFirstApp(isFirst)
+    override fun setOpenFirstApp() =
+        local.setOpenFirstApp()
 }

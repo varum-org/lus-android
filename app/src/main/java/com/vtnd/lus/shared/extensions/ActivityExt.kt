@@ -134,8 +134,7 @@ fun Activity.showError(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
     Snackbar.make(findViewById(android.R.id.content), message, duration).show()
 }
 
-fun BaseActivity<*, *>?.handleDefaultApiError(apiError: Exception) {
-    this?.let {
+fun AppCompatActivity.handleDefaultApiError(apiError: Exception) {
         when (apiError) {
             is HttpException -> {
                 Timber.i("aaaa")
@@ -154,10 +153,9 @@ fun BaseActivity<*, *>?.handleDefaultApiError(apiError: Exception) {
                 showError(message = getString(R.string.msg_error_data_parse))
             }
         }
-    }
 }
 
-fun BaseActivity<*, *>.getErrorMessage(e: Exception): String? {
+fun AppCompatActivity.getErrorMessage(e: Exception): String? {
     val responseBody = (e as HttpException).response()?.errorBody()
     val errorCode = e.response()?.code()
     if (errorCode == HttpURLConnection.HTTP_UNAUTHORIZED) {

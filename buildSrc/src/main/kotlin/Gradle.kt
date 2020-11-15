@@ -32,7 +32,7 @@ object Versions {
     const val room_coroutines = "2.1.0-alpha04"
     const val support = "1.0.0"
     const val constraint_layout = "2.0.2"
-    const val material = "1.2.0-alpha02"
+    const val material = "1.3.0-alpha03"
     const val work = "2.2.0"
     const val koin = "2.1.6"
     const val firebase_analytics = "17.2.2"

@@ -3,9 +3,9 @@ package com.vtnd.lus.data.repository.source
 interface RepoDataSource {
 
     interface Local {
-        fun isOpenFirstApp(): Boolean?
+        fun isOpenFirstApp(): String?
 
-        fun setOpenFirstApp(isFirst: Boolean)
+        fun setOpenFirstApp()
     }
 
     interface Remote

@@ -20,4 +20,8 @@
     <color name="grey_900">#212121</color>
     <!-- Color Text Dark -->
     <color name="grey_600">#757575</color>
+
+    <color name="indigo_900">#2A2A54</color>
+    <color name="blue_grey_400">#797991</color>
+    <color name="black_alpha_44">#70000000</color>
 </resources>
