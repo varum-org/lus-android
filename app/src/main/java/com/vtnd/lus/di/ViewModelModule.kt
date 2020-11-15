@@ -3,6 +3,7 @@ package com.vtnd.lus.di
 import com.vtnd.lus.ui.auth.AuthViewModel
 import com.vtnd.lus.ui.auth.login.LoginViewModel
 import com.vtnd.lus.ui.auth.register.RegisterViewModel
+import com.vtnd.lus.ui.auth.verify.VerifyViewModel
 import com.vtnd.lus.ui.auth.welcome.WelcomeViewModel
 import com.vtnd.lus.ui.intro.IntroSlideViewModel
 import com.vtnd.lus.ui.main.MainViewModel
@@ -33,5 +34,6 @@ val viewModelModule = module {
     viewModel { ProfileViewModel() }
     viewModel { LoginViewModel(userRepository = get(), tokenRepository = get()) }
     viewModel { WelcomeViewModel() }
+    viewModel { VerifyViewModel(userRepository = get()) }
     viewModel { RegisterViewModel(userRepository = get()) }
 }

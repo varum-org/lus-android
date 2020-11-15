@@ -50,6 +50,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
         passwordError.observeLiveData(viewLifecycleOwner, ::handleValidatePassword)
     }
 
+    override fun onStop() {
+        super.onStop()
+        onHideSoftKeyBoard()
+    }
+
     private fun handleValidateEmail(emailError: EmailErrorType) {
         emailInput.error = emailError.message
     }

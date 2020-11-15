@@ -2,6 +2,7 @@ package com.vtnd.lus.data.repository.source.remote.api
 
 import com.vtnd.lus.data.repository.source.remote.api.request.SignInRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
+import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
 import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.SignInResponse
 import retrofit2.Retrofit
@@ -17,7 +18,11 @@ interface ApiService {
 
     @Headers("@: NoAuth")
     @POST("api/v1/user/register")
-    suspend fun signUp(@Body signUpRequest: SignUpRequest): BaseResponse<Unit>
+    suspend fun signUp(@Body signUpRequest: SignUpRequest): BaseResponse<Any>
+
+    @Headers("@: NoAuth")
+    @POST("api/v1/user/verify_email")
+    suspend fun verifyAccount(@Body verifyRequest: VerifyRequest): BaseResponse<Any>
 
     companion object Factory {
         operator fun invoke(retrofit: Retrofit) = retrofit.create<ApiService>()

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -14,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.snackbar.Snackbar
 import com.vtnd.lus.R
+import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.shared.AnimateType
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -29,25 +30,6 @@ fun Fragment.replaceFragment(
             addToBackStack(tag)
         }
         replace(containerId, fragment, tag)
-    }, animateType)
-}
-
-fun Fragment.replaceOldFragment(
-    @IdRes containerId: Int,
-    showFragment: Fragment,
-    addToBackStack: Boolean = false,
-    tag: String = showFragment::class.java.simpleName,
-    animateType: AnimateType = AnimateType.FADE
-) {
-    val existFragment = activity?.supportFragmentManager?.findFragmentByTag(tag)
-    Log.i("1234","${existFragment}-$tag")
-    activity?.supportFragmentManager?.transact({
-        if (addToBackStack)
-            addToBackStack(tag)
-        if (existFragment != null && existFragment.isAdded){
-            replace(containerId, existFragment, tag)
-Log.i("1234","${existFragment}-$tag")
-        }
     }, animateType)
 }
 
@@ -208,4 +190,10 @@ fun Fragment.initToolbar(
             safeClick { this@initToolbar.goBackFragment() }
         } else gone()
     }
+}
+
+fun Fragment.showError(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
+    Snackbar.make((activity as BaseActivity<*, *>).findViewById(android.R.id.content),
+        message,
+        duration).show()
 }

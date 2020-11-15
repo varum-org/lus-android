@@ -1,10 +1,12 @@
 package com.vtnd.lus.base
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
@@ -87,5 +89,11 @@ abstract class BaseFragment<viewBinding : ViewBinding, viewModel : BaseViewModel
         exception.observeLiveData(viewLifecycleOwner) {
             (activity as? BaseActivity<*, *>)?.handleDefaultApiError(it)
         }
+    }
+
+    fun onHideSoftKeyBoard() {
+        val inputMng: InputMethodManager =
+            context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMng.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
     }
 }

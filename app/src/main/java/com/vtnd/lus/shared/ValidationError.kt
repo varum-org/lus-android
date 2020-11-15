@@ -9,26 +9,23 @@ typealias ValidateResult = Pair<Boolean, ErrorType<String?>>
 class ValidateError {
 
     fun validateEmail(email: String?) = when {
-        email.isNullOrBlank() ->
-            ValidateResult(false, EmailErrorType.EMAIL_EMPTY)
-        !Patterns.EMAIL_ADDRESS.matcher(email).matches() ->
-            ValidateResult(false, EmailErrorType.INVALID_EMAIL)
+        email.isNullOrBlank() -> ValidateResult(false, EmailErrorType.EMAIL_EMPTY)
+        !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> ValidateResult(false,
+            EmailErrorType.INVALID_EMAIL)
         else -> ValidateResult(true, EmailErrorType.NONE)
     }
 
     fun validatePassword(password: String?) = when {
-        password.isNullOrBlank() ->
-            ValidateResult(false, PasswordErrorType.PASSWORD_EMPTY)
-        password.length < LEAST_NUMBER_CHARACTER ->
-            ValidateResult(false, PasswordErrorType.LEAST_CHARACTER)
+        password.isNullOrBlank() -> ValidateResult(false, PasswordErrorType.PASSWORD_EMPTY)
+        password.length < LEAST_NUMBER_CHARACTER -> ValidateResult(false,
+            PasswordErrorType.LEAST_CHARACTER)
         else -> ValidateResult(true, PasswordErrorType.NONE)
     }
 
     fun validateUserName(userName: String?) = when {
-        userName.isNullOrBlank() ->
-            ValidateResult(false, UserNameErrorType.USER_NAME_EMPTY)
-        userName.length < LEAST_NUMBER_CHARACTER ->
-            ValidateResult(false, UserNameErrorType.LEAST_CHARACTER)
+        userName.isNullOrBlank() -> ValidateResult(false, UserNameErrorType.USER_NAME_EMPTY)
+        userName.length < LEAST_NUMBER_CHARACTER -> ValidateResult(false,
+            UserNameErrorType.LEAST_CHARACTER)
         else -> ValidateResult(true, UserNameErrorType.NONE)
     }
 
@@ -48,11 +45,16 @@ class ValidateError {
     }
 
     fun validatePhone(phone: String?) = when {
-        phone.isNullOrBlank() ->
-            ValidateResult(false, PhoneErrorType.PHONE_EMPTY)
+        phone.isNullOrBlank() -> ValidateResult(false, PhoneErrorType.PHONE_EMPTY)
         !Patterns.PHONE.matcher(phone).matches() ->
             ValidateResult(false, PhoneErrorType.INVALID_PHONE)
         else -> ValidateResult(true, PhoneErrorType.NONE)
+    }
+
+    fun validateCode(code: String?) = when {
+        code.isNullOrBlank() -> ValidateResult(false, CodeErrorType.CODE_EMPTY)
+        code.length != LEAST_NUMBER_CHARACTER -> ValidateResult(false, CodeErrorType.INVALID_CODE)
+        else -> ValidateResult(true, CodeErrorType.NONE)
     }
 
     companion object {

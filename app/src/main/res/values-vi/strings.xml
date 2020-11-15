@@ -17,4 +17,7 @@
     <string name="full_name">Tên đầy </string>
     <string name="phone">Số điện thoại</string>
     <string name="email">Email</string>
+    <string name="you_will_get_a_otp_via_email">Bạn sẽ nhận được mã OTP qua Email</string>
+    <string name="verification">Xác minh</string>
+    <string name="verify_email_success">Xác minh email thành công!</string>
 </resources>

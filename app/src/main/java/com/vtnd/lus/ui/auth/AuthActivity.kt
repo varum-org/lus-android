@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.databinding.ActivityAuthBinding
-import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.extensions.addFragmentToActivity
 import com.vtnd.lus.shared.extensions.switchFragment
+import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.ui.auth.login.LoginFragment
 import com.vtnd.lus.ui.auth.register.RegisterFragment
 import com.vtnd.lus.ui.auth.welcome.WelcomeFragment
@@ -15,9 +15,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
     override val viewModel: AuthViewModel by viewModel()
-    private val welcomeFragment = WelcomeFragment.newInstance()
-    private val loginFragment = LoginFragment.newInstance()
-    private val registerFragment = RegisterFragment.newInstance()
+    private val welcomeFragment by lazy { WelcomeFragment.newInstance() }
+    private val loginFragment by lazy { LoginFragment.newInstance() }
+    private val registerFragment by lazy { RegisterFragment.newInstance() }
     private lateinit var currentFragment: Fragment
 
     override fun inflateViewBinding(inflater: LayoutInflater) =

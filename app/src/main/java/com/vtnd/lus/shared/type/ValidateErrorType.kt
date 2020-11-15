@@ -79,4 +79,19 @@ class ValidateErrorType {
         }
     }
 
+    enum class CodeErrorType : ErrorType<String?> {
+        CODE_EMPTY {
+            override val message: String?
+                get() = "Empty, please enter!"
+        },
+        INVALID_CODE {
+            override val message: String?
+                get() =  "Invalid code number"
+        },
+        NONE {
+            override val message: String?
+                get() = null
+        }
+    }
+
 }
