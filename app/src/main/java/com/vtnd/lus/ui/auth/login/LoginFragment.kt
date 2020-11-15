@@ -1,18 +1,19 @@
 package com.vtnd.lus.ui.auth.login
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentLoginBinding
-import com.vtnd.lus.shared.type.AuthType
-import com.vtnd.lus.shared.type.ValidateErrorType.EmailErrorType
-import com.vtnd.lus.shared.type.ValidateErrorType.PasswordErrorType
 import com.vtnd.lus.shared.extensions.listenToViews
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
 import com.vtnd.lus.shared.liveData.observeLiveData
+import com.vtnd.lus.shared.type.AuthType
+import com.vtnd.lus.shared.type.ValidateErrorType.EmailErrorType
+import com.vtnd.lus.shared.type.ValidateErrorType.PasswordErrorType
 import com.vtnd.lus.ui.auth.AuthActivity
+import com.vtnd.lus.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,7 +45,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
         signInResponse.observeLiveData(viewLifecycleOwner) {
-//            Toast.makeText(activity, it?.user?.userName, Toast.LENGTH_SHORT).show()
+            startActivity(Intent(activity, MainActivity::class.java))
+            (activity as AuthActivity).apply {
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                finish()
+            }
         }
         emailError.observeLiveData(viewLifecycleOwner, ::handleValidateEmail)
         passwordError.observeLiveData(viewLifecycleOwner, ::handleValidatePassword)
