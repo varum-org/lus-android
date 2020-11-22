@@ -23,9 +23,13 @@ fun Fragment.replaceFragment(
     @IdRes containerId: Int, fragment: Fragment,
     addToBackStack: Boolean = false,
     tag: String = fragment::class.java.simpleName,
-    animateType: AnimateType = AnimateType.FADE
+    animateType: AnimateType = AnimateType.FADE,
+    sharedElement: View? = null
 ) {
     activity?.supportFragmentManager?.transact({
+        sharedElement?.let {
+            addSharedElement(sharedElement, sharedElement.transitionName)
+        }
         if (addToBackStack) {
             addToBackStack(tag)
         }

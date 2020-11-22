@@ -32,7 +32,7 @@
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_34"
             android:text="@string/welcome_to_lus"
             android:textAllCaps="true"
             android:textColor="@color/grey_900"
@@ -41,6 +41,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/skipText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp_34"
+            android:background="@drawable/ic_arrow_right_circle"
+            app:elevation="@dimen/dp_8"
+            app:fontFamily="@font/segoe_ui_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/titleText"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/titleText"
+            app:layout_constraintWidth_percent="0.13" />
+
 
         <ImageView
             android:id="@+id/welcomeImage"
@@ -75,12 +90,14 @@
                 android:backgroundTint="@color/red_a400"
                 android:paddingVertical="@dimen/dp_12"
                 android:text="@string/login"
+                app:cornerRadius="@dimen/dp_24"
                 android:textColor="@color/white"
                 app:fontFamily="@font/segoe_ui_semibold" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
+                app:cornerRadius="@dimen/dp_24"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:backgroundTint="@color/pink_50"

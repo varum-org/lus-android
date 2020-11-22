@@ -44,7 +44,8 @@ val dataSourceModule = module {
     single<UserDataSource.Local> {
         UserLocalImpl(
 //            databaseApi = get(),
-            sharedPrefApi = get()
+            sharedPrefApi = get(),
+            userJsonAdapter = get()
         )
     }
     single<UserDataSource.Remote> {

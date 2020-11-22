@@ -3,13 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutToolbar"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:background="@color/white"
-    app:layout_constraintDimensionRatio="w,56:414"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@color/white">
 
     <ImageButton
         android:id="@+id/leftImageButton"

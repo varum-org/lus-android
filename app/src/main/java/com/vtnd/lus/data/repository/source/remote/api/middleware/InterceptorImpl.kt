@@ -1,8 +1,6 @@
 package com.vtnd.lus.data.repository.source.remote.api.middleware
 
-import android.app.Application
 import com.vtnd.lus.data.TokenRepository
-import com.vtnd.lus.data.UserRepository
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -23,7 +21,7 @@ class InterceptorImpl(private var tokenRepository: TokenRepository) : Intercepto
                     null -> request
                     else -> request
                         .newBuilder()
-                        .addHeader(KEY_AUTH, "$KEY_BEARER $token")
+                        .addHeader(KEY_AUTH, token)
                         .build()
                 }
             }
@@ -33,7 +31,6 @@ class InterceptorImpl(private var tokenRepository: TokenRepository) : Intercepto
             .removeHeader(KEY_VALUE)
             .build()
             .let(chain::proceed)
-
         if (response.code in arrayOf(
                 HttpURLConnection.HTTP_UNAUTHORIZED,
                 HttpURLConnection.HTTP_FORBIDDEN
@@ -48,7 +45,6 @@ class InterceptorImpl(private var tokenRepository: TokenRepository) : Intercepto
     companion object {
         private const val KEY_NO_AUTH = "NoAuth"
         private const val KEY_AUTH = "Authorization"
-        private const val KEY_BEARER = "Bearer"
         private const val KEY_VALUE = "@"
     }
 }

@@ -1,14 +1,17 @@
 package com.vtnd.lus.ui.main
 
-import android.os.Bundle
+import android.content.Intent
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatDelegate
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.databinding.ActivityMainBinding
 import com.vtnd.lus.shared.extensions.addFragmentToActivity
+import com.vtnd.lus.shared.liveData.observeLiveData
+import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.main.container.ContainerFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
@@ -21,7 +24,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         addFragmentToActivity(R.id.container, ContainerFragment.newInstance(), false)
     }
 
-    override fun registerLiveData() {
+    @ExperimentalCoroutinesApi
+    override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
+        isLogin.observeLiveData(this@MainActivity) {
+            if (it) {
+                logoutEvent.observeLiveData(this@MainActivity) {
+                    startActivity(Intent(applicationContext, AuthActivity::class.java))
+                    finish()
+                }
+            }
+        }
     }
 }

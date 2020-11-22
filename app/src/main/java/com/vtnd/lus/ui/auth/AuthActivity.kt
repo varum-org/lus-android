@@ -3,7 +3,7 @@ package com.vtnd.lus.ui.auth
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import com.vtnd.lus.R
-import com.vtnd.lus.base.BaseActivity
+import com.vtnd.lus.base.BaseActivity2
 import com.vtnd.lus.databinding.ActivityAuthBinding
 import com.vtnd.lus.shared.extensions.addFragmentToActivity
 import com.vtnd.lus.shared.extensions.switchFragment
@@ -13,7 +13,7 @@ import com.vtnd.lus.ui.auth.register.RegisterFragment
 import com.vtnd.lus.ui.auth.welcome.WelcomeFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
+class AuthActivity : BaseActivity2<ActivityAuthBinding, AuthViewModel>() {
     override val viewModel: AuthViewModel by viewModel()
     private val welcomeFragment by lazy { WelcomeFragment.newInstance() }
     private val loginFragment by lazy { LoginFragment.newInstance() }
@@ -24,17 +24,22 @@ class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
         ActivityAuthBinding.inflate(inflater)
 
     override fun initialize() {
-        viewModel.isOpenFirstApp?.let {
+        currentFragment = welcomeFragment
+        if (viewModel.isOpenFirstApp) {
+            viewModel.setOpenFirstApp()
             currentFragment = welcomeFragment
-            if (it) {
-                viewModel.setOpenFirstApp()
-                currentFragment = welcomeFragment
-                addFragmentToActivity(R.id.auth, welcomeFragment, false)
-            } else {
-                currentFragment = loginFragment
-                addFragmentToActivity(R.id.auth, loginFragment, false)
-            }
+            addFragmentToActivity(R.id.auth, welcomeFragment, false)
+        } else {
+            currentFragment = loginFragment
+            addFragmentToActivity(R.id.auth, loginFragment, false)
         }
+
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun hideLoading() {
     }
 
     fun switchFragment(authType: AuthType) = when (authType) {

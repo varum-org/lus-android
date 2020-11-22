@@ -1,10 +1,12 @@
 package com.vtnd.lus.data
 
+import kotlinx.coroutines.flow.Flow
+
 interface TokenRepository {
 
     fun getToken(): String?
 
-    fun saveToken(token: String)
-
     fun clearToken()
+
+    fun tokenObservable(): Flow<String?>
 }

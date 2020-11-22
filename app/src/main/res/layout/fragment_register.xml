@@ -34,8 +34,8 @@
                 android:id="@+id/titleLoginText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_16"
-                android:text="@string/login"
+                android:layout_marginTop="@dimen/dp_34"
+                android:text="@string/register"
                 android:textAllCaps="true"
                 android:textColor="@color/grey_900"
                 android:textSize="@dimen/sp_12"
@@ -43,6 +43,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/skipText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/dp_34"
+                android:background="@drawable/ic_arrow_right_circle"
+                app:elevation="@dimen/dp_8"
+                app:fontFamily="@font/segoe_ui_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/titleLoginText"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/titleLoginText"
+                app:layout_constraintWidth_percent="0.13" />
 
             <ImageView
                 android:id="@+id/loginImage"
@@ -144,18 +158,31 @@
                             android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/registerButton"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/dp_14"
-                        android:paddingBottom="@dimen/dp_14"
-                        android:backgroundTint="@color/red_a400"
-                        app:cornerRadius="@dimen/dp_24"
-                        app:rippleColor="@color/pink_50"
-                        android:text="@string/register"
-                        android:textColor="@color/white"
-                        app:fontFamily="@font/segoe_ui_semibold" />
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/registerButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/red_a400"
+                            android:paddingVertical="@dimen/dp_12"
+                            android:text="@string/register"
+                            android:textColor="@color/white"
+                            app:cornerRadius="@dimen/dp_24"
+                            app:fontFamily="@font/segoe_ui_semibold"
+                            app:rippleColor="@color/pink_50" />
+
+                        <ProgressBar
+                            android:id="@+id/progress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:elevation="@dimen/dp_2"
+                            android:indeterminateTint="@color/purple_200"
+                            android:visibility="invisible" />
+                    </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"

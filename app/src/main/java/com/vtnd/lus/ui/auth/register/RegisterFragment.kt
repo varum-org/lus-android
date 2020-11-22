@@ -1,24 +1,24 @@
 package com.vtnd.lus.ui.auth.register
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import com.vtnd.lus.R
-import com.vtnd.lus.base.BaseFragment
+import com.vtnd.lus.base.BaseFragment2
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.databinding.FragmentRegisterBinding
 import com.vtnd.lus.shared.AnimateType
-import com.vtnd.lus.shared.extensions.listenToViews
-import com.vtnd.lus.shared.extensions.replaceFragment
-import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
+import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.type.ValidateErrorType.*
 import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.auth.verify.VerifyFragment
+import com.vtnd.lus.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_register.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel>(),
+class RegisterFragment : BaseFragment2<FragmentRegisterBinding, RegisterViewModel>(),
     View.OnClickListener {
 
     override val viewModel: RegisterViewModel by viewModel()
@@ -28,7 +28,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     override fun initialize() {
         setupDismissKeyBoard(activity, registerLayout)
-        listenToViews(registerButton, signInText)
+        listenToViews(registerButton, signInText, skipText)
     }
 
     override fun onClick(view: View?) {
@@ -45,6 +45,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             }
             R.id.signInText -> {
                 (activity as AuthActivity).switchFragment(AuthType.LOGIN)
+            }
+            R.id.skipText -> {
+                startActivity(Intent(activity, MainActivity::class.java))
+                activity?.apply {
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                    finish()
+                }
             }
         }
     }
@@ -63,6 +70,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     override fun onStop() {
         super.onStop()
         onHideSoftKeyBoard()
+    }
+
+    override fun showLoading() {
+        registerButton.invisible()
+        progress.visible()
+    }
+
+    override fun hideLoading() {
+        registerButton.visible()
+        progress.invisible()
     }
 
     private fun handleValidateEmail(emailError: EmailErrorType) {

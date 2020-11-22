@@ -5,7 +5,7 @@ import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.vtnd.lus.BuildConfig
 import com.vtnd.lus.data.TokenRepository
-import com.vtnd.lus.data.UserRepository
+import com.vtnd.lus.data.model.UserJsonAdapter
 import com.vtnd.lus.data.repository.source.remote.api.ApiService
 import com.vtnd.lus.data.repository.source.remote.api.middleware.InterceptorImpl
 import com.vtnd.lus.shared.constants.Constants.KEY_BASE_URL
@@ -27,6 +27,10 @@ fun provideMoshi(): Moshi {
         .add(KotlinJsonAdapterFactory())
         .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
         .build()
+}
+
+private fun provideUserLocalJsonAdapter(moshi: Moshi): UserJsonAdapter {
+    return UserJsonAdapter(moshi)
 }
 
 fun provideAuthInterceptor(tokenRepository: TokenRepository): InterceptorImpl {
@@ -65,9 +69,11 @@ val networkModule = module {
 
     single { provideMoshi() }
 
-    factory{ provideAuthInterceptor(get()) }
+    factory { provideUserLocalJsonAdapter(moshi = get()) }
 
-    factory{ provideLoggingInterceptor() }
+    factory { provideAuthInterceptor(get()) }
+
+    factory { provideLoggingInterceptor() }
 
     single { provideOkHttpClient(listOf(get<InterceptorImpl>(), get<HttpLoggingInterceptor>())) }
 

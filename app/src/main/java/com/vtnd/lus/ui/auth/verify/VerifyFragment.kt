@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.core.os.bundleOf
 import com.vtnd.lus.R
-import com.vtnd.lus.base.BaseFragment
+import com.vtnd.lus.base.BaseFragment2
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
 import com.vtnd.lus.databinding.FragmentVerifyBinding
-import com.vtnd.lus.shared.extensions.goBackFragment
-import com.vtnd.lus.shared.extensions.safeClick
-import com.vtnd.lus.shared.extensions.showError
+import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.type.ValidateErrorType
@@ -17,7 +15,7 @@ import com.vtnd.lus.ui.auth.AuthActivity
 import kotlinx.android.synthetic.main.fragment_verify.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class VerifyFragment : BaseFragment<FragmentVerifyBinding, VerifyViewModel>() {
+class VerifyFragment : BaseFragment2<FragmentVerifyBinding, VerifyViewModel>() {
     private var email: String? = ""
 
     override val viewModel: VerifyViewModel by viewModel()
@@ -45,6 +43,18 @@ class VerifyFragment : BaseFragment<FragmentVerifyBinding, VerifyViewModel>() {
                 codeOtpView.text.toString()
             ))
         }
+    }
+
+    override fun showLoading() {
+        verifyButton.invisible()
+        progress.visible()
+
+    }
+
+    override fun hideLoading() {
+        verifyButton.visible()
+        progress.invisible()
+
     }
 
     override fun registerLiveData() = with(viewModel) {

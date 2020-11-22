@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
 import com.vtnd.lus.R
-import com.vtnd.lus.base.BaseActivity
+import com.vtnd.lus.base.BaseActivity2
 import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.databinding.ActivityIntroSlideBinding
 import com.vtnd.lus.shared.extensions.safeClick
@@ -21,7 +21,7 @@ import com.vtnd.lus.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_intro_slide.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IntroSlideActivity : BaseActivity<ActivityIntroSlideBinding, IntroSlideViewModel>() {
+class IntroSlideActivity : BaseActivity2<ActivityIntroSlideBinding, IntroSlideViewModel>() {
     private val introSlideAdapter by lazy { IntroSlideAdapter() }
 
     override val viewModel: IntroSlideViewModel by viewModel()
@@ -39,21 +39,16 @@ class IntroSlideActivity : BaseActivity<ActivityIntroSlideBinding, IntroSlideVie
                 setupCurrentIndicator(position)
             }
         })
-        nextButton.safeClick {
-            if (introSliderViewPaper.currentItem + 1 < introSlideAdapter.itemCount) {
-                introSliderViewPaper.currentItem += 1
-            } else {
-                startActivity(Intent(applicationContext, AuthActivity::class.java))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish()
-            }
-        }
         skipText.safeClick {
             startActivity(Intent(applicationContext, AuthActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             finish()
         }
     }
+
+    override fun showLoading() {}
+
+    override fun hideLoading() {}
 
     private fun setupIntroSlide() {
         introSliderViewPaper.adapter = introSlideAdapter

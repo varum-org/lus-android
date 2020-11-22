@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="locate">vi</string>
+    <!-- Common -->
+    <string name="error">Lỗi</string>
+    <string name="retry">Thử lại</string>
+    <string name="no_data_available">Không có dữ liệu</string>
+    <string name="msg_error_time_out">Hết thời gian kết nối!!</string>
+    <string name="msg_error_no_internet">Không kết nối internet!</string>
+    <string name="msg_error_data_parse">Lỗi phân tích cú pháp dữ liệu!</string>
+
+    <!-- Menu container-->
+    <string name="home">Trang chính</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="notification">Thông báo</string>
+    <string name="profile">Hồ sơ</string>
     <string name="skip_intro">Bỏ qua phần giới thiệu</string>
     <string name="next">Tiếp theo</string>
     <string name="lus">Lus</string>
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng ký</string>
     <string name="welcome_to_lus">Chào mừng bạn đến Lus</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
+    <string name="username">Tên người dùng</string>
+    <string name="password">Mật khẩu</string>
     <string name="don_t_have_an_account">Bạn chưa có tài khoản ?</string>
     <string name="sign_up">Đăng ký</string>
     <string name="already_have_an_account">Bạn đã có tài khoản ?</string>
