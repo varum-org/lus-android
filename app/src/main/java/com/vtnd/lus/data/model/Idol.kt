@@ -31,7 +31,7 @@ data class Idol(
     @Json(name = "rent_total_accepted")
     val rentTotalAccepted: Int,
     @Json(name = "services")
-    val services: List<Service>,
+    val services: List<Service> = emptyList(),
     @Json(name = "status")
     val status: Int,
     @Json(name = "user_id")

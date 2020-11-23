@@ -4,7 +4,7 @@ import com.vtnd.lus.base.BaseRepository
 import com.vtnd.lus.data.UserRepository
 import com.vtnd.lus.data.repository.source.TokenDataSource
 import com.vtnd.lus.data.repository.source.UserDataSource
-import com.vtnd.lus.data.repository.source.remote.api.request.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
 import com.vtnd.lus.shared.scheduler.DataResult

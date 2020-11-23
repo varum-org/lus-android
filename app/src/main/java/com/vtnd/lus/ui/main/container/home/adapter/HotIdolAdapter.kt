@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import com.vtnd.lus.R
 import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.data.model.User
-import com.vtnd.lus.data.repository.source.remote.api.request.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
 import com.vtnd.lus.shared.extensions.safeClick
 import kotlinx.android.synthetic.main.item_hot_idol.view.*
+import java.util.*
 
 class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Unit) :
     BaseAdapter(DIFF_CALLBACK) {
@@ -26,6 +27,14 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
             itemView.apply {
                 item.itemData.let { idolRes ->
                     idolImage.transitionName = idolRes.idol.id
+                    idolRes.user?.birthday?.let {
+                        context.getString(R.string.nick_name, idolRes.idol.nickName, it.getAge())
+                    } ?: idolRes.idol.nickName
+                    idolNameText.text = idolRes.idol.nickName
+                    idolLocationText.text =
+                        context?.getString(R.string.live_in, "Đà Nẵng")
+                    idolAddressText.text =
+                        context?.getString(R.string.idol_address, idolRes.idol.address)
                     safeClick {
                         onItemClickListener(idolImage, idolRes)
                     }
@@ -43,4 +52,15 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
                 ) = oldItem.itemData.first?.id == oldItem.itemData.first?.id
             }
     }
+}
+
+private fun Date.getAge(): String? {
+    val dob = Calendar.getInstance()
+    val today = Calendar.getInstance()
+    dob.time = this
+    var age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR)
+    if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+        age--
+    }
+    return age.toString()
 }

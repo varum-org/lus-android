@@ -1,14 +1,18 @@
 package com.vtnd.lus.data.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @JsonClass(generateAdapter = true)
+@Parcelize
 data class User(
     @Json(name = "address")
     val address: String?,
     @Json(name = "birthday")
-    val birthday: String?,
+    val birthday: Date?,
     @Json(name = "created_date")
     val createdDate: String?,
     @Json(name = "email")
@@ -31,4 +35,4 @@ data class User(
     val userName: String?,
     @Json(name = "__v")
     val v: Int?
-)
+) : Parcelable

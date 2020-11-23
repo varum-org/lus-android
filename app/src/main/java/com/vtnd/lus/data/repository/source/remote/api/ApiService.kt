@@ -1,6 +1,6 @@
 package com.vtnd.lus.data.repository.source.remote.api
 
-import com.vtnd.lus.data.repository.source.remote.api.request.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.data.repository.source.remote.api.request.SignInRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
