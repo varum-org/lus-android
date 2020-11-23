@@ -36,4 +36,7 @@
     <string name="you_will_get_a_otp_via_email">You will get a OTP via Email</string>
     <string name="verification">Verification</string>
     <string name="verify_email_success">Verify email success!</string>
+    <string name="idol_address">Home town is %1$s</string>
+    <string name="live_in">Live in %1$s</string>
+    <string name="nick_name">%1$s ,%2$s</string>
 </resources>

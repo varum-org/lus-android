@@ -1,7 +1,7 @@
 package com.vtnd.lus.data.repository.source
 
 import com.vtnd.lus.data.model.User
-import com.vtnd.lus.data.repository.source.remote.api.request.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
 import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse

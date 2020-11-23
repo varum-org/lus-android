@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import com.google.android.material.transition.MaterialContainerTransform
 import com.vtnd.lus.base.BaseFragment
-import com.vtnd.lus.data.repository.source.remote.api.request.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.databinding.FragmentIdolDetailBinding
 import kotlinx.android.synthetic.main.fragment_idol_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel

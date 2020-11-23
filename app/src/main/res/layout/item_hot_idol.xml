@@ -48,16 +48,17 @@
             app:layout_constraintTop_toBottomOf="@+id/idolImageCard">
 
             <TextView
+                android:id="@+id/idolNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Bảo khánh, 24"
                 android:textColor="@color/indigo_900"
                 android:textSize="@dimen/sp_10"
                 app:fontFamily="@font/segoe_ui_semibold" />
 
             <TextView
+                android:id="@+id/idolLocationText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
@@ -73,6 +74,7 @@
                 app:fontFamily="@font/segoe_ui_regular" />
 
             <TextView
+                android:id="@+id/idolAddressText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_4"
@@ -80,7 +82,6 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="Quê Quán Ba Đông, Quãng Ngãi"
                 android:textColor="@color/indigo_900"
                 android:textSize="@dimen/sp_8"
                 app:drawableStartCompat="@drawable/ic_home_light"

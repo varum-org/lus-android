@@ -4,7 +4,7 @@ import com.vtnd.lus.base.BaseViewModel
 import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.data.TokenRepository
 import com.vtnd.lus.data.UserRepository
-import com.vtnd.lus.data.repository.source.remote.api.request.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.shared.TYPE_HEADER
 import com.vtnd.lus.shared.liveData.SingleLiveData
 import com.vtnd.lus.shared.type.CategoryIdolType
