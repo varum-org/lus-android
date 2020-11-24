@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import com.google.android.material.transition.MaterialContainerTransform
+import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.databinding.FragmentIdolDetailBinding
+import com.vtnd.lus.shared.extensions.transparentStatusBar
 import kotlinx.android.synthetic.main.fragment_idol_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel>() {
 
@@ -24,6 +27,7 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         FragmentIdolDetailBinding.inflate(inflater)
 
     override fun initialize() {
+
         arguments?.apply {
             getParcelable<IdolResponse>(ARGUMENT_IDOL)?.let {
                 idolImage.transitionName = it.idol.id
@@ -34,6 +38,16 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
 
     override fun registerLiveData() {
         super.registerLiveData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.transparentStatusBar(true)
+    }
+
+    override fun onStop() {
+        activity?.transparentStatusBar(false)
+        super.onStop()
     }
 
     companion object {

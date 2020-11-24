@@ -9,6 +9,7 @@ import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
+import com.vtnd.lus.shared.extensions.getAge
 import com.vtnd.lus.shared.extensions.safeClick
 import kotlinx.android.synthetic.main.item_hot_idol.view.*
 import java.util.*
@@ -52,15 +53,4 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
                 ) = oldItem.itemData.first?.id == oldItem.itemData.first?.id
             }
     }
-}
-
-private fun Date.getAge(): String? {
-    val dob = Calendar.getInstance()
-    val today = Calendar.getInstance()
-    dob.time = this
-    var age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR)
-    if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
-        age--
-    }
-    return age.toString()
 }

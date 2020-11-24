@@ -11,18 +11,27 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:fitsSystemWindows="true"
+        <com.vtnd.lus.shared.widget.RoundishImageView
             android:id="@+id/idolImage"
+            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_197"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
+            app:cornerRadius="@dimen/dp_16"
+            app:roundedCorners="bottomLeft|bottomRight"
             android:src="@drawable/bg_avatar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
