@@ -17,24 +17,19 @@
         android:layout_height="match_parent"
         android:padding="@dimen/dp_10">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/idolImageCard"
+        <com.vtnd.lus.shared.widget.RoundishImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardCornerRadius="@dimen/dp_16"
             app:layout_constraintDimensionRatio="190:197"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/idolImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bg_avatar" />
-        </androidx.cardview.widget.CardView>
+            android:id="@+id/idolImage"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_avatar"
+            app:cornerRadius="@dimen/dp_16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:roundedCorners="all" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -45,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idolImageCard">
+            app:layout_constraintTop_toBottomOf="@+id/idolImage">
 
             <TextView
                 android:id="@+id/idolNameText"

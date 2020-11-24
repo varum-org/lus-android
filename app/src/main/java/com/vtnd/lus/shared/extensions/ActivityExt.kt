@@ -5,13 +5,15 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.Rect
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.vtnd.lus.R
-import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.shared.AnimateType
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -19,6 +21,7 @@ import timber.log.Timber
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
+
 
 fun AppCompatActivity.replaceFragmentInActivity(
     @IdRes containerId: Int,
@@ -168,15 +171,31 @@ fun AppCompatActivity.getErrorMessage(e: Exception): String? {
             val jsonObject = JSONObject(responseBody.string())
             val message = jsonObject.getString("messages")
             Timber.i(message)
-            if (!message.isNullOrBlank()) {
-                message
-            } else {
-                getString(R.string.msg_error_data_parse)
-            }
+            if (!message.isNullOrBlank())
+                message else getString(R.string.msg_error_data_parse)
         } catch (ex: Exception) {
             e.message
         }
-    } ?: kotlin.run {
-        getString(R.string.msg_error_data_parse)
+    } ?: getString(R.string.msg_error_data_parse)
+}
+
+@Suppress("DEPRECATION")
+fun Activity.transparentStatusBar(isTransparent: Boolean) {
+    window.apply {
+        val statusBarColor = statusBarColor
+        if (isTransparent) {
+            this.statusBarColor = Color.TRANSPARENT
+            decorView.systemUiVisibility =
+                (decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv())
+        } else {
+            this.statusBarColor = statusBarColor
+            decorView.systemUiVisibility =
+                (decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        }
     }
+}
+
+fun Activity.getHeightStatusBar() = Rect().run {
+    window.decorView.getWindowVisibleDisplayFrame(this)
+    this.top
 }
