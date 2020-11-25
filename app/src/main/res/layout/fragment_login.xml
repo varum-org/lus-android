@@ -48,13 +48,14 @@
                 android:id="@+id/skipText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginEnd="@dimen/dp_34"
+                android:layout_marginEnd="36dp"
                 android:background="@drawable/ic_arrow_right_circle"
                 app:elevation="@dimen/dp_8"
                 app:layout_constraintBottom_toBottomOf="@+id/titleLoginText"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/titleLoginText"
+                app:layout_constraintVertical_bias="0.357"
                 app:layout_constraintWidth_percent="0.13" />
 
             <ImageView

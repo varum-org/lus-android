@@ -61,7 +61,6 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="Đang ở Quãng Ngãi"
                 android:textColor="@color/indigo_900"
                 android:textSize="@dimen/sp_8"
                 app:drawableStartCompat="@drawable/ic_location_light"

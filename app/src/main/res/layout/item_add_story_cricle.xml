@@ -2,8 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/storyCircleImage"
-    android:layout_width="@dimen/dp_45"
-    android:layout_height="@dimen/dp_45"
+    android:layout_width="@dimen/dp_53"
+    android:layout_height="@dimen/dp_53"
     android:layout_marginEnd="@dimen/dp_16"
     android:background="@drawable/bg_pink_50_oval_ripple">
 
