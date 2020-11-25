@@ -10,28 +10,227 @@
             type="com.vtnd.lus.ui.main.container.idolDetail.IdolDetailViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.vtnd.lus.shared.widget.RoundishImageView
-            android:id="@+id/idolImage"
-            android:fitsSystemWindows="true"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_197"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            app:cornerRadius="@dimen/dp_16"
-            app:roundedCorners="bottomLeft|bottomRight"
-            android:src="@drawable/bg_avatar" />
+        <ImageButton
+            android:id="@+id/skipText"
+            android:layout_width="@dimen/dp_34"
+            android:layout_height="@dimen/dp_34"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@drawable/ic_arrow_left_circle"
+            android:elevation="@dimen/dp_4" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
+            android:fillViewport="true"
+            android:orientation="vertical">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.vtnd.lus.shared.widget.RoundishImageView
+                    android:id="@+id/idolImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_avatar"
+                    app:layout_constraintDimensionRatio="w,190:197"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:backgroundTint="@color/red_a400"
+                    android:src="@drawable/ic_heart_bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/idolImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/idolImage"
+                    app:maxImageSize="@dimen/dp_30"
+                    app:tint="@color/white" />
+
+                <LinearLayout
+                    android:id="@+id/idolInformationLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/idolImage">
+
+                    <TextView
+                        android:id="@+id/idolNameText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Bảo Khánh, 24"
+                        android:textColor="@color/indigo_900"
+                        android:textSize="@dimen/sp_18"
+                        app:fontFamily="@font/segoe_ui_semibold" />
+
+                    <TextView
+                        android:id="@+id/idolLocationText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:drawablePadding="@dimen/dp_8"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="Đang ở quãng ngãi"
+                        android:textColor="@color/indigo_900"
+                        android:textSize="@dimen/sp_12"
+                        app:drawableStartCompat="@drawable/ic_location_light"
+                        app:drawableTint="@color/indigo_900"
+                        app:fontFamily="@font/segoe_ui_regular" />
+
+                    <TextView
+                        android:id="@+id/idolAddressText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:drawablePadding="@dimen/dp_9"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="Quê Quán ba động, Quảng Ngãi"
+                        android:textColor="@color/indigo_900"
+                        android:textSize="@dimen/sp_12"
+                        app:drawableStartCompat="@drawable/ic_home_light"
+                        app:drawableTint="@color/indigo_900"
+                        app:fontFamily="@font/segoe_ui_regular" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:drawablePadding="@dimen/dp_9"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="Đang tìm người trò truyện"
+                        android:textColor="@color/indigo_900"
+                        android:textSize="@dimen/sp_12"
+                        app:drawableStartCompat="@drawable/ic_heart_light"
+                        app:drawableTint="@color/indigo_900"
+                        app:fontFamily="@font/segoe_ui_regular" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:drawablePadding="@dimen/dp_9"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="Chưa có con"
+                        android:textColor="@color/indigo_900"
+                        android:textSize="@dimen/sp_12"
+                        app:drawableStartCompat="@drawable/ic_user"
+                        app:drawableTint="@color/indigo_900"
+                        app:fontFamily="@font/segoe_ui_regular" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:drawablePadding="@dimen/dp_9"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="Tốt nghiệp trường sư phạm huế"
+                        android:textColor="@color/indigo_900"
+                        android:textSize="@dimen/sp_12"
+                        app:drawableStartCompat="@drawable/ic_work"
+                        app:drawableTint="@color/indigo_900"
+                        app:fontFamily="@font/segoe_ui_regular" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:drawablePadding="@dimen/dp_9"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="Crush Quốc Dân"
+                        android:textColor="@color/indigo_900"
+                        android:textSize="@dimen/sp_12"
+                        app:drawableStartCompat="@drawable/ic_ticket_star"
+                        app:drawableTint="#ff9f31"
+                        app:fontFamily="@font/segoe_ui_regular" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginHorizontal="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:background="@color/grey_600"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/idolInformationLayout" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/idolGalleryViewPager2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="w,190:197"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line" />
+
+                <LinearLayout
+                    android:id="@+id/indicatorsContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/idolGalleryViewPager2" />
+
+                <TextView
+                    android:id="@+id/idolServiceText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Dịch vụ"
+                    android:textColor="@color/indigo_900"
+                    android:textSize="@dimen/sp_16"
+                    app:fontFamily="@font/segoe_ui_semibold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/indicatorsContainer" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/idolServiceRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/idolServiceText" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 </layout>
