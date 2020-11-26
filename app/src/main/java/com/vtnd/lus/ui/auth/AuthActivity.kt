@@ -3,7 +3,7 @@ package com.vtnd.lus.ui.auth
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import com.vtnd.lus.R
-import com.vtnd.lus.base.BaseActivity2
+import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.databinding.ActivityAuthBinding
 import com.vtnd.lus.shared.extensions.addFragmentToActivity
 import com.vtnd.lus.shared.extensions.switchFragment
@@ -13,7 +13,7 @@ import com.vtnd.lus.ui.auth.register.RegisterFragment
 import com.vtnd.lus.ui.auth.welcome.WelcomeFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AuthActivity : BaseActivity2<ActivityAuthBinding, AuthViewModel>() {
+class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
     override val viewModel: AuthViewModel by viewModel()
     private val welcomeFragment by lazy { WelcomeFragment.newInstance() }
     private val loginFragment by lazy { LoginFragment.newInstance() }

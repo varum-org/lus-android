@@ -129,6 +129,7 @@ dependencies {
     implementation(Deps.swiperefreshlayout)
     implementation(Deps.glide_runtime)
     kapt(Deps.glide_compiler)
+    implementation(Deps.glide_integration)
     implementation(Deps.dexter) //Permissionx
 
     // androidx preference

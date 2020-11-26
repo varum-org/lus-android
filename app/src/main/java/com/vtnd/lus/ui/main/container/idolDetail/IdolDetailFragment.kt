@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.get
@@ -17,16 +16,21 @@ import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.databinding.FragmentIdolDetailBinding
+import com.vtnd.lus.di.GlideApp
 import com.vtnd.lus.shared.decoration.HorizontalMarginItemDecoration
+import com.vtnd.lus.shared.extensions.getAge
+import com.vtnd.lus.shared.extensions.goBackFragment
+import com.vtnd.lus.shared.extensions.listenToViews
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.GalleryAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.ServiceAdapter
 import kotlinx.android.synthetic.main.fragment_idol_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.abs
 
-class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel>() {
+class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel>(),
+    View.OnClickListener {
     private val galleryAdapter = GalleryAdapter {}
     private val serviceAdapter = ServiceAdapter {}
+    private lateinit var idolResponse: IdolResponse
 
     override val viewModel: IdolDetailViewModel by viewModel()
 
@@ -42,9 +46,10 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         arguments?.apply {
             getParcelable<IdolResponse>(ARGUMENT_IDOL)?.let {
                 idolImage.transitionName = it.idol.id
-                Toast.makeText(activity, it.idol.nickName, Toast.LENGTH_SHORT).show()
+                idolResponse = it
             }
         }
+        listenToViews(backImageButton, addFavoriteFAB)
         setupViewPager2()
         setupIndicators()
         setupCurrentIndicator(0)
@@ -55,20 +60,49 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
             }
         })
         setupServiceRecyclerView()
+        binDataToView()
     }
 
     override fun registerLiveData() {
         super.registerLiveData()
     }
 
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.backImageButton -> this.goBackFragment()
+            R.id.addFavoriteFAB -> {
+            }
+        }
+    }
+
+    private fun binDataToView() = with(idolResponse) {
+        GlideApp.with(this@IdolDetailFragment)
+            .load(idol.imageGallery[0])
+            .placeholder(R.color.pink_50)
+            .error(R.color.red_a400)
+            .dontAnimate()
+            .into(idolImage)
+        idolNameText.text = user?.birthday?.let {
+            getString(R.string.nick_name, idol.nickName, it.getAge())
+        } ?: idol.nickName
+        idolDescriptionText.text = idol.description
+        idolLocationText.text =
+            context?.getString(R.string.live_in, "Đà Nẵng")
+        idolAddressText.text = getString(R.string.idol_address, idol.address)
+        idolRelationshipText.text = idol.relationship
+        distinctionText.text = getString(R.string.crush_national_citizen)
+    }
+
     private fun setupViewPager2() {
         idolGalleryViewPager2.apply {
             adapter = galleryAdapter.apply {
-                submitList(listOf(
-                    ItemViewHolder(Any()),
-                    ItemViewHolder(Any()),
-                    ItemViewHolder(Any())
-                ))
+                idolResponse.idol.imageGallery.run {
+                    subList(1, this.size)
+                }.let {
+                    submitList(it.map {
+                        ItemViewHolder(it)
+                    })
+                }
             }
             addItemDecoration(HorizontalMarginItemDecoration(context, R.dimen.dp_16))
             offscreenPageLimit = 1
@@ -79,12 +113,9 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         idolServiceRecyclerView.apply {
             setHasFixedSize(true)
             adapter = serviceAdapter.apply {
-                submitList(listOf(
-                    ItemViewHolder(Any()),
-                    ItemViewHolder(Any()),
-                    ItemViewHolder(Any()),
-                    ItemViewHolder(Any())
-                ))
+                submitList(idolResponse.idol.services.map {
+                    ItemViewHolder(it)
+                })
             }
         }
     }
@@ -127,7 +158,6 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
                         R.drawable.indicator_inactive
                     )
                 )
-
             }
         }
     }
