@@ -6,13 +6,13 @@ import com.vtnd.lus.R
 import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.data.model.User
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
+import com.vtnd.lus.di.GlideApp
 import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
 import com.vtnd.lus.shared.extensions.getAge
 import com.vtnd.lus.shared.extensions.safeClick
 import kotlinx.android.synthetic.main.item_hot_idol.view.*
-import java.util.*
 
 class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Unit) :
     BaseAdapter(DIFF_CALLBACK) {
@@ -27,6 +27,12 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
         override fun bind(item: ItemViewHolder<IdolResponse>) {
             itemView.apply {
                 item.itemData.let { idolRes ->
+                    GlideApp.with(idolImage)
+                        .load(idolRes.idol.imageGallery[0])
+                        .placeholder(R.color.pink_50)
+                        .error(R.color.red_a400)
+                        .dontAnimate()
+                        .into(idolImage)
                     idolImage.transitionName = idolRes.idol.id
                     idolRes.user?.birthday?.let {
                         context.getString(R.string.nick_name, idolRes.idol.nickName, it.getAge())

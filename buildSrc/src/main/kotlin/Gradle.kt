@@ -163,6 +163,7 @@ object Deps {
 
     const val glide_runtime = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+    const val glide_integration = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
 
     const val junit = "junit:junit:${Versions.junit}"
     const val mock_web_server = "com.squareup.okhttp3:mockwebserver:${Versions.mockwebserver}"

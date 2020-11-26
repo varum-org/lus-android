@@ -11,5 +11,7 @@ data class Service(
     @Json(name = "service_name")
     val serviceName: String,
     @Json(name = "service_price")
-    val servicePrice: Int
+    val servicePrice: Int,
+    @Json(name = "service_description")
+    val serviceDescription: String
 ) : Parcelable

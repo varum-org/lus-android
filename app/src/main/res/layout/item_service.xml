@@ -6,12 +6,12 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/dp_16"
     android:layout_marginTop="@dimen/dp_4"
-    android:layout_marginBottom="@dimen/dp_8"
+    android:layout_marginBottom="@dimen/dp_10"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/dp_8"
-    app:cardElevation="@dimen/dp_8">
+    app:cardElevation="@dimen/dp_4">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -58,7 +58,6 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:paddingHorizontal="@dimen/dp_12"
-                android:text="Doggy"
                 android:textColor="@color/indigo_900"
                 android:textSize="@dimen/sp_10"
                 android:textStyle="bold"
@@ -76,17 +75,21 @@
                 android:gravity="center_vertical"
                 android:maxLines="4"
                 android:paddingHorizontal="@dimen/dp_8"
-                android:text="Chổng mong, quỳ gối,ih a"
                 android:textColor="@color/indigo_900"
                 android:textSize="@dimen/sp_10"
                 app:fontFamily="@font/segoe_ui_regular" />
 
         </LinearLayout>
 
-        <ImageButton
+        <com.vtnd.lus.shared.widget.RoundishImageView
             android:id="@+id/serviceActionButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            app:cornerRadius="@dimen/dp_25"
+            app:roundedCorners="all"
             android:layout_marginEnd="@dimen/dp_16"
             android:background="@drawable/ic_plus_circle"
             app:layout_constraintBottom_toBottomOf="parent"
