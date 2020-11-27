@@ -5,6 +5,7 @@ import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.vtnd.lus.BuildConfig
 import com.vtnd.lus.data.TokenRepository
+import com.vtnd.lus.data.model.ServiceJsonAdapter
 import com.vtnd.lus.data.model.UserJsonAdapter
 import com.vtnd.lus.data.repository.source.remote.api.ApiService
 import com.vtnd.lus.data.repository.source.remote.api.middleware.InterceptorImpl
@@ -31,6 +32,10 @@ fun provideMoshi(): Moshi {
 
 private fun provideUserLocalJsonAdapter(moshi: Moshi): UserJsonAdapter {
     return UserJsonAdapter(moshi)
+}
+
+private fun provideServiceLocalJsonAdapter(moshi: Moshi): ServiceJsonAdapter {
+    return ServiceJsonAdapter(moshi)
 }
 
 fun provideAuthInterceptor(tokenRepository: TokenRepository): InterceptorImpl {
@@ -70,6 +75,8 @@ val networkModule = module {
     single { provideMoshi() }
 
     factory { provideUserLocalJsonAdapter(moshi = get()) }
+
+    factory { provideServiceLocalJsonAdapter(moshi = get()) }
 
     factory { provideAuthInterceptor(get()) }
 

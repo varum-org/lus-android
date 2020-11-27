@@ -16,6 +16,7 @@ class SplashViewModel(
     val isOpenFirstApp = repoRepository.isOpenFirstApp().isNullOrEmpty()
     val token = !tokenRepository.getToken().isNullOrBlank()
     val isSaved = SingleLiveData<Unit>()
+    val isSavedService = SingleLiveData<Unit>()
 
     fun saveUserToLocal() {
         viewModelScope.launch {
@@ -23,6 +24,18 @@ class SplashViewModel(
                 getUser(it)
             }
         }
+    }
+
+    fun saveServiceToLocal() {
+        viewModelScope(isSavedService,
+            isShowLoading = false,
+            onRequest = { repoRepository.getServices() },
+            onSuccess = {
+                isSavedService.postValue(Unit)
+                showLoading(true)
+            },
+            onError = { exception.postValue(it) }
+        )
     }
 
     private fun getUser(id: String) {

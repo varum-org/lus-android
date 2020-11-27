@@ -2,9 +2,12 @@ package com.vtnd.lus.data.repository.source.local.api.pref
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import com.vtnd.lus.data.repository.source.local.api.SharedPrefApi
 
-class SharedPrefApiImpl(context: Context) : SharedPrefApi {
+class SharedPrefApiImpl(context: Context, private val moshi: Moshi) : SharedPrefApi {
 
     private val sharedPreferences by lazy {
         context.getSharedPreferences(SharedPrefKey.PREFS_NAME, Context.MODE_PRIVATE)
@@ -58,6 +61,18 @@ class SharedPrefApiImpl(context: Context) : SharedPrefApi {
         else -> {
             error("Not support for type clazz")
         }
+    }
+
+    override fun <T> putList(key: String, clazz: Class<T>, list: List<T>) {
+        val listMyData = Types.newParameterizedType(MutableList::class.java, clazz)
+        val adapter: JsonAdapter<List<T>> = moshi.adapter(listMyData)
+        sharedPreferences.edit().putString(key, adapter.toJson(list)).apply()
+    }
+
+    override fun <T> getList(key: String, clazz: Class<T>): List<T>? {
+        val listMyData = Types.newParameterizedType(MutableList::class.java, clazz)
+        val adapter: JsonAdapter<List<T>> = moshi.adapter(listMyData)
+        return get(key, String::class.java)?.let { adapter.fromJson(it) }
     }
 
     override fun removeKey(key: String) {

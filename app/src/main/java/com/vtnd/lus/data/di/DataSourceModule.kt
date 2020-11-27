@@ -1,7 +1,5 @@
 package com.vtnd.lus.data.di
 
-import android.content.ContentResolver
-import android.content.Context
 import com.vtnd.lus.data.repository.source.RepoDataSource
 import com.vtnd.lus.data.repository.source.TokenDataSource
 import com.vtnd.lus.data.repository.source.UserDataSource
@@ -30,7 +28,7 @@ val dataSourceModule = module {
 //    single { appDatabase(context = get()) }
 
     single<SharedPrefApi> {
-        SharedPrefApiImpl(context = get())
+        SharedPrefApiImpl(context = get(), moshi = get())
     }
 
 //    single<DatabaseApi> {
@@ -56,7 +54,8 @@ val dataSourceModule = module {
     single<RepoDataSource.Local> {
         RepoLocalImpl(
 //            databaseApi = get(),
-            sharedPrefApi = get()
+            sharedPrefApi = get(),
+            serviceJsonAdapter = get()
         )
     }
     single<RepoDataSource.Remote> {

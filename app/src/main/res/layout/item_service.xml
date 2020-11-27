@@ -38,7 +38,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/dp_8"
-                android:background="@drawable/ic_heart_bold"
                 android:backgroundTint="@color/red_a400" />
         </androidx.cardview.widget.CardView>
 
