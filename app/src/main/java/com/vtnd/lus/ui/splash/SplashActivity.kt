@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity2
 import com.vtnd.lus.databinding.ActivitySplashBinding
-import com.vtnd.lus.shared.extensions.delayTask
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.intro.IntroSlideActivity
@@ -20,19 +19,8 @@ class SplashActivity : BaseActivity2<ActivitySplashBinding, SplashViewModel>() {
 
     override fun initialize() {
         when {
-            viewModel.token -> {
-                viewModel.saveUserToLocal()
-            }
-            viewModel.isOpenFirstApp -> delayTask({
-                startActivity(Intent(applicationContext, IntroSlideActivity::class.java))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-                finish()
-            })
-            else -> delayTask({
-                startActivity(Intent(applicationContext, AuthActivity::class.java))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-                finish()
-            })
+            viewModel.token -> viewModel.saveUserToLocal()
+            else -> viewModel.saveServiceToLocal()
         }
 
     }
@@ -50,6 +38,17 @@ class SplashActivity : BaseActivity2<ActivitySplashBinding, SplashViewModel>() {
             startActivity(Intent(applicationContext, MainActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
+        }
+        isSavedService.observeLiveData(this@SplashActivity) {
+            if (isOpenFirstApp) {
+                startActivity(Intent(applicationContext, IntroSlideActivity::class.java))
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                finish()
+            } else {
+                startActivity(Intent(applicationContext, AuthActivity::class.java))
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                finish()
+            }
         }
     }
 }

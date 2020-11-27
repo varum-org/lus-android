@@ -2,11 +2,13 @@ package com.vtnd.lus.data.repository
 
 import com.vtnd.lus.base.BaseRepository
 import com.vtnd.lus.data.UserRepository
+import com.vtnd.lus.data.repository.source.RepoDataSource
 import com.vtnd.lus.data.repository.source.TokenDataSource
 import com.vtnd.lus.data.repository.source.UserDataSource
-import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
+import com.vtnd.lus.shared.extensions.toIdolResponses
 import com.vtnd.lus.shared.scheduler.DataResult
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,7 +19,8 @@ import timber.log.Timber
 class UserRepositoryImpl(
     private val remote: UserDataSource.Remote,
     private val local: UserDataSource.Local,
-    private val tokenLocal: TokenDataSource.Local
+    private val tokenLocal: TokenDataSource.Local,
+    private val repoLocal: RepoDataSource.Local
 ) : BaseRepository(), UserRepository {
 
     override suspend fun signIn(email: String, password: String) =
@@ -79,7 +82,9 @@ class UserRepositoryImpl(
         category: CategoryIdolType
     ): DataResult<List<IdolResponse>> =
         withResultContext {
-            remote.getIdols(isLogin, category).data
+            remote.getIdols(isLogin, category).data.toIdolResponses(repoLocal.services())
         }
+
+
 }
 

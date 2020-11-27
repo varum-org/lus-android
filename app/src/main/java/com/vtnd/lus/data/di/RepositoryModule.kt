@@ -14,13 +14,14 @@ val repositoryModule = module {
         UserRepositoryImpl(
             local = get(),
             remote = get(),
-            tokenLocal = get()
+            tokenLocal = get(),
+            repoLocal = get()
         )
     }
     single<RepoRepository> {
         RepoRepositoryImpl(
-            local = get()
-//            remote = get()
+            local = get(),
+            remote = get()
         )
     }
     single<TokenRepository> {

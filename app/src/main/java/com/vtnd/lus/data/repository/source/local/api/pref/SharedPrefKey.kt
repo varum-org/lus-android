@@ -9,7 +9,7 @@ object SharedPrefKey {
     const val KEY_OPEN_FIRST_APP = "KEY_OPEN_FIRST_APP"
     const val VALUE_OPEN_FIRST_APP = "VALUE_OPEN_FIRST_APP"
 
-    const val KEY_USER_ID = "KEY_USER_ID"
+    const val KEY_SERVICES = "KEY_SERVICES"
     const val KEY_IS_MANAGER = "KEY_IS_MANAGER"
     const val KEY_END_DATE = "KEY_END_DATE"
 }

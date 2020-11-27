@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import com.vtnd.lus.R
 import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.data.model.Service
+import com.vtnd.lus.di.GlideApp
 import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
+import kotlinx.android.synthetic.main.fragment_idol_detail.*
 import kotlinx.android.synthetic.main.item_service.view.*
 
 class ServiceAdapter(private val onItemClickListener: (Service) -> Unit) :
@@ -25,6 +27,12 @@ class ServiceAdapter(private val onItemClickListener: (Service) -> Unit) :
                 item.itemData.let {
                     serviceNameText.text = it.serviceName
                     serviceDescriptionText.text = it.serviceDescription
+                    GlideApp.with(serviceIconImage)
+                        .load(it.serviceImagePath)
+                        .placeholder(R.color.pink_50)
+                        .error(R.color.red_a400)
+                        .dontAnimate()
+                        .into(serviceIconImage)
                 }
             }
         }
