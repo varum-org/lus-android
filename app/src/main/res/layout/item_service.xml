@@ -21,12 +21,12 @@
             android:id="@+id/serviceIconCardView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginVertical="@dimen/dp_22"
+            android:layout_marginTop="@dimen/dp_22"
             android:layout_marginStart="@dimen/dp_16"
             app:cardBackgroundColor="@color/pink_50"
             app:cardCornerRadius="@dimen/dp_50"
             app:cardElevation="@dimen/dp_1"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/servicePriceLayout"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,6 +40,35 @@
                 android:layout_margin="@dimen/dp_8"
                 android:backgroundTint="@color/red_a400" />
         </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp_4"
+            android:id="@+id/servicePriceLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_22"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/serviceIconCardView"
+            app:layout_constraintStart_toStartOf="@+id/serviceIconCardView"
+            app:layout_constraintTop_toBottomOf="@+id/serviceIconCardView">
+
+            <TextView
+                android:id="@+id/servicePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/indigo_900"
+                android:textSize="@dimen/sp_10"
+                app:fontFamily="@font/segoe_ui_regular" />
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="@dimen/dp_12"
+                android:layout_height="@dimen/dp_12"
+                android:src="@drawable/ic_heart_bold"
+                app:tint="#ff9f31" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -77,16 +106,12 @@
                 android:textColor="@color/indigo_900"
                 android:textSize="@dimen/sp_10"
                 app:fontFamily="@font/segoe_ui_regular" />
-
         </LinearLayout>
 
         <com.vtnd.lus.shared.widget.RoundishImageView
             android:id="@+id/serviceActionButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless"
             app:cornerRadius="@dimen/dp_25"
             app:roundedCorners="all"
             android:layout_marginEnd="@dimen/dp_16"

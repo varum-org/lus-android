@@ -40,13 +40,13 @@ android {
     flavorDimensions("appVariant")
     productFlavors {
         create("dev") {
-            setDimension("appVariant")
+            dimension = "appVariant"
             applicationIdSuffix = ".dev"
             resValue("string", "app_name", "LUS Dev")
             buildConfigField("String", "BASE_URL", "\"https://lus-sever.herokuapp.com/\"")
         }
         create("prd") {
-            setDimension("appVariant")
+            dimension = "appVariant"
             resValue("string", "app_name", "LUS")
             buildConfigField(
                     "String",
@@ -128,6 +128,7 @@ dependencies {
     implementation(Deps.support_core_ktx)
     implementation(Deps.swiperefreshlayout)
     implementation(Deps.glide_runtime)
+    implementation(Deps.glide_drawable)
     kapt(Deps.glide_compiler)
     implementation(Deps.glide_integration)
     implementation(Deps.dexter) //Permissionx

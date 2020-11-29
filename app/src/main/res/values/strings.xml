@@ -40,4 +40,8 @@
     <string name="live_in">Live in %1$s</string>
     <string name="nick_name">%1$s ,%2$s</string>
     <string name="crush_national_citizen">Crush National Citizen</string>
+    <string name="to_rent">To rent</string>
+    <string name="service">Service</string>
+    <string name="cancel">Cancel</string>
+    <string name="apply">Apply</string>
 </resources>

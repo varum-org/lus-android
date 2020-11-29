@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cartBottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_400"
+    android:background="@color/white"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="@dimen/dp_40"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerCartLayout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/red_a400"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/iconServiceLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:padding="@dimen/dp_6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iconServiceImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_service" />
+
+            <TextView
+                android:id="@+id/badgeText"
+                android:layout_width="@dimen/dp_18"
+                android:layout_height="@dimen/dp_18"
+                android:layout_gravity="end|top"
+                android:background="@drawable/bg_red_400_stroke_1"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_10" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/serviceTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            app:fontFamily="@font/segoe_ui_semibold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iconMoney"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iconMoney"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_8"
+            android:src="@drawable/ic_heart_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/serviceTotal"
+            app:layout_constraintStart_toEndOf="@+id/iconServiceLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/orange_400" />
+
+        <ImageView
+            android:id="@+id/iconArrowImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@drawable/ic_arrow_up_2"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/formLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/pink_50"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="@dimen/dp_8"
+        app:layout_constraintBottom_toTopOf="@+id/cartRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerCartLayout">
+
+        <TextView
+            android:id="@+id/startDateText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingVertical="@dimen/dp_8"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingEnd="0dp"
+            android:text="10/11/2020"
+            android:textColor="@color/grey_900"
+            android:textSize="@dimen/sp_14"
+            app:fontFamily="@font/segoe_ui_semibold"
+            app:layout_constraintEnd_toStartOf="@+id/startDateImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/startDateImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@drawable/ic_calendar"
+            android:backgroundTint="@color/deep_purple_a200"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingVertical="@dimen/dp_8"
+            app:layout_constraintBottom_toBottomOf="@+id/startDateText"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/startDateText"
+            app:layout_constraintWidth_percent="0.08" />
+
+        <TextView
+            android:id="@+id/noteText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="Thêm ghi chú..."
+            android:paddingVertical="@dimen/dp_8"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingEnd="0dp"
+            app:fontFamily="@font/segoe_ui_semibold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startDateText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/toRentButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formLayout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toRentButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginVertical="@dimen/dp_12"
+        android:backgroundTint="@color/red_a400"
+        android:paddingVertical="@dimen/dp_12"
+        android:text="@string/to_rent"
+        android:textColor="@color/white"
+        app:cornerRadius="@dimen/dp_24"
+        app:fontFamily="@font/segoe_ui_semibold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cartRecyclerView"
+        app:layout_constraintVertical_bias="1"
+        app:rippleColor="@color/deep_purple_50" />
+</androidx.constraintlayout.widget.ConstraintLayout>

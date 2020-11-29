@@ -10,6 +10,7 @@ import com.vtnd.lus.di.GlideApp
 import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
+import com.vtnd.lus.shared.constants.Constants.BASE_IMAGE_URL
 import com.vtnd.lus.shared.extensions.getAge
 import com.vtnd.lus.shared.extensions.safeClick
 import kotlinx.android.synthetic.main.item_hot_idol.view.*
@@ -28,7 +29,7 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
             itemView.apply {
                 item.itemData.let { idolRes ->
                     GlideApp.with(idolImage)
-                        .load(idolRes.idol.imageGallery[0])
+                        .load(BASE_IMAGE_URL+idolRes.idol.imageGallery[0])
                         .placeholder(R.color.pink_50)
                         .error(R.color.red_a400)
                         .dontAnimate()
@@ -56,7 +57,7 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
                 override fun areItemsTheSame(
                     oldItem: ItemViewHolder<Pair<User?, IdolResponse?>>,
                     newItem: ItemViewHolder<Pair<User?, IdolResponse?>>
-                ) = oldItem.itemData.first?.id == oldItem.itemData.first?.id
+                ) = oldItem.itemData.first?.id == newItem.itemData.first?.id
             }
     }
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/dp_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/actionHoursLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/cardServiceNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingHorizontal="@dimen/dp_12"
+            android:textColor="@color/grey_900"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
+            app:fontFamily="@font/segoe_ui_bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cardPriceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp_12"
+                android:textColor="@color/indigo_900"
+                android:textSize="@dimen/sp_12"
+                app:fontFamily="@font/segoe_ui_semibold" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_12"
+                android:layout_height="@dimen/dp_12"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_heart_bold"
+                app:tint="@color/orange_400" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/actionHoursLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.vtnd.lus.shared.widget.RoundishImageView
+            android:id="@+id/cardMinusImage"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_negative_circle"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            app:cornerRadius="@dimen/dp_25"
+            app:roundedCorners="all" />
+
+        <TextView
+            android:id="@+id/cardHoursText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingHorizontal="@dimen/dp_8"
+            android:textColor="@color/grey_900"
+            android:textSize="@dimen/sp_12"
+            app:fontFamily="@font/segoe_ui_bold" />
+
+        <com.vtnd.lus.shared.widget.RoundishImageView
+            android:id="@+id/cardPlusImage"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_plus_circle"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            app:cornerRadius="@dimen/dp_25"
+            app:roundedCorners="all" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/grey_600"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

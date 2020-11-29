@@ -17,6 +17,7 @@ object Versions {
     const val espresso = "3.2.0"
     const val fragment = "1.2.0-rc02"
     const val glide = "4.11.0"
+    const val glide_drawable = "1.2.21"
     const val junit = "4.12"
     const val lifecycle = "2.3.0-alpha06"
     const val mockito = "2.25.0"
@@ -99,7 +100,6 @@ object Deps {
         "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
     const val support_databinding = "com.android.databinding:compiler:${Versions.databinding}"
 
-
     const val support_design = "com.google.android.material:material:${Versions.material}"
     const val support_core_utils = "androidx.legacy:legacy-support-core-utils:${Versions.support}"
     const val support_core_ktx = "androidx.core:core-ktx:${Versions.core_ktx}"
@@ -162,6 +162,7 @@ object Deps {
     const val kotlin_allopen = "org.jetbrains.kotlin:kotlin-allopen:${Versions.kotlin}"
 
     const val glide_runtime = "com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glide_drawable = "pl.droidsonroids.gif:android-gif-drawable:${Versions.glide_drawable}"
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
     const val glide_integration = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
 

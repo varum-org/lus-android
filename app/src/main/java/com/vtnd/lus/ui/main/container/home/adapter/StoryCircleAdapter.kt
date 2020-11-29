@@ -25,7 +25,7 @@ class StoryCircleAdapter(private val onItemClickListener: (Any) -> Unit) :
             override fun areItemsTheSame(
                 oldItem: ItemViewHolder<Any>,
                 newItem: ItemViewHolder<Any>
-            ) = oldItem.itemData == oldItem.itemData
+            ) = oldItem.itemData == newItem.itemData
         }
     }
 }
