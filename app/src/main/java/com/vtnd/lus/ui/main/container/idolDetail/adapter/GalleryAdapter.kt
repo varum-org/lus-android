@@ -8,6 +8,7 @@ import com.vtnd.lus.di.GlideApp
 import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
+import com.vtnd.lus.shared.constants.Constants.BASE_IMAGE_URL
 import kotlinx.android.synthetic.main.item_gallery.view.*
 
 class GalleryAdapter(private val onItemClickListener: (String) -> Unit) :
@@ -24,7 +25,7 @@ class GalleryAdapter(private val onItemClickListener: (String) -> Unit) :
             itemView.apply {
                 item.itemData.let {
                     GlideApp.with(this)
-                        .load(it)
+                        .load(BASE_IMAGE_URL + it)
                         .placeholder(R.color.pink_50)
                         .error(R.color.red_a400)
                         .dontAnimate()
@@ -40,7 +41,7 @@ class GalleryAdapter(private val onItemClickListener: (String) -> Unit) :
                 override fun areItemsTheSame(
                     oldItem: ItemViewHolder<String>,
                     newItem: ItemViewHolder<String>
-                ) = oldItem.itemData == oldItem.itemData
+                ) = oldItem.itemData == newItem.itemData
             }
     }
 }

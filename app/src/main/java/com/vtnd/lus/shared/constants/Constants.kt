@@ -9,6 +9,7 @@ object Constants {
 
     // App constants
     const val KEY_BASE_URL = "KEY_BASE_URL"
+    const val BASE_IMAGE_URL = "https://res.cloudinary.com/employeern/image/upload/"
 
     // Format constants
     const val FORMAT_YYY_MM_DD = "yyyy-MM-dd"

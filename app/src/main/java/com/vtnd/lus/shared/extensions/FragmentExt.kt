@@ -17,6 +17,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.shared.AnimateType
+import com.vtnd.lus.shared.widget.DatePickerAlertDialog
+import com.vtnd.lus.shared.widget.NoteAlertDialog
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 fun Fragment.replaceFragment(
@@ -200,4 +202,24 @@ fun Fragment.showError(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
     Snackbar.make((activity as BaseActivity<*, *>).findViewById(android.R.id.content),
         message,
         duration).show()
+}
+
+fun Fragment.showDatePickerAlertDialog(
+    dayOfMonth: Int,
+    month: Int,
+    year: Int,
+    completion: DatePickerAlertDialog.() -> Unit
+) = DatePickerAlertDialog(requireContext()).apply {
+    initDatePicker(dayOfMonth, month, year)
+    completion.invoke(this)
+    show()
+}
+
+fun Fragment.showNoteAlertDialog(
+    oldNote:String,
+    completion: NoteAlertDialog.() -> Unit
+) = NoteAlertDialog(requireContext()).apply {
+    initNote(oldNote)
+    completion.invoke(this)
+    show()
 }

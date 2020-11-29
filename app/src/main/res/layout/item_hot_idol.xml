@@ -26,7 +26,6 @@
             android:id="@+id/idolImage"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:src="@drawable/bg_avatar"
             app:cornerRadius="@dimen/dp_16"
             app:layout_constraintTop_toTopOf="parent"
             app:roundedCorners="all" />

@@ -24,4 +24,6 @@
     <color name="indigo_900">#2A2A54</color>
     <color name="blue_grey_400">#797991</color>
     <color name="black_alpha_44">#70000000</color>
+    <color name="red_a400_alpha_44">#70FF3146</color>
+    <color name="orange_400">#FF9F31</color>
 </resources>

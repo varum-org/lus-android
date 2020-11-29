@@ -37,4 +37,8 @@
     <string name="idol_address">Quê quán %1$s</string>
     <string name="live_in">Đang ở %1$s</string>
     <string name="crush_national_citizen">Crush Quốc Dân</string>
+    <string name="to_rent">Thuê</string>
+    <string name="service">Dịch vụ</string>
+    <string name="cancel">Huỷ</string>
+    <string name="apply">Áp dụng</string>
 </resources>

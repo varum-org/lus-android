@@ -10,12 +10,14 @@
             type="com.vtnd.lus.ui.main.container.idolDetail.IdolDetailViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
@@ -34,13 +36,14 @@
                     android:src="@drawable/bg_avatar"
                     app:layout_constraintDimensionRatio="w,190:197"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/addFavoriteFAB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/addFavoriteFAB"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:backgroundTint="@color/red_a400"
                     android:src="@drawable/ic_heart_bold"
@@ -125,6 +128,7 @@
                         app:drawableStartCompat="@drawable/ic_heart_light"
                         app:drawableTint="@color/indigo_900"
                         app:fontFamily="@font/segoe_ui_regular" />
+
                     <TextView
                         android:id="@+id/distinctionText"
                         android:layout_width="match_parent"
@@ -180,7 +184,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="Dịch vụ"
+                    android:text="@string/service"
                     android:textColor="@color/indigo_900"
                     android:textSize="@dimen/sp_16"
                     app:fontFamily="@font/segoe_ui_semibold"
@@ -189,15 +193,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/indicatorsContainer" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:id="@+id/idolServiceRecyclerView"
                     android:layout_width="0dp"
-                    android:layout_marginBottom="@dimen/dp_8"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginBottom="@android:dimen/app_icon_size"
                     android:orientation="vertical"
+                    android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/idolServiceText" />
@@ -217,5 +222,7 @@
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
             app:cornerRadius="@dimen/dp_17"
             app:roundedCorners="all" />
-    </FrameLayout>
+
+        <include layout="@layout/layout_cart_bottom" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

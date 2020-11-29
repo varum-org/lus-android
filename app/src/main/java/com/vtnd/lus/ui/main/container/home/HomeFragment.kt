@@ -29,7 +29,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         replaceFragment(
             containerId = R.id.container,
             fragment = fragment,
-            animateType = AnimateType.NONE,
+            animateType = AnimateType.SLIDE_TO_RIGHT,
             addToBackStack = true,
             sharedElement = sharedElement
         )
