@@ -1,6 +1,5 @@
 package com.vtnd.lus.ui.auth.register
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import com.vtnd.lus.R
@@ -10,11 +9,11 @@ import com.vtnd.lus.databinding.FragmentRegisterBinding
 import com.vtnd.lus.shared.AnimateType
 import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
-import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.type.ValidateErrorType.*
 import com.vtnd.lus.ui.auth.AuthActivity
+import com.vtnd.lus.ui.auth.AuthActivity.Companion.TAG_FRAGMENT_VERIFY
+import com.vtnd.lus.ui.auth.login.LoginFragment
 import com.vtnd.lus.ui.auth.verify.VerifyFragment
-import com.vtnd.lus.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_register.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,14 +43,11 @@ class RegisterFragment : BaseFragment2<FragmentRegisterBinding, RegisterViewMode
                 )
             }
             R.id.signInText -> {
-                (activity as AuthActivity).switchFragment(AuthType.LOGIN)
+                replaceFragment(R.id.auth, LoginFragment.newInstance(), true)
             }
-            R.id.skipText -> {
-                startActivity(Intent(activity, MainActivity::class.java))
-                activity?.apply {
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-                    finish()
-                }
+            R.id.skipText -> activity?.apply {
+                (activity as AuthActivity).clearAllFragment()
+                goBackFragment()
             }
         }
     }
@@ -99,10 +95,13 @@ class RegisterFragment : BaseFragment2<FragmentRegisterBinding, RegisterViewMode
     }
 
     private fun handleSignUnSuccess() {
-        replaceFragment(R.id.auth,
+        replaceFragment(
+            R.id.auth,
             VerifyFragment.newInstance(emailInput.editText?.text.toString()),
             true,
-            animateType = AnimateType.SLIDE_TO_RIGHT)
+            tag = TAG_FRAGMENT_VERIFY,
+            animateType = AnimateType.SLIDE_TO_RIGHT
+        )
     }
 
     companion object {

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.vtnd.lus.base.BaseViewModel
 import com.vtnd.lus.data.UserRepository
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
-import com.vtnd.lus.data.repository.source.remote.api.response.SignInResponse
 import com.vtnd.lus.shared.ValidateError
 import com.vtnd.lus.shared.liveData.SingleLiveData
 import com.vtnd.lus.shared.type.ValidateErrorType.*

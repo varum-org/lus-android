@@ -2,20 +2,33 @@ package com.vtnd.lus.ui.main
 
 import androidx.lifecycle.asLiveData
 import com.vtnd.lus.base.BaseViewModel
+import com.vtnd.lus.data.RepoRepository
 import com.vtnd.lus.data.TokenRepository
 import com.vtnd.lus.data.UserRepository
 import com.vtnd.lus.shared.liveData.SingleLiveData
+import com.vtnd.lus.shared.scheduler.dispatcher.AppDispatchers
+import com.vtnd.lus.shared.scheduler.dispatcher.DispatchersProvider
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
+import org.koin.core.KoinComponent
+import org.koin.core.get
+import org.koin.core.qualifier.named
 
 class MainViewModel(
-    private val userRepository: UserRepository,
-    private val tokenRepository: TokenRepository
-) : BaseViewModel() {
+    userRepository: UserRepository,
+    tokenRepository: TokenRepository,
+    repoRepository: RepoRepository
+) : BaseViewModel(), KoinComponent {
+    private val dispatchersProvider =
+        get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
 
-    val isLogin = SingleLiveData<Boolean>()
+    @ExperimentalCoroutinesApi
+    val isLogin = userRepository.isLogin()
+        .map { it }
+        .distinctUntilChanged()
+        .flowOn(dispatchersProvider)
+        .buffer(1)
+        .asLiveData()
 
     @ExperimentalCoroutinesApi
     val logoutEvent = tokenRepository
@@ -25,15 +38,7 @@ class MainViewModel(
         .map { Unit }.asLiveData()
 
     init {
-        isLogin()
-    }
-
-    private fun isLogin() {
-        viewModelScope(null,
-            isShowLoading = false,
-            onRequest = { userRepository.isLogin() },
-            onSuccess = { isLogin.postValue(!it.isNullOrEmpty()) },
-            onError = { exception.postValue(it) }
-        )
+        if (repoRepository.isOpenFirstApp().isNullOrEmpty())
+            repoRepository.setOpenFirstApp()
     }
 }

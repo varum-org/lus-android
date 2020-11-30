@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_32"
                 android:layout_marginEnd="@dimen/dp_32"
-                android:hint="Thêm ghi chú..."
+                android:hint="@string/add_note"
                 android:inputType="textLongMessage|textCapSentences|textMultiLine"
                 android:maxLines="5"
                 app:layout_constraintEnd_toEndOf="parent"

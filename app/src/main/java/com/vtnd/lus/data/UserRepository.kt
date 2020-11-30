@@ -17,7 +17,7 @@ interface UserRepository {
 
     suspend fun setLogin(): DataResult<Unit>
 
-    suspend fun isLogin(): DataResult<String?>
+    fun isLogin(): Flow<String?>
 
     suspend fun clearLogin(): DataResult<Unit>
 

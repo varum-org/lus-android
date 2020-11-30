@@ -1,5 +1,6 @@
 package com.vtnd.lus.ui.main.container.idolDetail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,11 +24,13 @@ import com.vtnd.lus.shared.constants.Constants.BASE_IMAGE_URL
 import com.vtnd.lus.shared.decoration.HorizontalMarginItemDecoration
 import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
+import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.CartAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.GalleryAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.ServiceAdapter
 import kotlinx.android.synthetic.main.fragment_idol_detail.*
 import kotlinx.android.synthetic.main.layout_cart_bottom.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.*
@@ -35,7 +38,7 @@ import java.util.*
 
 class
 IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel>(),
-    View.OnClickListener {
+        View.OnClickListener {
 
     override val viewModel: IdolDetailViewModel by viewModel()
     private val galleryAdapter = GalleryAdapter {}
@@ -55,7 +58,7 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
     }
 
     override fun inflateViewBinding(inflater: LayoutInflater) =
-        FragmentIdolDetailBinding.inflate(inflater)
+            FragmentIdolDetailBinding.inflate(inflater)
 
     override fun initialize() {
         setupDismissKeyBoard(activity, layout)
@@ -67,12 +70,12 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
             }
         }
         setupBottomSheet()
-        listenToViews(backImageButton, addFavoriteFAB)
+        listenToViews(backImageButton, addFavoriteFAB, toRentButton, startDateImage, noteText)
         setupViewPager2()
         setupIndicators()
         setupCurrentIndicator(0)
         idolGalleryViewPager2.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
+                ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 setupCurrentIndicator(position)
             }
@@ -83,8 +86,17 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
 
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
+        isLogin.observeLiveData(viewLifecycleOwner) {
+            if (it) {
+                // Action show are you sure oder
+            } else {
+                activity?.apply {
+                    startActivity(Intent(this, AuthActivity::class.java))
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                }
+            }
+        }
         idolServicesLiveData.observeLiveData(viewLifecycleOwner) {
-            Timber.i(it.toString())
             serviceAdapter.submitList(it)
         }
         cardServicesLiveData.observeLiveData(viewLifecycleOwner) {
@@ -103,11 +115,15 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
         }
     }
 
+    @ExperimentalCoroutinesApi
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.backImageButton -> this.goBackFragment()
             R.id.addFavoriteFAB -> {
             }
+            R.id.toRentButton -> viewModel.checkLogin()
+            R.id.startDateImage -> onStartDateClick()
+            R.id.noteText -> onNoteClick()
         }
     }
 
@@ -125,41 +141,38 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
             else bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
         bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
+                BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {}
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 iconArrowImage.rotation = slideOffset * 180
             }
         })
-        startDateImage.setOnClickListener {
-            onStartDateClick()
-        }
-        noteText.setOnClickListener {
-            onNoteClick()
-        }
     }
 
     private fun onStartDateClick() {
         showDatePickerAlertDialog(
-            calendar.get(Calendar.DAY_OF_MONTH),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.YEAR)
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.YEAR)
         ) {
-            title("Start date")
+            title(getString(R.string.start_date))
             leftButton(getString(R.string.cancel))
             rightButton(getString(R.string.apply)) { newDayOfMonth, newMonth, newYear ->
-                calendar.set(newYear, newMonth, newDayOfMonth)
-                context?.let {
-                    startDateText.text = calendar.time.toStringDefaultDate(it)
-                }
+                defaultCalendar.set(newYear, newMonth, newDayOfMonth)
+                if (defaultCalendar.time > currentCalendar.time) {
+                    calendar.set(newYear, newMonth, newDayOfMonth)
+                    context?.let {
+                        startDateText.text = calendar.time.toStringDefaultDate(it)
+                    }
+                } else showError(getString(R.string.invalid) + ": " + getString(R.string.start_date))
             }
         }
     }
 
     private fun onNoteClick() {
         showNoteAlertDialog(noteText.text.toString()) {
-            title("Note")
+            title(getString(R.string.note))
             leftButton(getString(R.string.cancel))
             rightButton(getString(R.string.apply)) { note ->
                 noteText.text = note
@@ -169,11 +182,11 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
 
     private fun binDataToView() = with(idolResponse) {
         GlideApp.with(this@IdolDetailFragment)
-            .load(BASE_IMAGE_URL + idol.imageGallery[0])
-            .placeholder(R.color.pink_50)
-            .error(R.color.red_a400)
-            .dontAnimate()
-            .into(idolImage)
+                .load(BASE_IMAGE_URL + idol.imageGallery[0])
+                .placeholder(R.color.pink_50)
+                .error(R.color.red_a400)
+                .dontAnimate()
+                .into(idolImage)
         idolNameText.text = user?.birthday?.let {
             getString(R.string.nick_name, idol.nickName, it.getAge())
         } ?: idol.nickName
@@ -182,6 +195,9 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
         idolAddressText.text = getString(R.string.idol_address, idol.address)
         idolRelationshipText.text = idol.relationship
         distinctionText.text = getString(R.string.crush_national_citizen)
+        context?.let {
+            startDateText.text = calendar.time.toStringDefaultDate(it)
+        }
     }
 
     private fun setupViewPager2() {
@@ -214,16 +230,16 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
     private fun setupIndicators() {
         val indicators = arrayOfNulls<ImageView>(galleryAdapter.itemCount)
         val layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.WRAP_CONTENT)
         layoutParams.setMargins(8, 0, 8, 0)
         for (i in indicators.indices) {
             indicators[i] = ImageView(requireContext())
             indicators[i].apply {
                 this?.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.indicator_inactive
-                    )
+                        ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.indicator_inactive
+                        )
                 )
                 this?.layoutParams = layoutParams
             }
@@ -237,17 +253,17 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
             val imageView = indicatorsContainer[i] as ImageView
             if (i == index) {
                 imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.indicator_active
-                    )
+                        ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.indicator_active
+                        )
                 )
             } else {
                 imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.indicator_inactive
-                    )
+                        ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.indicator_inactive
+                        )
                 )
             }
         }

@@ -27,20 +27,24 @@ val viewModelModule = module {
         SplashViewModel(
             repoRepository = get(),
             tokenRepository = get(),
-            userRepository = get())
+            userRepository = get()
+        )
     }
     viewModel { IntroSlideViewModel(repoRepository = get()) }
-    viewModel { AuthViewModel(repoRepository = get()) }
+    viewModel { AuthViewModel() }
     viewModel {
         MainViewModel(
             userRepository = get(),
-            tokenRepository = get())
+            tokenRepository = get(),
+            repoRepository = get()
+        )
     }
     viewModel { ContainerViewModel() }
     viewModel {
         HomeViewModel(
             userRepository = get(),
-            tokenRepository = get())
+            tokenRepository = get()
+        )
     }
     viewModel { SearchViewModel() }
     viewModel { FavoriteViewModel() }
@@ -49,10 +53,11 @@ val viewModelModule = module {
     viewModel {
         LoginViewModel(
             userRepository = get(),
-            tokenRepository = get())
+            tokenRepository = get()
+        )
     }
     viewModel { WelcomeViewModel() }
-    viewModel { IdolDetailViewModel() }
+    viewModel { IdolDetailViewModel(get()) }
     viewModel { VerifyViewModel(userRepository = get()) }
     viewModel { RegisterViewModel(userRepository = get()) }
 }

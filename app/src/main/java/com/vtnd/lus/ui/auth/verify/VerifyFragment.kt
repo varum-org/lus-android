@@ -9,9 +9,9 @@ import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
 import com.vtnd.lus.databinding.FragmentVerifyBinding
 import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
-import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.type.ValidateErrorType
 import com.vtnd.lus.ui.auth.AuthActivity
+import com.vtnd.lus.ui.auth.login.LoginFragment
 import kotlinx.android.synthetic.main.fragment_verify.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,16 +31,22 @@ class VerifyFragment : BaseFragment2<FragmentVerifyBinding, VerifyViewModel>() {
         FragmentVerifyBinding.inflate(inflater)
 
     override fun initialize() {
+        skipText.safeClick {
+            goBackFragment()
+        }
         verifyButton.safeClick {
-            viewModel.verifyAccount(VerifyRequest(
-                email,
-                codeOtpView.text.toString()
-            ))
+            viewModel.verifyAccount(
+                VerifyRequest(
+                    email,
+                    codeOtpView.text.toString()
+                )
+            )
         }
         codeOtpView.setOtpCompletionListener {
-            viewModel.verifyAccount(VerifyRequest(
-                email,
-                codeOtpView.text.toString()
+            viewModel.verifyAccount(
+                VerifyRequest(
+                    email,
+                    codeOtpView.text.toString()
             ))
         }
     }
@@ -81,8 +87,7 @@ class VerifyFragment : BaseFragment2<FragmentVerifyBinding, VerifyViewModel>() {
 
     private fun handleVerifySuccess() {
         showError(getString(R.string.verify_email_success))
-        (activity as AuthActivity).switchFragment(AuthType.LOGIN)
-        goBackFragment()
+        replaceFragment(R.id.auth, LoginFragment.newInstance(), true)
     }
 
     companion object {

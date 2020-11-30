@@ -15,22 +15,13 @@ class SplashActivity : BaseActivity2<ActivitySplashBinding, SplashViewModel>() {
     override val viewModel: SplashViewModel by viewModel()
 
     override fun inflateViewBinding(inflater: LayoutInflater) =
-        ActivitySplashBinding.inflate(inflater)
+            ActivitySplashBinding.inflate(inflater)
 
-    override fun initialize() {
-        when {
-            viewModel.token -> viewModel.saveUserToLocal()
-            else -> viewModel.saveServiceToLocal()
-        }
+    override fun initialize() {}
 
-    }
+    override fun showLoading() {}
 
-    override fun showLoading() {
-    }
-
-
-    override fun hideLoading() {
-    }
+    override fun hideLoading() {}
 
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
@@ -45,9 +36,11 @@ class SplashActivity : BaseActivity2<ActivitySplashBinding, SplashViewModel>() {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 finish()
             } else {
-                startActivity(Intent(applicationContext, AuthActivity::class.java))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-                finish()
+                if (!token) {
+                    startActivity(Intent(applicationContext, MainActivity::class.java))
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                    finish()
+                } else viewModel.saveUserToLocal()
             }
         }
     }

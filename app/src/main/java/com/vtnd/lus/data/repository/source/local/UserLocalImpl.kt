@@ -46,6 +46,19 @@ class UserLocalImpl(
         }
     }
 
+    private var loginObservable = callbackFlow {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, k ->
+            if (SharedPrefKey.KEY_USER == k) {
+                offer(sharedPrefApi.get(KEY_LOGIN, String::class.java))
+            }
+        }
+        send(sharedPrefApi.get(KEY_LOGIN, String::class.java))
+        sharedPrefApi.registerOnSharedPreferenceChangeListener(listener)
+        awaitClose {
+            sharedPrefApi.unregisterOnSharedPreferenceChangeListener(listener)
+        }
+    }
+
     override fun userObservable() =
         userObservable.flowOn(dispatchersProvider)
             .map { json -> json?.toUser() }
@@ -70,10 +83,11 @@ class UserLocalImpl(
             sharedPrefApi.put(KEY_LOGIN, VALUE_LOGIN)
         }
 
-    override suspend fun isLogin() =
-        withContext(dispatchersProvider) {
-            sharedPrefApi.get(KEY_LOGIN, String::class.java)
-        }
+    override fun isLogin() =
+        loginObservable.flowOn(dispatchersProvider)
+            .map { it }
+            .buffer(1)
+            .also { Timber.i("Login $it") }
 
     override suspend fun clearLogin() =
         withContext(dispatchersProvider) {

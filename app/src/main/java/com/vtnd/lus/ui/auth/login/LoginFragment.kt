@@ -6,15 +6,13 @@ import android.view.View
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment2
 import com.vtnd.lus.databinding.FragmentLoginBinding
-import com.vtnd.lus.shared.extensions.invisible
-import com.vtnd.lus.shared.extensions.listenToViews
-import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
-import com.vtnd.lus.shared.extensions.visible
+import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.shared.type.AuthType
 import com.vtnd.lus.shared.type.ValidateErrorType.EmailErrorType
 import com.vtnd.lus.shared.type.ValidateErrorType.PasswordErrorType
 import com.vtnd.lus.ui.auth.AuthActivity
+import com.vtnd.lus.ui.auth.register.RegisterFragment
 import com.vtnd.lus.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,14 +38,11 @@ class LoginFragment : BaseFragment2<FragmentLoginBinding, LoginViewModel>(),
                     passwordInput.editText?.text.toString())
             }
             R.id.signUpText -> {
-                (activity as AuthActivity).switchFragment(AuthType.REGISTER)
+                replaceFragment(R.id.auth, RegisterFragment.newInstance(), true)
             }
-            R.id.skipText -> {
-                startActivity(Intent(activity, MainActivity::class.java))
-                activity?.apply {
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-                    finish()
-                }
+            R.id.skipText ->   {
+                (activity as AuthActivity).clearAllFragment()
+                goBackFragment()
             }
         }
     }
@@ -55,7 +50,6 @@ class LoginFragment : BaseFragment2<FragmentLoginBinding, LoginViewModel>(),
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
         signInResponse.observeLiveData(viewLifecycleOwner) {
-            startActivity(Intent(activity, MainActivity::class.java))
             activity?.apply {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 finish()

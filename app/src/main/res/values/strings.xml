@@ -44,4 +44,8 @@
     <string name="service">Service</string>
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
+    <string name="start_date">Start Date</string>
+    <string name="note">Note</string>
+    <string name="add_note">Add note…</string>
+    <string name="invalid">Invalid</string>
 </resources>
