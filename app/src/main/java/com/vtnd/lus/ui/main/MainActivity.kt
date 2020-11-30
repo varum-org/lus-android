@@ -1,9 +1,7 @@
 package com.vtnd.lus.ui.main
 
 import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
-import android.view.WindowManager
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.databinding.ActivityMainBinding
@@ -30,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
         isLogin.observeLiveData(this@MainActivity) {
-            if (it) {
+            if (!it.isNullOrEmpty()) {
                 logoutEvent.observeLiveData(this@MainActivity) {
                     startActivity(Intent(applicationContext, AuthActivity::class.java))
                     finish()

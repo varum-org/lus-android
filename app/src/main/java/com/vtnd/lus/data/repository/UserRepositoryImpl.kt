@@ -57,7 +57,8 @@ class UserRepositoryImpl(
     override fun userObservable() =
         local.userObservable()
             .distinctUntilChanged()
-            .buffer(1).let {
+            .buffer(1)
+            .let {
                 Timber.i("userObservable")
                 it
             }
@@ -67,9 +68,13 @@ class UserRepositoryImpl(
             local.setLogin()
         }
 
-    override suspend fun isLogin() =
-        withResultContext {
-            local.isLogin()
+    @ExperimentalCoroutinesApi
+    override fun isLogin() = local.isLogin()
+        .distinctUntilChanged()
+        .buffer(1)
+        .let {
+            Timber.i("LoginObservable")
+            it
         }
 
     override suspend fun clearLogin() =

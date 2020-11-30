@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
@@ -40,7 +39,7 @@ class IntroSlideActivity : BaseActivity2<ActivityIntroSlideBinding, IntroSlideVi
             }
         })
         skipText.safeClick {
-            startActivity(Intent(applicationContext, AuthActivity::class.java))
+            startActivity(Intent(applicationContext, MainActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             finish()
         }

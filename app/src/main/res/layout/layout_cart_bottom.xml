@@ -46,7 +46,6 @@
                 android:layout_gravity="end|top"
                 android:background="@drawable/bg_red_400_stroke_1"
                 android:gravity="center"
-                android:text="0"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/sp_10" />
 
@@ -113,7 +112,6 @@
             android:paddingVertical="@dimen/dp_8"
             android:paddingStart="@dimen/dp_16"
             android:paddingEnd="0dp"
-            android:text="10/11/2020"
             android:textColor="@color/grey_900"
             android:textSize="@dimen/sp_14"
             app:fontFamily="@font/segoe_ui_semibold"
@@ -144,7 +142,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:hint="Thêm ghi chú..."
+            android:hint="@string/add_note"
             android:paddingVertical="@dimen/dp_8"
             android:paddingStart="@dimen/dp_16"
             android:paddingEnd="0dp"

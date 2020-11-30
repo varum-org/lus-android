@@ -27,7 +27,7 @@ abstract class BaseFragment<viewBinding : ViewBinding, viewModel : BaseViewModel
     protected val viewBinding get() = _viewBinding!! // ktlint-disable
     private val noDataFragment by lazy { EmptyFragment.newInstance() }
     val currentCalendar by lazy { getCalendar() }
-    val defaultCalendar by lazy { getCalendar(Constants.TIME_ZONE_UTC) }
+    val defaultCalendar by lazy { getCalendar() }
 
     abstract fun inflateViewBinding(inflater: LayoutInflater): viewBinding
 

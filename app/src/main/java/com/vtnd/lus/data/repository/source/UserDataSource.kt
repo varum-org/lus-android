@@ -22,7 +22,7 @@ interface UserDataSource {
 
         suspend fun setLogin()
 
-        suspend fun isLogin(): String?
+        fun isLogin(): Flow<String?>
 
         suspend fun clearLogin()
     }
