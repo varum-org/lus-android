@@ -18,6 +18,8 @@ import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.qualifier.named
+import java.util.*
+import kotlin.collections.ArrayList
 
 class IdolDetailViewModel(
     private val userRepository: UserRepository
@@ -26,9 +28,15 @@ class IdolDetailViewModel(
         get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
     val cardServicesLiveData = SingleLiveData<List<ItemCard>>()
     val idolServicesLiveData = SingleLiveData<List<ItemService>>()
+    val startDate = SingleLiveData<Date>()
+    val note = SingleLiveData<String>()
     private var cardServices = mutableListOf<ItemCard>()
     private var idolServices = mutableListOf<ItemService>()
     val isLogin = SingleLiveData<Boolean>()
+
+    init {
+        startDate.postValue(Date())
+    }
 
     @ExperimentalCoroutinesApi
     fun checkLogin() {

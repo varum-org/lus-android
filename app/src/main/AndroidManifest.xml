@@ -31,7 +31,9 @@
         <activity
             android:name=".ui.intro.IntroSlideActivity"
             android:theme="@style/ThemeNoStatus" />
-        <activity android:name="com.vtnd.lus.ui.auth.AuthActivity" />
+        <activity
+            android:theme="@style/ThemeNoStatus"
+            android:name="com.vtnd.lus.ui.auth.AuthActivity" />
         <activity android:name=".ui.main.MainActivity" />
     </application>
 </manifest>

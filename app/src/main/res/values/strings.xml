@@ -48,4 +48,8 @@
     <string name="note">Note</string>
     <string name="add_note">Add note…</string>
     <string name="invalid">Invalid</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="rent">Rent</string>
+    <string name="are_you_sure_to_rent">Are you sure to rent?</string>
 </resources>

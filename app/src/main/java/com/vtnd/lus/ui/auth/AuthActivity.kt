@@ -38,7 +38,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
                 clearAllFragment()
                 goBackFragment()
             }
-        } else super.onBackPressed()
+        } else{
+            super.onBackPressed()
+            overridePendingTransition(R.anim.nothing, R.anim.bottom_down)
+        }
     }
 
     companion object {

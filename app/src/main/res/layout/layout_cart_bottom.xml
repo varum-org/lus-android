@@ -174,7 +174,7 @@
         android:text="@string/to_rent"
         android:textColor="@color/white"
         app:cornerRadius="@dimen/dp_24"
-        app:fontFamily="@font/segoe_ui_semibold"
+        app:fontFamily="@font/segoe_ui_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
