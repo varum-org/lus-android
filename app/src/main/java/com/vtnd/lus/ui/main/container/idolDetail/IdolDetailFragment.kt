@@ -32,6 +32,7 @@ import kotlinx.android.synthetic.main.fragment_idol_detail.*
 import kotlinx.android.synthetic.main.layout_cart_bottom.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import java.util.*
 
 class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel>(), View.OnClickListener {
@@ -84,6 +85,7 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         super.registerLiveData()
         startDate.observeLiveData(viewLifecycleOwner) { date ->
             calendar.time = date
+            Timber.i("DateStart: " + calendar.time.toString())
             context?.let {
                 startDateText.text = calendar.time.toStringDefaultDate(it)
             }
@@ -174,20 +176,11 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
     }
 
     private fun onStartDateClick() {
-        showDatePickerAlertDialog(
-                calendar.get(Calendar.DAY_OF_MONTH),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.YEAR)
-        ) {
-            title(getString(R.string.start_date))
-            leftButton(getString(R.string.cancel))
-            rightButton(getString(R.string.apply)) { newDayOfMonth, newMonth, newYear ->
-                defaultCalendar.set(newYear, newMonth, newDayOfMonth)
-                if (defaultCalendar.time > currentCalendar.time) {
-                    calendar.set(newYear, newMonth, newDayOfMonth)
-                    viewModel.startDate.postValue(calendar.time)
-                } else showError(getString(R.string.invalid) + ": " + getString(R.string.start_date))
-            }
+        pickDateTime(calendar) {
+            if (!it.time.before(getCalendar().time)) {
+                calendar.time = it.time
+                viewModel.startDate.postValue(calendar.time)
+            } else showError(getString(R.string.invalid) + ": " + getString(R.string.start_date))
         }
     }
 
@@ -241,17 +234,19 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
 
     private fun setupIndicators() {
         val indicators = arrayOfNulls<ImageView>(galleryAdapter.itemCount)
-        val layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
+        val layoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         layoutParams.setMargins(8, 0, 8, 0)
         for (i in indicators.indices) {
             indicators[i] = ImageView(requireContext())
             indicators[i].apply {
                 this?.setImageDrawable(
-                        ContextCompat.getDrawable(
-                                requireContext(),
-                                R.drawable.indicator_inactive
-                        )
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.indicator_inactive
+                    )
                 )
                 this?.layoutParams = layoutParams
             }

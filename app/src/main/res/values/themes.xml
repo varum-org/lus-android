@@ -45,4 +45,22 @@
         <item name="android:datePickerMode">spinner</item>
         <item name="android:calendarViewShown">false</item>
     </style>
+
+    <style name="CustomDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorPrimary">@color/grey_600</item>
+        <item name="fontFamily">@font/segoe_ui_regular</item>
+        <item name="colorControlNormal">@color/red_a400</item>
+        <item name="colorAccent">@color/red_a400</item>
+    </style>
+
+    <style name="CustomTimePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorPrimary">@color/grey_600</item>
+        <item name="fontFamily">@font/segoe_ui_regular</item>
+        <item name="colorControlNormal">@color/red_a400</item>
+        <item name="colorAccent">@color/red_a400</item>
+    </style>
 </resources>

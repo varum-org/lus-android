@@ -2,6 +2,8 @@ package com.vtnd.lus.shared.extensions
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Handler
 import android.os.Looper
 import android.view.View
@@ -22,6 +24,7 @@ import com.vtnd.lus.shared.widget.DatePickerAlertDialog
 import com.vtnd.lus.shared.widget.NoteAlertDialog
 import com.vtnd.lus.shared.widget.NotificationAlertDialog
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import java.util.*
 
 fun Fragment.replaceFragment(
     @IdRes containerId: Int, fragment: Fragment,
@@ -232,9 +235,34 @@ fun Fragment.showAlertDialog(
     completion.invoke(this)
     show()
 }
+
 fun Fragment.showNotificationAlertDialog(
-        completion: NotificationAlertDialog.() -> Unit
+    completion: NotificationAlertDialog.() -> Unit
 ) = NotificationAlertDialog(requireContext()).apply {
     completion.invoke(this)
     show()
+}
+
+fun Fragment.pickDateTime(calendar: Calendar, doSomethingWith: (Calendar) -> Unit) {
+    DatePickerDialog(
+        requireContext(),
+        R.style.CustomDatePickerStyle,
+        DatePickerDialog.OnDateSetListener { _, year, month, day ->
+            TimePickerDialog(
+                requireContext(),
+                R.style.CustomTimePickerStyle,
+                TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+                    val pickedDateTime = Calendar.getInstance()
+                    pickedDateTime.set(year, month, day, hour, minute)
+                    doSomethingWith(pickedDateTime)
+                },
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                false
+            ).show()
+        },
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+    ).show()
 }
