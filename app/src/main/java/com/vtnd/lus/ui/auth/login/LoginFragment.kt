@@ -51,8 +51,8 @@ class LoginFragment : BaseFragment2<FragmentLoginBinding, LoginViewModel>(),
         super.registerLiveData()
         signInResponse.observeLiveData(viewLifecycleOwner) {
             activity?.apply {
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 finish()
+                overridePendingTransition(R.anim.nothing, R.anim.bottom_down)
             }
         }
         emailError.observeLiveData(viewLifecycleOwner, ::handleValidateEmail)

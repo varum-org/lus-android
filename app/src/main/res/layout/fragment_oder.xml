@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.vtnd.lus.ui.main.container.idolDetail.IdolDetailViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.vtnd.lus.shared.widget.RoundishImageView
+                android:id="@+id/backImageButton"
+                android:layout_width="@dimen/dp_34"
+                android:layout_height="@dimen/dp_34"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@drawable/ic_arrow_left_circle"
+                android:clickable="true"
+                android:elevation="@dimen/dp_4"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cornerRadius="@dimen/dp_17"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:roundedCorners="all" />
+
+            <TextView
+                android:textColor="@color/grey_900"
+                android:text="To rent service"
+                android:textSize="@dimen/sp_14"
+                android:paddingEnd="@dimen/dp_16"
+                android:paddingStart="@dimen/dp_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/backImageButton"
+                app:layout_constraintTop_toTopOf="@+id/backImageButton"
+                app:layout_constraintBottom_toBottomOf="@+id/backImageButton"
+                android:layout_width="0dp"
+                app:fontFamily="@font/segoe_ui_semibold"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

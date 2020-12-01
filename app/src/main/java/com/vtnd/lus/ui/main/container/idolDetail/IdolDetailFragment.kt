@@ -32,13 +32,9 @@ import kotlinx.android.synthetic.main.fragment_idol_detail.*
 import kotlinx.android.synthetic.main.layout_cart_bottom.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 import java.util.*
 
-
-class
-IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel>(),
-        View.OnClickListener {
+class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel>(), View.OnClickListener {
 
     override val viewModel: IdolDetailViewModel by viewModel()
     private val galleryAdapter = GalleryAdapter {}
@@ -86,13 +82,39 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
 
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
+        startDate.observeLiveData(viewLifecycleOwner) { date ->
+            calendar.time = date
+            context?.let {
+                startDateText.text = calendar.time.toStringDefaultDate(it)
+            }
+        }
+        note.observeLiveData(viewLifecycleOwner) {
+            noteText.text = it
+        }
         isLogin.observeLiveData(viewLifecycleOwner) {
             if (it) {
-                // Action show are you sure oder
+                showAlertDialog {
+                    title(getString(R.string.rent))
+                    message(getString(R.string.are_you_sure_to_rent))
+                    leftButton(getString(R.string.no))
+                    rightButton(getString(R.string.yes)) {
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                        showLoading(true)
+                        delayTask({
+                            showLoading(false)
+                        },800)
+                        // action oder
+                    }
+                }
             } else {
                 activity?.apply {
-                    startActivity(Intent(this, AuthActivity::class.java))
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                    showLoading(true)
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    delayTask({
+                        showLoading(false)
+                        startActivity(Intent(this, AuthActivity::class.java))
+                        overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
+                    },800)
                 }
             }
         }
@@ -109,6 +131,7 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
                         state = BottomSheetBehavior.STATE_COLLAPSED
                 } else {
                     noteText.text = null
+                    viewModel.startDate.postValue(Date())
                     state = BottomSheetBehavior.STATE_HIDDEN
                 }
             }
@@ -162,9 +185,7 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
                 defaultCalendar.set(newYear, newMonth, newDayOfMonth)
                 if (defaultCalendar.time > currentCalendar.time) {
                     calendar.set(newYear, newMonth, newDayOfMonth)
-                    context?.let {
-                        startDateText.text = calendar.time.toStringDefaultDate(it)
-                    }
+                    viewModel.startDate.postValue(calendar.time)
                 } else showError(getString(R.string.invalid) + ": " + getString(R.string.start_date))
             }
         }
@@ -175,7 +196,7 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
             title(getString(R.string.note))
             leftButton(getString(R.string.cancel))
             rightButton(getString(R.string.apply)) { note ->
-                noteText.text = note
+                viewModel.note.postValue(note)
             }
         }
     }
@@ -195,21 +216,12 @@ IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel
         idolAddressText.text = getString(R.string.idol_address, idol.address)
         idolRelationshipText.text = idol.relationship
         distinctionText.text = getString(R.string.crush_national_citizen)
-        context?.let {
-            startDateText.text = calendar.time.toStringDefaultDate(it)
-        }
     }
 
     private fun setupViewPager2() {
         idolGalleryViewPager2.apply {
             adapter = galleryAdapter.apply {
-                idolResponse.idol.imageGallery.run {
-                    subList(1, this.size)
-                }.let {
-                    submitList(it.map {
-                        ItemViewHolder(it)
-                    })
-                }
+                idolResponse.idol.imageGallery.run { subList(1, this.size) }.let { submitList(it.map { imagePath -> ItemViewHolder(imagePath) }) }
             }
             addItemDecoration(HorizontalMarginItemDecoration(context, R.dimen.dp_16))
             offscreenPageLimit = 1

@@ -17,8 +17,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity
 import com.vtnd.lus.shared.AnimateType
+import com.vtnd.lus.shared.widget.BaseAlertDialog
 import com.vtnd.lus.shared.widget.DatePickerAlertDialog
 import com.vtnd.lus.shared.widget.NoteAlertDialog
+import com.vtnd.lus.shared.widget.NotificationAlertDialog
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 fun Fragment.replaceFragment(
@@ -220,6 +222,19 @@ fun Fragment.showNoteAlertDialog(
     completion: NoteAlertDialog.() -> Unit
 ) = NoteAlertDialog(requireContext()).apply {
     initNote(oldNote)
+    completion.invoke(this)
+    show()
+}
+
+fun Fragment.showAlertDialog(
+        completion: BaseAlertDialog.() -> Unit
+) = BaseAlertDialog(requireContext()).apply {
+    completion.invoke(this)
+    show()
+}
+fun Fragment.showNotificationAlertDialog(
+        completion: NotificationAlertDialog.() -> Unit
+) = NotificationAlertDialog(requireContext()).apply {
     completion.invoke(this)
     show()
 }

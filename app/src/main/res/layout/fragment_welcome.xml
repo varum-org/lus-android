@@ -94,7 +94,7 @@
                 android:text="@string/login"
                 app:cornerRadius="@dimen/dp_24"
                 android:textColor="@color/white"
-                app:fontFamily="@font/segoe_ui_semibold" />
+                app:fontFamily="@font/segoe_ui_regular" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/registerButton"
