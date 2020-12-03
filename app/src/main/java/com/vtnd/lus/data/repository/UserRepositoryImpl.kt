@@ -5,6 +5,7 @@ import com.vtnd.lus.data.UserRepository
 import com.vtnd.lus.data.repository.source.RepoDataSource
 import com.vtnd.lus.data.repository.source.TokenDataSource
 import com.vtnd.lus.data.repository.source.UserDataSource
+import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
@@ -31,7 +32,6 @@ class UserRepositoryImpl(
                 profile?.let { local.saveUser(profile) }
                 token
                     ?.let { tokenLocal.saveToken(it) }
-                    .let { local.setLogin() }
             } ?: tokenLocal.clearToken()
         }
 
@@ -63,25 +63,6 @@ class UserRepositoryImpl(
                 it
             }
 
-    override suspend fun setLogin() =
-        withResultContext {
-            local.setLogin()
-        }
-
-    @ExperimentalCoroutinesApi
-    override fun isLogin() = local.isLogin()
-        .distinctUntilChanged()
-        .buffer(1)
-        .let {
-            Timber.i("LoginObservable")
-            it
-        }
-
-    override suspend fun clearLogin() =
-        withResultContext {
-            local.clearLogin()
-        }
-
     override suspend fun getIdols(
         isLogin: Boolean,
         category: CategoryIdolType
@@ -90,6 +71,9 @@ class UserRepositoryImpl(
             remote.getIdols(isLogin, category).data.toIdolResponses(repoLocal.services())
         }
 
-
+    override suspend fun getRoom(roomRequest: RoomRequest) =
+        withResultContext {
+            remote.getRoom(roomRequest).data
+        }
 }
 

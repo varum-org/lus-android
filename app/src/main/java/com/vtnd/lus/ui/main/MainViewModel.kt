@@ -23,7 +23,7 @@ class MainViewModel(
         get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
 
     @ExperimentalCoroutinesApi
-    val isLogin = userRepository.isLogin()
+    val userObservable = userRepository.userObservable()
         .map { it }
         .distinctUntilChanged()
         .flowOn(dispatchersProvider)

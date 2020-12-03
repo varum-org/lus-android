@@ -7,6 +7,7 @@ import com.vtnd.lus.BuildConfig
 import com.vtnd.lus.data.TokenRepository
 import com.vtnd.lus.data.model.ServiceJsonAdapter
 import com.vtnd.lus.data.model.UserJsonAdapter
+import com.vtnd.lus.data.repository.source.UserDataSource
 import com.vtnd.lus.data.repository.source.remote.api.ApiService
 import com.vtnd.lus.data.repository.source.remote.api.middleware.InterceptorImpl
 import com.vtnd.lus.shared.constants.Constants.KEY_BASE_URL
@@ -38,8 +39,11 @@ private fun provideServiceLocalJsonAdapter(moshi: Moshi): ServiceJsonAdapter {
     return ServiceJsonAdapter(moshi)
 }
 
-fun provideAuthInterceptor(tokenRepository: TokenRepository): InterceptorImpl {
-    return InterceptorImpl(tokenRepository)
+fun provideAuthInterceptor(
+    tokenRepository: TokenRepository,
+    userDataSource: UserDataSource.Local
+): InterceptorImpl {
+    return InterceptorImpl(tokenRepository, userDataSource)
 }
 
 fun provideLoggingInterceptor(): HttpLoggingInterceptor {
@@ -78,7 +82,7 @@ val networkModule = module {
 
     factory { provideServiceLocalJsonAdapter(moshi = get()) }
 
-    factory { provideAuthInterceptor(get()) }
+    factory { provideAuthInterceptor(get(), get()) }
 
     factory { provideLoggingInterceptor() }
 

@@ -1,6 +1,8 @@
 package com.vtnd.lus.data.repository.source
 
+import com.vtnd.lus.data.model.Room
 import com.vtnd.lus.data.model.User
+import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
@@ -20,11 +22,7 @@ interface UserDataSource {
 
         suspend fun saveUser(user: User)
 
-        suspend fun setLogin()
-
-        fun isLogin(): Flow<String?>
-
-        suspend fun clearLogin()
+        suspend fun clearUser()
     }
 
     interface Remote {
@@ -44,5 +42,8 @@ interface UserDataSource {
             isLogin: Boolean,
             category: CategoryIdolType
         ): BaseResponse<List<IdolResponse>>
+
+        //Room
+        suspend fun getRoom(roomRequest: RoomRequest): BaseResponse<Room>
     }
 }
