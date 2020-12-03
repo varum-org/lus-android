@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/noDataImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/ic_launcher_background"
+        android:src="@drawable/search"
         app:layout_constraintDimensionRatio="w,1"
-        app:layout_constraintWidth_percent="0.14"
+        app:layout_constraintWidth_percent="0.5"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -23,8 +23,8 @@
         android:text="@string/no_data_available"
         android:textAlignment="center"
         android:textColor="@color/grey_600"
-        android:textSize="@dimen/sp_16"
-        app:fontFamily="@font/segoe_ui_light"
+        android:textSize="@dimen/sp_12"
+        app:fontFamily="@font/segoe_ui_semibold_italic"
         tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.helper.widget.Flow
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="noDataImageView,noDataTextView"
         app:flow_maxElementsWrap="1"
-        app:flow_verticalGap="@dimen/dp_16"
+        app:flow_verticalGap="@dimen/dp_8"
         app:flow_wrapMode="chain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

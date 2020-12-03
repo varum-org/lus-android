@@ -2,6 +2,9 @@ package com.vtnd.lus.shared.extensions
 
 import android.os.SystemClock
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+
 
 fun View.isVisible() = visibility == View.VISIBLE
 fun View.isGone() = visibility == View.GONE
@@ -39,6 +42,11 @@ fun View.safeClick(blockInMillis: Long = 1000L, onClick: (View) -> Unit) {
         onClick(this)
     }
 }
+
+fun View.setTint(color: Int) =
+        DrawableCompat.wrap(background).apply {
+            DrawableCompat.setTint(this, ContextCompat.getColor(context, color))
+        }
 
 fun View.OnClickListener.listenToViews(vararg views: View) {
     views.forEach { it.setOnClickListener(this) }

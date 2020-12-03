@@ -45,4 +45,11 @@
     <string name="note">Ghi chú</string>
     <string name="add_note">Thêm ghi chú…</string>
     <string name="invalid">Không hợp lệ</string>
+    <string name="present_to">Tặng quà cho %1$s</string>
+    <string name="choose_a_gift_to_impress">Chọn một món quà để gây ấn tượng hơn</string>
+    <string name="search_on_Lus">Tìm kiếm trên Lus</string>
+    <string name="new_idol_request">Danh sách idol tìm được</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="follow">Theo dõi</string>
 </resources>

@@ -30,6 +30,7 @@ import com.vtnd.lus.ui.main.container.idolDetail.adapter.GalleryAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.ServiceAdapter
 import kotlinx.android.synthetic.main.fragment_idol_detail.*
 import kotlinx.android.synthetic.main.layout_cart_bottom.*
+import kotlinx.android.synthetic.main.layout_information_idol.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -204,6 +205,7 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         idolNameText.text = user?.birthday?.let {
             getString(R.string.nick_name, idol.nickName, it.getAge())
         } ?: idol.nickName
+        serviceNameText.text = getString(R.string.present_to, idol.nickName)
         idolDescriptionText.text = idol.description
         idolLocationText.text = context?.getString(R.string.live_in, "Đà Nẵng")
         idolAddressText.text = getString(R.string.idol_address, idol.address)
