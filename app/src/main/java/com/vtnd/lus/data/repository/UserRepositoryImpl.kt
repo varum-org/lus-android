@@ -75,5 +75,10 @@ class UserRepositoryImpl(
         withResultContext {
             remote.getRoom(roomRequest).data
         }
+
+    override suspend fun getMessageFromRoom(id: String) =
+        withResultContext {
+            remote.getMessageFromRoom(id).data
+        }
 }
 

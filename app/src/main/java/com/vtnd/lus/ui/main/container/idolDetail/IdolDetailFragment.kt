@@ -28,6 +28,7 @@ import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.CartAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.GalleryAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.ServiceAdapter
+import com.vtnd.lus.ui.main.container.message.MessageFragment
 import kotlinx.android.synthetic.main.fragment_idol_detail.*
 import kotlinx.android.synthetic.main.layout_cart_bottom.*
 import kotlinx.android.synthetic.main.layout_information_idol.*
@@ -68,7 +69,14 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
             }
         }
         setupBottomSheet()
-        listenToViews(backImageButton, addFavoriteFAB, toRentButton, startDateImage, noteText)
+        listenToViews(
+            messageFAB,
+            backImageButton,
+            addFavoriteFAB,
+            toRentButton,
+            startDateImage,
+            noteText
+        )
         setupViewPager2()
         setupIndicators()
         setupCurrentIndicator(0)
@@ -84,6 +92,9 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
 
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
+        room.observeLiveData(viewLifecycleOwner) {
+            replaceFragment(R.id.container, MessageFragment.newInstance(it), true)
+        }
         startDate.observeLiveData(viewLifecycleOwner) { date ->
             calendar.time = date
             Timber.i("DateStart: " + calendar.time.toString())
@@ -93,33 +104,6 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         }
         note.observeLiveData(viewLifecycleOwner) {
             noteText.text = it
-        }
-        isLogin.observeLiveData(viewLifecycleOwner) {
-            if (it) {
-                showAlertDialog {
-                    title(getString(R.string.rent))
-                    message(getString(R.string.are_you_sure_to_rent))
-                    leftButton(getString(R.string.no))
-                    rightButton(getString(R.string.yes)) {
-                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                        showLoading(true)
-                        delayTask({
-                            showLoading(false)
-                        },800)
-                        // action oder
-                    }
-                }
-            } else {
-                activity?.apply {
-                    showLoading(true)
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                    delayTask({
-                        showLoading(false)
-                        startActivity(Intent(this, AuthActivity::class.java))
-                        overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
-                    },800)
-                }
-            }
         }
         idolServicesLiveData.observeLiveData(viewLifecycleOwner) {
             serviceAdapter.submitList(it)
@@ -147,15 +131,37 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
             R.id.backImageButton -> this.goBackFragment()
             R.id.addFavoriteFAB -> {
             }
-            R.id.toRentButton -> viewModel.checkLogin()
+            R.id.toRentButton -> viewModel.checkLogin() {
+                if (it) showAlert() else authentication()
+            }
             R.id.startDateImage -> onStartDateClick()
             R.id.noteText -> onNoteClick()
+            R.id.messageFAB -> viewModel.checkLogin() {
+                if (it) idolResponse.user?.id?.let { id -> viewModel.getRoom(id) }
+                else authentication()
+            }
         }
     }
 
     override fun onStop() {
         super.onStop()
         onHideSoftKeyBoard()
+    }
+
+    private fun showAlert() {
+        showAlertDialog {
+            title(getString(R.string.rent))
+            message(getString(R.string.are_you_sure_to_rent))
+            leftButton(getString(R.string.no))
+            rightButton(getString(R.string.yes)) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                showLoading(true)
+                delayTask({
+                    showLoading(false)
+                }, 800)
+                // action oder
+            }
+        }
     }
 
     private fun setupBottomSheet() {
@@ -167,7 +173,7 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
             else bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
         bottomSheetBehavior.addBottomSheetCallback(object :
-                BottomSheetBehavior.BottomSheetCallback() {
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {}
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -195,13 +201,24 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         }
     }
 
+    private fun authentication() {
+        activity?.apply {
+            showLoading(true)
+            delayTask({
+                showLoading(false)
+                startActivity(Intent(this, AuthActivity::class.java))
+                overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
+            }, 800)
+        }
+    }
+
     private fun binDataToView() = with(idolResponse) {
         GlideApp.with(this@IdolDetailFragment)
-                .load(BASE_IMAGE_URL + idol.imageGallery[0])
-                .placeholder(R.color.pink_50)
-                .error(R.color.red_a400)
-                .dontAnimate()
-                .into(idolImage)
+            .load(BASE_IMAGE_URL + idol.imageGallery[0])
+            .placeholder(R.color.pink_50)
+            .error(R.color.red_a400)
+            .dontAnimate()
+            .into(idolImage)
         idolNameText.text = user?.birthday?.let {
             getString(R.string.nick_name, idol.nickName, it.getAge())
         } ?: idol.nickName

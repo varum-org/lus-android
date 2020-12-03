@@ -52,7 +52,20 @@
                     app:maxImageSize="@dimen/dp_30"
                     app:tint="@color/white" />
 
-          <include layout="@layout/layout_information_idol" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/messageFAB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:backgroundTint="@color/red_a400"
+                    android:src="@drawable/ic_chat_bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/idolImage"
+                    app:layout_constraintEnd_toStartOf="@+id/addFavoriteFAB"
+                    app:layout_constraintTop_toBottomOf="@+id/idolImage"
+                    app:maxImageSize="@dimen/dp_30"
+                    app:tint="@color/white" />
+
+                <include layout="@layout/layout_information_idol" />
 
                 <View
                     android:id="@+id/line"

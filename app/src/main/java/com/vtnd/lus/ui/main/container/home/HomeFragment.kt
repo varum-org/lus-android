@@ -19,7 +19,7 @@ import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.main.container.home.adapter.HotIdolAdapter
 import com.vtnd.lus.ui.main.container.home.adapter.StoryCircleAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.IdolDetailFragment
-import com.vtnd.lus.ui.main.container.message.MessageFragment
+import com.vtnd.lus.ui.main.container.room.RoomFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,7 +49,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         initToolbar(
             title = getString(R.string.app_name),
             iconRight = R.drawable.ic_chat_light
-        ) { viewModel.checkLogin() }
+        ) {
+            viewModel.checkLogin() {
+                if (it) replaceFragment(R.id.container, RoomFragment.newInstance(), true)
+                else {
+                    activity?.apply {
+                        showLoading(true)
+                        delayTask({
+                            showLoading(false)
+                            startActivity(Intent(this, AuthActivity::class.java))
+                            overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
+                        }, 800)
+                    }
+                }
+            }
+        }
         storyCircleRecyclerView.apply {
             setHasFixedSize(true)
             adapter = storyCircleAdapter
@@ -71,9 +85,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
-        room.observeLiveData(viewLifecycleOwner){
-            replaceFragment(R.id.container,MessageFragment.newInstance(it))
-        }
         storyIdols.observeLiveData(viewLifecycleOwner) {
             storyCircleAdapter.submitList(it)
         }
@@ -81,19 +92,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             hotIdolAdapter.submitList(it?.map { idol ->
                 ItemViewHolder(idol)
             })
-        }
-        isLogin.observeLiveData(viewLifecycleOwner) {
-            if (it) getRoom()
-            else {
-                activity?.apply {
-                    showLoading(true)
-                    delayTask({
-                        showLoading(false)
-                        startActivity(Intent(this, AuthActivity::class.java))
-                        overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
-                    }, 800)
-                }
-            }
         }
     }
 

@@ -8,11 +8,9 @@ import com.vtnd.lus.di.MainApplication
 import com.vtnd.lus.shared.extensions.addFragmentToActivity
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.main.container.ContainerFragment
-import io.socket.client.IO
 import io.socket.client.Socket
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     lateinit var socket: Socket
@@ -31,14 +29,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     @ExperimentalCoroutinesApi
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
-        userObservable.observeLiveData(this@MainActivity) {
-            it?.let { user ->
-                userId = user.id
-                socket.connect()
-                    .on(Socket.EVENT_CONNECT) {
-                        socket.emit(SOCKET_JOIN_ROOM, user.id)
-                    }
-            }
+        user.observeLiveData(this@MainActivity) {
+            userId = it.id
+            socket.connect()
+                .on(Socket.EVENT_CONNECT) {
+                    socket.emit(SOCKET_JOIN_ROOM, userId)
+                }
         }
     }
 

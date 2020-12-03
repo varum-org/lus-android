@@ -1,5 +1,6 @@
 package com.vtnd.lus.data.repository.source
 
+import com.vtnd.lus.data.model.Message
 import com.vtnd.lus.data.model.Room
 import com.vtnd.lus.data.model.User
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
@@ -11,6 +12,7 @@ import com.vtnd.lus.data.repository.source.remote.api.response.SignInResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.UserResponse
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.flow.Flow
+import retrofit2.http.Path
 
 interface UserDataSource {
 
@@ -45,5 +47,7 @@ interface UserDataSource {
 
         //Room
         suspend fun getRoom(roomRequest: RoomRequest): BaseResponse<Room>
+
+        suspend fun getMessageFromRoom(id: String): BaseResponse<List<Message>>
     }
 }

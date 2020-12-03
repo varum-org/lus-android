@@ -60,4 +60,6 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="follow">Follow</string>
+    <string name="send_message">Send message…</string>
+    <string name="please_enter_your_message">Please enter your message!</string>
 </resources>

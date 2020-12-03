@@ -14,6 +14,7 @@ import com.vtnd.lus.ui.main.container.idolDetail.IdolDetailViewModel
 import com.vtnd.lus.ui.main.container.message.MessageViewModel
 import com.vtnd.lus.ui.main.container.notification.NotificationViewModel
 import com.vtnd.lus.ui.main.container.profile.ProfileViewModel
+import com.vtnd.lus.ui.main.container.room.RoomViewModel
 import com.vtnd.lus.ui.main.container.search.SearchViewModel
 import com.vtnd.lus.ui.splash.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -33,7 +34,8 @@ val viewModelModule = module {
     }
     viewModel { IntroSlideViewModel(repoRepository = get()) }
     viewModel { AuthViewModel() }
-    viewModel { MessageViewModel() }
+    viewModel { RoomViewModel() }
+    viewModel { MessageViewModel(userRepository = get(), messageJsonAdapter = get()) }
     viewModel {
         MainViewModel(
             userRepository = get(),

@@ -4,7 +4,9 @@ import androidx.lifecycle.viewModelScope
 import com.vtnd.lus.base.BaseViewModel
 import com.vtnd.lus.data.TokenRepository
 import com.vtnd.lus.data.UserRepository
+import com.vtnd.lus.data.model.Room
 import com.vtnd.lus.data.model.Service
+import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.shared.liveData.SingleLiveData
 import com.vtnd.lus.shared.scheduler.dispatcher.AppDispatchers
 import com.vtnd.lus.shared.scheduler.dispatcher.DispatchersProvider
@@ -12,7 +14,6 @@ import com.vtnd.lus.shared.type.CardActionType
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.ItemCard
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.ItemService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -32,24 +33,24 @@ class IdolDetailViewModel(
     val note = SingleLiveData<String>()
     private var cardServices = mutableListOf<ItemCard>()
     private var idolServices = mutableListOf<ItemService>()
-    val isLogin = SingleLiveData<Boolean>()
+    val room = SingleLiveData<Room>()
 
     init {
         startDate.postValue(Date())
     }
 
     @ExperimentalCoroutinesApi
-    fun checkLogin() {
+    fun checkLogin(check: (Boolean) -> Unit) {
         viewModelScope.launch {
-            tokenRepository.tokenObservable()
-                .map { it }
-                .distinctUntilChanged()
-                .flowOn(dispatchersProvider)
-                .buffer(1)
-                .collect {
-                    isLogin.postValue(!it.isNullOrEmpty())
-                }
+            check.invoke(!tokenRepository.getToken().isNullOrEmpty())
         }
+    }
+
+    fun getRoom(user_id: String) {
+        viewModelScope(room,
+            onRequest = { userRepository.getRoom(RoomRequest(user_id)) },
+            onSuccess = { room.postValue(it) },
+            onError = { exception.postValue(it) })
     }
 
     fun addServiceToCard(itemService: ItemService, pos: Int) {

@@ -47,7 +47,7 @@ class MainApplication : Application(), KoinComponent {
         }
         baseUrl = get(named(Constants.KEY_BASE_URL))
         try {
-            socket = IO.socket(baseUrl)
+            socket = IO.socket("http://192.168.1.6:5000")
         } catch (e: Exception) {
             Timber.i(e)
         }

@@ -26,10 +26,8 @@ class HomeViewModel(
 ) : BaseViewModel(), KoinComponent {
     private val dispatchersProvider =
         get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
-    val isLogin = SingleLiveData<Boolean>()
     val hotIdols = SingleLiveData<List<IdolResponse>>()
     val storyIdols = SingleLiveData<List<ItemViewHolder<Any>>>()
-    val room = SingleLiveData<Room>()
 
     init {
         initialStoryIdols()
@@ -37,32 +35,10 @@ class HomeViewModel(
     }
 
     @ExperimentalCoroutinesApi
-    fun checkLogin() {
+    fun checkLogin(check: (Boolean) -> Unit) {
         viewModelScope.launch {
-            tokenRepository.tokenObservable()
-                .map { it }
-                .distinctUntilChanged()
-                .flowOn(dispatchersProvider)
-                .buffer(1)
-                .collect {
-                    isLogin.postValue(!it.isNullOrEmpty())
-                }
+            check.invoke(!tokenRepository.getToken().isNullOrEmpty())
         }
-    }
-
-    fun getRoom() {
-        viewModelScope.launch {
-            userRepository.user()?.let {
-                getRoom(it.id!!)
-            }
-        }
-    }
-
-    private fun getRoom(user_id: String) {
-        viewModelScope(room,
-            onRequest = { userRepository.getRoom(RoomRequest(user_id)) },
-            onSuccess = { room.postValue(it) },
-            onError = { exception.postValue(it) })
     }
 
     private fun initialStoryIdols() {
