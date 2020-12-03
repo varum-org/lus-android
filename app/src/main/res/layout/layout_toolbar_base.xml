@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutToolbarBase"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@color/white">
+
+    <com.vtnd.lus.shared.widget.RoundishImageView
+        android:id="@+id/leftImageBaseButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_16"
+        android:background="@drawable/ic_arrow_left_2"
+        android:clickable="true"
+        android:elevation="@dimen/dp_4"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        app:cornerRadius="@dimen/dp_17"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHeight_percent="0.43"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:roundedCorners="all" />
+
+    <TextView
+        android:id="@+id/titleToolbarBaseTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_4"
+        android:gravity="center"
+        android:textColor="@color/grey_900"
+        android:textSize="@dimen/sp_12"
+        app:fontFamily="@font/segoe_ui_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rightImageBaseButton"
+        app:layout_constraintStart_toEndOf="@id/leftImageBaseButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vtnd.lus.shared.widget.RoundishImageView
+        android:id="@+id/rightImageBaseButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:backgroundTint="@color/grey_900"
+        android:clickable="true"
+        android:elevation="@dimen/dp_4"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        app:cornerRadius="@dimen/dp_17"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.43"
+        app:layout_constraintTop_toTopOf="parent"
+        app:roundedCorners="all" />
+</androidx.constraintlayout.widget.ConstraintLayout>

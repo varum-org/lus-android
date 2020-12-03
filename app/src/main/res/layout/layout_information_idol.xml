@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/idolInformationLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_16"
+    android:layout_marginTop="@dimen/dp_16"
+    android:orientation="vertical"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/idolImage">
+
+    <TextView
+        android:id="@+id/idolNameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/indigo_900"
+        android:textSize="@dimen/sp_18"
+        app:fontFamily="@font/segoe_ui_semibold" />
+
+    <TextView
+        android:id="@+id/idolDescriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="center_vertical"
+        android:textColor="@color/grey_600"
+        android:textSize="@dimen/sp_14"
+        app:fontFamily="@font/segoe_ui_semibold" />
+
+    <TextView
+        android:id="@+id/idolLocationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:drawablePadding="@dimen/dp_8"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="@color/indigo_900"
+        android:textSize="@dimen/sp_12"
+        app:drawableStartCompat="@drawable/ic_location_light"
+        app:drawableTint="@color/indigo_900"
+        app:fontFamily="@font/segoe_ui_regular" />
+
+    <TextView
+        android:id="@+id/idolAddressText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        android:drawablePadding="@dimen/dp_9"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="@color/indigo_900"
+        android:textSize="@dimen/sp_12"
+        app:drawableStartCompat="@drawable/ic_home_light"
+        app:drawableTint="@color/indigo_900"
+        app:fontFamily="@font/segoe_ui_regular" />
+
+    <TextView
+        android:id="@+id/idolRelationshipText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        android:drawablePadding="@dimen/dp_9"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="@color/indigo_900"
+        android:textSize="@dimen/sp_12"
+        app:drawableStartCompat="@drawable/ic_heart_light"
+        app:drawableTint="@color/indigo_900"
+        app:fontFamily="@font/segoe_ui_regular" />
+
+    <TextView
+        android:id="@+id/distinctionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        android:drawablePadding="@dimen/dp_9"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="@string/crush_national_citizen"
+        android:textColor="@color/indigo_900"
+        android:textSize="@dimen/sp_12"
+        app:drawableStartCompat="@drawable/ic_ticket_star"
+        app:drawableTint="#ff9f31"
+        app:fontFamily="@font/segoe_ui_regular" />
+</LinearLayout>

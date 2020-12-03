@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/genreCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_16"
+    android:layout_marginVertical="@dimen/dp_8"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/dp_8"
+    app:cardElevation="@dimen/dp_8"
+    app:cardMaxElevation="@dimen/dp_8">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/itemMovieImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_avatar2"
+            app:layout_constraintDimensionRatio="190:197"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bgImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/textLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textLayout" />
+
+        <LinearLayout
+            android:id="@+id/textLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/idolNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/dp_16"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Nguyen Thi Hong Thom"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16"
+                app:fontFamily="@font/segoe_ui_bold" />
+
+            <TextView
+                android:id="@+id/idolLocationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:drawablePadding="@dimen/dp_8"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Nguyen Thi Hong Thom"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12"
+                app:drawableStartCompat="@drawable/ic_location_light"
+                app:drawableTint="@color/white"
+                app:fontFamily="@font/segoe_ui_regular" />
+
+            <TextView
+                android:id="@+id/idolAddressText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:drawablePadding="@dimen/dp_9"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Nguyen Thi Hong Thom"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12"
+                app:drawableStartCompat="@drawable/ic_home_light"
+                app:drawableTint="@color/white"
+                app:fontFamily="@font/segoe_ui_regular" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

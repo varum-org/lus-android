@@ -89,11 +89,7 @@
                 android:textColor="@color/indigo_900"
                 android:textSize="@dimen/sp_10"
                 android:textStyle="bold"
-                app:fontFamily="@font/segoe_ui_semibold"
-                app:layout_constraintBottom_toTopOf="@+id/serviceDescriptionText"
-                app:layout_constraintEnd_toStartOf="@+id/serviceActionButton"
-                app:layout_constraintStart_toEndOf="@+id/serviceIconCardView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:fontFamily="@font/segoe_ui_semibold" />
 
             <TextView
                 android:id="@+id/serviceDescriptionText"

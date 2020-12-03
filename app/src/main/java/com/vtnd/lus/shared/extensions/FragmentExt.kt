@@ -24,6 +24,7 @@ import com.vtnd.lus.shared.widget.DatePickerAlertDialog
 import com.vtnd.lus.shared.widget.NoteAlertDialog
 import com.vtnd.lus.shared.widget.NotificationAlertDialog
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar_base.*
 import java.util.*
 
 fun Fragment.replaceFragment(
@@ -245,24 +246,46 @@ fun Fragment.showNotificationAlertDialog(
 
 fun Fragment.pickDateTime(calendar: Calendar, doSomethingWith: (Calendar) -> Unit) {
     DatePickerDialog(
-        requireContext(),
-        R.style.CustomDatePickerStyle,
-        DatePickerDialog.OnDateSetListener { _, year, month, day ->
-            TimePickerDialog(
-                requireContext(),
-                R.style.CustomTimePickerStyle,
-                TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-                    val pickedDateTime = Calendar.getInstance()
-                    pickedDateTime.set(year, month, day, hour, minute)
-                    doSomethingWith(pickedDateTime)
-                },
-                calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE),
-                false
-            ).show()
-        },
-        calendar.get(Calendar.YEAR),
-        calendar.get(Calendar.MONTH),
-        calendar.get(Calendar.DAY_OF_MONTH)
+            requireContext(),
+            R.style.CustomDatePickerStyle,
+            { _, year, month, day ->
+                TimePickerDialog(
+                        requireContext(),
+                        R.style.CustomTimePickerStyle,
+                        TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+                            val pickedDateTime = Calendar.getInstance()
+                            pickedDateTime.set(year, month, day, hour, minute)
+                            doSomethingWith(pickedDateTime)
+                        },
+                        calendar.get(Calendar.HOUR_OF_DAY),
+                        calendar.get(Calendar.MINUTE),
+                        false
+                ).show()
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
     ).show()
+}
+
+fun Fragment.initToolbarBase(
+        title: String? = null,
+        iconRight: Int? = null,
+        isShowIconLeft: Boolean = true,
+        setRightOnClickListener: (() -> Unit)? = null
+) {
+    title?.let { titleToolbarBaseTextView.text = it }
+    rightImageBaseButton.apply {
+        iconRight?.let {
+            visible()
+            setBackgroundResource(it)
+            safeClick { setRightOnClickListener?.invoke() }
+        } ?: gone()
+    }
+    leftImageBaseButton.apply {
+        if (isShowIconLeft) {
+            visible()
+            safeClick { this@initToolbarBase.goBackFragment() }
+        } else gone()
+    }
 }

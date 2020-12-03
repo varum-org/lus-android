@@ -52,98 +52,7 @@
                     app:maxImageSize="@dimen/dp_30"
                     app:tint="@color/white" />
 
-                <LinearLayout
-                    android:id="@+id/idolInformationLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/idolImage">
-
-                    <TextView
-                        android:id="@+id/idolNameText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textColor="@color/indigo_900"
-                        android:textSize="@dimen/sp_18"
-                        app:fontFamily="@font/segoe_ui_semibold" />
-
-                    <TextView
-                        android:id="@+id/idolDescriptionText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/grey_600"
-                        android:textSize="@dimen/sp_14"
-                        app:fontFamily="@font/segoe_ui_semibold" />
-
-                    <TextView
-                        android:id="@+id/idolLocationText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:drawablePadding="@dimen/dp_8"
-                        android:ellipsize="end"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:textColor="@color/indigo_900"
-                        android:textSize="@dimen/sp_12"
-                        app:drawableStartCompat="@drawable/ic_location_light"
-                        app:drawableTint="@color/indigo_900"
-                        app:fontFamily="@font/segoe_ui_regular" />
-
-                    <TextView
-                        android:id="@+id/idolAddressText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_4"
-                        android:drawablePadding="@dimen/dp_9"
-                        android:ellipsize="end"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:textColor="@color/indigo_900"
-                        android:textSize="@dimen/sp_12"
-                        app:drawableStartCompat="@drawable/ic_home_light"
-                        app:drawableTint="@color/indigo_900"
-                        app:fontFamily="@font/segoe_ui_regular" />
-
-                    <TextView
-                        android:id="@+id/idolRelationshipText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_4"
-                        android:drawablePadding="@dimen/dp_9"
-                        android:ellipsize="end"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:textColor="@color/indigo_900"
-                        android:textSize="@dimen/sp_12"
-                        app:drawableStartCompat="@drawable/ic_heart_light"
-                        app:drawableTint="@color/indigo_900"
-                        app:fontFamily="@font/segoe_ui_regular" />
-
-                    <TextView
-                        android:id="@+id/distinctionText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_4"
-                        android:drawablePadding="@dimen/dp_9"
-                        android:ellipsize="end"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:text="@string/crush_national_citizen"
-                        android:textColor="@color/indigo_900"
-                        android:textSize="@dimen/sp_12"
-                        app:drawableStartCompat="@drawable/ic_ticket_star"
-                        app:drawableTint="#ff9f31"
-                        app:fontFamily="@font/segoe_ui_regular" />
-                </LinearLayout>
+          <include layout="@layout/layout_information_idol" />
 
                 <View
                     android:id="@+id/line"
@@ -156,6 +65,82 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/idolInformationLayout" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/presentLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line">
+
+                    <ImageView
+                        android:id="@+id/serviceIconCardView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="@dimen/dp_8"
+                        android:src="@drawable/ic_present"
+                        app:cardBackgroundColor="@color/pink_50"
+                        app:cardCornerRadius="@dimen/dp_50"
+                        app:cardElevation="@dimen/dp_1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.1" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/serviceIconCardView"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/serviceNameText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:paddingHorizontal="@dimen/dp_8"
+                            android:textColor="@color/indigo_900"
+                            android:textSize="@dimen/sp_10"
+                            android:textStyle="bold"
+                            app:fontFamily="@font/segoe_ui_semibold"
+                            app:layout_constraintBottom_toTopOf="@+id/serviceDescriptionText"
+                            app:layout_constraintEnd_toStartOf="@+id/serviceActionButton"
+                            app:layout_constraintStart_toEndOf="@+id/serviceIconCardView"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/serviceDescriptionText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="4"
+                            android:paddingHorizontal="@dimen/dp_8"
+                            android:text="@string/choose_a_gift_to_impress"
+                            android:textColor="@color/indigo_900"
+                            android:textSize="@dimen/sp_10"
+                            app:fontFamily="@font/segoe_ui_regular" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginHorizontal="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:background="@color/grey_600"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/presentLayout" />
+
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/idolGalleryViewPager2"
                     android:layout_width="0dp"
@@ -163,7 +148,7 @@
                     app:layout_constraintDimensionRatio="w,190:197"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/line" />
+                    app:layout_constraintTop_toBottomOf="@+id/line2" />
 
                 <LinearLayout
                     android:id="@+id/indicatorsContainer"

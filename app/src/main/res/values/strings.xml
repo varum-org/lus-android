@@ -52,4 +52,11 @@
     <string name="no">No</string>
     <string name="rent">Rent</string>
     <string name="are_you_sure_to_rent">Are you sure to rent?</string>
+    <string name="present_to">Give gifts to %1$s</string>
+    <string name="choose_a_gift_to_impress">Choose a gift to impress</string>
+    <string name="search_on_Lus">Search on Lus</string>
+    <string name="new_idol_request">List of idols found</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="follow">Follow</string>
 </resources>
