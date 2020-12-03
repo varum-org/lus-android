@@ -194,4 +194,7 @@ dependencies {
     implementation(Deps.timber)
     //OTP VIew
     implementation( Deps.otp_view)
+    implementation( Deps.socketio){
+        exclude("org.json", "json")
+    }
 }

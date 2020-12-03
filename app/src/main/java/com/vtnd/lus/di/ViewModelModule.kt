@@ -11,6 +11,7 @@ import com.vtnd.lus.ui.main.container.ContainerViewModel
 import com.vtnd.lus.ui.main.container.favorite.FavoriteViewModel
 import com.vtnd.lus.ui.main.container.home.HomeViewModel
 import com.vtnd.lus.ui.main.container.idolDetail.IdolDetailViewModel
+import com.vtnd.lus.ui.main.container.message.MessageViewModel
 import com.vtnd.lus.ui.main.container.notification.NotificationViewModel
 import com.vtnd.lus.ui.main.container.profile.ProfileViewModel
 import com.vtnd.lus.ui.main.container.search.SearchViewModel
@@ -32,6 +33,7 @@ val viewModelModule = module {
     }
     viewModel { IntroSlideViewModel(repoRepository = get()) }
     viewModel { AuthViewModel() }
+    viewModel { MessageViewModel() }
     viewModel {
         MainViewModel(
             userRepository = get(),
@@ -57,7 +59,12 @@ val viewModelModule = module {
         )
     }
     viewModel { WelcomeViewModel() }
-    viewModel { IdolDetailViewModel(get()) }
+    viewModel {
+        IdolDetailViewModel(
+            userRepository = get(),
+            tokenRepository = get()
+        )
+    }
     viewModel { VerifyViewModel(userRepository = get()) }
     viewModel { RegisterViewModel(userRepository = get()) }
 }

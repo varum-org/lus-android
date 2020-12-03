@@ -1,5 +1,6 @@
 package com.vtnd.lus.ui.main.container.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
@@ -10,15 +11,18 @@ import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.databinding.FragmentHomeBinding
 import com.vtnd.lus.shared.AnimateType
 import com.vtnd.lus.shared.decoration.HorizontalMarginItemDecoration
+import com.vtnd.lus.shared.extensions.delayTask
 import com.vtnd.lus.shared.extensions.initToolbar
 import com.vtnd.lus.shared.extensions.replaceFragment
 import com.vtnd.lus.shared.liveData.observeLiveData
+import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.main.container.home.adapter.HotIdolAdapter
 import com.vtnd.lus.ui.main.container.home.adapter.StoryCircleAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.IdolDetailFragment
+import com.vtnd.lus.ui.main.container.message.MessageFragment
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 import kotlin.math.abs
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
@@ -40,16 +44,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override fun inflateViewBinding(inflater: LayoutInflater) =
         FragmentHomeBinding.inflate(inflater)
 
+    @ExperimentalCoroutinesApi
     override fun initialize() {
         initToolbar(
             title = getString(R.string.app_name),
             iconRight = R.drawable.ic_chat_light
-        )
+        ) { viewModel.checkLogin() }
         storyCircleRecyclerView.apply {
             setHasFixedSize(true)
             adapter = storyCircleAdapter
         }
-
         hotIdolRecyclerView.apply {
             adapter = hotIdolAdapter
             offscreenPageLimit = 1
@@ -67,6 +71,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
+        room.observeLiveData(viewLifecycleOwner){
+            replaceFragment(R.id.container,MessageFragment.newInstance(it))
+        }
         storyIdols.observeLiveData(viewLifecycleOwner) {
             storyCircleAdapter.submitList(it)
         }
@@ -74,6 +81,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             hotIdolAdapter.submitList(it?.map { idol ->
                 ItemViewHolder(idol)
             })
+        }
+        isLogin.observeLiveData(viewLifecycleOwner) {
+            if (it) getRoom()
+            else {
+                activity?.apply {
+                    showLoading(true)
+                    delayTask({
+                        showLoading(false)
+                        startActivity(Intent(this, AuthActivity::class.java))
+                        overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
+                    }, 800)
+                }
+            }
         }
     }
 

@@ -5,9 +5,7 @@ import com.vtnd.lus.data.model.User
 import com.vtnd.lus.data.model.UserJsonAdapter
 import com.vtnd.lus.data.repository.source.UserDataSource
 import com.vtnd.lus.data.repository.source.local.api.SharedPrefApi
-import com.vtnd.lus.data.repository.source.local.api.pref.SharedPrefKey
-import com.vtnd.lus.data.repository.source.local.api.pref.SharedPrefKey.KEY_LOGIN
-import com.vtnd.lus.data.repository.source.local.api.pref.SharedPrefKey.VALUE_LOGIN
+import com.vtnd.lus.data.repository.source.local.api.pref.SharedPrefKey.KEY_USER
 import com.vtnd.lus.shared.scheduler.dispatcher.AppDispatchers
 import com.vtnd.lus.shared.scheduler.dispatcher.DispatchersProvider
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -33,28 +31,15 @@ class UserLocalImpl(
 
     private var userObservable = callbackFlow {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, k ->
-            if (SharedPrefKey.KEY_USER == k) {
-                offer(sharedPrefApi.get(SharedPrefKey.KEY_USER, String::class.java))
+            if (KEY_USER == k) {
+                offer(sharedPrefApi.get(KEY_USER, String::class.java))
                 Timber.d("change share preferences listener")
             }
         }
-        send(sharedPrefApi.get(SharedPrefKey.KEY_USER, String::class.java))
+        send(sharedPrefApi.get(KEY_USER, String::class.java))
         sharedPrefApi.registerOnSharedPreferenceChangeListener(listener)
         awaitClose {
             Timber.d("close share preferences listener")
-            sharedPrefApi.unregisterOnSharedPreferenceChangeListener(listener)
-        }
-    }
-
-    private var loginObservable = callbackFlow {
-        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, k ->
-            if (SharedPrefKey.KEY_USER == k) {
-                offer(sharedPrefApi.get(KEY_LOGIN, String::class.java))
-            }
-        }
-        send(sharedPrefApi.get(KEY_LOGIN, String::class.java))
-        sharedPrefApi.registerOnSharedPreferenceChangeListener(listener)
-        awaitClose {
             sharedPrefApi.unregisterOnSharedPreferenceChangeListener(listener)
         }
     }
@@ -67,32 +52,22 @@ class UserLocalImpl(
 
     override suspend fun user() =
         withContext(dispatchersProvider) {
-            sharedPrefApi.get(SharedPrefKey.KEY_USER, String::class.java).toUser()
+            sharedPrefApi.get(KEY_USER, String::class.java).toUser()
         }
 
     override suspend fun saveUser(user: User) {
         withContext(dispatchersProvider) {
             userJsonAdapter.toJson(user).let {
-                sharedPrefApi.put(SharedPrefKey.KEY_USER, it)
+                sharedPrefApi.put(KEY_USER, it)
             }
         }
     }
 
-    override suspend fun setLogin() =
+    override suspend fun clearUser() {
         withContext(dispatchersProvider) {
-            sharedPrefApi.put(KEY_LOGIN, VALUE_LOGIN)
+            sharedPrefApi.removeKey(KEY_USER)
         }
-
-    override fun isLogin() =
-        loginObservable.flowOn(dispatchersProvider)
-            .map { it }
-            .buffer(1)
-            .also { Timber.i("Login $it") }
-
-    override suspend fun clearLogin() =
-        withContext(dispatchersProvider) {
-            sharedPrefApi.removeKey(KEY_LOGIN)
-        }
+    }
 
     private fun String?.toUser(): User? =
         runCatching { userJsonAdapter.fromJson(this ?: return null) }.getOrNull()

@@ -1,6 +1,8 @@
 package com.vtnd.lus.data.repository.source.remote.api
 
+import com.vtnd.lus.data.model.Room
 import com.vtnd.lus.data.model.Service
+import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignInRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
@@ -37,6 +39,9 @@ interface ApiService {
 
     @GET("api/v1/services")
     suspend fun getServices(): BaseResponse<List<Service>?>
+
+    @POST("api/v1/room")
+    suspend fun getRoom(@Body roomRequest: RoomRequest): BaseResponse<Room>
 
     companion object Factory {
         operator fun invoke(retrofit: Retrofit) = retrofit.create<ApiService>()

@@ -58,6 +58,7 @@ object Versions {
     const val legacy_preference = "1.0.0"
     const val timber = "4.7.1"
     const val otp_view = "2.1.2"
+    const val socketio = "1.0.0"
 }
 
 @Suppress("unused")
@@ -220,4 +221,5 @@ object Deps {
         "androidx.legacy:legacy-preference-v14:${Versions.legacy_preference}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val otp_view = "com.github.mukeshsolanki:android-otpview-pinview:${Versions.otp_view}"
+    const val socketio = "io.socket:socket.io-client:${Versions.socketio}"
 }

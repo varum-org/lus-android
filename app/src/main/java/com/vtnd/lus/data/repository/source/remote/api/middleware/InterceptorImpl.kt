@@ -1,13 +1,17 @@
 package com.vtnd.lus.data.repository.source.remote.api.middleware
 
 import com.vtnd.lus.data.TokenRepository
+import com.vtnd.lus.data.repository.source.UserDataSource
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber
 import java.net.HttpURLConnection
 
-class InterceptorImpl(private var tokenRepository: TokenRepository) : Interceptor {
+class InterceptorImpl(
+    private var tokenRepository: TokenRepository,
+    private val userDataSource: UserDataSource.Local
+) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -37,7 +41,10 @@ class InterceptorImpl(private var tokenRepository: TokenRepository) : Intercepto
             )
         ) {
             Timber.d("remove User And Token")
-            runBlocking { tokenRepository.clearToken() }
+            runBlocking {
+                tokenRepository.clearToken()
+                userDataSource.clearUser()
+            }
         }
         return response
     }
