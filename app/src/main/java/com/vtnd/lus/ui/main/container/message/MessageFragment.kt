@@ -1,6 +1,6 @@
 package com.vtnd.lus.ui.main.container.message
 
-import android.system.Os.socket
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import androidx.core.os.bundleOf
 import com.vtnd.lus.R
@@ -11,7 +11,6 @@ import com.vtnd.lus.databinding.FragmentMessageBinding
 import com.vtnd.lus.di.MainApplication
 import com.vtnd.lus.shared.extensions.initToolbarBase
 import com.vtnd.lus.shared.extensions.safeClick
-import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
 import com.vtnd.lus.shared.extensions.showError
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.main.container.message.adapter.MessageAdapter
@@ -38,24 +37,30 @@ class MessageFragment : BaseFragment<FragmentMessageBinding, MessageViewModel>()
     override fun inflateViewBinding(inflater: LayoutInflater) =
         FragmentMessageBinding.inflate(inflater)
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initialize() {
-        setupDismissKeyBoard(requireActivity(), messageLayout)
         socket = (requireActivity().application as MainApplication).socket
         arguments?.apply {
-            getParcelable<Room>(ARGUMENT_ROOM)?.let(viewModel::postRoom)
+            getParcelable<Room>(ARGUMENT_ROOM)?.let {
+                viewModel.postRoom(it)
+            }
         }
         initToolbarBase(
             getString(R.string.message),
             iconRight = R.drawable.ic_baseline_settings_24,
             isShowIconLeft = true
         )
-        sendImage.safeClick {
-            handleSendImage()
-        }
-        onSocketMessage()
         messageRecycleView.apply {
             setHasFixedSize(true)
             adapter = messageAdapter
+            setOnTouchListener { _, _ ->
+                onHideSoftKeyBoard()
+                false
+            }
+        }
+        onSocketMessage()
+        sendImage.safeClick {
+            handleSendImage()
         }
     }
 
@@ -75,7 +80,10 @@ class MessageFragment : BaseFragment<FragmentMessageBinding, MessageViewModel>()
             if (it.isEmpty()) {
                 showChildNoDataFragment(R.id.messageLayout)
             } else {
-                messageAdapter.submitList(it)
+                hideChildNoDataFragment()
+                messageAdapter.submitList(it){
+                    messageRecycleView.scrollToPosition(it.size - 1)
+                }
             }
         }
     }
@@ -91,6 +99,7 @@ class MessageFragment : BaseFragment<FragmentMessageBinding, MessageViewModel>()
         } else {
             val message = Message("", userId, messageEditText.text.toString(), roomId)
             viewModel.messageToString(message)
+            messageEditText.text.clear()
         }
     }
 

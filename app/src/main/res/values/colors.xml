@@ -30,4 +30,5 @@
     <color name="black_alpha_70">#B3000000</color>
     <color name="blue_grey_50">#EFF0F4</color>
     <color name="blue_grey_100">#C9CCD1</color>
+    <color name="green_500">#2FCD45</color>
 </resources>

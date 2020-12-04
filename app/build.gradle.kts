@@ -186,7 +186,8 @@ dependencies {
 
     //Firebase
     //implementation(Deps.firebase_analytics)
-
+    implementation ("com.github.florent37:shapeofview:1.4.7")
+    implementation ("com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")
     //Circle ImageView
     implementation(Deps.circle_image)
 

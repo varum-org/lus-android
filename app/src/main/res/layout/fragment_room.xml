@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,8 +12,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/roomLayout"
         android:layout_width="match_parent"
+        android:background="@color/blue_grey_50"
         android:layout_height="match_parent">
 
         <include layout="@layout/layout_toolbar_base" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/roomRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_4"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutToolbarBase" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

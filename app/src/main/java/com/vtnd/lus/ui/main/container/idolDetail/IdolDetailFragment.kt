@@ -20,6 +20,7 @@ import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.databinding.FragmentIdolDetailBinding
 import com.vtnd.lus.di.GlideApp
+import com.vtnd.lus.shared.AnimateType
 import com.vtnd.lus.shared.constants.Constants.BASE_IMAGE_URL
 import com.vtnd.lus.shared.decoration.HorizontalMarginItemDecoration
 import com.vtnd.lus.shared.extensions.*
@@ -93,7 +94,10 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
         room.observeLiveData(viewLifecycleOwner) {
-            replaceFragment(R.id.container, MessageFragment.newInstance(it), true)
+            replaceFragment(
+                R.id.container, MessageFragment.newInstance(it), addToBackStack = true,
+                animateType = AnimateType.SLIDE_TO_RIGHT
+            )
         }
         startDate.observeLiveData(viewLifecycleOwner) { date ->
             calendar.time = date

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <com.vtnd.lus.shared.widget.RoundishImageView
+        android:id="@+id/avatarImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_16"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_avatar2"
+        app:cornerRadius="@dimen/dp_25"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.12"
+        app:roundedCorners="all" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/avatarImage"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/nameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="0dp"
+            android:text="Amee"
+            android:textColor="@color/indigo_900"
+            android:textSize="@dimen/sp_10"
+            android:textStyle="bold"
+            app:fontFamily="@font/segoe_ui_semibold"
+            app:layout_constraintBottom_toTopOf="@+id/addressText"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/statusLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:backgroundTint="@color/blue_a100"
+            android:gravity="center"
+            android:minWidth="@dimen/dp_50"
+            android:padding="@dimen/dp_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/statusImage"
+                android:layout_width="@dimen/dp_8"
+                android:layout_height="@dimen/dp_8"
+                android:src="@drawable/bg_white_oval"
+                app:tint="@color/green_500" />
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_2"
+                android:text="online"
+                android:textColor="@color/grey_600"
+                android:textSize="@dimen/sp_8"
+                app:fontFamily="@font/segoe_ui_bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/addressText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="4"
+            android:paddingHorizontal="@dimen/dp_8"
+            android:text="Da Nang"
+            android:textColor="@color/indigo_900"
+            android:textSize="@dimen/sp_10"
+            app:fontFamily="@font/segoe_ui_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

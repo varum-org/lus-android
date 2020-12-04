@@ -29,16 +29,23 @@ class MessageViewModel(
     val messagesLiveData = SingleLiveData<List<ItemViewHolder<Message>>>()
     private val messages = mutableListOf<Message>()
 
+    init {
+        viewModelScope.launch(dispatchersProvider) {
+            userLiveData.postValue(userRepository.user())
+        }
+    }
+
     fun postRoom(room: Room) {
         roomLiveData.postValue(room)
-        viewModelScope(null,
+        viewModelScope(
+            null,
             onRequest = { userRepository.getMessageFromRoom(room.id!!) },
             onSuccess = {
                 messagesLiveData.postValue(
-                    ArrayList(messages).apply {
-                        addAll(it)
-                    }.map {
-                        ItemViewHolder(it)
+                    ArrayList(messages.apply { addAll(it) }).map {
+                        if (userLiveData.value?.id == it.userId)
+                            ItemViewHolder(it).copy(type = MessageType.CHAT_MINE.type)
+                        else ItemViewHolder(it).copy(type = MessageType.CHAT_PARTNER.type)
                     }
                 )
             },
@@ -50,20 +57,16 @@ class MessageViewModel(
     }
 
     fun stringToMessage(userId: String, message: String) {
-        val newMessages = ArrayList(messages).apply {
-            add(messageJsonAdapter.fromJson(message))
-        }.map {
-            if (userId == it.userId)
-                ItemViewHolder(it).copy(type = MessageType.CHAT_MINE.type)
-            else ItemViewHolder(it).copy(type = MessageType.CHAT_PARTNER.type)
-        }
-        messagesLiveData.postValue(newMessages)
-    }
-
-
-    init {
-        viewModelScope.launch(dispatchersProvider) {
-            userLiveData.postValue(userRepository.user())
+        messageJsonAdapter.fromJson(message)?.let { newMessage ->
+            if (roomLiveData.value?.id == newMessage.roomId) {
+                messages.add(newMessage)
+                val newMessages = ArrayList(messages).map {
+                    if (userId == it.userId)
+                        ItemViewHolder(it).copy(type = MessageType.CHAT_MINE.type)
+                    else ItemViewHolder(it).copy(type = MessageType.CHAT_PARTNER.type)
+                }
+                messagesLiveData.postValue(newMessages)
+            }
         }
     }
 }

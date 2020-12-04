@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Rect
+import android.util.DisplayMetrics
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.NonNull
@@ -21,6 +22,7 @@ import timber.log.Timber
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
+import kotlin.math.roundToInt
 
 
 fun AppCompatActivity.replaceFragmentInActivity(
@@ -163,6 +165,8 @@ fun AppCompatActivity.getErrorMessage(e: Exception): String? {
     val errorCode = e.response()?.code()
     if (errorCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
         // TODO reLogin
+        clearAllFragment()
+        goBackFragment()
     }
 
     return responseBody?.let {
@@ -198,4 +202,9 @@ fun Activity.transparentStatusBar(isTransparent: Boolean) {
 fun Activity.getHeightStatusBar() = Rect().run {
     window.decorView.getWindowVisibleDisplayFrame(this)
     this.top
+}
+
+
+fun Context.dpToPx(dp: Int) = this.run {
+    (dp * (resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
 }

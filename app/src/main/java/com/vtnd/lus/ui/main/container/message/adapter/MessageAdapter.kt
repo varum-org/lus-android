@@ -34,6 +34,7 @@ class MessageAdapter(private val onItemClickListener: (Message) -> Unit) :
             itemView.apply {
                 item.itemData.let {
                     messagePartner.text = it.content
+                    usernamePartner.text = it.userId
                 }
             }
         }
