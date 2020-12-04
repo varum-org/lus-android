@@ -7,10 +7,7 @@ import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignInRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
-import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
-import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
-import com.vtnd.lus.data.repository.source.remote.api.response.SignInResponse
-import com.vtnd.lus.data.repository.source.remote.api.response.UserResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.*
 import retrofit2.Retrofit
 import retrofit2.create
 import retrofit2.http.*
@@ -46,6 +43,9 @@ interface ApiService {
 
     @GET("api/v1/room/{id}")
     suspend fun getMessageFromRoom(@Path("id") id: String): BaseResponse<List<Message>>
+
+    @GET("api/v1/rooms")
+    suspend fun getRooms(): BaseResponse<List<RoomResponse>>
 
     companion object Factory {
         operator fun invoke(retrofit: Retrofit) = retrofit.create<ApiService>()

@@ -4,8 +4,8 @@
     <color name="red_a400">#FF3146</color> // Color primary
     <color name="pink_50">#FCE8EA</color> // Color primary light
     <color name="deep_purple_a200">#8142E1</color>
-    <color name="indigo_50">#EFF3FB</color> // Color background
-
+    <color name="indigo_50">#EFF3FB</color>
+    // Color background
     <color name="purple_200">#FFBB86FC</color>
     <color name="red_a100">#FC8686</color>
     <color name="blue_a100">#80D8FF</color>
@@ -28,6 +28,6 @@
     <color name="red_a400_alpha_44">#70FF3146</color>
     <color name="orange_400">#FF9F31</color>
     <color name="black_alpha_70">#B3000000</color>
-    <color name="blue_grey_50">#E5E6EB</color>
+    <color name="blue_grey_50">#EFF0F4</color>
     <color name="blue_grey_100">#C9CCD1</color>
 </resources>

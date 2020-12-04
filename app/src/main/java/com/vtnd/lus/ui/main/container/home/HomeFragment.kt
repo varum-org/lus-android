@@ -47,11 +47,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     @ExperimentalCoroutinesApi
     override fun initialize() {
         initToolbar(
-            title = getString(R.string.app_name),
-            iconRight = R.drawable.ic_chat_light
+                title = getString(R.string.app_name),
+                iconRight = R.drawable.ic_chat_light
         ) {
             viewModel.checkLogin() {
-                if (it) replaceFragment(R.id.container, RoomFragment.newInstance(), true)
+                if (it) replaceFragment(
+                        containerId = R.id.container,
+                        fragment = RoomFragment.newInstance(),
+                        addToBackStack = true,
+                        animateType = AnimateType.SLIDE_TO_RIGHT
+                )
                 else {
                     activity?.apply {
                         showLoading(true)

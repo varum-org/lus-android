@@ -34,7 +34,7 @@ val viewModelModule = module {
     }
     viewModel { IntroSlideViewModel(repoRepository = get()) }
     viewModel { AuthViewModel() }
-    viewModel { RoomViewModel() }
+    viewModel { RoomViewModel(userRepository = get()) }
     viewModel { MessageViewModel(userRepository = get(), messageJsonAdapter = get()) }
     viewModel {
         MainViewModel(
