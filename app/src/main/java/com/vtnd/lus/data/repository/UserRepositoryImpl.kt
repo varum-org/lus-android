@@ -64,21 +64,26 @@ class UserRepositoryImpl(
             }
 
     override suspend fun getIdols(
-        isLogin: Boolean,
-        category: CategoryIdolType
+            isLogin: Boolean,
+            category: CategoryIdolType
     ): DataResult<List<IdolResponse>> =
-        withResultContext {
-            remote.getIdols(isLogin, category).data.toIdolResponses(repoLocal.services())
-        }
+            withResultContext {
+                remote.getIdols(isLogin, category).data.toIdolResponses(repoLocal.services())
+            }
 
     override suspend fun getRoom(roomRequest: RoomRequest) =
-        withResultContext {
-            remote.getRoom(roomRequest).data
-        }
+            withResultContext {
+                remote.getRoom(roomRequest).data
+            }
 
     override suspend fun getMessageFromRoom(id: String) =
-        withResultContext {
-            remote.getMessageFromRoom(id).data
-        }
+            withResultContext {
+                remote.getMessageFromRoom(id).data
+            }
+
+    override suspend fun getRooms() =
+            withResultContext {
+                remote.getRooms().data
+            }
 }
 

@@ -6,7 +6,9 @@ import com.vtnd.lus.data.model.User
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
+import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponse
 import com.vtnd.lus.shared.scheduler.DataResult
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.flow.Flow
@@ -40,4 +42,6 @@ interface UserRepository {
     suspend fun getRoom(roomRequest: RoomRequest): DataResult<Room>
 
     suspend fun getMessageFromRoom(id: String): DataResult<List<Message>>
+
+    suspend fun getRooms(): DataResult<List<RoomResponse>>
 }
