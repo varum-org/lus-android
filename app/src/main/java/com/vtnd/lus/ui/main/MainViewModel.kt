@@ -1,5 +1,6 @@
 package com.vtnd.lus.ui.main
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.vtnd.lus.base.BaseViewModel
@@ -25,13 +26,14 @@ class MainViewModel(
     private val dispatchersProvider =
         get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
 
-    val user = SingleLiveData<User>()
 
-    init {
-        viewModelScope.launch(dispatchersProvider) {
-            user.postValue(userRepository.user())
-        }
-    }
+    @ExperimentalCoroutinesApi
+    val userProfile: LiveData<User?> = userRepository.userObservable()
+        .map { it }
+        .distinctUntilChanged()
+        .flowOn(dispatchersProvider)
+        .buffer(1)
+        .asLiveData()
 
     @ExperimentalCoroutinesApi
     val logoutEvent = tokenRepository

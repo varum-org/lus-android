@@ -5,8 +5,10 @@ import com.vtnd.lus.base.BaseViewModel
 import com.vtnd.lus.data.TokenRepository
 import com.vtnd.lus.data.UserRepository
 import com.vtnd.lus.data.model.Room
+import com.vtnd.lus.data.model.RoomJsonAdapter
 import com.vtnd.lus.data.model.Service
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.shared.liveData.SingleLiveData
 import com.vtnd.lus.shared.scheduler.dispatcher.AppDispatchers
 import com.vtnd.lus.shared.scheduler.dispatcher.DispatchersProvider
@@ -23,17 +25,20 @@ import kotlin.collections.ArrayList
 
 class IdolDetailViewModel(
     private val userRepository: UserRepository,
-    private val tokenRepository: TokenRepository
+    private val tokenRepository: TokenRepository,
+    private val roomJsonAdapter: RoomJsonAdapter
 ) : BaseViewModel(), KoinComponent {
     private val dispatchersProvider =
         get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
     val cardServicesLiveData = SingleLiveData<List<ItemCard>>()
     val idolServicesLiveData = SingleLiveData<List<ItemService>>()
+    val idolResponseLiveData = SingleLiveData<IdolResponse>()
     val startDate = SingleLiveData<Date>()
     val note = SingleLiveData<String>()
     private var cardServices = mutableListOf<ItemCard>()
     private var idolServices = mutableListOf<ItemService>()
     val room = SingleLiveData<Room>()
+    val roomJson = SingleLiveData<String>()
 
     init {
         startDate.postValue(Date())
@@ -49,7 +54,10 @@ class IdolDetailViewModel(
     fun getRoom(user_id: String) {
         viewModelScope(room,
             onRequest = { userRepository.getRoom(RoomRequest(user_id)) },
-            onSuccess = { room.postValue(it) },
+            onSuccess = {
+                roomJson.postValue(roomJsonAdapter.toJson(it))
+                room.postValue(it)
+                        },
             onError = { exception.postValue(it) })
     }
 
@@ -101,6 +109,13 @@ class IdolDetailViewModel(
             idolServices.addAll(services.map { ItemService(it) })
             idolServicesLiveData.postValue(idolServices)
         }
+    }
+
+    fun getIdolDetail(id: String) {
+        viewModelScope(idolResponseLiveData,
+            onRequest = { userRepository.getIdol(id) },
+            onSuccess = { idolResponseLiveData.postValue(it) },
+            onError = { exception.postValue(it) })
     }
 
     fun removeAllServiceFromCard() {

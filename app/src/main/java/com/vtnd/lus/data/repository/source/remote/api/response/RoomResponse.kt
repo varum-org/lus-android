@@ -12,6 +12,6 @@ import kotlinx.android.parcel.Parcelize
 data class RoomResponse(
         @Json(name = "room")
         val room: Room?,
-        @Json(name = "users")
-        val users: List<User>?= emptyList()
+        @Json(name = "userReceive")
+        val userReceive: User?
 ) : Parcelable

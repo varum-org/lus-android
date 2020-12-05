@@ -34,8 +34,20 @@ val viewModelModule = module {
     }
     viewModel { IntroSlideViewModel(repoRepository = get()) }
     viewModel { AuthViewModel() }
-    viewModel { RoomViewModel(userRepository = get()) }
-    viewModel { MessageViewModel(userRepository = get(), messageJsonAdapter = get()) }
+    viewModel {
+        RoomViewModel(
+            userRepository = get(),
+            roomJsonAdapter = get(),
+            roomResponseJsonAdapter = get()
+        )
+    }
+    viewModel {
+        MessageViewModel(
+            userRepository = get(),
+            messageJsonAdapter = get(),
+            roomJsonAdapter = get()
+        )
+    }
     viewModel {
         MainViewModel(
             userRepository = get(),
@@ -50,7 +62,7 @@ val viewModelModule = module {
             tokenRepository = get()
         )
     }
-    viewModel { SearchViewModel() }
+    viewModel { SearchViewModel(userRepository = get()) }
     viewModel { FavoriteViewModel() }
     viewModel { NotificationViewModel() }
     viewModel { ProfileViewModel(userRepository = get()) }
@@ -64,7 +76,8 @@ val viewModelModule = module {
     viewModel {
         IdolDetailViewModel(
             userRepository = get(),
-            tokenRepository = get()
+            tokenRepository = get(),
+            roomJsonAdapter = get()
         )
     }
     viewModel { VerifyViewModel(userRepository = get()) }

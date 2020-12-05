@@ -46,9 +46,8 @@ class MainApplication : Application(), KoinComponent {
             Timber.plant(Timber.DebugTree())
         }
         baseUrl = get(named(Constants.KEY_BASE_URL))
-        "http://172.16.25.150:5000"
         try {
-            socket = IO.socket( baseUrl)
+            socket = IO.socket( "https://lus-sever.herokuapp.com")
         } catch (e: Exception) {
             Timber.i(e)
         }

@@ -11,29 +11,29 @@ data class Idol(
     @Json(name = "address")
     val address: String,
     @Json(name = "completion_rate")
-    val completionRate: Int,
+    val completionRate: Int?,
     @Json(name = "description")
-    val description: String,
+    val description: String?,
     @Json(name = "image_gallery")
-    val imageGallery: List<String>,
+    val imageGallery: List<String> = emptyList(),
     @Json(name = "nick_name")
-    val nickName: String,
+    val nickName: String?,
     @Json(name = "rating")
-    val rating: Int,
+    val rating: Int?,
     @Json(name = "rating_total")
-    val ratingTotal: Int,
+    val ratingTotal: Int?,
     @Json(name = "relationship")
-    val relationship: String,
+    val relationship: String?,
     @Json(name = "rent_time_total")
-    val rentTimeTotal: Int,
+    val rentTimeTotal: Int?,
     @Json(name = "rent_total")
-    val rentTotal: Int,
+    val rentTotal: Int?,
     @Json(name = "rent_total_accepted")
-    val rentTotalAccepted: Int,
+    val rentTotalAccepted: Int?,
     @Json(name = "services")
     val services: List<Service> = emptyList(),
     @Json(name = "status")
-    val status: Int,
+    val status: Int?,
     @Json(name = "user_id")
     val userId: String
 ) : Parcelable

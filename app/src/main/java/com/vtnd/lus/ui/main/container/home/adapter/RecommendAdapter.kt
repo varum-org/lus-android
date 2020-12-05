@@ -11,29 +11,28 @@ import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
 import com.vtnd.lus.shared.constants.Constants
 import com.vtnd.lus.shared.extensions.safeClick
-import kotlinx.android.synthetic.main.item_story_cricle.view.storyCircleImage
+import kotlinx.android.synthetic.main.item_recommend.view.*
 
-class StoryCircleAdapter(private val onItemClickListener: ( IdolResponse) -> Unit) :
+class RecommendAdapter(private val onItemClickListener: (IdolResponse) -> Unit) :
     BaseAdapter(DIFF_CALLBACK) {
 
     override fun customViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(inflateView(R.layout.item_story_cricle, parent))
-
+        ViewHolder(inflateView(R.layout.item_recommend, parent))
 
     inner class ViewHolder(
         itemView: View
-    ) : BaseViewHolder<ItemViewHolder<IdolResponse>>(itemView) {
+    ) : BaseViewHolder<ItemViewHolder<IdolResponse>>(itemView){
 
         override fun bind(item: ItemViewHolder<IdolResponse>) {
             super.bind(item)
             itemView.apply {
                 item.itemData.let { idolRes ->
-                    GlideApp.with(storyCircleImage)
+                    GlideApp.with(avatarImageView)
                         .load(Constants.BASE_IMAGE_URL + idolRes.idol.imageGallery[0])
                         .placeholder(R.color.pink_50)
                         .error(R.color.red_a400)
                         .dontAnimate()
-                        .into(storyCircleImage)
+                        .into(avatarImageView)
                     safeClick {
                         onItemClickListener( idolRes)
                     }
@@ -47,7 +46,7 @@ class StoryCircleAdapter(private val onItemClickListener: ( IdolResponse) -> Uni
             override fun areItemsTheSame(
                 oldItem: ItemViewHolder<IdolResponse>,
                 newItem: ItemViewHolder<IdolResponse>
-            ) = oldItem.itemData == newItem.itemData
+            ) = oldItem.itemData.idol.id == newItem.itemData.idol.id
         }
     }
 }

@@ -29,7 +29,7 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
             itemView.apply {
                 item.itemData.let { idolRes ->
                     GlideApp.with(idolImage)
-                        .load(BASE_IMAGE_URL+idolRes.idol.imageGallery[0])
+                        .load(BASE_IMAGE_URL+ idolRes.idol.imageGallery[0])
                         .placeholder(R.color.pink_50)
                         .error(R.color.red_a400)
                         .dontAnimate()

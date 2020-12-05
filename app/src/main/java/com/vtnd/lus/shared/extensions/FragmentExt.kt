@@ -25,6 +25,7 @@ import com.vtnd.lus.shared.widget.NoteAlertDialog
 import com.vtnd.lus.shared.widget.NotificationAlertDialog
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.android.synthetic.main.layout_toolbar_base.*
+import kotlinx.android.synthetic.main.layout_toolbar_search.*
 import java.util.*
 
 fun Fragment.replaceFragment(

@@ -1,5 +1,6 @@
 package com.vtnd.lus.data.repository.source.remote.api
 
+import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Message
 import com.vtnd.lus.data.model.Room
 import com.vtnd.lus.data.model.Service
@@ -46,6 +47,23 @@ interface ApiService {
 
     @GET("api/v1/rooms")
     suspend fun getRooms(): BaseResponse<List<RoomResponse>>
+
+    @GET("api/v1/idols/search")
+    suspend fun search(
+        @Query("name") nickName: String?,
+        @Query("rating") rating: Int?
+    ): BaseResponse<List<Idol>>
+
+    @GET("api/v1/idol/{id}")
+    suspend fun getIdol(
+        @Path("id") id: String
+    ): BaseResponse<IdolResponse>
+
+    @Headers("@: NoAuth")
+    @GET("api/v1/idol/{id}")
+    suspend fun getIdolNoToken(
+        @Path("id") id: String
+    ): BaseResponse<IdolResponse>
 
     companion object Factory {
         operator fun invoke(retrofit: Retrofit) = retrofit.create<ApiService>()

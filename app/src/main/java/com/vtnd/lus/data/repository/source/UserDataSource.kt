@@ -1,5 +1,6 @@
 package com.vtnd.lus.data.repository.source
 
+import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Message
 import com.vtnd.lus.data.model.Room
 import com.vtnd.lus.data.model.User
@@ -7,9 +8,9 @@ import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
 import com.vtnd.lus.data.repository.source.remote.api.response.*
+import com.vtnd.lus.shared.scheduler.DataResult
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.flow.Flow
-import retrofit2.http.Path
 
 interface UserDataSource {
 
@@ -42,11 +43,21 @@ interface UserDataSource {
             category: CategoryIdolType
         ): BaseResponse<List<IdolResponse>>
 
+        suspend fun getIdol(
+            isLogin: Boolean,
+            id: String
+        ): BaseResponse<IdolResponse>
+
         //Room
         suspend fun getRoom(roomRequest: RoomRequest): BaseResponse<Room>
 
         suspend fun getMessageFromRoom(id: String): BaseResponse<List<Message>>
 
         suspend fun getRooms(): BaseResponse<List<RoomResponse>>
+
+        suspend fun search(
+            nickName: String?,
+            rating: Int?
+        ): BaseResponse<List<Idol>>
     }
 }

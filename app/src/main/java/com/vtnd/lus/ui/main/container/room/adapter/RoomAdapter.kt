@@ -39,8 +39,7 @@ class RoomAdapter(
                     if (adapterPosition == 0) {
                         setBackgroundColor(resources.getColor(R.color.pink_50, context.theme))
                     }
-                    it.users?.let { users ->
-                        val userNotNull = if (users[0].id == user.id) users[1] else users[0]
+                    it.userReceive?.let { userNotNull ->
                         nameText.text = userNotNull.userName
                         addressText.text = userNotNull.address
                         userNotNull.imagePath?.let { imagePath ->

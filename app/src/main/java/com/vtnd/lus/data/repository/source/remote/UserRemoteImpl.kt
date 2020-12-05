@@ -1,7 +1,5 @@
 package com.vtnd.lus.data.repository.source.remote
 
-import com.vtnd.lus.data.model.Message
-import com.vtnd.lus.data.model.Room
 import com.vtnd.lus.data.repository.source.UserDataSource
 import com.vtnd.lus.data.repository.source.remote.api.ApiService
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
@@ -33,9 +31,18 @@ class UserRemoteImpl(private val apiService: ApiService) : UserDataSource.Remote
         if (isLogin) apiService.getIdols(category.titleName)
         else apiService.getIdolsNoToken(category.titleName)
 
-    override suspend fun getRoom( roomRequest: RoomRequest) = apiService.getRoom(roomRequest)
+    override suspend fun getIdol(isLogin: Boolean, id: String)=
+        if (isLogin) apiService.getIdol(id)
+        else apiService.getIdolNoToken(id)
+
+    override suspend fun getRoom(roomRequest: RoomRequest) = apiService.getRoom(roomRequest)
 
     override suspend fun getMessageFromRoom(id: String) = apiService.getMessageFromRoom(id)
 
     override suspend fun getRooms() = apiService.getRooms()
+
+    override suspend fun search(
+        nickName: String?,
+        rating: Int?
+    ) = apiService.search(nickName, rating)
 }

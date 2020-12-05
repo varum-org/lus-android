@@ -11,5 +11,7 @@ data class Room(
     @Json(name = "_id")
     val id: String?,
     @Json(name = "user_id")
-    val userId: List<String>? = emptyList()
+    val userId: List<String>? = emptyList(),
+    @Json(name = "size")
+    val size: Int = 0
 ) : Parcelable

@@ -49,9 +49,10 @@ android {
             dimension = "appVariant"
             resValue("string", "app_name", "LUS")
             buildConfigField(
-                    "String",
-                    "BASE_URL",
-                    "\"https://lus-sever.herokuapp.com/\"")
+                "String",
+                "BASE_URL",
+                "\"https://lus-sever.herokuapp.com/\""
+            )
         }
     }
 
@@ -186,16 +187,21 @@ dependencies {
 
     //Firebase
     //implementation(Deps.firebase_analytics)
-    implementation ("com.github.florent37:shapeofview:1.4.7")
-    implementation ("com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")
+    implementation("com.github.florent37:shapeofview:1.4.7")
+    implementation("com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")
     //Circle ImageView
     implementation(Deps.circle_image)
 
     //Timber
     implementation(Deps.timber)
     //OTP VIew
-    implementation( Deps.otp_view)
-    implementation( Deps.socketio){
+    implementation(Deps.otp_view)
+
+    //Socket io
+    implementation(Deps.socketio) {
         exclude("org.json", "json")
     }
+
+    //dotsloader
+    implementation("com.agrawalsuneet.androidlibs:dotsloader:1.4")
 }
