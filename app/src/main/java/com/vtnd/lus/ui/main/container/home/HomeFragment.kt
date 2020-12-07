@@ -110,11 +110,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         recommendRecyclerView.apply {
             setHasFixedSize(true)
             adapter = recommendAdapter
-            addItemDecoration(
-                VerticalSpaceItemDecoration(
-                    resources.getDimension(R.dimen.dp_4).toInt()
-                )
-            )
+            addItemDecoration(VerticalSpaceItemDecoration(resources.getDimension(R.dimen.dp_4).toInt()))
             addItemDecoration(HorizontalMarginItemDecoration(context, R.dimen.dp_4))
         }
     }
