@@ -43,7 +43,7 @@
             android:textSize="@dimen/sp_10"
             android:textStyle="bold"
             app:fontFamily="@font/segoe_ui_semibold"
-            app:layout_constraintBottom_toTopOf="@+id/serviceDescriptionText"
+            app:layout_constraintBottom_toTopOf="@+id/addressText"
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
@@ -76,7 +76,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/serviceDescriptionText"
+            android:id="@+id/addressText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"

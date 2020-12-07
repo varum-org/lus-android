@@ -9,11 +9,13 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Message(
     @Json(name = "_id")
-    val id: String?,
+    val id: String? = "",
     @Json(name = "user_id")
-    val userId: String?,
+    val userId: String? = "",
     @Json(name = "content")
-    val content: String?,
+    val content: String? = "",
     @Json(name = "room_id")
-    val roomId: String?
+    val roomId: String? = "",
+    @Json(name = "is_read")
+    val isRead: Int = 0
 ) : Parcelable

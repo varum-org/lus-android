@@ -11,6 +11,8 @@ import com.vtnd.lus.ui.main.container.ContainerFragment
 import io.socket.client.Socket
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
+import kotlin.math.log
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     lateinit var socket: Socket
@@ -29,26 +31,23 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     @ExperimentalCoroutinesApi
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
-        user.observeLiveData(this@MainActivity) {
-            userId = it.id
-            socket.connect()
-                .on(Socket.EVENT_CONNECT) {
-                    socket.emit(SOCKET_JOIN_ROOM, userId)
-                }
+        userProfile.observeLiveData(this@MainActivity) {
+            if (it != null) {
+                userId = it.id
+                socket.connect()
+                    .on(Socket.EVENT_CONNECT) {
+                        socket.emit(SOCKET_ONLINE, userId)
+                    }.on(SOCKET_JOIN_ROOM) { roomJson ->
+                        socket.emit(SOCKET_JOIN_ROOM, roomJson[0])
+                    }
+            } else {
+                socket.disconnect()
+            }
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        socket.apply {
-            userId?.let {
-                emit(SOCKET_OFFLINE,userId)
-            }
-            disconnect()
-        }
-    }
-    companion object{
-        private const val SOCKET_JOIN_ROOM = "join"
-        private const val SOCKET_OFFLINE = "offline"
+    companion object {
+        private const val SOCKET_ONLINE = "online"
+        private const val SOCKET_JOIN_ROOM = "joinRoom"
     }
 }

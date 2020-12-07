@@ -15,7 +15,8 @@ val repositoryModule = module {
             local = get(),
             remote = get(),
             tokenLocal = get(),
-            repoLocal = get()
+            repoLocal = get(),
+            tokenRepository = get()
         )
     }
     single<RepoRepository> {

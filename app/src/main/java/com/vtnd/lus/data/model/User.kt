@@ -20,7 +20,7 @@ data class User(
     @Json(name = "email_active")
     val emailActive: Int?,
     @Json(name = "gender")
-    val gender: String?,
+    val gender: Int?,
     @Json(name = "_id")
     val id: String?,
     @Json(name = "image_path")

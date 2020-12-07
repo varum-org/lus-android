@@ -6,11 +6,13 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.vtnd.lus.BuildConfig
 import com.vtnd.lus.data.TokenRepository
 import com.vtnd.lus.data.model.MessageJsonAdapter
+import com.vtnd.lus.data.model.RoomJsonAdapter
 import com.vtnd.lus.data.model.ServiceJsonAdapter
 import com.vtnd.lus.data.model.UserJsonAdapter
 import com.vtnd.lus.data.repository.source.UserDataSource
 import com.vtnd.lus.data.repository.source.remote.api.ApiService
 import com.vtnd.lus.data.repository.source.remote.api.middleware.InterceptorImpl
+import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponseJsonAdapter
 import com.vtnd.lus.shared.constants.Constants.KEY_BASE_URL
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -41,6 +43,12 @@ private fun provideServiceLocalJsonAdapter(moshi: Moshi): ServiceJsonAdapter {
 }
 private fun provideMessageLocalJsonAdapter(moshi: Moshi): MessageJsonAdapter {
     return MessageJsonAdapter(moshi)
+}
+private fun provideRoomJsonAdapter(moshi: Moshi): RoomJsonAdapter {
+    return RoomJsonAdapter(moshi)
+}
+private fun provideRoomResponseJsonAdapter(moshi: Moshi): RoomResponseJsonAdapter {
+    return RoomResponseJsonAdapter(moshi)
 }
 fun provideAuthInterceptor(
     tokenRepository: TokenRepository,
@@ -86,6 +94,10 @@ val networkModule = module {
     factory { provideServiceLocalJsonAdapter(moshi = get()) }
 
     factory { provideMessageLocalJsonAdapter(moshi = get()) }
+
+    factory { provideRoomJsonAdapter(moshi = get()) }
+
+    factory { provideRoomResponseJsonAdapter(moshi = get()) }
 
     factory { provideAuthInterceptor(get(), get()) }
 

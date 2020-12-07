@@ -9,6 +9,9 @@ fun List<IdolResponse>.toIdolResponses(services: List<Service>?) =
         it.copy(idol = it.idol.copy(services = it.idol.services.toServices(services)))
     }
 
+fun IdolResponse.toIdolResponse(services: List<Service>?) =
+    this.copy(idol = this.idol.copy(services = this.idol.services.toServices(services)))
+
 fun List<Service>.toServices(services: List<Service>?) =
     this.map {
         it.toService(services)

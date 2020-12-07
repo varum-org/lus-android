@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -10,45 +9,70 @@
             type="com.vtnd.lus.ui.main.container.home.HomeViewModel" />
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include layout="@layout/layout_toolbar" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/storyCircleRecyclerView"
+        <androidx.core.widget.NestedScrollView
+            android:fillViewport="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_28"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_42"
-            android:text="Hot Idol"
-            android:textColor="@color/indigo_900"
-            android:textSize="@dimen/sp_22"
-            app:fontFamily="@font/segoe_ui_bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            android:text="T7 Task in progress"
-            android:textColor="@color/blue_grey_400"
-            android:textSize="@dimen/sp_12"
-            app:fontFamily="@font/segoe_ui_semibold" />
+                <include layout="@layout/layout_toolbar" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/hotIdolRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_309"
-            android:layout_marginTop="@dimen/dp_22" />
-    </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/storyCircleRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_28"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_42"
+                    android:text="Hot Idol"
+                    android:textColor="@color/indigo_900"
+                    android:textSize="@dimen/sp_22"
+                    app:fontFamily="@font/segoe_ui_bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:text="T7 Task in progress"
+                    android:textColor="@color/blue_grey_400"
+                    android:textSize="@dimen/sp_12"
+                    app:fontFamily="@font/segoe_ui_semibold" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/hotIdolRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_309"
+                    android:layout_marginTop="@dimen/dp_22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_22"
+                    android:text="Recommend for you"
+                    android:textColor="@color/indigo_900"
+                    android:textSize="@dimen/sp_22"
+                    app:fontFamily="@font/segoe_ui_bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recommendRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_22"
+                    android:layout_marginBottom="@dimen/dp_16"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 </layout>

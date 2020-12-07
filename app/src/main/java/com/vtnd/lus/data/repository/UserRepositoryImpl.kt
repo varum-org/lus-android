@@ -1,6 +1,7 @@
 package com.vtnd.lus.data.repository
 
 import com.vtnd.lus.base.BaseRepository
+import com.vtnd.lus.data.TokenRepository
 import com.vtnd.lus.data.UserRepository
 import com.vtnd.lus.data.repository.source.RepoDataSource
 import com.vtnd.lus.data.repository.source.TokenDataSource
@@ -9,6 +10,7 @@ import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
+import com.vtnd.lus.shared.extensions.toIdolResponse
 import com.vtnd.lus.shared.extensions.toIdolResponses
 import com.vtnd.lus.shared.scheduler.DataResult
 import com.vtnd.lus.shared.type.CategoryIdolType
@@ -21,7 +23,8 @@ class UserRepositoryImpl(
     private val remote: UserDataSource.Remote,
     private val local: UserDataSource.Local,
     private val tokenLocal: TokenDataSource.Local,
-    private val repoLocal: RepoDataSource.Local
+    private val repoLocal: RepoDataSource.Local,
+    private val tokenRepository: TokenRepository
 ) : BaseRepository(), UserRepository {
 
     override suspend fun signIn(email: String, password: String) =
@@ -72,18 +75,30 @@ class UserRepositoryImpl(
             }
 
     override suspend fun getRoom(roomRequest: RoomRequest) =
-            withResultContext {
-                remote.getRoom(roomRequest).data
-            }
+        withResultContext {
+            remote.getRoom(roomRequest).data
+        }
 
     override suspend fun getMessageFromRoom(id: String) =
-            withResultContext {
-                remote.getMessageFromRoom(id).data
-            }
+        withResultContext {
+            remote.getMessageFromRoom(id).data
+        }
 
     override suspend fun getRooms() =
-            withResultContext {
-                remote.getRooms().data
-            }
+        withResultContext {
+            remote.getRooms().data
+        }
+
+    override suspend fun search(nickName: String?, rating: Int?) =
+        withResultContext {
+            remote.search(nickName, rating).data
+        }
+
+    override suspend fun getIdol(id: String) =
+        withResultContext {
+            remote.getIdol(!tokenRepository.getToken().isNullOrEmpty(), id).data.toIdolResponse(
+                repoLocal.services()
+            )
+        }
 }
 

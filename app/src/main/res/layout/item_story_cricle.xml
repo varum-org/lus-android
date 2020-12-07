@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<de.hdodenhof.circleimageview.CircleImageView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/dp_53"
+<de.hdodenhof.circleimageview.CircleImageView android:layout_width="@dimen/dp_53"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/storyCircleImage"
     android:layout_height="@dimen/dp_53"
     android:src="@drawable/bg_avatar"
     android:layout_marginEnd="@dimen/dp_16"
-    android:elevation="@dimen/dp_4"
-    app:civ_border_color="@color/red_a400"
-    app:civ_border_width="@dimen/dp_2" />
+    android:elevation="@dimen/dp_4" />
