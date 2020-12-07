@@ -13,7 +13,6 @@ import com.vtnd.lus.databinding.FragmentMessageBinding
 import com.vtnd.lus.di.MainApplication
 import com.vtnd.lus.shared.extensions.initToolbarBase
 import com.vtnd.lus.shared.extensions.safeClick
-import com.vtnd.lus.shared.extensions.showError
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.main.container.message.adapter.MessageAdapter
 import io.socket.client.Socket
@@ -110,9 +109,7 @@ class MessageFragment : BaseFragment<FragmentMessageBinding, MessageViewModel>()
     }
 
     private fun handleSendImage() {
-        if (messageEditText.text.isNullOrEmpty()) {
-            showError(getString(R.string.please_enter_your_message))
-        } else {
+        if (!messageEditText.text.isNullOrEmpty() && messageEditText.text.isNotBlank()) {
             val message = Message("", userId, messageEditText.text.toString(), room.id)
             viewModel.messageToString(message)
             messageEditText.text.clear()

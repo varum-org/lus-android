@@ -62,4 +62,7 @@
     <string name="follow">Follow</string>
     <string name="send_message">Send message…</string>
     <string name="please_enter_your_message">Please enter your message!</string>
+    <string name="menu">Menu</string>
+    <string name="setting">Setting</string>
+    <string name="see_your_profile_page">See your profile page</string>
 </resources>

@@ -55,4 +55,6 @@
     <string name="follow">Theo dõi</string>
     <string name="send_message">Gửi tin nhắn…</string>
     <string name="please_enter_your_message">Vui lòng nhập tin nhắn!</string>
+    <string name="setting">Cài đặt</string>
+    <string name="see_your_profile_page">Xem trang cá nhân của bạn</string>
 </resources>

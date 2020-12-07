@@ -15,18 +15,15 @@ class SearchViewModel(private val userRepository: UserRepository) : BaseViewMode
     }
 
     fun search(name: String, rating: Int? = null) {
-        if (name != query) {
-            if (name.isNotEmpty())
+        if (name.trim() != query.trim()) {
+            if (name.trim().isNotBlank())
                 viewModelScope(searchIdols,
                     isShowLoading = false,
                     onRequest = {
-                        userRepository.search(
-                            if (name.isEmpty()) null else name,
-                            rating
-                        )
+                        userRepository.search(name.trim(), rating)
                     },
                     onSuccess = {
-                        query = name
+                        query = name.trim()
                         searchIdols.postValue(it)
                     },
                     onError = { exception.postValue(it) })
