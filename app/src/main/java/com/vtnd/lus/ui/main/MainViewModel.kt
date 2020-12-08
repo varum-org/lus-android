@@ -28,7 +28,7 @@ class MainViewModel(
 
 
     @ExperimentalCoroutinesApi
-    val userProfile: LiveData<User?> = userRepository.userObservable()
+    val userProfile = userRepository.userObservable()
         .map { it }
         .distinctUntilChanged()
         .flowOn(dispatchersProvider)

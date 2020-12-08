@@ -16,11 +16,11 @@ interface UserDataSource {
 
     interface Local {
 
-        fun userObservable(): Flow<User?>
+        fun userObservable(): Flow<IdolResponse?>
 
-        suspend fun user(): User?
+        suspend fun user(): IdolResponse?
 
-        suspend fun saveUser(user: User)
+        suspend fun saveUser(user: IdolResponse)
 
         suspend fun clearUser()
     }
@@ -34,7 +34,7 @@ interface UserDataSource {
 
         suspend fun verifyAccount(verifyRequest: VerifyRequest): BaseResponse<Any>
 
-        suspend fun getUser(id: String): BaseResponse<UserResponse>
+        suspend fun getUser(id: String): BaseResponse<IdolResponse>
 
         //Idol
 

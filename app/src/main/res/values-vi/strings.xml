@@ -42,6 +42,7 @@
     <string name="service">Dịch vụ</string>
     <string name="cancel">Huỷ</string>
     <string name="apply">Áp dụng</string>
+    <string name="ok2">Tiếp tục</string>
     <string name="start_date">Ngày bắt đầu</string>
     <string name="note">Ghi chú</string>
     <string name="add_note">Thêm ghi chú…</string>
@@ -57,4 +58,15 @@
     <string name="please_enter_your_message">Vui lòng nhập tin nhắn!</string>
     <string name="setting">Cài đặt</string>
     <string name="see_your_profile_page">Xem trang cá nhân của bạn</string>
+    <string name="see_more">Xem thêm</string>
+    <string name="help_and_support">Trợ giúp &amp; hỗ trợ</string>
+    <string name="change_password">Thay đổi mật khẩu</string>
+    <string name="log_out">Đăng xuất</string>
+    <string name="wallet">Ví</string>
+    <string name="gallery">Thư viện ảnh</string>
+    <string name="bill">Hóa đơn</string>
+    <string name="history">Lịch sử</string>
+    <string name="invite_friends">Mời bạn bè</string>
+    <string name="feedback">Phản hồi</string>
+    <string name="success">Thành công</string>
 </resources>

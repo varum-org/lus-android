@@ -22,7 +22,7 @@ class UserRemoteImpl(private val apiService: ApiService) : UserDataSource.Remote
     override suspend fun verifyAccount(verifyRequest: VerifyRequest) =
         apiService.verifyAccount(verifyRequest)
 
-    override suspend fun getUser(id: String): BaseResponse<UserResponse> = apiService.getUser(id)
+    override suspend fun getUser(id: String) = apiService.getUser(id)
 
     override suspend fun getIdols(
         isLogin: Boolean,

@@ -7,8 +7,9 @@ import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
+import kotlinx.android.synthetic.main.item_menu_user.view.*
 
-class MenuUserAdapter(private val onItemClickListener: (Any) -> Unit) :
+class MenuUserAdapter(private val onItemClickListener: (ItemMenu) -> Unit) :
     BaseAdapter(DIFF_CALLBACK) {
 
     override fun customViewHolder(parent: ViewGroup, viewType: Int) =
@@ -16,13 +17,23 @@ class MenuUserAdapter(private val onItemClickListener: (Any) -> Unit) :
 
     inner class ViewHolder(
         itemView: View
-    ) : BaseViewHolder<ItemViewHolder<Any>>(itemView)
+    ) : BaseViewHolder<ItemViewHolder<ItemMenu>>(itemView){
+        override fun bind(item: ItemViewHolder<ItemMenu>) {
+            super.bind(item)
+            itemView.apply {
+                item.itemData.let {
+                    it.title?.let { title -> titleText.text = context.getString(title) }
+                    it.icon?.let { icon -> menuImage.setImageResource(icon) }
+                }
+            }
+        }
+    }
 
     companion object {
-        private val DIFF_CALLBACK = object : BaseDiffUtil<ItemViewHolder<Any>>() {
+        private val DIFF_CALLBACK = object : BaseDiffUtil<ItemViewHolder<ItemMenu>>() {
             override fun areItemsTheSame(
-                oldItem: ItemViewHolder<Any>,
-                newItem: ItemViewHolder<Any>
+                oldItem: ItemViewHolder<ItemMenu>,
+                newItem: ItemViewHolder<ItemMenu>
             ) = oldItem.itemData == newItem.itemData
         }
     }

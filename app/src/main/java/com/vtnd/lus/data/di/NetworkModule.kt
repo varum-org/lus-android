@@ -12,6 +12,7 @@ import com.vtnd.lus.data.model.UserJsonAdapter
 import com.vtnd.lus.data.repository.source.UserDataSource
 import com.vtnd.lus.data.repository.source.remote.api.ApiService
 import com.vtnd.lus.data.repository.source.remote.api.middleware.InterceptorImpl
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponseJsonAdapter
 import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponseJsonAdapter
 import com.vtnd.lus.shared.constants.Constants.KEY_BASE_URL
 import okhttp3.Interceptor
@@ -36,6 +37,9 @@ fun provideMoshi(): Moshi {
 
 private fun provideUserLocalJsonAdapter(moshi: Moshi): UserJsonAdapter {
     return UserJsonAdapter(moshi)
+}
+private fun provideIdolResponseJsonAdapter(moshi: Moshi): IdolResponseJsonAdapter {
+    return IdolResponseJsonAdapter(moshi)
 }
 
 private fun provideServiceLocalJsonAdapter(moshi: Moshi): ServiceJsonAdapter {
@@ -94,6 +98,8 @@ val networkModule = module {
     factory { provideServiceLocalJsonAdapter(moshi = get()) }
 
     factory { provideMessageLocalJsonAdapter(moshi = get()) }
+
+    factory { provideIdolResponseJsonAdapter(moshi = get()) }
 
     factory { provideRoomJsonAdapter(moshi = get()) }
 

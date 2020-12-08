@@ -31,10 +31,9 @@ class UserRepositoryImpl(
         withResultContext {
             val (token, user) = remote.signIn(email, password).data
             user?.id?.let { id ->
-                val (profile) = remote.getUser(id).data
-                profile?.let { local.saveUser(profile) }
-                token
-                    ?.let { tokenLocal.saveToken(it) }
+                token?.let { tokenLocal.saveToken(it) }?: tokenLocal.clearToken()
+                val profile = remote.getUser(id).data
+                local.saveUser(profile)
             } ?: tokenLocal.clearToken()
         }
 
@@ -50,8 +49,8 @@ class UserRepositoryImpl(
 
     override suspend fun getUser(id: String) =
         withResultContext {
-            val (user) = remote.getUser(id).data
-            user?.let { local.saveUser(user) } ?: tokenLocal.clearToken()
+            val user = remote.getUser(id).data
+            user.user?.id?.let { local.saveUser(user) } ?: tokenLocal.clearToken()
         }
 
     override suspend fun user() = local.user()

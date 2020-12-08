@@ -43,7 +43,7 @@ class RoomViewModel(
 
     fun getUser(user: (User?) -> Unit) {
         viewModelScope.launch {
-            user.invoke(userRepository.user())
+            user.invoke(userRepository.user()?.user)
         }
     }
 }

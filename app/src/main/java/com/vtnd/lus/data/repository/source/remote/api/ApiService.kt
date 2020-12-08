@@ -34,7 +34,7 @@ interface ApiService {
     suspend fun getIdols(@Query("category") category: String): BaseResponse<List<IdolResponse>>
 
     @GET("api/v1/user/{id}")
-    suspend fun getUser(@Path("id") id: String): BaseResponse<UserResponse>
+    suspend fun getUser(@Path("id") id: String): BaseResponse<IdolResponse>
 
     @GET("api/v1/services")
     suspend fun getServices(): BaseResponse<List<Service>?>

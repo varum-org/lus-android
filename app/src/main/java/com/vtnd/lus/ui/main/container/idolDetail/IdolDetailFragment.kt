@@ -17,7 +17,6 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.base.ItemViewHolder
-import com.vtnd.lus.data.model.RoomJsonAdapter
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.databinding.FragmentIdolDetailBinding
 import com.vtnd.lus.di.GlideApp
@@ -170,10 +169,23 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
                 showLoading(true)
                 delayTask({
                     showLoading(false)
+                    showNotificationSuccessAlertDialog()
                 }, 800)
-                // action oder
             }
         }
+    }
+
+    private fun showNotificationSuccessAlertDialog() {
+        showNotificationAlertDialog {
+            icon(R.drawable.ic_check)
+            statusMessage(getString(R.string.success))
+            button(getString(R.string.ok2))
+        }
+//        showNotificationAlertDialog {
+//            icon(R.drawable.ic_cancel)
+//            statusMessage(getString(R.string.error))
+//            button(getString(R.string.retry))
+//        }
     }
 
     private fun setupBottomSheet() {

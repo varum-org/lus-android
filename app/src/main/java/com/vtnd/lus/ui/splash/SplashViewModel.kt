@@ -24,7 +24,7 @@ class SplashViewModel(
 
     fun saveUserToLocal() {
         viewModelScope.launch {
-            userRepository.user()?.id?.let {
+            userRepository.user()?.user?.id?.let {
                 getUser(it)
             }
         }

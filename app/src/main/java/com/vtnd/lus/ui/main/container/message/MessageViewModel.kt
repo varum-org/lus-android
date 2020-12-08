@@ -36,7 +36,7 @@ class MessageViewModel(
     var roomSize = 0
 
     @ExperimentalCoroutinesApi
-    val userLiveData: LiveData<User?> = userRepository.userObservable()
+    val userLiveData = userRepository.userObservable()
         .map { it }
         .distinctUntilChanged()
         .flowOn(dispatchersProvider)
@@ -51,7 +51,7 @@ class MessageViewModel(
             onSuccess = {
                 viewModelScope.launch {
                     messages.addAll(it.map { message ->
-                        if (userRepository.user()?.id == message.userId)
+                        if (userRepository.user()?.user?.id == message.userId)
                             ItemViewHolder(message).copy(type = MessageType.CHAT_MINE.type)
                         else ItemViewHolder(message).copy(type = MessageType.CHAT_PARTNER.type)
                     }).apply {
