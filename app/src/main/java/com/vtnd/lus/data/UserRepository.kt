@@ -16,9 +16,9 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
 
     //Local
-    suspend fun user(): User?
+    suspend fun user(): IdolResponse?
 
-    fun userObservable(): Flow<User?>
+    fun userObservable(): Flow<IdolResponse?>
 
     //Remote
     //User

@@ -12,7 +12,7 @@
     app:layout_constraintTop_toBottomOf="@+id/layoutToolbarMenu">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/userImage"
+        android:id="@+id/idolImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dp_8"
@@ -31,13 +31,14 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:text="ololoe"
+        android:id="@+id/titleText"
         android:textColor="@color/grey_900"
         android:textSize="@dimen/sp_12"
         app:fontFamily="@font/segoe_ui_semibold"
-        app:layout_constraintBottom_toBottomOf="@+id/userImage"
+        app:layout_constraintBottom_toBottomOf="@+id/idolImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/userImage"
-        app:layout_constraintTop_toTopOf="@+id/userImage" />
+        app:layout_constraintStart_toEndOf="@id/idolImage"
+        app:layout_constraintTop_toTopOf="@+id/idolImage" />
 
     <View
         android:id="@+id/line"
@@ -45,6 +46,6 @@
         android:layout_height="@dimen/dp_1"
         android:background="@color/blue_grey_100"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/userImage"
+        app:layout_constraintStart_toEndOf="@+id/idolImage"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

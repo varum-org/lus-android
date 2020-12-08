@@ -1,11 +1,11 @@
 package com.vtnd.lus.data.repository.source.local
 
 import android.content.SharedPreferences
-import com.vtnd.lus.data.model.User
-import com.vtnd.lus.data.model.UserJsonAdapter
 import com.vtnd.lus.data.repository.source.UserDataSource
 import com.vtnd.lus.data.repository.source.local.api.SharedPrefApi
 import com.vtnd.lus.data.repository.source.local.api.pref.SharedPrefKey.KEY_USER
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponseJsonAdapter
 import com.vtnd.lus.shared.scheduler.dispatcher.AppDispatchers
 import com.vtnd.lus.shared.scheduler.dispatcher.DispatchersProvider
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,7 +24,7 @@ import timber.log.Timber
 class UserLocalImpl(
 //    private val databaseApi: DatabaseApi,
     private val sharedPrefApi: SharedPrefApi,
-    private val userJsonAdapter: UserJsonAdapter
+    private val userJsonAdapter: IdolResponseJsonAdapter
 ) : UserDataSource.Local, KoinComponent {
     private val dispatchersProvider =
         get<DispatchersProvider>(named(AppDispatchers.IO)).dispatcher()
@@ -55,7 +55,7 @@ class UserLocalImpl(
             sharedPrefApi.get(KEY_USER, String::class.java).toUser()
         }
 
-    override suspend fun saveUser(user: User) {
+    override suspend fun saveUser(user: IdolResponse) {
         withContext(dispatchersProvider) {
             userJsonAdapter.toJson(user).let {
                 sharedPrefApi.put(KEY_USER, it)
@@ -69,6 +69,6 @@ class UserLocalImpl(
         }
     }
 
-    private fun String?.toUser(): User? =
+    private fun String?.toUser(): IdolResponse? =
         runCatching { userJsonAdapter.fromJson(this ?: return null) }.getOrNull()
 }

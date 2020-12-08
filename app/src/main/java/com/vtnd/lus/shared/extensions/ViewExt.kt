@@ -2,8 +2,10 @@ package com.vtnd.lus.shared.extensions
 
 import android.os.SystemClock
 import android.view.View
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import com.vtnd.lus.R
 
 
 fun View.isVisible() = visibility == View.VISIBLE
@@ -44,10 +46,26 @@ fun View.safeClick(blockInMillis: Long = 1000L, onClick: (View) -> Unit) {
 }
 
 fun View.setTint(color: Int) =
-        DrawableCompat.wrap(background).apply {
-            DrawableCompat.setTint(this, ContextCompat.getColor(context, color))
-        }
+    DrawableCompat.wrap(background).apply {
+        DrawableCompat.setTint(this, ContextCompat.getColor(context, color))
+    }
 
 fun View.OnClickListener.listenToViews(vararg views: View) {
     views.forEach { it.setOnClickListener(this) }
+}
+
+fun ImageView.randomAvatar() {
+    setImageResource(
+        listOf(
+            R.drawable.people_1,
+            R.drawable.people_2,
+            R.drawable.people_3,
+            R.drawable.people_4,
+            R.drawable.people_5,
+            R.drawable.people_6,
+            R.drawable.people_7,
+            R.drawable.people_8,
+            R.drawable.people_9
+        ).random()
+    )
 }

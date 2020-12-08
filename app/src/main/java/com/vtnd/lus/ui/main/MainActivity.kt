@@ -33,7 +33,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         super.registerLiveData()
         userProfile.observeLiveData(this@MainActivity) {
             if (it != null) {
-                userId = it.id
+                userId = it.user.id
                 socket.connect()
                     .on(Socket.EVENT_CONNECT) {
                         socket.emit(SOCKET_ONLINE, userId)

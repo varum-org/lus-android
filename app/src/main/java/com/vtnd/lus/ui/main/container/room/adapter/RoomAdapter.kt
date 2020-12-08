@@ -16,6 +16,7 @@ import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
 import com.vtnd.lus.shared.constants.Constants
 import com.vtnd.lus.shared.extensions.dpToPx
+import com.vtnd.lus.shared.extensions.randomAvatar
 import com.vtnd.lus.shared.extensions.safeClick
 import kotlinx.android.synthetic.main.item_room.view.*
 
@@ -49,22 +50,7 @@ class RoomAdapter(
                                 .error(R.color.red_a400)
                                 .dontAnimate()
                                 .into(avatarImage)
-                        } ?: when (val firstLetter = userNotNull.userName?.firstOrNull()) {
-                            null -> ColorDrawable(Color.parseColor("#fafafa"))
-                            else -> {
-                                val size = context!!.dpToPx(96)
-                                TextDrawable
-                                    .builder()
-                                    .beginConfig()
-                                    .width(size)
-                                    .height(size)
-                                    .endConfig()
-                                    .buildRect(
-                                        firstLetter.toUpperCase().toString(),
-                                        ColorGenerator.MATERIAL.getColor(userNotNull.email)
-                                    )
-                            }
-                        }.let(avatarImage::setImageDrawable)
+                        } ?: avatarImage.randomAvatar()
                     }
                     safeClick { _ ->
                         onItemClickListener.invoke(it)
