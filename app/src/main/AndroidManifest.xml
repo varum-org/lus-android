@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".di.MainApplication"
@@ -33,5 +34,9 @@
             android:theme="@style/ThemeNoStatus" />
         <activity android:name="com.vtnd.lus.ui.auth.AuthActivity" />
         <activity android:name=".ui.main.MainActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${mapsApiKey}" />
     </application>
 </manifest>
