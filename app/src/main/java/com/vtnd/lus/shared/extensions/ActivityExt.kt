@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.vtnd.lus.R
+import com.vtnd.lus.base.BaseActivity2
 import com.vtnd.lus.shared.AnimateType
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -139,11 +140,11 @@ fun Activity.showError(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
     Snackbar.make(findViewById(android.R.id.content), message, duration).show()
 }
 
-fun AppCompatActivity.handleDefaultApiError(apiError: Exception) {
+fun AppCompatActivity.handleDefaultApiError(apiError: Exception,unauthorized: AppCompatActivity.() -> Unit) {
         when (apiError) {
             is HttpException -> {
                 Timber.i("aaaa")
-                getErrorMessage(apiError)?.let {
+                getErrorMessage(apiError,unauthorized)?.let {
                     Timber.i(it)
                     showError(it)
                 }
@@ -160,13 +161,12 @@ fun AppCompatActivity.handleDefaultApiError(apiError: Exception) {
         }
 }
 
-fun AppCompatActivity.getErrorMessage(e: Exception): String? {
+fun AppCompatActivity.getErrorMessage(e: Exception,unauthorized: AppCompatActivity.() -> Unit): String? {
     val responseBody = (e as HttpException).response()?.errorBody()
     val errorCode = e.response()?.code()
     if (errorCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+        unauthorized.invoke(this)
         // TODO reLogin
-        clearAllFragment()
-        goBackFragment()
     }
 
     return responseBody?.let {

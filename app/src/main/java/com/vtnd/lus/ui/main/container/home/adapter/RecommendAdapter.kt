@@ -10,6 +10,7 @@ import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
 import com.vtnd.lus.shared.constants.Constants
+import com.vtnd.lus.shared.extensions.getAge
 import com.vtnd.lus.shared.extensions.safeClick
 import kotlinx.android.synthetic.main.item_recommend.view.*
 
@@ -27,6 +28,13 @@ class RecommendAdapter(private val onItemClickListener: (IdolResponse) -> Unit) 
             super.bind(item)
             itemView.apply {
                 item.itemData.let { idolRes ->
+                    idolNameText.text = idolRes.user?.birthday?.let {
+                        context.getString(R.string.nick_name, idolRes.idol.nickName, it.getAge())
+                    } ?: idolRes.idol.nickName
+                    idolLocationText.text =
+                        context?.getString(R.string.live_in, "Đà Nẵng")
+                    idolAddressText.text =
+                        context?.getString(R.string.idol_address, idolRes.idol.address)
                     GlideApp.with(avatarImageView)
                         .load(Constants.BASE_IMAGE_URL + idolRes.idol.imageGallery[0])
                         .placeholder(R.color.pink_50)
@@ -34,7 +42,7 @@ class RecommendAdapter(private val onItemClickListener: (IdolResponse) -> Unit) 
                         .dontAnimate()
                         .into(avatarImageView)
                     safeClick {
-                        onItemClickListener( idolRes)
+                        onItemClickListener(idolRes)
                     }
                 }
             }
