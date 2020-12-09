@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
     id(Plugins.androidApp)
@@ -33,8 +34,14 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles(
-                file("proguard-rules.pro")
+            file("proguard-rules.pro")
         )
+        val properties = Properties()
+        if (rootProject.file("local.properties").exists()) {
+            properties.load(rootProject.file("local.properties").inputStream())
+        }
+        // Inject the Maps API key into the manifest
+        manifestPlaceholders["mapsApiKey"] = properties.getProperty("MAPS_API_KEY", "")
     }
 
     flavorDimensions("appVariant")
@@ -186,6 +193,10 @@ dependencies {
     androidTestImplementation(Deps.espresso_core)
 
     //Firebase
+    implementation("com.google.android.gms:play-services-maps:17.0.0")
+    implementation("com.google.android.gms:play-services-location:17.1.0")
+    implementation("com.google.android.gms:play-services-places:17.0.0")
+    implementation("com.google.android.libraries.places:places-compat:2.4.0")
     //implementation(Deps.firebase_analytics)
     implementation("com.github.florent37:shapeofview:1.4.7")
     implementation("com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")
