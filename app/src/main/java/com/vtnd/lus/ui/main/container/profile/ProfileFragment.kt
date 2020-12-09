@@ -4,25 +4,46 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
+import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.databinding.FragmentProfileBinding
 import com.vtnd.lus.di.GlideApp
+import com.vtnd.lus.shared.AnimateType
 import com.vtnd.lus.shared.TYPE_FOOTER
 import com.vtnd.lus.shared.constants.Constants
 import com.vtnd.lus.shared.decoration.FlexibleGridSpacingItemDecoration
 import com.vtnd.lus.shared.extensions.randomAvatar
+import com.vtnd.lus.shared.extensions.replaceFragment
 import com.vtnd.lus.shared.extensions.setTextDefaultValue
 import com.vtnd.lus.shared.liveData.observeLiveData
+import com.vtnd.lus.ui.auth.register.RegisterFragment
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuIdolAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuSettingAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuUserAdapter
+import com.vtnd.lus.ui.main.container.registerIdol.RegisterIdolFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>() {
 
-    private val menuIdolAdapter by lazy { MenuIdolAdapter {} }
+    private val menuIdolAdapter by lazy {
+        MenuIdolAdapter {
+            when (it) {
+                is Idol -> {
+
+                }
+                else -> {
+                    replaceFragment(
+                        R.id.container,
+                        RegisterIdolFragment.newInstance(),
+                        addToBackStack = true,
+                        animateType = AnimateType.SLIDE_TO_RIGHT
+                    )
+                }
+            }
+        }
+    }
     private val menuUserAdapter by lazy { MenuUserAdapter {} }
     private val menuSettingAdapter by lazy { MenuSettingAdapter {} }
 
