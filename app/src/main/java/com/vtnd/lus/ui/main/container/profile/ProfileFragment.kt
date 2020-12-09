@@ -1,13 +1,13 @@
 package com.vtnd.lus.ui.main.container.profile
 
 import android.view.LayoutInflater
-import android.widget.GridLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.databinding.FragmentProfileBinding
 import com.vtnd.lus.di.GlideApp
+import com.vtnd.lus.shared.TYPE_FOOTER
 import com.vtnd.lus.shared.constants.Constants
 import com.vtnd.lus.shared.decoration.FlexibleGridSpacingItemDecoration
 import com.vtnd.lus.shared.extensions.randomAvatar
@@ -19,7 +19,6 @@ import com.vtnd.lus.ui.main.container.profile.adapter.MenuUserAdapter
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>() {
 
@@ -47,10 +46,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
                     .dontAnimate()
                     .into(userImage)
             } ?: userImage.randomAvatar()
-            idolResponse.idol?.let {idol->
+            idolResponse.idol?.let { idol ->
                 viewModel.postMenuIdol(idol)
-            }
-        } ?: userImage.randomAvatar()
+            } ?: viewModel.postMenuIdol(Any(), TYPE_FOOTER)
+        } ?: apply {
+            userImage.randomAvatar()
+            viewModel.postMenuIdol(Any(), TYPE_FOOTER)
+        }
     }
 
     private fun setupRecyclerView() {

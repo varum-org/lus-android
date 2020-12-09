@@ -29,7 +29,7 @@ import kotlin.math.abs
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private val storyCircleAdapter = StoryCircleAdapter { item ->
-        val fragment = IdolDetailFragment.newInstance(item, item.idol.id)
+        val fragment = IdolDetailFragment.newInstance(item, item.idol!!.id)
         fragment.sharedElementEnterTransition = MaterialContainerTransform()
         replaceFragment(
             containerId = R.id.container,
@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         )
     }
     private val hotIdolAdapter = HotIdolAdapter { sharedElement, item ->
-        val fragment = IdolDetailFragment.newInstance(item, item.idol.id)
+        val fragment = IdolDetailFragment.newInstance(item, item.idol!!.id)
         fragment.sharedElementEnterTransition = MaterialContainerTransform()
         replaceFragment(
             containerId = R.id.container,
@@ -50,7 +50,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         )
     }
     private val recommendAdapter = RecommendAdapter { item ->
-        val fragment = IdolDetailFragment.newInstance(item, item.idol.id)
+        val fragment = IdolDetailFragment.newInstance(item, item.idol!!.id)
         fragment.sharedElementEnterTransition = MaterialContainerTransform()
         replaceFragment(
             containerId = R.id.container,

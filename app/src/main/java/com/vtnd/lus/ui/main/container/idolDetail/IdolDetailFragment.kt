@@ -68,7 +68,7 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         setupDismissKeyBoard(activity, layout)
         arguments?.apply {
             getParcelable<IdolResponse>(ARGUMENT_IDOL)?.let {
-                idolImage.transitionName = it.idol.id
+                idolImage.transitionName = it.idol!!.id
                 idolResponse = it
                 viewModel.addServicesIdol(it.idol.services)
             } ?: apply {
@@ -116,7 +116,7 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         }
         idolResponseLiveData.observeLiveData(viewLifecycleOwner) {
             idolResponse = it
-            viewModel.addServicesIdol(it.idol.services)
+            viewModel.addServicesIdol(it.idol!!.services)
             binDataToView(it)
         }
         cardServicesLiveData.observeLiveData(viewLifecycleOwner) {
@@ -248,7 +248,7 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         })
         idolResponse?.apply {
             GlideApp.with(this@IdolDetailFragment)
-                .load(BASE_IMAGE_URL + idol.imageGallery[0])
+                .load(BASE_IMAGE_URL + idol!!.imageGallery[0])
                 .placeholder(R.color.pink_50)
                 .error(R.color.red_a400)
                 .dontAnimate()
@@ -269,7 +269,7 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         idolResponse?.let {
             idolGalleryViewPager2.apply {
                 adapter = galleryAdapter.apply {
-                    it.idol.imageGallery.run { subList(1, this.size) }
+                    it.idol!!.imageGallery.run { subList(1, this.size) }
                         .let { submitList(it.map { imagePath -> ItemViewHolder(imagePath) }) }
                 }
                 addItemDecoration(HorizontalMarginItemDecoration(context, R.dimen.dp_16))

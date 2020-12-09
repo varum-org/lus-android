@@ -55,7 +55,6 @@
                 android:elevation="@dimen/dp_16"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Nguyen Thi Hong Thom"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_10"
                 app:fontFamily="@font/segoe_ui_bold" />
@@ -81,7 +80,6 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="Nguyen Thi Hong Thom"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_8"
                 app:drawableStartCompat="@drawable/ic_home_light"

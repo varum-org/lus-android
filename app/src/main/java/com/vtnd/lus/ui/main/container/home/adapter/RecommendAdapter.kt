@@ -28,15 +28,15 @@ class RecommendAdapter(private val onItemClickListener: (IdolResponse) -> Unit) 
             super.bind(item)
             itemView.apply {
                 item.itemData.let { idolRes ->
-                    idolNameText.text = idolRes.user?.birthday?.let {
-                        context.getString(R.string.nick_name, idolRes.idol.nickName, it.getAge())
-                    } ?: idolRes.idol.nickName
+                    idolNameText.text = idolRes.user.birthday?.let {
+                        context.getString(R.string.nick_name, idolRes.idol!!.nickName, it.getAge())
+                    } ?: idolRes.idol!!.nickName
                     idolLocationText.text =
                         context?.getString(R.string.live_in, "Đà Nẵng")
                     idolAddressText.text =
-                        context?.getString(R.string.idol_address, idolRes.idol.address)
+                        context?.getString(R.string.idol_address, idolRes.idol!!.address)
                     GlideApp.with(avatarImageView)
-                        .load(Constants.BASE_IMAGE_URL + idolRes.idol.imageGallery[0])
+                        .load(Constants.BASE_IMAGE_URL + idolRes.idol!!.imageGallery[0])
                         .placeholder(R.color.pink_50)
                         .error(R.color.red_a400)
                         .dontAnimate()
@@ -54,7 +54,7 @@ class RecommendAdapter(private val onItemClickListener: (IdolResponse) -> Unit) 
             override fun areItemsTheSame(
                 oldItem: ItemViewHolder<IdolResponse>,
                 newItem: ItemViewHolder<IdolResponse>
-            ) = oldItem.itemData.idol.id == newItem.itemData.idol.id
+            ) = oldItem.itemData.idol!!.id == newItem.itemData.idol!!.id
         }
     }
 }

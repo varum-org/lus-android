@@ -50,7 +50,7 @@ class UserRepositoryImpl(
     override suspend fun getUser(id: String) =
         withResultContext {
             val user = remote.getUser(id).data
-            user.user?.id?.let { local.saveUser(user) } ?: tokenLocal.clearToken()
+            user.user.id?.let { local.saveUser(user) } ?: tokenLocal.clearToken()
         }
 
     override suspend fun user() = local.user()

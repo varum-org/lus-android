@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class IdolResponse(
     @Json(name = "idol")
-    val idol: Idol,
+    val idol: Idol?,
     @Json(name = "liked")
     val liked: Boolean?,
     @Json(name = "user")

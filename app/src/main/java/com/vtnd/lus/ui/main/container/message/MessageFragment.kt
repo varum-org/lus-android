@@ -85,7 +85,7 @@ class MessageFragment : BaseFragment<FragmentMessageBinding, MessageViewModel>()
             socket.emit(SOCKET_JOIN_CHAT, room.id)
         }
         userLiveData.observeLiveData(viewLifecycleOwner) {
-            userId = it!!.user?.id.toString()
+            userId = it!!.user.id.toString()
         }
         messageJson.observeLiveData(viewLifecycleOwner) {
             if (!it.isNullOrEmpty())
