@@ -2,6 +2,7 @@ package com.vtnd.lus.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +11,13 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.vtnd.lus.R
 import com.vtnd.lus.shared.constants.Constants
-import com.vtnd.lus.shared.extensions.getCalendar
-import com.vtnd.lus.shared.extensions.handleDefaultApiError
-import com.vtnd.lus.shared.extensions.hideChildFragment
-import com.vtnd.lus.shared.extensions.showChildFragment
+import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.shared.widget.DialogManagerImpl
+import com.vtnd.lus.ui.auth.AuthActivity
+import com.vtnd.lus.ui.main.MainActivity
 import com.vtnd.lus.ui.main.empty.EmptyFragment
 
 abstract class BaseFragment<viewBinding : ViewBinding, viewModel : BaseViewModel> :
@@ -87,7 +88,12 @@ abstract class BaseFragment<viewBinding : ViewBinding, viewModel : BaseViewModel
             showLoading(it)
         }
         exception.observeLiveData(viewLifecycleOwner) {
-            (activity as? BaseActivity<*, *>)?.handleDefaultApiError(it)
+            (activity as? BaseActivity<*, *>)?.handleDefaultApiError(it){
+                clearAllFragment()
+                goBackFragment()
+                startActivity(Intent(this, AuthActivity::class.java))
+                overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
+            }
         }
     }
 

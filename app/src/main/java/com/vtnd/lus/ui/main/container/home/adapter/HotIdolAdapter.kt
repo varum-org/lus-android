@@ -35,10 +35,9 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
                         .dontAnimate()
                         .into(idolImage)
                     idolImage.transitionName = idolRes.idol.id
-                    idolRes.user?.birthday?.let {
+                    idolNameText.text =  idolRes.user?.birthday?.let {
                         context.getString(R.string.nick_name, idolRes.idol.nickName, it.getAge())
                     } ?: idolRes.idol.nickName
-                    idolNameText.text = idolRes.idol.nickName
                     idolLocationText.text =
                         context?.getString(R.string.live_in, "Đà Nẵng")
                     idolAddressText.text =

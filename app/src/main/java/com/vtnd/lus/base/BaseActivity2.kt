@@ -1,11 +1,13 @@
 package com.vtnd.lus.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.vtnd.lus.shared.extensions.handleDefaultApiError
 import com.vtnd.lus.shared.liveData.observeLiveData
+import com.vtnd.lus.ui.main.MainActivity
 
 abstract class BaseActivity2<viewBinding : ViewBinding, viewModel : BaseViewModel> :
     AppCompatActivity(), BaseView {
@@ -35,7 +37,10 @@ abstract class BaseActivity2<viewBinding : ViewBinding, viewModel : BaseViewMode
                 showLoading(it)
             }
             exception.observeLiveData(this@BaseActivity2) {
-                handleDefaultApiError(it)
+                handleDefaultApiError(it) {
+                    startActivity(Intent(this@BaseActivity2, MainActivity::class.java))
+                    finish()
+                }
             }
         }
     }
