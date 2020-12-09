@@ -8,6 +8,7 @@ import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.di.GlideApp
 import com.vtnd.lus.shared.*
 import com.vtnd.lus.shared.constants.Constants
+import com.vtnd.lus.shared.extensions.safeClick
 import kotlinx.android.synthetic.main.item_menu_idol.view.*
 
 class MenuIdolAdapter(private val onItemClickListener: (Any) -> Unit) :
@@ -35,7 +36,9 @@ class MenuIdolAdapter(private val onItemClickListener: (Any) -> Unit) :
                             .error(R.color.red_a400)
                             .dontAnimate()
                             .into(idolImage)
-                        onItemClickListener.invoke(it)
+                        safeClick { _ ->
+                            onItemClickListener.invoke(it)
+                        }
                     }
                 }
             }
@@ -49,7 +52,9 @@ class MenuIdolAdapter(private val onItemClickListener: (Any) -> Unit) :
             super.bind(item)
             itemView.apply {
                 item.itemData.let {
-                    onItemClickListener.invoke(it)
+                    safeClick { _ ->
+                        onItemClickListener.invoke(it)
+                    }
                 }
             }
         }
