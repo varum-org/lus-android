@@ -29,7 +29,7 @@ class StoryCircleAdapter(private val onItemClickListener: ( IdolResponse) -> Uni
             itemView.apply {
                 item.itemData.let { idolRes ->
                     GlideApp.with(storyCircleImage)
-                        .load(Constants.BASE_IMAGE_URL + idolRes.idol.imageGallery[0])
+                        .load(Constants.BASE_IMAGE_URL + idolRes.idol!!.imageGallery[0])
                         .placeholder(R.color.pink_50)
                         .error(R.color.red_a400)
                         .dontAnimate()

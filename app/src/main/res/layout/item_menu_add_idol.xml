@@ -11,18 +11,19 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/layoutToolbarMenu">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/idolImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dp_8"
         android:layout_marginBottom="@dimen/dp_8"
-        android:src="@drawable/bg_avatar2"
+        android:src="@drawable/ic_star"
+        app:tint="@color/orange_400"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line"
-        app:layout_constraintWidth_percent="0.12" />
+        app:layout_constraintWidth_percent="0.08" />
 
     <TextView
         android:layout_width="0dp"
@@ -30,6 +31,7 @@
         android:layout_marginStart="@dimen/dp_8"
         android:ellipsize="end"
         android:maxLines="2"
+        android:text="@string/register_idol"
         android:id="@+id/titleText"
         android:textColor="@color/grey_900"
         android:textSize="@dimen/sp_12"
@@ -37,7 +39,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/idolImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/idolImage"
-        app:layout_constraintTop_toTopOf="@+id/idolImage" />
+        app:layout_constraintTop_toTopOf="@+id/idolImage"
+        android:drawablePadding="@dimen/dp_4"
+        app:drawableEndCompat="@drawable/ic_arrow_right_circle" />
 
     <View
         android:id="@+id/line"

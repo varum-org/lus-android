@@ -29,13 +29,13 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
             itemView.apply {
                 item.itemData.let { idolRes ->
                     GlideApp.with(idolImage)
-                        .load(BASE_IMAGE_URL+ idolRes.idol.imageGallery[0])
+                        .load(BASE_IMAGE_URL+ idolRes.idol!!.imageGallery[0])
                         .placeholder(R.color.pink_50)
                         .error(R.color.red_a400)
                         .dontAnimate()
                         .into(idolImage)
                     idolImage.transitionName = idolRes.idol.id
-                    idolNameText.text =  idolRes.user?.birthday?.let {
+                    idolNameText.text =  idolRes.user.birthday?.let {
                         context.getString(R.string.nick_name, idolRes.idol.nickName, it.getAge())
                     } ?: idolRes.idol.nickName
                     idolLocationText.text =

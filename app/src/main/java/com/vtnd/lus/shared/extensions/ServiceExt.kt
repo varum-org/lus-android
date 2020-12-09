@@ -6,11 +6,11 @@ import com.vtnd.lus.ui.main.container.idolDetail.adapter.ItemCard
 
 fun List<IdolResponse>.toIdolResponses(services: List<Service>?) =
     this.map {
-        it.copy(idol = it.idol.copy(services = it.idol.services.toServices(services)))
+        it.copy(idol = it.idol?.copy(services = it.idol.services.toServices(services)))
     }
 
 fun IdolResponse.toIdolResponse(services: List<Service>?) =
-    this.copy(idol = this.idol.copy(services = this.idol.services.toServices(services)))
+    this.copy(idol = this.idol?.copy(services = this.idol.services.toServices(services)))
 
 fun List<Service>.toServices(services: List<Service>?) =
     this.map {
