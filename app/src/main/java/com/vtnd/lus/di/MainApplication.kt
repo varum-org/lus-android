@@ -1,6 +1,7 @@
 package com.vtnd.lus.di
 
 import android.app.Application
+import com.google.android.libraries.places.api.Places
 import com.vtnd.lus.BuildConfig
 import com.vtnd.lus.data.di.dataSourceModule
 import com.vtnd.lus.data.di.networkModule
@@ -31,6 +32,7 @@ class MainApplication : Application(), KoinComponent {
             repositoryModule,
             viewModelModule
         )
+        setupPlaceApi()
         startKoin {
             // use AndroidLogger as Koin Logger - default Level.INFO
             androidLogger(Level.INFO)
@@ -52,4 +54,8 @@ class MainApplication : Application(), KoinComponent {
             Timber.i(e)
         }
     }
+    private fun setupPlaceApi() {
+        Places.initialize(this, "AIzaSyDCrGZXXsyMYRY2Ewmznl0zVMHtpkRWkEc")
+    }
+
 }

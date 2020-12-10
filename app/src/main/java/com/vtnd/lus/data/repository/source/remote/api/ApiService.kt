@@ -65,6 +65,12 @@ interface ApiService {
         @Path("id") id: String
     ): BaseResponse<IdolResponse>
 
+    @PUT("api/v1/user/logout")
+    @FormUrlEncoded
+    suspend fun logout(
+        @Field("device_token") deviceToken: String
+    ): BaseResponse<Any>
+
     companion object Factory {
         operator fun invoke(retrofit: Retrofit) = retrofit.create<ApiService>()
     }

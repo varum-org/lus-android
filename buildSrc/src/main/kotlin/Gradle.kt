@@ -15,7 +15,7 @@ object Versions {
     const val androidx_test_ext = "1.1.1"
     const val core_ktx = "1.1.0"
     const val espresso = "3.2.0"
-    const val fragment = "1.2.0-rc02"
+    const val fragment = "1.3.0-alpha05"
     const val glide = "4.11.0"
     const val glide_drawable = "1.2.21"
     const val junit = "4.12"
@@ -51,7 +51,7 @@ object Versions {
     const val lottie = "3.3.1"
     const val qr_code = "1.9.8"
     const val anko = "0.10.8"
-    const val coroutines = "1.3.2"
+    const val coroutines = "1.3.6"
     const val databinding = "2.3.1"
     const val circle_image = "3.1.0"
     const val preference= "1.1.1"
@@ -214,6 +214,8 @@ object Deps {
     const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val coroutines_android =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val coroutines_play_services =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutines}"
     const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     const val circle_image = "de.hdodenhof:circleimageview:${Versions.circle_image}"
     const val preference = "androidx.preference:preference-ktx:${Versions.preference}"

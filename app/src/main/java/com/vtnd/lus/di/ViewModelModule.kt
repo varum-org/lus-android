@@ -84,5 +84,5 @@ val viewModelModule = module {
     }
     viewModel { VerifyViewModel(userRepository = get()) }
     viewModel { RegisterViewModel(userRepository = get()) }
-    viewModel { RegisterIdolViewModel() }
+    viewModel { RegisterIdolViewModel(repoRepository = get()) }
 }
