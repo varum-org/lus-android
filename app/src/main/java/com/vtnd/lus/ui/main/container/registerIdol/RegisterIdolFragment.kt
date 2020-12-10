@@ -2,9 +2,12 @@ package com.vtnd.lus.ui.main.container.registerIdol
 
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
+import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentRegisterIdolBinding
+import com.vtnd.lus.shared.extensions.initToolbarBase
 import com.vtnd.lus.shared.extensions.invisible
+import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
 import com.vtnd.lus.shared.extensions.visible
 import com.vtnd.lus.ui.main.container.adapter.ContainerViewPagerAdapter
 import com.vtnd.lus.ui.main.container.registerIdol.addressIdol.AddressIdolFragment
@@ -25,12 +28,22 @@ class RegisterIdolFragment : BaseFragment<FragmentRegisterIdolBinding, RegisterI
         FragmentRegisterIdolBinding.inflate(inflater)
 
     override fun initialize() {
+        setupDismissKeyBoard(activity, registerIdolLayout)
+        initToolbarBase(
+            getString(R.string.edit_idol_profile),
+            isShowIconLeft = true,
+            iconRight = R.drawable.ic_save
+        ) {  }
         setupViewPaper()
     }
 
-
     override fun registerLiveData() {
         super.registerLiveData()
+    }
+
+    override fun onStop() {
+        onHideSoftKeyBoard()
+        super.onStop()
     }
 
     private fun setupViewPaper() {

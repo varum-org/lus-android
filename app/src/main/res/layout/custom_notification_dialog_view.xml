@@ -49,6 +49,7 @@
                 android:backgroundTint="@color/pink_50"
                 app:cornerRadius="@dimen/dp_16"
                 android:id="@+id/button"
+                android:textSize="@dimen/sp_10"
                 app:fontFamily="@font/segoe_ui_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

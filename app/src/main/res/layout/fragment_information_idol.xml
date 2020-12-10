@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,12 +9,130 @@
             type="com.vtnd.lus.ui.main.container.registerIdol.RegisterIdolViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/informationLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/green_500">
+        android:layout_height="match_parent">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editNickName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Nick name"
+                    app:boxStrokeColor="@color/pink_50"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="6"
+                    app:endIconMode="none"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null"
+                    app:errorTextColor="@color/red_a400"
+                    app:helperTextEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:layout_constraintBottom_toTopOf="@+id/editRelationship"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:startIconTint="@color/grey_600">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:maxLength="6"
+                        android:singleLine="true"
+                        app:fontFamily="@font/segoe_ui_regular" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editRelationship"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Relationship (Alone,..)"
+                    app:boxStrokeColor="@color/pink_50"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="16"
+                    app:endIconMode="none"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null"
+                    app:errorTextColor="@color/red_a400"
+                    app:helperTextEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:layout_constraintBottom_toTopOf="@+id/editDescription"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editNickName"
+                    app:startIconTint="@color/grey_600">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="16"
+                        android:singleLine="true"
+                        app:fontFamily="@font/segoe_ui_regular" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Giới thiệu về bản thân"
+                    app:boxStrokeColor="@color/pink_50"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="500"
+                    app:endIconMode="none"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null"
+                    app:errorTextColor="@color/red_a400"
+                    app:helperTextEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editRelationship">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start|top"
+                        android:imeOptions="actionNext"
+                        android:inputType="textLongMessage|textCapSentences|textMultiLine"
+                        android:lines="5"
+                        android:maxLength="500"
+                        android:maxLines="6"
+                        android:singleLine="true"
+                        app:fontFamily="@font/segoe_ui_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>

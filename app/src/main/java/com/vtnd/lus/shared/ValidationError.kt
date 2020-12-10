@@ -17,20 +17,28 @@ class ValidateError {
 
     fun validatePassword(password: String?) = when {
         password.isNullOrBlank() -> ValidateResult(false, PasswordErrorType.PASSWORD_EMPTY)
-        password.length < LEAST_NUMBER_CHARACTER -> ValidateResult(false,
-            PasswordErrorType.LEAST_CHARACTER)
+        password.length < LEAST_NUMBER_CHARACTER -> ValidateResult(
+            false,
+            PasswordErrorType.LEAST_CHARACTER
+        )
         else -> ValidateResult(true, PasswordErrorType.NONE)
     }
 
     fun validateUserName(userName: String?) = when {
         userName.isNullOrBlank() -> ValidateResult(false, UserNameErrorType.USER_NAME_EMPTY)
-        userName.length < LEAST_NUMBER_CHARACTER -> ValidateResult(false,
-            UserNameErrorType.LEAST_CHARACTER)
+        userName.length < LEAST_NUMBER_CHARACTER -> ValidateResult(
+            false,
+            UserNameErrorType.LEAST_CHARACTER
+        )
         else -> ValidateResult(true, UserNameErrorType.NONE)
     }
 
-    fun validateEmpty(value: String?) = when {
+    fun validateBase(value: String?) = when {
         value.isNullOrBlank() -> ValidateResult(false, BaseErrorType.IS_EMPTY)
+        value.length < LEAST_NUMBER_CHARACTER -> ValidateResult(
+            false,
+            BaseErrorType.LEAST_CHARACTER
+        )
         else -> ValidateResult(true, BaseErrorType.NONE)
     }
 

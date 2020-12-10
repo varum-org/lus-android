@@ -7,33 +7,33 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Idol(
     @Json(name = "_id")
-    val id: String,
+    val id: String = "",
     @Json(name = "address")
-    val address: String,
+    val address: String = "",
     @Json(name = "completion_rate")
-    val completionRate: Int?,
+    val completionRate: Int? = null,
     @Json(name = "description")
-    val description: String?,
+    val description: String? = null,
     @Json(name = "image_gallery")
     val imageGallery: List<String> = emptyList(),
     @Json(name = "nick_name")
-    val nickName: String?,
+    val nickName: String? = null,
     @Json(name = "rating")
-    val rating: Int?,
+    val rating: Int? = null,
     @Json(name = "rating_total")
-    val ratingTotal: Int?,
+    val ratingTotal: Int? = null,
     @Json(name = "relationship")
-    val relationship: String?,
+    val relationship: String? = null,
     @Json(name = "rent_time_total")
-    val rentTimeTotal: Int?,
+    val rentTimeTotal: Int? = null,
     @Json(name = "rent_total")
-    val rentTotal: Int?,
+    val rentTotal: Int? = null,
     @Json(name = "rent_total_accepted")
-    val rentTotalAccepted: Int?,
+    val rentTotalAccepted: Int? = null,
     @Json(name = "services")
     val services: List<Service> = emptyList(),
     @Json(name = "status")
-    val status: Int?,
+    val status: Int? = null,
     @Json(name = "user_id")
-    val userId: String
+    val userId: String = ""
 ) : Parcelable

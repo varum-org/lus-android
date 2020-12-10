@@ -12,8 +12,9 @@
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
-      android:background="@color/pink_50"
+      android:id="@+id/registerIdolLayout"
       android:layout_height="match_parent">
+    <include layout="@layout/layout_toolbar_base" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/addIdolViewPaper"
@@ -23,7 +24,7 @@
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutToolbarBase" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/nextButton"

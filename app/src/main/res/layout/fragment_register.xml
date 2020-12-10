@@ -187,14 +187,15 @@
                     </FrameLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dp_8"
                         android:orientation="horizontal">
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/already_have_an_account"
@@ -203,7 +204,7 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/signInText"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_8"
                             android:gravity="center"

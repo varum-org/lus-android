@@ -1,7 +1,6 @@
 package com.vtnd.lus.data.model
 
 import android.os.Parcelable
-import com.google.gson.annotations.JsonAdapter
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
@@ -10,13 +9,13 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Service(
     @Json(name = "service_code")
-    val serviceCode: Int?,
+    val serviceCode: Int? = null,
     @Json(name = "service_name")
-    val serviceName: String?,
+    val serviceName: String? = null,
     @Json(name = "service_price")
-    val servicePrice: Int?,
+    val servicePrice: Int? = null,
     @Json(name = "service_description")
-    val serviceDescription: String?,
+    val serviceDescription: String? = null,
     @Json(name = "service_image_path")
-    val serviceImagePath: String?
+    val serviceImagePath: String? = null
 ) : Parcelable

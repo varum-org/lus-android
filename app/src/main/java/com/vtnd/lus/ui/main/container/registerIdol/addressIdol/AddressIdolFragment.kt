@@ -18,15 +18,12 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentAddressIdolBinding
-import com.vtnd.lus.shared.extensions.getDrawableBy
-import com.vtnd.lus.shared.extensions.requestLocationPermission
-import com.vtnd.lus.shared.extensions.showAlertDialog
-import com.vtnd.lus.shared.extensions.toast
+import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.main.container.registerIdol.RegisterIdolViewModel
 import kotlinx.android.synthetic.main.fragment_address_idol.*
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 
 @Suppress("DEPRECATION")
@@ -35,13 +32,14 @@ class AddressIdolFragment : BaseFragment<FragmentAddressIdolBinding, RegisterIdo
     private var marker: Marker? = null
     private var autocompleteSupportFragment: AutocompleteSupportFragment? = null
 
-    override val viewModel: RegisterIdolViewModel by viewModel()
+    override val viewModel by lazy(LazyThreadSafetyMode.NONE) { requireParentFragment().getViewModel<RegisterIdolViewModel>() }
 
     override fun inflateViewBinding(inflater: LayoutInflater) =
         FragmentAddressIdolBinding.inflate(inflater)
 
     @SuppressLint("MissingPermission") // Already ensured permission
     override fun initialize() {
+        setupDismissKeyBoard(activity, addressLayout)
         lifecycleScope.launch {
             if (requestLocationPermission()) {
                 viewModel.getCurrentLocation()
@@ -60,12 +58,17 @@ class AddressIdolFragment : BaseFragment<FragmentAddressIdolBinding, RegisterIdo
 
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
-        viewModel.locationLiveData.observeLiveData(viewLifecycleOwner) {
+        locationLiveData.observeLiveData(viewLifecycleOwner) {
             moveCameraToLocation(it)
         }
-        viewModel.addressLiveData.observeLiveData(viewLifecycleOwner) {
+        addressLiveData.observeLiveData(viewLifecycleOwner) {
             autocompleteSupportFragment?.setText(it)
         }
+    }
+
+    override fun onStop() {
+        onHideSoftKeyBoard()
+        super.onStop()
     }
 
     override fun onDestroyView() {
@@ -73,6 +76,7 @@ class AddressIdolFragment : BaseFragment<FragmentAddressIdolBinding, RegisterIdo
         _googleMap?.setOnMapLongClickListener(null)
         _googleMap = null
     }
+
 
     private fun setupMapFragment() {
         (childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).apply {

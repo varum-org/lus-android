@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_16"
+    android:layout_marginTop="@dimen/dp_4"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/dp_8"
+    app:cardElevation="@dimen/dp_4">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/serviceIconCardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_22"
+            android:layout_marginStart="@dimen/dp_16"
+            app:cardBackgroundColor="@color/pink_50"
+            app:cardCornerRadius="@dimen/dp_50"
+            app:cardElevation="@dimen/dp_1"
+            app:layout_constraintBottom_toTopOf="@+id/servicePriceLayout"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.15">
+
+            <ImageView
+                android:id="@+id/serviceIconImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/dp_8"
+                android:backgroundTint="@color/red_a400" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp_4"
+            android:id="@+id/servicePriceLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_22"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/serviceIconCardView"
+            app:layout_constraintStart_toStartOf="@+id/serviceIconCardView"
+            app:layout_constraintTop_toBottomOf="@+id/serviceIconCardView">
+
+            <TextView
+                android:id="@+id/servicePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/indigo_900"
+                android:textSize="@dimen/sp_10"
+                app:fontFamily="@font/segoe_ui_regular" />
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="@dimen/dp_12"
+                android:layout_height="@dimen/dp_12"
+                android:src="@drawable/ic_heart_bold"
+                app:tint="#ff9f31" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/serviceActionButton"
+            app:layout_constraintStart_toEndOf="@+id/serviceIconCardView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/serviceNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/dp_12"
+                android:textColor="@color/indigo_900"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold"
+                app:fontFamily="@font/segoe_ui_semibold" />
+
+            <TextView
+                android:id="@+id/serviceDescriptionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="4"
+                android:paddingHorizontal="@dimen/dp_8"
+                android:textColor="@color/indigo_900"
+                android:textSize="@dimen/sp_10"
+                app:fontFamily="@font/segoe_ui_regular" />
+        </LinearLayout>
+
+        <com.vtnd.lus.shared.widget.RoundishImageView
+            android:id="@+id/serviceActionButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cornerRadius="@dimen/dp_25"
+            app:roundedCorners="all"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
