@@ -11,10 +11,14 @@ import com.vtnd.lus.data.model.ServiceJsonAdapter
 import com.vtnd.lus.data.model.UserJsonAdapter
 import com.vtnd.lus.data.repository.source.UserDataSource
 import com.vtnd.lus.data.repository.source.remote.api.ApiService
+import com.vtnd.lus.data.repository.source.remote.api.GeocoderApiService
+import com.vtnd.lus.data.repository.source.remote.api.middleware.CoroutineCallAdapterFactory
 import com.vtnd.lus.data.repository.source.remote.api.middleware.InterceptorImpl
+import com.vtnd.lus.data.repository.source.remote.api.response.GeocoderErrorResponseJsonAdapter
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponseJsonAdapter
 import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponseJsonAdapter
 import com.vtnd.lus.shared.constants.Constants.KEY_BASE_URL
+import com.vtnd.lus.shared.constants.Constants.KEY_GEOCODE_URL
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,6 +30,8 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 fun provideApiService(retrofit: Retrofit): ApiService = ApiService(retrofit)
+
+fun provideGeocoderApiService(retrofit: Retrofit): GeocoderApiService = GeocoderApiService(retrofit)
 
 fun provideMoshi(): Moshi {
     return Moshi
@@ -105,13 +111,20 @@ val networkModule = module {
 
     factory { provideRoomResponseJsonAdapter(moshi = get()) }
 
+    factory { GeocoderErrorResponseJsonAdapter(moshi = get()) }
+
     factory { provideAuthInterceptor(get(), get()) }
 
     factory { provideLoggingInterceptor() }
 
     single { provideOkHttpClient(listOf(get<InterceptorImpl>(), get<HttpLoggingInterceptor>())) }
 
-    single { provideRetrofit(get(named(KEY_BASE_URL)), get(), get()) }
+    factory(named(KEY_BASE_URL)) { provideRetrofit(get(named(KEY_BASE_URL)), get(), get()) }
 
-    single { provideApiService(get()) }
+    factory(named(KEY_GEOCODE_URL)) { provideRetrofit(get(named(KEY_GEOCODE_URL)), get(), get()) }
+
+    single { provideApiService(get(named(KEY_BASE_URL))) }
+
+    single { provideGeocoderApiService(get(named(KEY_GEOCODE_URL))) }
+
 }

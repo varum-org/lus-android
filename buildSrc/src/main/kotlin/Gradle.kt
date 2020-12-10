@@ -51,7 +51,7 @@ object Versions {
     const val lottie = "3.3.1"
     const val qr_code = "1.9.8"
     const val anko = "0.10.8"
-    const val coroutines = "1.3.6"
+    const val coroutines = "1.4.2"
     const val databinding = "2.3.1"
     const val circle_image = "3.1.0"
     const val preference= "1.1.1"
@@ -189,7 +189,6 @@ object Deps {
     const val koin_android = "org.koin:koin-androidx-scope:${Versions.koin}"
     const val koin_viewmodel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
     const val koin_ext = "org.koin:koin-androidx-ext:${Versions.koin}"
-
     const val firebase_analytics =
         "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
     const val dexter = "com.karumi:dexter:${Versions.dexter}"

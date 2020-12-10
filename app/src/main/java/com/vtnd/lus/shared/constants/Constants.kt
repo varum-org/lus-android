@@ -9,6 +9,8 @@ object Constants {
 
     // App constants
     const val KEY_BASE_URL = "KEY_BASE_URL"
+    const val KEY_GEOCODE_URL = "KEY_GEOCODE_URL"
+    const val KEY_GEOCODE_API = "KEY_GEOCODE_API"
     const val BASE_IMAGE_URL = "https://res.cloudinary.com/employeern/image/upload/"
 
     // Format constants

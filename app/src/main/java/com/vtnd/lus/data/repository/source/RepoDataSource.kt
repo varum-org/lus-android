@@ -2,8 +2,9 @@ package com.vtnd.lus.data.repository.source
 
 import com.vtnd.lus.data.model.Service
 import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
-import com.vtnd.lus.shared.scheduler.DataResult
+import com.vtnd.lus.data.repository.source.remote.api.response.GeocoderResponse
 import kotlinx.coroutines.flow.Flow
+import retrofit2.Response
 
 interface RepoDataSource {
 
@@ -22,5 +23,7 @@ interface RepoDataSource {
     interface Remote {
         //Service
         suspend fun getServices(): BaseResponse<List<Service>?>
+
+        suspend fun getAddressForCoordinates(latlng: String, key: String): Response<GeocoderResponse>
     }
 }

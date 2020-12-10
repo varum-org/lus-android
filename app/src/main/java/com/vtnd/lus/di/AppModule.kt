@@ -9,4 +9,10 @@ val appModule = module {
     single(named(Constants.KEY_BASE_URL)) {
         BuildConfig.BASE_URL
     }
+    single(named(Constants.KEY_GEOCODE_URL)) {
+        BuildConfig.GEOCODE_URL
+    }
+    single(named(Constants.KEY_GEOCODE_API)) {
+        BuildConfig.GEOCODE_API
+    }
 }
