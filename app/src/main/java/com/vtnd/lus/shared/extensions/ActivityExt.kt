@@ -9,9 +9,10 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.util.DisplayMetrics
 import android.view.View
-import androidx.annotation.IdRes
-import androidx.annotation.NonNull
+import android.widget.Toast
+import androidx.annotation.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.vtnd.lus.R
@@ -208,3 +209,28 @@ fun Activity.getHeightStatusBar() = Rect().run {
 fun Context.dpToPx(dp: Int) = this.run {
     (dp * (resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
 }
+
+@Suppress("nothing_to_inline")
+@ColorInt
+inline fun Context.getColorBy(@ColorRes id: Int) = ContextCompat.getColor(this, id)
+
+@Suppress("nothing_to_inline")
+inline fun Context.getDrawableBy(@DrawableRes id: Int) = ContextCompat.getDrawable(this, id)
+
+
+@Suppress("nothing_to_inline")
+inline fun Context.toast(
+    @StringRes messageRes: Int,
+    short: Boolean = true
+) = this.toast(getString(messageRes), short)
+
+@Suppress("nothing_to_inline")
+inline fun Context.toast(
+    message: String,
+    short: Boolean = true
+) =
+    Toast.makeText(
+        this,
+        message,
+        if (short) Toast.LENGTH_SHORT else Toast.LENGTH_LONG
+    ).apply { show() }!!

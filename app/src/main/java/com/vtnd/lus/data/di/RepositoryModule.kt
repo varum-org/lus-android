@@ -22,7 +22,8 @@ val repositoryModule = module {
     single<RepoRepository> {
         RepoRepositoryImpl(
             local = get(),
-            remote = get()
+            remote = get(),
+            application = get()
         )
     }
     single<TokenRepository> {

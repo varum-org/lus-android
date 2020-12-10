@@ -53,6 +53,13 @@ class UserRepositoryImpl(
             user.user.id?.let { local.saveUser(user) } ?: tokenLocal.clearToken()
         }
 
+    override suspend fun logout() =
+        withResultContext {
+//            remote.logout("123456").data
+            local.clearUser()
+            tokenLocal.clearToken()
+        }
+
     override suspend fun user() = local.user()
 
     @ExperimentalCoroutinesApi

@@ -12,11 +12,8 @@ import com.vtnd.lus.shared.AnimateType
 import com.vtnd.lus.shared.TYPE_FOOTER
 import com.vtnd.lus.shared.constants.Constants
 import com.vtnd.lus.shared.decoration.FlexibleGridSpacingItemDecoration
-import com.vtnd.lus.shared.extensions.randomAvatar
-import com.vtnd.lus.shared.extensions.replaceFragment
-import com.vtnd.lus.shared.extensions.setTextDefaultValue
+import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
-import com.vtnd.lus.ui.auth.register.RegisterFragment
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuIdolAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuSettingAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuUserAdapter
@@ -31,7 +28,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         MenuIdolAdapter {
             when (it) {
                 is Idol -> {
-
                 }
                 else -> {
                     replaceFragment(
@@ -45,7 +41,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         }
     }
     private val menuUserAdapter by lazy { MenuUserAdapter {} }
-    private val menuSettingAdapter by lazy { MenuSettingAdapter {} }
+    private val menuSettingAdapter by lazy {
+        MenuSettingAdapter {
+            when (it.title) {
+                R.string.log_out -> {
+                    requireActivity().showAlertDialog {
+                        title("Logout")
+                        message("Are you sure you want to logout?")
+                        iconId(R.drawable.ic_logout)
+                        cancelable(true)
+                        positiveAction("OK") { _, _ ->
+                            viewModel.logout()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     override val viewModel: ProfileViewModel by viewModel()
 
@@ -53,7 +65,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         FragmentProfileBinding.inflate(inflater)
 
     override fun initialize() {
+        initView()
         setupRecyclerView()
+    }
+
+    private fun initView() {
+
+
     }
 
     private fun binDataToView(user: IdolResponse?) {
@@ -108,6 +126,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         menuIdolLiveData.observeLiveData(viewLifecycleOwner, menuIdolAdapter::submitList)
         menuUserLiveData.observeLiveData(viewLifecycleOwner, menuUserAdapter::submitList)
         menuSettingLiveData.observeLiveData(viewLifecycleOwner, menuSettingAdapter::submitList)
+        logoutLiveData.observeLiveData(viewLifecycleOwner) { requireContext().toast("Logout success") }
     }
 
     companion object {

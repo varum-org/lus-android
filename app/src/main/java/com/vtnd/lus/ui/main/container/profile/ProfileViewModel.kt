@@ -6,7 +6,6 @@ import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseViewModel
 import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.data.UserRepository
-import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.shared.TYPE_ITEM
 import com.vtnd.lus.shared.liveData.SingleLiveData
 import com.vtnd.lus.shared.scheduler.dispatcher.AppDispatchers
@@ -28,6 +27,7 @@ class ProfileViewModel(
     val menuUserLiveData = SingleLiveData<List<ItemViewHolder<ItemMenu>>>()
     val menuIdolLiveData = SingleLiveData<List<ItemViewHolder<Any>>>()
     val menuSettingLiveData = SingleLiveData<List<ItemViewHolder<ItemMenu>>>()
+    val logoutLiveData = SingleLiveData<Any>()
     private val dispatchersProvider =
         get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
 
@@ -101,5 +101,12 @@ class ProfileViewModel(
                     title = R.string.log_out
                 )
             ).map { ItemViewHolder(it) })
+    }
+
+    fun logout() {
+        viewModelScope(logoutLiveData,
+            onRequest = { userRepository.logout() },
+            onError = { exception.postValue(it) },
+            onSuccess = { logoutLiveData.postValue(it) })
     }
 }

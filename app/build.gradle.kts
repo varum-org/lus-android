@@ -129,6 +129,7 @@ dependencies {
     implementation(Deps.support_app_compat)
 
     implementation(Deps.support_design)
+    implementation(Deps.support_fragment_runtime_ktx)
     implementation(Deps.support_constraintLayout)
     implementation(Deps.support_annotations)
     implementation(Deps.support_recyclerview)
@@ -156,6 +157,7 @@ dependencies {
     //Coroutine
     implementation(Deps.coroutines_core)
     implementation(Deps.coroutines_android)
+    implementation(Deps.coroutines_play_services)
     implementation(Deps.support_core_ktx)
     testImplementation(Deps.coroutines_test)
 
@@ -193,10 +195,13 @@ dependencies {
     androidTestImplementation(Deps.espresso_core)
 
     //Firebase
+    // Gms
+
     implementation("com.google.android.gms:play-services-maps:17.0.0")
     implementation("com.google.android.gms:play-services-location:17.1.0")
     implementation("com.google.android.gms:play-services-places:17.0.0")
-    implementation("com.google.android.libraries.places:places-compat:2.4.0")
+    implementation("com.google.android.libraries.places:places:2.3.0")
+
     //implementation(Deps.firebase_analytics)
     implementation("com.github.florent37:shapeofview:1.4.7")
     implementation("com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")

@@ -3,12 +3,13 @@ package com.vtnd.lus.data.repository.source
 import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Message
 import com.vtnd.lus.data.model.Room
-import com.vtnd.lus.data.model.User
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
-import com.vtnd.lus.data.repository.source.remote.api.response.*
-import com.vtnd.lus.shared.scheduler.DataResult
+import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.SignInResponse
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.flow.Flow
 
@@ -35,6 +36,8 @@ interface UserDataSource {
         suspend fun verifyAccount(verifyRequest: VerifyRequest): BaseResponse<Any>
 
         suspend fun getUser(id: String): BaseResponse<IdolResponse>
+
+        suspend fun logout(deviceToken: String): BaseResponse<Any>
 
         //Idol
 

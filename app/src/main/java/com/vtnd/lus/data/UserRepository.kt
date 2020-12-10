@@ -7,6 +7,7 @@ import com.vtnd.lus.data.model.User
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
+import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponse
 import com.vtnd.lus.shared.scheduler.DataResult
@@ -29,6 +30,8 @@ interface UserRepository {
     suspend fun verifyAccount(verifyRequest: VerifyRequest): DataResult<Any>
 
     suspend fun getUser(id: String): DataResult<Unit>
+
+    suspend fun logout(): DataResult<Any>
 
     //Idol
     suspend fun getIdols(

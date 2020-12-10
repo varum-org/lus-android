@@ -1,17 +1,21 @@
 package com.vtnd.lus.shared.extensions
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -26,7 +30,9 @@ import com.vtnd.lus.shared.widget.NotificationAlertDialog
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.android.synthetic.main.layout_toolbar_base.*
 import kotlinx.android.synthetic.main.layout_toolbar_search.*
+import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
+import kotlin.coroutines.resume
 
 fun Fragment.replaceFragment(
     @IdRes containerId: Int, fragment: Fragment,
@@ -288,5 +294,52 @@ fun Fragment.initToolbarBase(
             visible()
             safeClick { this@initToolbarBase.goBackFragment() }
         } else gone()
+    }
+}
+
+suspend fun Fragment.requestLocationPermission(): Boolean {
+    val list = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    ).map {
+        it to (ContextCompat.checkSelfPermission(
+            requireContext(),
+            it
+        ) == PackageManager.PERMISSION_GRANTED)
+    }
+
+    val (permission) = list.find { !it.second } ?: return true
+
+    return suspendCancellableCoroutine { continuation ->
+        val requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (continuation.isActive) {
+                continuation.resume(isGranted)
+            }
+        }
+
+        when {
+            shouldShowRequestPermissionRationale(permission) -> {
+                requireView().snack("You need grant location permission to retrieve current location!") {
+
+                    action("OK") { requestPermission.launch(permission) }
+
+                    val onDismissed = onDismissed {
+                        if (it != SnackbarDismissEvent.DISMISS_EVENT_ACTION && continuation.isActive) {
+                            continuation.resume(false)
+                        }
+                    }
+
+                    continuation.invokeOnCancellation {
+                        removeCallback(onDismissed)
+                        dismiss()
+                        requestPermission.unregister()
+                    }
+                }
+            }
+            else -> {
+                continuation.invokeOnCancellation { requestPermission.unregister() }
+                requestPermission.launch(permission)
+            }
+        }
     }
 }

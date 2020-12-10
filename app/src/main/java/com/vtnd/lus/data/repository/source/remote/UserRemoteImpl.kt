@@ -24,6 +24,8 @@ class UserRemoteImpl(private val apiService: ApiService) : UserDataSource.Remote
 
     override suspend fun getUser(id: String) = apiService.getUser(id)
 
+    override suspend fun logout(deviceToken: String) = apiService.logout(deviceToken)
+
     override suspend fun getIdols(
         isLogin: Boolean,
         category: CategoryIdolType
