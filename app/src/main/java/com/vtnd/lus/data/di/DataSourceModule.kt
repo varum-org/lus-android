@@ -60,7 +60,8 @@ val dataSourceModule = module {
     }
     single<RepoDataSource.Remote> {
         RepoRemoteImpl(
-            apiService = get()
+            apiService = get(),
+            geocoderApiService = get()
         )
     }
     single<TokenDataSource.Local> {

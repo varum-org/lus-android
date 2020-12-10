@@ -51,6 +51,8 @@ android {
             applicationIdSuffix = ".dev"
             resValue("string", "app_name", "LUS Dev")
             buildConfigField("String", "BASE_URL", "\"https://lus-sever.herokuapp.com/\"")
+            buildConfigField("String", "GEOCODE_URL", "\"https://maps.googleapis.com/maps/api/\"")
+            buildConfigField("String", "GEOCODE_API", "\"AIzaSyDCrGZXXsyMYRY2Ewmznl0zVMHtpkRWkEc\"")
         }
         create("prd") {
             dimension = "appVariant"
@@ -59,6 +61,16 @@ android {
                 "String",
                 "BASE_URL",
                 "\"https://lus-sever.herokuapp.com/\""
+            )
+            buildConfigField(
+                "String",
+                "GEOCODE_URL",
+                "\"https://maps.googleapis.com/maps/api/\""
+            )
+            buildConfigField(
+                "String",
+                "GEOCODE_API",
+                "\"AIzaSyDCrGZXXsyMYRY2Ewmznl0zVMHtpkRWkEc\""
             )
         }
     }
@@ -127,7 +139,6 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(Deps.kotlin_stdlib)
     implementation(Deps.support_app_compat)
-
     implementation(Deps.support_design)
     implementation(Deps.support_fragment_runtime_ktx)
     implementation(Deps.support_constraintLayout)
@@ -194,15 +205,14 @@ dependencies {
     androidTestImplementation(Deps.atsl_runner)
     androidTestImplementation(Deps.espresso_core)
 
-    //Firebase
     // Gms
-
     implementation("com.google.android.gms:play-services-maps:17.0.0")
     implementation("com.google.android.gms:play-services-location:17.1.0")
-    implementation("com.google.android.gms:play-services-places:17.0.0")
     implementation("com.google.android.libraries.places:places:2.3.0")
 
+    //Firebase
     //implementation(Deps.firebase_analytics)
+
     implementation("com.github.florent37:shapeofview:1.4.7")
     implementation("com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")
     //Circle ImageView

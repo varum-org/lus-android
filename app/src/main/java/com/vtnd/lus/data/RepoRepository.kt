@@ -1,6 +1,7 @@
 package com.vtnd.lus.data
 
 import com.vtnd.lus.data.model.Service
+import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
 import com.vtnd.lus.shared.scheduler.DataResult
 import com.vtnd.lus.ui.main.container.registerIdol.addressIdol.DomainLocation
 import kotlinx.coroutines.flow.Flow
@@ -20,4 +21,6 @@ interface RepoRepository {
 
     //Service
     suspend fun getServices(): DataResult<Unit>
+
+    suspend fun getAddressForCoordinates(location: DomainLocation): DataResult<String>
 }
