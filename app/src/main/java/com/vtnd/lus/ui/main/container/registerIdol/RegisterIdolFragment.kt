@@ -11,6 +11,7 @@ import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
 import com.vtnd.lus.shared.extensions.visible
 import com.vtnd.lus.ui.main.container.adapter.ContainerViewPagerAdapter
 import com.vtnd.lus.ui.main.container.registerIdol.addressIdol.AddressIdolFragment
+import com.vtnd.lus.ui.main.container.registerIdol.imageGallery.ImageGalleryFragment
 import com.vtnd.lus.ui.main.container.registerIdol.infomationIdol.InformationIdolFragment
 import com.vtnd.lus.ui.main.container.registerIdol.serviceIdol.ServiceIdolFragment
 import kotlinx.android.synthetic.main.fragment_register_idol.*
@@ -21,6 +22,7 @@ class RegisterIdolFragment : BaseFragment<FragmentRegisterIdolBinding, RegisterI
     private val addressFragment by lazy { AddressIdolFragment.newInstance() }
     private val informationFragment by lazy { InformationIdolFragment.newInstance() }
     private val serviceFragment by lazy { ServiceIdolFragment.newInstance() }
+    private val imageGalleryFragment by lazy { ImageGalleryFragment.newInstance() }
 
     override val viewModel: RegisterIdolViewModel by viewModel()
 
@@ -49,7 +51,10 @@ class RegisterIdolFragment : BaseFragment<FragmentRegisterIdolBinding, RegisterI
     private fun setupViewPaper() {
         addIdolViewPaper.apply {
             offscreenPageLimit = 3
-            val fragments = listOf<Fragment>(informationFragment, addressFragment, serviceFragment)
+            val fragments = listOf<Fragment>(informationFragment,
+                addressFragment,
+                serviceFragment,
+                imageGalleryFragment)
             val adapterViewPaper = ContainerViewPagerAdapter(childFragmentManager, fragments)
             adapter = adapterViewPaper
             currentItem = 0
