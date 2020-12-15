@@ -26,26 +26,28 @@ class RegisterIdolViewModel(
 ) : BaseViewModel(), KoinComponent {
     private val dispatchersProvider =
         get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
-
-    val locationLiveData = SingleLiveData<DomainLocation>()
-    private val validateInput = ValidateError()
-    val addressLiveData = SingleLiveData<String>()
-    val idolRequestLiveData = SingleLiveData<Idol>()
-    private var serviceRequests = mutableListOf<Service>()
-    private var idolRequest = Idol()
     private val _nickNameError =
         MutableLiveData<ValidateErrorType.BaseErrorType>(ValidateErrorType.BaseErrorType.IS_EMPTY)
     private val _relationshipError =
         MutableLiveData<ValidateErrorType.BaseErrorType>(ValidateErrorType.BaseErrorType.IS_EMPTY)
     private val _descriptionError =
         MutableLiveData<ValidateErrorType.BaseErrorType>(ValidateErrorType.BaseErrorType.IS_EMPTY)
-    val nickNameError: LiveData<ValidateErrorType.BaseErrorType> get() = _nickNameError
-    val relationshipError: LiveData<ValidateErrorType.BaseErrorType> get() = _relationshipError
-    val descriptionError: LiveData<ValidateErrorType.BaseErrorType> get() = _descriptionError
     private var nickNameText: String = ""
     private var relationshipText: String = ""
     private var descriptionText: String = ""
+    private val validateInput = ValidateError()
+    private var serviceRequests = mutableListOf<Service>()
+    private var galleryRequests = mutableListOf<String>()
+    private var idolRequest = Idol()
     val servicesLiveData = SingleLiveData<List<Service>>()
+    val galleryLiveData = SingleLiveData<List<String>>()
+    val locationLiveData = SingleLiveData<DomainLocation>()
+    val addressLiveData = SingleLiveData<String>()
+    val idolRequestLiveData = SingleLiveData<Idol>()
+    val nickNameError: LiveData<ValidateErrorType.BaseErrorType> get() = _nickNameError
+    val relationshipError: LiveData<ValidateErrorType.BaseErrorType> get() = _relationshipError
+    val descriptionError: LiveData<ValidateErrorType.BaseErrorType> get() = _descriptionError
+
 
     init {
         viewModelScope.launch(dispatchersProvider) {
@@ -53,6 +55,7 @@ class RegisterIdolViewModel(
                 servicesLiveData.postValue(it)
             }
             idolRequestLiveData.postValue(idolRequest)
+            galleryLiveData.postValue(galleryRequests)
         }
     }
 
