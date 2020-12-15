@@ -1,5 +1,6 @@
 package com.vtnd.lus.ui.main.container.registerIdol.imageGallery.adapter
 
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import com.vtnd.lus.R
@@ -10,7 +11,7 @@ import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
 import kotlinx.android.synthetic.main.item_gallery_2.view.*
 
-class GalleryAdapter2(private val onItemClickListener: (String) -> Unit) :
+class GalleryAdapter2(private val onItemClickListener: (Uri) -> Unit) :
     BaseAdapter(DIFF_CALLBACK) {
 
     override fun customViewHolder(parent: ViewGroup, viewType: Int) =
@@ -18,9 +19,9 @@ class GalleryAdapter2(private val onItemClickListener: (String) -> Unit) :
 
     inner class ViewHolder(
         itemView: View
-    ) : BaseViewHolder<ItemViewHolder<String>>(itemView) {
+    ) : BaseViewHolder<ItemViewHolder<Uri>>(itemView) {
 
-        override fun bind(item: ItemViewHolder<String>) {
+        override fun bind(item: ItemViewHolder<Uri>) {
             itemView.apply {
                 item.itemData.let {
                     GlideApp.with(this)
@@ -36,10 +37,10 @@ class GalleryAdapter2(private val onItemClickListener: (String) -> Unit) :
 
     companion object {
         private val DIFF_CALLBACK =
-            object : BaseDiffUtil<ItemViewHolder<String>>() {
+            object : BaseDiffUtil<ItemViewHolder<Uri>>() {
                 override fun areItemsTheSame(
-                    oldItem: ItemViewHolder<String>,
-                    newItem: ItemViewHolder<String>
+                    oldItem: ItemViewHolder<Uri>,
+                    newItem: ItemViewHolder<Uri>
                 ) = oldItem.itemData == newItem.itemData
             }
     }
