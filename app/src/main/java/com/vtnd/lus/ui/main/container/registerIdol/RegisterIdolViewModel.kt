@@ -1,6 +1,7 @@
 package com.vtnd.lus.ui.main.container.registerIdol
 
 import android.Manifest
+import android.net.Uri
 import androidx.annotation.RequiresPermission
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -37,10 +38,10 @@ class RegisterIdolViewModel(
     private var descriptionText: String = ""
     private val validateInput = ValidateError()
     private var serviceRequests = mutableListOf<Service>()
-    private var galleryRequests = mutableListOf<String>()
+    private var galleryRequests = mutableListOf<Uri>()
     private var idolRequest = Idol()
     val servicesLiveData = SingleLiveData<List<Service>>()
-    val galleryLiveData = SingleLiveData<List<String>>()
+    val galleryLiveData = SingleLiveData<List<Uri>>()
     val locationLiveData = SingleLiveData<DomainLocation>()
     val addressLiveData = SingleLiveData<String>()
     val idolRequestLiveData = SingleLiveData<Idol>()
@@ -110,6 +111,27 @@ class RegisterIdolViewModel(
         }
         idolRequest = idolRequest.copy(services = serviceRequests)
         idolRequestLiveData.postValue(idolRequest)
+    }
+
+    fun postImage(uri: Uri) {
+        val oldImage = galleryRequests.singleOrNull { it == uri }
+        galleryRequests = if (oldImage == null) {
+            galleryRequests.apply {
+                add(uri)
+            }
+        } else {
+            galleryRequests.apply {
+                set(indexOf(oldImage), uri)
+            }
+        }
+        galleryLiveData.postValue(galleryRequests)
+    }
+
+    fun deleteImage(uri: Uri) {
+        galleryRequests = galleryRequests.apply {
+            remove(uri)
+        }
+        galleryLiveData.postValue(galleryRequests)
     }
 
     fun setLocation(domainLocation: DomainLocation, address: String?) {
