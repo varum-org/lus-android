@@ -2,6 +2,7 @@ package com.vtnd.lus.shared
 
 import android.net.Uri
 import android.util.Patterns
+import com.vtnd.lus.data.model.Service
 import com.vtnd.lus.shared.type.ValidateErrorType.*
 
 typealias ValidateResult = Pair<Boolean, ErrorType<String?>>
@@ -35,15 +36,17 @@ class ValidateError {
 
     fun validateBase(value: String?) = when {
         value.isNullOrBlank() -> ValidateResult(false, BaseErrorType.IS_EMPTY)
-        value.length < LEAST_NUMBER_CHARACTER -> ValidateResult(
-            false,
-            BaseErrorType.LEAST_CHARACTER
-        )
         else -> ValidateResult(true, BaseErrorType.NONE)
     }
 
-    fun validateUriEmpty(value: Uri?) = when (value) {
-        null -> ValidateResult(false, BaseErrorType.IS_EMPTY)
+    fun validateUrisEmpty(value: List<Uri>) = when {
+        value.isNullOrEmpty() -> ValidateResult(false, BaseErrorType.IS_EMPTY)
+        value.size < 2 -> ValidateResult(false, BaseErrorType.LEAST_IMAGES)
+        else -> ValidateResult(true, BaseErrorType.NONE)
+    }
+
+    fun validateServicesEmpty(value: List<Service>) = when {
+        value.isNullOrEmpty() -> ValidateResult(false, BaseErrorType.IS_EMPTY)
         else -> ValidateResult(true, BaseErrorType.NONE)
     }
 

@@ -1,5 +1,6 @@
 package com.vtnd.lus.data.repository.source
 
+import android.net.Uri
 import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Message
 import com.vtnd.lus.data.model.Room
@@ -62,5 +63,7 @@ interface UserDataSource {
             nickName: String?,
             rating: Int?
         ): BaseResponse<List<Idol>>
+
+        suspend fun registerIdol(idol: Idol, uris: List<Uri>): BaseResponse<Any>
     }
 }

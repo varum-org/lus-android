@@ -74,7 +74,16 @@
     <string name="invite_friends">Mời bạn bè</string>
     <string name="feedback">Phản hồi</string>
     <string name="success">Thành công</string>
-    <string name="register_idol">Đăng ký idol</string>
+    <string name="register_success">Đăng ký thành công!</string>
+    <string name="register_idol">Đăng ký thần tượng</string>
     <string name="edit_idol_profile">Chỉnh sửa hồ sơ thần tượng</string>
     <string name="input_coin">Nhập coin…</string>
+    <string name="information_idol">Thông tin thần tượng</string>
+    <string name="location">Vị trí</string>
+    <string name="service_idol">Dịch vụ của thần tượng</string>
+    <string name="image_gallery">Thư viện ảnh</string>
+    <string name="recommend_for_you">Đề xuất cho bạn</string>
+    <string name="nickname">Biệt danh</string>
+    <string name="relationship">Mối quan hệ (cô đơn,..)</string>
+    <string name="introduce_yourself">Giới thiệu về bản thân</string>
 </resources>

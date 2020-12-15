@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
@@ -283,17 +284,19 @@ fun Fragment.pickDateTime(calendar: Calendar, doSomethingWith: (Calendar) -> Uni
 }
 
 fun Fragment.initToolbarBase(
-        title: String? = null,
-        iconRight: Int? = null,
-        isShowIconLeft: Boolean = true,
-        setRightOnClickListener: (() -> Unit)? = null
+    title: String? = null,
+    iconRight: Int? = null,
+    isShowIconLeft: Boolean = true,
+    color: Int = R.color.grey_600,
+    setRightOnClickListener: ((ImageView) -> Unit)? = null
 ) {
     title?.let { titleToolbarBaseTextView.text = it }
     rightImageBaseButton.apply {
         iconRight?.let {
             visible()
             setBackgroundResource(it)
-            safeClick { setRightOnClickListener?.invoke() }
+            setTint(color)
+            safeClick { setRightOnClickListener?.invoke(this) }
         } ?: invisible()
     }
     leftImageBaseButton.apply {

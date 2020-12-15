@@ -1,8 +1,10 @@
 package com.vtnd.lus.data.repository
 
+import android.net.Uri
 import com.vtnd.lus.base.BaseRepository
 import com.vtnd.lus.data.TokenRepository
 import com.vtnd.lus.data.UserRepository
+import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.repository.source.RepoDataSource
 import com.vtnd.lus.data.repository.source.TokenDataSource
 import com.vtnd.lus.data.repository.source.UserDataSource
@@ -105,6 +107,11 @@ class UserRepositoryImpl(
             remote.getIdol(!tokenRepository.getToken().isNullOrEmpty(), id).data.toIdolResponse(
                 repoLocal.services()
             )
+        }
+
+    override suspend fun registerIdol(idol: Idol, uris: List<Uri>) =
+        withResultContext {
+            remote.registerIdol(idol, uris).data
         }
 }
 

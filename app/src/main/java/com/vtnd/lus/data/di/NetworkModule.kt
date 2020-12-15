@@ -88,6 +88,7 @@ fun provideOkHttpClient(
 ): OkHttpClient {
     return OkHttpClient.Builder()
         .connectTimeout(20, TimeUnit.SECONDS)
+        .retryOnConnectionFailure(true)
         .readTimeout(20, TimeUnit.SECONDS)
         .writeTimeout(20, TimeUnit.SECONDS).apply {
             for (interceptor in authInterceptor) addInterceptor(interceptor)

@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.vtnd.lus.base.BaseViewModel
 import com.vtnd.lus.data.RepoRepository
+import com.vtnd.lus.data.UserRepository
 import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Service
 import com.vtnd.lus.shared.ValidateError
@@ -23,19 +24,19 @@ import org.koin.core.qualifier.named
 import timber.log.Timber
 
 class RegisterIdolViewModel(
-    private val repoRepository: RepoRepository
+    private val repoRepository: RepoRepository,
+    private val userRepository: UserRepository
 ) : BaseViewModel(), KoinComponent {
     private val dispatchersProvider =
         get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
     private val _nickNameError =
-        MutableLiveData<ValidateErrorType.BaseErrorType>(ValidateErrorType.BaseErrorType.IS_EMPTY)
+        MutableLiveData<ValidateErrorType.BaseErrorType>()
     private val _relationshipError =
-        MutableLiveData<ValidateErrorType.BaseErrorType>(ValidateErrorType.BaseErrorType.IS_EMPTY)
+        MutableLiveData<ValidateErrorType.BaseErrorType>()
     private val _descriptionError =
-        MutableLiveData<ValidateErrorType.BaseErrorType>(ValidateErrorType.BaseErrorType.IS_EMPTY)
-    private var nickNameText: String = ""
-    private var relationshipText: String = ""
-    private var descriptionText: String = ""
+        MutableLiveData<ValidateErrorType.BaseErrorType>()
+    private val _urisError =
+        MutableLiveData<ValidateErrorType.BaseErrorType>()
     private val validateInput = ValidateError()
     private var serviceRequests = mutableListOf<Service>()
     private var galleryRequests = mutableListOf<Uri>()
@@ -48,7 +49,10 @@ class RegisterIdolViewModel(
     val nickNameError: LiveData<ValidateErrorType.BaseErrorType> get() = _nickNameError
     val relationshipError: LiveData<ValidateErrorType.BaseErrorType> get() = _relationshipError
     val descriptionError: LiveData<ValidateErrorType.BaseErrorType> get() = _descriptionError
-
+    val urisError: LiveData<ValidateErrorType.BaseErrorType> get() = _urisError
+    val isShowButton = SingleLiveData<Boolean>().apply { postValue(false) }
+    val isShowButtonRegister = SingleLiveData<Boolean>().apply { postValue(false) }
+    val idolResponse =SingleLiveData<Unit>()
 
     init {
         viewModelScope.launch(dispatchersProvider) {
@@ -61,35 +65,67 @@ class RegisterIdolViewModel(
     }
 
     fun postNickNameText(nickName: String) {
-        idolRequestLiveData.postValue(idolRequest.copy(nickName = nickName))
         val nicknameValidation = validateInput.validateBase(nickName)
+        idolRequest = idolRequest.copy(nickName = nickName)
+        idolRequestLiveData.postValue(idolRequest)
         _nickNameError.value = nicknameValidation.second as ValidateErrorType.BaseErrorType
+        checkInformation()
     }
 
     fun postRelationshipText(relationship: String) {
-        idolRequestLiveData.postValue(idolRequest.copy(relationship = relationship))
         val relationshipValidation = validateInput.validateBase(relationship)
+        idolRequest = idolRequest.copy(relationship = relationship)
+        idolRequestLiveData.postValue(idolRequest)
         _relationshipError.value = relationshipValidation.second as ValidateErrorType.BaseErrorType
+        checkInformation()
     }
 
     fun postDescriptionText(description: String) {
-        idolRequestLiveData.postValue(idolRequest.copy(description = description))
         val descriptionValidation = validateInput.validateBase(description)
+        idolRequest = idolRequest.copy(description = description)
+        idolRequestLiveData.postValue(idolRequest)
         _descriptionError.value = descriptionValidation.second as ValidateErrorType.BaseErrorType
+        checkInformation()
     }
 
-    fun check() {
-        val descriptionValidation = validateInput.validateBase(descriptionText)
-        val relationshipValidation = validateInput.validateBase(relationshipText)
-        val nicknameValidation = validateInput.validateBase(nickNameText)
-        Timber.i("${nicknameValidation.first}--${relationshipValidation.first}--${descriptionValidation.first}")
+    fun checkInformation() {
+        val relationshipValidation = validateInput.validateBase(idolRequest.relationship)
+        val nicknameValidation = validateInput.validateBase(idolRequest.nickName)
+        val descriptionValidation = validateInput.validateBase(idolRequest.description)
         if (nicknameValidation.first
             && relationshipValidation.first
             && descriptionValidation.first
-        ) {
+        ) isShowButton.postValue(true)
+        else isShowButton.postValue(false)
+        checkRegisterIdol()
+    }
 
+    fun checkRegisterIdol() {
+        val relationshipValidation = validateInput.validateBase(idolRequest.relationship)
+        val nicknameValidation = validateInput.validateBase(idolRequest.nickName)
+        val descriptionValidation = validateInput.validateBase(idolRequest.description)
+        val serviceValidation = validateInput.validateServicesEmpty(serviceRequests)
+        val urisValidation = validateInput.validateUrisEmpty(galleryRequests)
+        if (nicknameValidation.first
+            && relationshipValidation.first
+            && descriptionValidation.first
+            && serviceValidation.first
+            && urisValidation.first
+        ) {
+            isShowButtonRegister.postValue(true)
+        } else {
+            isShowButtonRegister.postValue(false)
         }
     }
+
+    fun checkServices() {
+        val serviceValidation = validateInput.validateServicesEmpty(serviceRequests)
+        if (serviceValidation.first
+        ) isShowButton.postValue(true)
+        else isShowButton.postValue(false)
+        checkRegisterIdol()
+    }
+
     fun postService(service: Service) {
         val oldService = serviceRequests.singleOrNull { it.serviceCode == service.serviceCode }
         serviceRequests = if (oldService == null) {
@@ -103,6 +139,7 @@ class RegisterIdolViewModel(
         }
         idolRequest = idolRequest.copy(services = serviceRequests)
         idolRequestLiveData.postValue(idolRequest)
+        checkServices()
     }
 
     fun deleteService(service: Service) {
@@ -111,6 +148,7 @@ class RegisterIdolViewModel(
         }
         idolRequest = idolRequest.copy(services = serviceRequests)
         idolRequestLiveData.postValue(idolRequest)
+        checkServices()
     }
 
     fun postImage(uri: Uri) {
@@ -124,14 +162,20 @@ class RegisterIdolViewModel(
                 set(indexOf(oldImage), uri)
             }
         }
+        val urisValidation = validateInput.validateUrisEmpty(galleryRequests)
+        _urisError.value = urisValidation.second as ValidateErrorType.BaseErrorType
         galleryLiveData.postValue(galleryRequests)
+        checkRegisterIdol()
     }
 
     fun deleteImage(uri: Uri) {
         galleryRequests = galleryRequests.apply {
             remove(uri)
         }
+        val urisValidation = validateInput.validateUrisEmpty(galleryRequests)
+        _urisError.value = urisValidation.second as ValidateErrorType.BaseErrorType
         galleryLiveData.postValue(galleryRequests)
+        checkRegisterIdol()
     }
 
     fun setLocation(domainLocation: DomainLocation, address: String?) {
@@ -162,5 +206,13 @@ class RegisterIdolViewModel(
             onRequest = { repoRepository.getAddressForCoordinates(location) },
             onSuccess = { addressLiveData.postValue(it) },
             onError = { exception.postValue(it) })
+    }
+    fun registerIdol(){
+        viewModelScope(
+            null,
+            onRequest = {userRepository.registerIdol(idolRequest,galleryRequests)},
+            onSuccess = {idolResponse.postValue(Unit)},
+            onError = {exception.postValue(it)}
+        )
     }
 }

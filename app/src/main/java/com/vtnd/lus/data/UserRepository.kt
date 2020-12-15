@@ -1,5 +1,6 @@
 package com.vtnd.lus.data
 
+import android.net.Uri
 import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Message
 import com.vtnd.lus.data.model.Room
@@ -13,6 +14,7 @@ import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponse
 import com.vtnd.lus.shared.scheduler.DataResult
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.flow.Flow
+import retrofit2.http.Body
 
 interface UserRepository {
 
@@ -47,6 +49,8 @@ interface UserRepository {
     suspend fun getIdol(
         id: String
     ): DataResult<IdolResponse>
+
+    suspend fun registerIdol(idol: Idol,uris: List<Uri>): DataResult<Any>
 
     //Room
 

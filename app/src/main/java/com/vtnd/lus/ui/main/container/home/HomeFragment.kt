@@ -3,13 +3,14 @@ package com.vtnd.lus.ui.main.container.home
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.transition.MaterialContainerTransform
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
-import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.databinding.FragmentHomeBinding
 import com.vtnd.lus.shared.AnimateType
+import com.vtnd.lus.shared.decoration.FlexibleGridSpacingItemDecoration
 import com.vtnd.lus.shared.decoration.HorizontalMarginItemDecoration
 import com.vtnd.lus.shared.decoration.VerticalSpaceItemDecoration
 import com.vtnd.lus.shared.extensions.delayTask
@@ -27,7 +28,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.abs
 
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
+    SwipeRefreshLayout.OnRefreshListener {
     private val storyCircleAdapter = StoryCircleAdapter { item ->
         val fragment = IdolDetailFragment.newInstance(item, item.idol!!.id)
         fragment.sharedElementEnterTransition = MaterialContainerTransform()
@@ -67,6 +69,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     @ExperimentalCoroutinesApi
     override fun initialize() {
+        homeRefresh.setOnRefreshListener(this)
         initToolbar(
             title = getString(R.string.app_name),
             iconRight = R.drawable.ic_chat_light
@@ -108,8 +111,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
         recommendRecyclerView.apply {
             adapter = recommendAdapter
-            addItemDecoration(VerticalSpaceItemDecoration(resources.getDimension(R.dimen.dp_4).toInt()))
-            addItemDecoration(HorizontalMarginItemDecoration(context, R.dimen.dp_4))
+            addItemDecoration(
+                FlexibleGridSpacingItemDecoration(
+                    top = resources.getDimensionPixelOffset(R.dimen.dp_8),
+                    bottom = resources.getDimensionPixelOffset(R.dimen.dp_8),
+                    left = resources.getDimensionPixelOffset(R.dimen.dp_16),
+                    right = resources.getDimensionPixelOffset(R.dimen.dp_16),
+                    middle = resources.getDimensionPixelOffset(R.dimen.dp_8)
+                )
+            )
         }
     }
 
@@ -119,6 +129,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             storyCircleAdapter.submitList(it)
         }
         hotIdols.observeLiveData(viewLifecycleOwner) {
+            homeRefresh.isRefreshing = false
             hotIdolAdapter.submitList(it)
         }
         recommendIdols.observeLiveData(viewLifecycleOwner) {
@@ -128,5 +139,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     companion object {
         fun newInstance() = HomeFragment()
+    }
+
+    override fun onRefresh() {
+        viewModel.initialHotIdols()
     }
 }

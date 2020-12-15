@@ -7,8 +7,6 @@ import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.databinding.FragmentImageGalleryBinding
 import com.vtnd.lus.shared.decoration.FlexibleGridSpacingItemDecoration
-import com.vtnd.lus.shared.decoration.HorizontalMarginItemDecoration
-import com.vtnd.lus.shared.decoration.VerticalSpaceItemDecoration
 import com.vtnd.lus.shared.extensions.safeClick
 import com.vtnd.lus.shared.extensions.showError
 import com.vtnd.lus.shared.liveData.observeLiveData
@@ -16,6 +14,7 @@ import com.vtnd.lus.ui.main.container.registerIdol.RegisterIdolViewModel
 import com.vtnd.lus.ui.main.container.registerIdol.imageGallery.adapter.GalleryAdapter2
 import kotlinx.android.synthetic.main.fragment_image_gallery.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import timber.log.Timber
 
 class ImageGalleryFragment : BaseFragment<FragmentImageGalleryBinding, RegisterIdolViewModel>() {
     private val imageGalleryAdapter2 by lazy {
@@ -52,8 +51,8 @@ class ImageGalleryFragment : BaseFragment<FragmentImageGalleryBinding, RegisterI
             val launcher =
                 registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
                     uri?.let {
-                        showError("URI:${it}")
                         viewModel.postImage(it)
+                        Timber.i("$it")
                     }
                 }
             launcher.launch(arrayOf("image/*"))
@@ -66,6 +65,9 @@ class ImageGalleryFragment : BaseFragment<FragmentImageGalleryBinding, RegisterI
             if (it.isNullOrEmpty()) showChildNoDataFragment(R.id.imageGalleryLayout)
             else hideChildNoDataFragment()
             imageGalleryAdapter2.submitList(ArrayList(it.map { uri -> ItemViewHolder(uri) }).toList())
+        }
+        urisError.observeLiveData(viewLifecycleOwner) {
+            it.message?.let { message -> showError(message) }
         }
     }
 

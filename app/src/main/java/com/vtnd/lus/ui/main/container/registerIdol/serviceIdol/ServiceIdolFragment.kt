@@ -9,6 +9,7 @@ import com.vtnd.lus.databinding.FragmentServiceIdolBinding
 import com.vtnd.lus.shared.extensions.safeClick
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
 import com.vtnd.lus.shared.extensions.showAddServiceAlertDialog
+import com.vtnd.lus.shared.extensions.showError
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.main.container.registerIdol.RegisterIdolViewModel
 import com.vtnd.lus.ui.main.container.registerIdol.serviceIdol.adapter.AddServiceAdapter

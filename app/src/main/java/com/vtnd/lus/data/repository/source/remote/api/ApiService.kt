@@ -8,7 +8,11 @@ import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignInRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
-import com.vtnd.lus.data.repository.source.remote.api.response.*
+import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponse
+import com.vtnd.lus.data.repository.source.remote.api.response.SignInResponse
+import okhttp3.MultipartBody
 import retrofit2.Retrofit
 import retrofit2.create
 import retrofit2.http.*
@@ -70,6 +74,13 @@ interface ApiService {
     suspend fun logout(
         @Field("device_token") deviceToken: String
     ): BaseResponse<Any>
+
+    @Multipart
+    @POST("api/v1/uploads")
+    suspend fun uploadFile(@Part body: List<MultipartBody.Part>): BaseResponse<List<String>>
+
+    @POST("api/v1/idol")
+    suspend fun registerIdol(@Body idol: Idol): BaseResponse<Any>
 
     companion object Factory {
         operator fun invoke(retrofit: Retrofit) = retrofit.create<ApiService>()

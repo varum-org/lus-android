@@ -63,6 +63,14 @@ class ValidateErrorType {
             override val message: String?
                 get() = "Please enter at least 6 characters!"
         },
+        LEAST_IMAGES {
+            override val message: String?
+                get() = "Please enter at least 2 image!"
+        },
+        LEAST_SERVICES {
+            override val message: String?
+                get() = "Please enter at least 1 service!"
+        },
         NONE {
             override val message: String?
                 get() = null

@@ -40,7 +40,7 @@
     <string name="verify_email_success">Verify email success!</string>
     <string name="idol_address">Home town is %1$s</string>
     <string name="live_in">Live in %1$s</string>
-    <string name="nick_name">%1$s ,%2$s</string>
+    <string name="nick_name">%1$s, %2$s</string>
     <string name="crush_national_citizen">Crush National Citizen</string>
     <string name="to_rent">To rent</string>
     <string name="service">Service</string>
@@ -84,7 +84,17 @@
     <string name="invite_friends">Invite friends</string>
     <string name="feedback">Feedback</string>
     <string name="success">Success</string>
+    <string name="register_success">Register success!</string>
     <string name="edit_idol_profile">Edit idol profile</string>
     <string name="register_idol">Register Idol</string>
     <string name="input_coin">Input coin…</string>
+    <string name="information_idol">Information Idol</string>
+    <string name="location">Location</string>
+    <string name="service_idol">Service Idol</string>
+    <string name="image_gallery">Image Gallery</string>
+    <string name="hot_idol">Hot Idol</string>
+    <string name="recommend_for_you">Recommend for you</string>
+    <string name="nickname">Nickname</string>
+    <string name="relationship">Relationship (Alone,..)</string>
+    <string name="introduce_yourself">Introduce yourself</string>
 </resources>

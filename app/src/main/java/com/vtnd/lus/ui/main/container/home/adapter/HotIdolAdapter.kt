@@ -52,11 +52,11 @@ class HotIdolAdapter(private val onItemClickListener: (View, IdolResponse) -> Un
 
     companion object {
         private val DIFF_CALLBACK =
-            object : BaseDiffUtil<ItemViewHolder<Pair<User?, IdolResponse?>>>() {
+            object : BaseDiffUtil<ItemViewHolder<IdolResponse>>() {
                 override fun areItemsTheSame(
-                    oldItem: ItemViewHolder<Pair<User?, IdolResponse?>>,
-                    newItem: ItemViewHolder<Pair<User?, IdolResponse?>>
-                ) = oldItem.itemData.first?.id == newItem.itemData.first?.id
+                    oldItem: ItemViewHolder<IdolResponse>,
+                    newItem: ItemViewHolder<IdolResponse>
+                ) = oldItem.itemData == newItem.itemData
             }
     }
 }

@@ -14,7 +14,6 @@ import com.vtnd.lus.ui.main.container.idolDetail.IdolDetailViewModel
 import com.vtnd.lus.ui.main.container.message.MessageViewModel
 import com.vtnd.lus.ui.main.container.notification.NotificationViewModel
 import com.vtnd.lus.ui.main.container.profile.ProfileViewModel
-import com.vtnd.lus.ui.main.container.registerIdol.RegisterIdolFragment
 import com.vtnd.lus.ui.main.container.registerIdol.RegisterIdolViewModel
 import com.vtnd.lus.ui.main.container.room.RoomViewModel
 import com.vtnd.lus.ui.main.container.search.SearchViewModel
@@ -84,5 +83,5 @@ val viewModelModule = module {
     }
     viewModel { VerifyViewModel(userRepository = get()) }
     viewModel { RegisterViewModel(userRepository = get()) }
-    viewModel { RegisterIdolViewModel(repoRepository = get()) }
+    viewModel { RegisterIdolViewModel(repoRepository = get(), userRepository = get()) }
 }

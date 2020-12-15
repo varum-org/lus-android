@@ -48,7 +48,8 @@ val dataSourceModule = module {
     }
     single<UserDataSource.Remote> {
         UserRemoteImpl(
-            apiService = get()
+            apiService = get(),
+            application = get()
         )
     }
     single<RepoDataSource.Local> {

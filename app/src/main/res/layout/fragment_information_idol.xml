@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:hint="Nick name"
+                    android:hint="@string/nickname"
                     app:boxStrokeColor="@color/pink_50"
                     app:counterEnabled="true"
                     app:counterMaxLength="6"
@@ -56,6 +56,7 @@
                         android:imeOptions="actionNext"
                         android:inputType="textPersonName"
                         android:maxLength="6"
+                        android:background="@color/pink_50"
                         android:singleLine="true"
                         app:fontFamily="@font/segoe_ui_regular" />
 
@@ -68,7 +69,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:hint="Relationship (Alone,..)"
+                    android:hint="@string/relationship"
                     app:boxStrokeColor="@color/pink_50"
                     app:counterEnabled="true"
                     app:counterMaxLength="16"
@@ -91,6 +92,7 @@
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
                         android:inputType="text"
+                        android:background="@color/pink_50"
                         android:maxLength="16"
                         android:singleLine="true"
                         app:fontFamily="@font/segoe_ui_regular" />
@@ -104,7 +106,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:hint="Giới thiệu về bản thân"
+                    android:hint="@string/introduce_yourself"
                     app:boxStrokeColor="@color/pink_50"
                     app:counterEnabled="true"
                     app:counterMaxLength="500"
@@ -128,6 +130,7 @@
                         android:inputType="textLongMessage|textCapSentences|textMultiLine"
                         android:lines="5"
                         android:maxLength="500"
+                        android:background="@color/pink_50"
                         android:maxLines="6"
                         android:singleLine="true"
                         app:fontFamily="@font/segoe_ui_regular" />

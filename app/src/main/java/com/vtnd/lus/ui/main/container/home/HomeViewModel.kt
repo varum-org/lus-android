@@ -37,7 +37,7 @@ class HomeViewModel(
         }
     }
 
-    private fun initialHotIdols() {
+    fun initialHotIdols() {
         viewModelScope(
             null,
             onRequest = {

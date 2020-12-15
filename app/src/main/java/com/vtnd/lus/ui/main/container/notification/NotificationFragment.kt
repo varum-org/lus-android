@@ -5,7 +5,6 @@ import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentNotificationBinding
 import com.vtnd.lus.shared.extensions.initToolbar
-import com.vtnd.lus.shared.extensions.initToolbarBase
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : BaseFragment<FragmentNotificationBinding,

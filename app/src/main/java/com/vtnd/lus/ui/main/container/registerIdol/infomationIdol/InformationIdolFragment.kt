@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.databinding.FragmentInformationIdolBinding
 import com.vtnd.lus.shared.extensions.setupDismissKeyBoard
+import com.vtnd.lus.shared.extensions.showError
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.main.container.registerIdol.RegisterIdolViewModel
 import kotlinx.android.synthetic.main.fragment_information_idol.*
