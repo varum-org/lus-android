@@ -46,6 +46,10 @@
     <string name="start_date">Ngày bắt đầu</string>
     <string name="note">Ghi chú</string>
     <string name="add_note">Thêm ghi chú…</string>
+    <string name="add_service">Thêm dịch vụ</string>
+    <string name="edit_service">Sữa dịch vụ</string>
+    <string name="add">Thêm</string>
+    <string name="edit">Sữa</string>
     <string name="invalid">Không hợp lệ</string>
     <string name="present_to">Tặng quà cho %1$s</string>
     <string name="choose_a_gift_to_impress">Chọn một món quà để gây ấn tượng hơn</string>
@@ -56,6 +60,7 @@
     <string name="follow">Theo dõi</string>
     <string name="send_message">Gửi tin nhắn…</string>
     <string name="please_enter_your_message">Vui lòng nhập tin nhắn!</string>
+    <string name="please_enter_your_price">Vui lòng nhập xu của bạn!</string>
     <string name="setting">Cài đặt</string>
     <string name="see_your_profile_page">Xem trang cá nhân của bạn</string>
     <string name="see_more">Xem thêm</string>
@@ -70,4 +75,6 @@
     <string name="feedback">Phản hồi</string>
     <string name="success">Thành công</string>
     <string name="register_idol">Đăng ký idol</string>
+    <string name="edit_idol_profile">Chỉnh sửa hồ sơ thần tượng</string>
+    <string name="input_coin">Nhập coin…</string>
 </resources>

@@ -59,6 +59,10 @@ class ValidateErrorType {
             override val message: String?
                 get() = "Empty, please enter!"
         },
+        LEAST_CHARACTER {
+            override val message: String?
+                get() = "Please enter at least 6 characters!"
+        },
         NONE {
             override val message: String?
                 get() = null

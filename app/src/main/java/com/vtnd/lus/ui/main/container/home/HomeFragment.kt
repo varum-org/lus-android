@@ -91,7 +91,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
         }
         storyCircleRecyclerView.apply {
-            setHasFixedSize(true)
             adapter = storyCircleAdapter
         }
         hotIdolRecyclerView.apply {
@@ -108,7 +107,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             addItemDecoration(HorizontalMarginItemDecoration(context, R.dimen.dp_80))
         }
         recommendRecyclerView.apply {
-            setHasFixedSize(true)
             adapter = recommendAdapter
             addItemDecoration(VerticalSpaceItemDecoration(resources.getDimension(R.dimen.dp_4).toInt()))
             addItemDecoration(HorizontalMarginItemDecoration(context, R.dimen.dp_4))

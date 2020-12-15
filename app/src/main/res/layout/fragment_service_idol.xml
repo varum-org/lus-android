@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,9 +13,37 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/serviceLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/blue_a100">
+        android:layout_height="match_parent">
 
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/serviceRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_service" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/serviceFAB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_16"
+                android:backgroundTint="@color/red_a400"
+                app:fabSize="normal"
+                app:layout_anchor="@id/serviceRecyclerView"
+                app:layout_anchorGravity="bottom|end"
+                app:layout_behavior="com.vtnd.lus.shared.ScrollAwareFABBehavior"
+                app:srcCompat="@drawable/ic_add"
+                app:tint="@android:color/white" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

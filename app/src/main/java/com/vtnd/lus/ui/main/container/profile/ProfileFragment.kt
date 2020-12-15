@@ -50,6 +50,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
                         message("Are you sure you want to logout?")
                         iconId(R.drawable.ic_logout)
                         cancelable(true)
+                        negativeAction("Cancel") { _, _ -> }
                         positiveAction("OK") { _, _ ->
                             viewModel.logout()
                         }
@@ -96,11 +97,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
     private fun setupRecyclerView() {
         menuIdolRecyclerView.apply {
-            setHasFixedSize(false)
             adapter = menuIdolAdapter
         }
         menuUserRecyclerView.apply {
-            setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(),2,GridLayoutManager.VERTICAL,false)
             adapter = menuUserAdapter
             addItemDecoration(
@@ -114,7 +113,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
             )
         }
         menuSettingRecyclerView.apply {
-            setHasFixedSize(true)
             adapter = menuSettingAdapter
         }
     }

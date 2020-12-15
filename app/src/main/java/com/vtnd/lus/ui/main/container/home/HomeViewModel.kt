@@ -47,11 +47,11 @@ class HomeViewModel(
                 )
             },
             onSuccess = {
+                val newIdols = it.map { idolResponse -> ItemViewHolder(idolResponse) }
                 viewModelScope.launch(dispatchersProvider) {
-                    val newIdols = it.map { idolResponse -> ItemViewHolder(idolResponse) }
-                    hotIdols.postValue(newIdols)
                     recommendIdols.postValue(newIdols)
                     storyIdols.postValue(newIdols)
+                    hotIdols.postValue(newIdols)
                 }
             },
             onError = { exception.postValue(it) }

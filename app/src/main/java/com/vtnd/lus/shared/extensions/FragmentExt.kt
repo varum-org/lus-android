@@ -22,11 +22,9 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.snackbar.Snackbar
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseActivity
+import com.vtnd.lus.data.model.Service
 import com.vtnd.lus.shared.AnimateType
-import com.vtnd.lus.shared.widget.BaseAlertDialog
-import com.vtnd.lus.shared.widget.DatePickerAlertDialog
-import com.vtnd.lus.shared.widget.NoteAlertDialog
-import com.vtnd.lus.shared.widget.NotificationAlertDialog
+import com.vtnd.lus.shared.widget.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.android.synthetic.main.layout_toolbar_base.*
 import kotlinx.android.synthetic.main.layout_toolbar_search.*
@@ -238,8 +236,18 @@ fun Fragment.showNoteAlertDialog(
 }
 
 fun Fragment.showAlertDialog(
-        completion: BaseAlertDialog.() -> Unit
+    completion: BaseAlertDialog.() -> Unit
 ) = BaseAlertDialog(requireContext()).apply {
+    completion.invoke(this)
+    show()
+}
+
+fun Fragment.showAddServiceAlertDialog(
+    services: List<Service>? = emptyList(),
+    oldService: Service,
+    completion: AddServiceAlertDialog.() -> Unit
+) = AddServiceAlertDialog(requireContext()).apply {
+    initAddService(services, oldService)
     completion.invoke(this)
     show()
 }
@@ -253,25 +261,24 @@ fun Fragment.showNotificationAlertDialog(
 
 fun Fragment.pickDateTime(calendar: Calendar, doSomethingWith: (Calendar) -> Unit) {
     DatePickerDialog(
-            requireContext(),
-            R.style.CustomDatePickerStyle,
-            { _, year, month, day ->
-                TimePickerDialog(
-                        requireContext(),
-                        R.style.CustomTimePickerStyle,
-                        TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-                            val pickedDateTime = Calendar.getInstance()
-                            pickedDateTime.set(year, month, day, hour, minute)
-                            doSomethingWith(pickedDateTime)
-                        },
-                        calendar.get(Calendar.HOUR_OF_DAY),
-                        calendar.get(Calendar.MINUTE),
-                        false
-                ).show()
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
+        requireContext(),
+        R.style.CustomDatePickerStyle,
+        { _, year, month, day ->
+            TimePickerDialog(
+                requireContext(),
+                R.style.CustomTimePickerStyle,{ _, hour, minute ->
+                    val pickedDateTime = Calendar.getInstance()
+                    pickedDateTime.set(year, month, day, hour, minute)
+                    doSomethingWith(pickedDateTime)
+                },
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                false
+            ).show()
+        },
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
     ).show()
 }
 
@@ -287,13 +294,13 @@ fun Fragment.initToolbarBase(
             visible()
             setBackgroundResource(it)
             safeClick { setRightOnClickListener?.invoke() }
-        } ?: gone()
+        } ?: invisible()
     }
     leftImageBaseButton.apply {
         if (isShowIconLeft) {
             visible()
             safeClick { this@initToolbarBase.goBackFragment() }
-        } else gone()
+        } else invisible()
     }
 }
 
