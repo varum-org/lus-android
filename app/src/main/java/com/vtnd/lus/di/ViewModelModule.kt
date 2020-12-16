@@ -9,6 +9,8 @@ import com.vtnd.lus.ui.intro.IntroSlideViewModel
 import com.vtnd.lus.ui.main.MainViewModel
 import com.vtnd.lus.ui.main.container.ContainerViewModel
 import com.vtnd.lus.ui.main.container.favorite.FavoriteViewModel
+import com.vtnd.lus.ui.main.container.history.HistoryViewModel
+import com.vtnd.lus.ui.main.container.history.tab.TabHistoryViewModel
 import com.vtnd.lus.ui.main.container.home.HomeViewModel
 import com.vtnd.lus.ui.main.container.idolDetail.IdolDetailViewModel
 import com.vtnd.lus.ui.main.container.message.MessageViewModel
@@ -82,6 +84,8 @@ val viewModelModule = module {
         )
     }
     viewModel { VerifyViewModel(userRepository = get()) }
+    viewModel { HistoryViewModel() }
+    viewModel { TabHistoryViewModel() }
     viewModel { RegisterViewModel(userRepository = get()) }
     viewModel { RegisterIdolViewModel(repoRepository = get(), userRepository = get()) }
 }

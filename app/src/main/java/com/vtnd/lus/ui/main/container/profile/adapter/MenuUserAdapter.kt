@@ -7,6 +7,7 @@ import com.vtnd.lus.base.ItemViewHolder
 import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
+import com.vtnd.lus.shared.extensions.safeClick
 import kotlinx.android.synthetic.main.item_menu_user.view.*
 
 class MenuUserAdapter(private val onItemClickListener: (ItemMenu) -> Unit) :
@@ -24,6 +25,9 @@ class MenuUserAdapter(private val onItemClickListener: (ItemMenu) -> Unit) :
                 item.itemData.let {
                     it.title?.let { title -> titleText.text = context.getString(title) }
                     it.icon?.let { icon -> menuImage.setImageResource(icon) }
+                    safeClick { _ ->
+                        onItemClickListener.invoke(it)
+                    }
                 }
             }
         }

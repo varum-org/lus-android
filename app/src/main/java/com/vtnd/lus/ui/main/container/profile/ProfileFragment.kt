@@ -17,6 +17,7 @@ import com.vtnd.lus.shared.decoration.FlexibleGridSpacingItemDecoration
 import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.auth.AuthActivity
+import com.vtnd.lus.ui.main.container.history.HistoryFragment
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuIdolAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuSettingAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuUserAdapter
@@ -56,7 +57,51 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
             }
         }
     }
-    private val menuUserAdapter by lazy { MenuUserAdapter {} }
+    private val menuUserAdapter by lazy {
+        MenuUserAdapter {
+            when (it.title) {
+                R.string.invite_friends, R.string.feedback -> {
+                }
+                else -> {
+                    viewModel.checkLogin { isLogin ->
+                        if (isLogin) {
+                            handleItemOfUser(it.title)
+                        } else activity?.apply {
+                            showLoading(true)
+                            delayTask({
+                                showLoading(false)
+                                startActivity(Intent(this, AuthActivity::class.java))
+                                overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
+                            }, 800)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleItemOfUser(id: Int?) {
+        when (id) {
+            R.string.wallet -> {
+
+            }
+            R.string.image_gallery -> {
+
+            }
+            R.string.bill -> {
+
+            }
+            R.string.history -> {
+                replaceFragment(
+                    R.id.container,
+                    HistoryFragment.newInstance(),
+                    addToBackStack = true,
+                    animateType = AnimateType.SLIDE_TO_RIGHT
+                )
+            }
+        }
+    }
+
     private val menuSettingAdapter by lazy {
         MenuSettingAdapter {
             when (it.title) {
