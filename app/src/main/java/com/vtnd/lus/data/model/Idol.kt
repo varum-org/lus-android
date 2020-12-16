@@ -2,6 +2,7 @@ package com.vtnd.lus.data.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.vtnd.lus.ui.main.container.registerIdol.addressIdol.DomainLocation
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -35,5 +36,7 @@ data class Idol(
     @Json(name = "status")
     val status: Int? = null,
     @Json(name = "user_id")
-    val userId: String = ""
+    val userId: String = "",
+    @Json(name = "location")
+    val location: DomainLocation? = null
 ) : Parcelable

@@ -13,6 +13,8 @@ import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.SignInResponse
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import retrofit2.http.Part
 
 interface UserDataSource {
 
@@ -63,7 +65,8 @@ interface UserDataSource {
             nickName: String?,
             rating: Int?
         ): BaseResponse<List<Idol>>
+        suspend fun uploadFile( body: List<MultipartBody.Part>): BaseResponse<List<String>>
 
-        suspend fun registerIdol(idol: Idol, uris: List<Uri>): BaseResponse<Any>
+        suspend fun registerIdol(idol: Idol): BaseResponse<Idol>
     }
 }

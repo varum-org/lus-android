@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.qualifier.named
-import timber.log.Timber
 
 class RegisterIdolViewModel(
     private val repoRepository: RepoRepository,
@@ -178,9 +177,9 @@ class RegisterIdolViewModel(
         checkRegisterIdol()
     }
 
-    fun setLocation(domainLocation: DomainLocation, address: String?) {
+    fun setLocation(domainLocation: DomainLocation) {
         locationLiveData.postValue(domainLocation)
-        address?.let {
+        domainLocation.name?.let {
             addressLiveData.postValue(it)
             return
         } ?: getAddressForCoordinates(domainLocation)
@@ -204,15 +203,23 @@ class RegisterIdolViewModel(
             addressLiveData,
             isShowLoading = false,
             onRequest = { repoRepository.getAddressForCoordinates(location) },
-            onSuccess = { addressLiveData.postValue(it) },
+            onSuccess = {
+                addressLiveData.postValue(it)
+                locationLiveData.postValue(locationLiveData.value?.copy(name = it))
+            },
             onError = { exception.postValue(it) })
     }
     fun registerIdol(){
         viewModelScope(
             null,
-            onRequest = {userRepository.registerIdol(idolRequest,galleryRequests)},
-            onSuccess = {idolResponse.postValue(Unit)},
-            onError = {exception.postValue(it)}
+            onRequest = {
+                userRepository.registerIdol(
+                    idolRequest.copy(location = locationLiveData.value),
+                    galleryRequests
+                )
+            },
+            onSuccess = { idolResponse.postValue(Unit) },
+            onError = { exception.postValue(it) }
         )
     }
 }

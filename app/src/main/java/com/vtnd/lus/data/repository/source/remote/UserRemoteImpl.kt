@@ -1,8 +1,6 @@
 package com.vtnd.lus.data.repository.source.remote
 
 import android.app.Application
-import android.net.Uri
-import android.provider.OpenableColumns
 import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.repository.source.UserDataSource
 import com.vtnd.lus.data.repository.source.remote.api.ApiService
@@ -15,14 +13,10 @@ import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.shared.scheduler.dispatcher.AppDispatchers
 import com.vtnd.lus.shared.scheduler.dispatcher.DispatchersProvider
 import com.vtnd.lus.shared.type.CategoryIdolType
-import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.qualifier.named
-import java.io.ByteArrayOutputStream
 
 class UserRemoteImpl(
     private val apiService: ApiService,
@@ -61,41 +55,15 @@ class UserRemoteImpl(
 
     override suspend fun getRooms() = apiService.getRooms()
 
-    override suspend fun registerIdol(idol: Idol, uris: List<Uri>) =
-        withContext(dispatchersProvider) {
-            val imageGallery = uploadUris(uris).data
-            apiService.registerIdol(idol.copy(imageGallery = imageGallery))
-        }
-
-    private suspend fun uploadUris(uris: List<Uri>) =
-        withContext(dispatchersProvider) {
-            val bodys = arrayListOf<MultipartBody.Part>()
-            uris.forEach {
-                bodys.add(uploadUri(it))
-            }
-            apiService.uploadFile(bodys)
-        }
-
-    private suspend fun uploadUri(uri: Uri) = withContext(dispatchersProvider) {
-        val contentResolver = application.contentResolver
-        val type = contentResolver.getType(uri)!!
-        val inputStream = contentResolver.openInputStream(uri)!!
-        val fileName = contentResolver.query(uri, null, null, null, null)!!.use {
-            it.moveToFirst()
-            it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
-        }
-        val bytes = ByteArrayOutputStream().use {
-            inputStream.copyTo(it)
-            it.toByteArray()
-        }
-        val requestFile = bytes.toRequestBody(type.toMediaTypeOrNull())
-        val body = MultipartBody.Part.createFormData("image_gallery", fileName, requestFile)
-        body
-    }
+    override suspend fun registerIdol(idol: Idol) =
+        apiService.registerIdol(idol)
 
 
-    override suspend fun search(
-        nickName: String?,
-        rating: Int?
-    ) = apiService.search(nickName, rating)
+override suspend fun search(
+    nickName: String?,
+    rating: Int?
+) = apiService.search(nickName, rating)
+
+override suspend fun uploadFile(body: List<MultipartBody.Part>) =
+    apiService.uploadFile(body)
 }

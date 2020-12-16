@@ -64,8 +64,8 @@ class RegisterFragment : BaseFragment2<FragmentRegisterBinding, RegisterViewMode
     }
 
     override fun onStop() {
-        super.onStop()
         onHideSoftKeyBoard()
+        super.onStop()
     }
 
     override fun showLoading() {

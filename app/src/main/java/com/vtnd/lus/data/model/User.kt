@@ -3,6 +3,7 @@ package com.vtnd.lus.data.model
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.vtnd.lus.ui.main.container.registerIdol.addressIdol.DomainLocation
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -34,5 +35,7 @@ data class User(
     @Json(name = "user_name")
     val userName: String?,
     @Json(name = "__v")
-    val v: Int?
+    val v: Int?,
+    @Json(name = "location")
+    val location: DomainLocation? = null
 ) : Parcelable

@@ -95,10 +95,10 @@ class AddressIdolFragment : BaseFragment<FragmentAddressIdolBinding, RegisterIdo
                             positiveAction("OK") { _, _ ->
                                 viewModel.setLocation(
                                     DomainLocation(
+                                        name = null,
                                         latitude = latLng.latitude,
                                         longitude = latLng.longitude
-                                    ),
-                                    null
+                                    )
                                 )
                             }
                         }
@@ -125,10 +125,10 @@ class AddressIdolFragment : BaseFragment<FragmentAddressIdolBinding, RegisterIdo
                         ?: return Timber.i("Error%s", "Cannot get latitude and longitude")
                     viewModel.setLocation(
                         DomainLocation(
+                           name =  place.address,
                             latitude = latLng.latitude,
                             longitude = latLng.longitude
-                        ),
-                        place.address
+                        )
                     )
                 }
 

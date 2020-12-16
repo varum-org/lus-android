@@ -75,12 +75,13 @@ interface ApiService {
         @Field("device_token") deviceToken: String
     ): BaseResponse<Any>
 
+    @Headers("@: NoAuth")
     @Multipart
     @POST("api/v1/uploads")
     suspend fun uploadFile(@Part body: List<MultipartBody.Part>): BaseResponse<List<String>>
 
     @POST("api/v1/idol")
-    suspend fun registerIdol(@Body idol: Idol): BaseResponse<Any>
+    suspend fun registerIdol(@Body idol: Idol): BaseResponse<Idol>
 
     companion object Factory {
         operator fun invoke(retrofit: Retrofit) = retrofit.create<ApiService>()

@@ -60,8 +60,8 @@ class LoginFragment : BaseFragment2<FragmentLoginBinding, LoginViewModel>(),
     }
 
     override fun onStop() {
-        super.onStop()
         onHideSoftKeyBoard()
+        super.onStop()
     }
 
     override fun showLoading() {

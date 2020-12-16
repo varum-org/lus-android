@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/layout"
         android:background="@color/white"
         android:focusableInTouchMode="true">
 
@@ -75,6 +76,8 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <com.mukesh.OtpView
+            android:clickable="true"
+            android:focusable="true"
             android:id="@+id/codeOtpView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

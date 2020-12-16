@@ -66,7 +66,7 @@ val viewModelModule = module {
     viewModel { SearchViewModel(userRepository = get()) }
     viewModel { FavoriteViewModel() }
     viewModel { NotificationViewModel() }
-    viewModel { ProfileViewModel(userRepository = get()) }
+    viewModel { ProfileViewModel(userRepository = get(),tokenRepository = get()) }
     viewModel {
         LoginViewModel(
             userRepository = get(),

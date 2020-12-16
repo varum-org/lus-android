@@ -9,6 +9,7 @@ import com.vtnd.lus.di.GlideApp
 import com.vtnd.lus.shared.BaseAdapter
 import com.vtnd.lus.shared.BaseDiffUtil
 import com.vtnd.lus.shared.BaseViewHolder
+import com.vtnd.lus.shared.constants.Constants
 import com.vtnd.lus.shared.extensions.safeClick
 import kotlinx.android.synthetic.main.item_add_service.view.*
 
@@ -31,7 +32,7 @@ class AddServiceAdapter(
                     serviceDescriptionText.text = it.serviceDescription
                     servicePrice.text = it.servicePrice.toString()
                     GlideApp.with(serviceIconImage)
-                        .load(it.serviceImagePath)
+                        .load(Constants.BASE_IMAGE_URL + it.serviceImagePath)
                         .placeholder(R.color.pink_50)
                         .error(R.color.red_a400)
                         .dontAnimate()

@@ -1,7 +1,9 @@
 package com.vtnd.lus.ui.main.container.profile
 
+import android.content.Intent
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.vtnd.lus.R
 import com.vtnd.lus.base.BaseFragment
 import com.vtnd.lus.data.model.Idol
@@ -14,6 +16,7 @@ import com.vtnd.lus.shared.constants.Constants
 import com.vtnd.lus.shared.decoration.FlexibleGridSpacingItemDecoration
 import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
+import com.vtnd.lus.ui.auth.AuthActivity
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuIdolAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuSettingAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuUserAdapter
@@ -22,20 +25,33 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(),
+    SwipeRefreshLayout.OnRefreshListener {
 
+    @ExperimentalCoroutinesApi
     private val menuIdolAdapter by lazy {
         MenuIdolAdapter {
             when (it) {
                 is Idol -> {
                 }
                 else -> {
-                    replaceFragment(
-                        R.id.container,
-                        RegisterIdolFragment.newInstance(),
-                        addToBackStack = true,
-                        animateType = AnimateType.SLIDE_TO_RIGHT
-                    )
+                    viewModel.checkLogin { isLogin ->
+                        if (isLogin)
+                            replaceFragment(
+                                R.id.container,
+                                RegisterIdolFragment.newInstance(),
+                                addToBackStack = true,
+                                animateType = AnimateType.SLIDE_TO_RIGHT
+                            )
+                        else activity?.apply {
+                            showLoading(true)
+                            delayTask({
+                                showLoading(false)
+                                startActivity(Intent(this, AuthActivity::class.java))
+                                overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
+                            }, 800)
+                        }
+                    }
                 }
             }
         }
@@ -71,8 +87,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     }
 
     private fun initView() {
-
-
+        profileRefresh.setOnRefreshListener(this)
     }
 
     private fun binDataToView(user: IdolResponse?) {
@@ -120,7 +135,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     @ExperimentalCoroutinesApi
     override fun registerLiveData() = with(viewModel) {
         super.registerLiveData()
-        userProfile.observeLiveData(viewLifecycleOwner, ::binDataToView)
+        userProfile.observeLiveData(viewLifecycleOwner) {
+            binDataToView(it)
+            profileRefresh.isRefreshing = false
+        }
         menuIdolLiveData.observeLiveData(viewLifecycleOwner, menuIdolAdapter::submitList)
         menuUserLiveData.observeLiveData(viewLifecycleOwner, menuUserAdapter::submitList)
         menuSettingLiveData.observeLiveData(viewLifecycleOwner, menuSettingAdapter::submitList)
@@ -129,5 +147,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
     companion object {
         fun newInstance() = ProfileFragment()
+    }
+
+    override fun onRefresh() {
+        viewModel.getUser() {
+            profileRefresh.isRefreshing = false
+        }
     }
 }

@@ -31,6 +31,7 @@ class VerifyFragment : BaseFragment2<FragmentVerifyBinding, VerifyViewModel>() {
         FragmentVerifyBinding.inflate(inflater)
 
     override fun initialize() {
+        setupDismissKeyBoard(activity,layout)
         skipText.safeClick {
             goBackFragment()
         }
@@ -73,8 +74,8 @@ class VerifyFragment : BaseFragment2<FragmentVerifyBinding, VerifyViewModel>() {
     }
 
     override fun onStop() {
-        super.onStop()
         onHideSoftKeyBoard()
+        super.onStop()
     }
 
     private fun handleValidateEmail(emailError: ValidateErrorType.EmailErrorType) {
