@@ -20,10 +20,13 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding, HistoryViewModel>()
     override fun initialize() {
         initToolbarBase(
             getString(R.string.history),
-            iconRight = R.drawable.ic_baseline_settings_24,
             isShowIconLeft = true
         )
-        historyPagerAdapter = HistoryPagerAdapter(childFragmentManager)
+        val titles =
+            listOf(R.string.pending, R.string.approved, R.string.rejected, R.string.finished).map {
+                getString(it)
+            }
+        historyPagerAdapter = HistoryPagerAdapter(titles, childFragmentManager)
         historyViewPaper.apply {
             offscreenPageLimit = 1
             historyTabLayout.setupWithViewPager(this)

@@ -64,7 +64,7 @@ class ProfileViewModel(
                 ),
                 ItemMenu(
                     icon = R.drawable.ic_time_square,
-                    title = R.string.history
+                    title = R.string.history_idol
                 ),
                 ItemMenu(
                     icon = R.drawable.ic_add_user,
@@ -88,8 +88,8 @@ class ProfileViewModel(
         menuSettingLiveData.postValue(
             listOf(
                 ItemMenu(
-                    icon = R.drawable.ic_more,
-                    title = R.string.see_more
+                    icon = R.drawable.ic_time_square,
+                    title = R.string.history
                 ),
                 ItemMenu(
                     icon = R.drawable.ic_help,

@@ -11,6 +11,7 @@
 
     <!-- Date -->
     <string name="format_date_mm_dd_yyyy">MM/dd/yyyy</string>
+    <string name="format_date_mm_dd_yyyy_hh_mm">MM-dd-yyyy HH:mm</string>
 
     <!-- Menu container-->
     <string name="home">Home</string>
@@ -82,6 +83,7 @@
     <string name="gallery">Image Gallery</string>
     <string name="bill">Bill</string>
     <string name="history">History</string>
+    <string name="history_idol">History of Idol</string>
     <string name="add_coin">Add coin</string>
     <string name="invite_friends">Invite friends</string>
     <string name="feedback">Feedback</string>
@@ -104,4 +106,16 @@
     <string name="expire_date_mm_yy">Expire date (MM/yy)</string>
     <string name="cvc">CVC</string>
     <string name="check_wallet">Not enough coins. Please add Coins to your account.</string>
+    <string name="pending">Pending</string>
+    <string name="approved">Approved</string>
+    <string name="approve">Approve</string>
+    <string name="rejected">Rejected</string>
+    <string name="finished">Finished</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="find_idol">Find Idol</string>
+    <string name="start_time_output">Start time: %1$s</string>
+    <string name="address_output">Address: %1$s</string>
+    <string name="note_output">Note: %1$s</string>
+    <string name="total_output">Total: %1$s</string>
 </resources>

@@ -12,6 +12,8 @@ import com.vtnd.lus.ui.main.container.addCard.AddCoinViewModel
 import com.vtnd.lus.ui.main.container.favorite.FavoriteViewModel
 import com.vtnd.lus.ui.main.container.history.HistoryViewModel
 import com.vtnd.lus.ui.main.container.history.tab.TabHistoryViewModel
+import com.vtnd.lus.ui.main.container.historyIdol.HistoryIdolViewModel
+import com.vtnd.lus.ui.main.container.historyIdol.tab.TabHistoryIdolViewModel
 import com.vtnd.lus.ui.main.container.home.HomeViewModel
 import com.vtnd.lus.ui.main.container.idolDetail.IdolDetailViewModel
 import com.vtnd.lus.ui.main.container.message.MessageViewModel
@@ -68,7 +70,7 @@ val viewModelModule = module {
         )
     }
     viewModel { SearchViewModel(userRepository = get()) }
-    viewModel { FavoriteViewModel() }
+    viewModel { FavoriteViewModel(userRepository = get(), tokenRepository = get()) }
     viewModel { NotificationViewModel() }
     viewModel { ProfileViewModel(userRepository = get(),tokenRepository = get()) }
     viewModel {
@@ -86,8 +88,10 @@ val viewModelModule = module {
         )
     }
     viewModel { VerifyViewModel(userRepository = get()) }
-    viewModel { HistoryViewModel() }
-    viewModel { TabHistoryViewModel() }
+    viewModel { TabHistoryViewModel(userRepository = get()) }
+    viewModel { TabHistoryIdolViewModel(userRepository = get()) }
+    viewModel { HistoryIdolViewModel(userRepository = get()) }
+    viewModel { HistoryViewModel(userRepository = get()) }
     viewModel { RegisterViewModel(userRepository = get()) }
     viewModel { RegisterIdolViewModel(repoRepository = get(), userRepository = get()) }
 }

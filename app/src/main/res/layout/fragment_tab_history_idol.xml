@@ -6,16 +6,16 @@
 
         <variable
             name="viewModel"
-            type="com.vtnd.lus.ui.main.container.history.tab.TabHistoryViewModel" />
+            type="com.vtnd.lus.ui.main.container.historyIdol.tab.TabHistoryIdolViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tabHistoryLayout"
+        android:id="@+id/tabHistoryIdolLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tabHistoryRecyclerView"
+            android:id="@+id/tabHistoryIdolRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"

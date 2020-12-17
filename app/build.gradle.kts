@@ -50,7 +50,7 @@ android {
             dimension = "appVariant"
             applicationIdSuffix = ".dev"
             resValue("string", "app_name", "LUS Dev")
-            buildConfigField("String", "BASE_URL", "\"https://lus-sever.herokuapp.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://lusss.herokuapp.com/\"")
             buildConfigField("String", "GEOCODE_URL", "\"https://maps.googleapis.com/maps/api/\"")
             buildConfigField("String", "GEOCODE_API", "\"AIzaSyDCrGZXXsyMYRY2Ewmznl0zVMHtpkRWkEc\"")
         }
@@ -60,7 +60,7 @@ android {
             buildConfigField(
                 "String",
                 "BASE_URL",
-                "\"https://lus-sever.herokuapp.com/\""
+                "\"https://lusss.herokuapp.com/\""
             )
             buildConfigField(
                 "String",

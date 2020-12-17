@@ -75,6 +75,7 @@
     <string name="gallery">Thư viện ảnh</string>
     <string name="bill">Hóa đơn</string>
     <string name="history">Lịch sử</string>
+    <string name="history_idol">Lịch sử của thần tượng</string>
     <string name="add_coin">Thêm xu</string>
     <string name="invite_friends">Mời bạn bè</string>
     <string name="feedback">Phản hồi</string>
@@ -95,4 +96,16 @@
     <string name="card_number">Số thẻ</string>
     <string name="expire_date_mm_yy">Ngày hết hạn (MM/yy)</string>
     <string name="check_wallet">Xu không đủ. Vui lòng nạp thêm Xu vào tài khoản.</string>
+    <string name="pending">Đang chờ xử lý</string>
+    <string name="approved">Đã chấp nhận</string>
+    <string name="approve">Chấp nhận</string>
+    <string name="rejected">Đã từ chối</string>
+    <string name="finished">Đã hoàn thành</string>
+    <string name="accept">Chấp nhận</string>
+    <string name="find_idol">Tìm thần tượng</string>
+    <string name="start_time_output">Thời gian bắt đầu :%1$s</string>
+    <string name="address_output">Địa chỉ: %1$s</string>
+    <string name="note_output">Ghi chú: %1$s</string>
+    <string name="total_output">Tổng: %1$s</string>
+    <string name="reject">Từ chối</string>
 </resources>

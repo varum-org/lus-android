@@ -144,6 +144,15 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         when (view?.id) {
             R.id.backImageButton -> this.goBackFragment()
             R.id.addFavoriteFAB -> {
+                showLoading(true)
+                delayTask({
+                    showLoading(false)
+                    showNotificationAlertDialog {
+                        icon(R.drawable.ic_heart_bold_red)
+                        statusMessage(getString(R.string.favorite))
+                        button(getString(R.string.ok2))
+                    }
+                }, 800)
             }
             R.id.toRentButton -> viewModel.checkLogin() {
                 if (it) showAlert() else authentication()

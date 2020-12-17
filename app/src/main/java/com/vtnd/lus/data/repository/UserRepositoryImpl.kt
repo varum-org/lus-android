@@ -10,10 +10,7 @@ import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.repository.source.RepoDataSource
 import com.vtnd.lus.data.repository.source.TokenDataSource
 import com.vtnd.lus.data.repository.source.UserDataSource
-import com.vtnd.lus.data.repository.source.remote.api.request.OrderRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
+import com.vtnd.lus.data.repository.source.remote.api.request.*
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.shared.extensions.toIdolResponse
 import com.vtnd.lus.shared.extensions.toIdolResponses
@@ -150,6 +147,14 @@ class UserRepositoryImpl(
             }
         }
 
+    override suspend fun getOrders(status: Int) = withResultContext {
+        remote.getOrders(status).data
+    }
+
+    override suspend fun getOrdersUser(status: Int) = withResultContext {
+        remote.getOrdersUser(status).data
+    }
+
     private suspend fun uploadImages(uris: List<Uri>) =
         withContext(dispatchersProvider) {
             return@withContext remote.uploadFile(uploadUris(uris)).data
@@ -158,6 +163,16 @@ class UserRepositoryImpl(
     private suspend fun uploadUris(uris: List<Uri>) =
         withContext(dispatchersProvider) {
             return@withContext uris.map { uploadUri(it) }
+        }
+
+    override suspend fun updateOder(historyRequest: HistoryRequest) =
+        withResultContext {
+            remote.updateOder(historyRequest).data
+        }
+
+    override suspend fun deleteOrder(orderId: String) =
+        withResultContext {
+            remote.deleteOrder(orderId).data
         }
 
     private suspend fun uploadUri(uri: Uri) =

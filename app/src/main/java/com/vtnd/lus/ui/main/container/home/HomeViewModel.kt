@@ -20,8 +20,7 @@ class HomeViewModel(
     private val userRepository: UserRepository,
     private val tokenRepository: TokenRepository
 ) : BaseViewModel(), KoinComponent {
-    private val dispatchersProvider =
-        get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
+    private val dispatchersProvider = get<DispatchersProvider>(named(AppDispatchers.MAIN)).dispatcher()
     val hotIdols = SingleLiveData<List<ItemViewHolder<IdolResponse>>>()
     val storyIdols = SingleLiveData<List<ItemViewHolder<IdolResponse>>>()
     val recommendIdols = SingleLiveData<List<ItemViewHolder<IdolResponse>>>()
@@ -43,7 +42,7 @@ class HomeViewModel(
             onRequest = {
                 userRepository.getIdols(
                     !tokenRepository.getToken().isNullOrEmpty(),
-                    CategoryIdolType.RANDOM
+                    CategoryIdolType.RATING
                 )
             },
             onSuccess = {

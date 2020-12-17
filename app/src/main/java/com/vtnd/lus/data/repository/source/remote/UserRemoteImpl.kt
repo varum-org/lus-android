@@ -69,4 +69,16 @@ class UserRemoteImpl(
 
     override suspend fun uploadFile(body: List<MultipartBody.Part>) =
         apiService.uploadFile(body)
+
+    override suspend fun getOrders(status: Int) =
+        apiService.getOrders(status)
+
+    override suspend fun getOrdersUser(status: Int) =
+        apiService.getOrdersUser(status)
+
+    override suspend fun updateOder(historyRequest: HistoryRequest) =
+        apiService.updateOder(historyRequest)
+
+    override suspend fun deleteOrder(orderId: String) =
+        apiService.deleteOrder(orderId)
 }

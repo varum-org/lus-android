@@ -3,17 +3,16 @@ package com.vtnd.lus.data
 import android.net.Uri
 import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Message
+import com.vtnd.lus.data.model.Order
 import com.vtnd.lus.data.model.Room
-import com.vtnd.lus.data.repository.source.remote.api.request.OrderRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
+import com.vtnd.lus.data.repository.source.remote.api.request.*
 import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponse
 import com.vtnd.lus.shared.scheduler.DataResult
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.flow.Flow
+import retrofit2.http.Body
 
 interface UserRepository {
 
@@ -64,4 +63,12 @@ interface UserRepository {
     suspend fun order(order: OrderRequest): DataResult<Any>
 
     suspend fun addCoin(coin: Int): DataResult<Any>
+
+    suspend fun getOrders(status: Int): DataResult<List<Order>>
+
+    suspend fun getOrdersUser(status: Int): DataResult<List<Order>>
+
+    suspend fun updateOder( historyRequest: HistoryRequest): DataResult<Order>
+
+    suspend fun deleteOrder(orderId: String): DataResult<Any>
 }

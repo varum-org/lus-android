@@ -1,9 +1,6 @@
 package com.vtnd.lus.data.repository.source.remote.api
 
-import com.vtnd.lus.data.model.Idol
-import com.vtnd.lus.data.model.Message
-import com.vtnd.lus.data.model.Room
-import com.vtnd.lus.data.model.Service
+import com.vtnd.lus.data.model.*
 import com.vtnd.lus.data.repository.source.remote.api.request.*
 import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
@@ -86,6 +83,18 @@ interface ApiService {
     @FormUrlEncoded
     @POST("api/v1/wallet")
     suspend fun addCoin(@Field("coin") coin: Int): BaseResponse<Any>
+
+    @GET("api/v1/idols/orders")
+    suspend fun getOrders(@Query("status") status: Int): BaseResponse<List<Order>>
+
+    @GET("api/v1/orders")
+    suspend fun getOrdersUser(@Query("status") status: Int): BaseResponse<List<Order>>
+
+    @PATCH("api/v1/order")
+    suspend fun updateOder(@Body historyRequest: HistoryRequest): BaseResponse<Order>
+
+    @DELETE("api/v1/orders/{order_id}")
+    suspend fun deleteOrder(@Path("order_id") orderId: String): BaseResponse<Any>
 
     companion object Factory {
         operator fun invoke(retrofit: Retrofit) = retrofit.create<ApiService>()

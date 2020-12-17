@@ -49,7 +49,7 @@ class MainApplication : Application(), KoinComponent {
         }
         baseUrl = get(named(Constants.KEY_BASE_URL))
         try {
-            socket = IO.socket( "https://lus-sever.herokuapp.com")
+            socket = IO.socket( "https://lusss.herokuapp.com")
         } catch (e: Exception) {
             Timber.i(e)
         }

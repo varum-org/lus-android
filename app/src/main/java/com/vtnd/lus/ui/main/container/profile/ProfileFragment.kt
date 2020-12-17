@@ -17,7 +17,9 @@ import com.vtnd.lus.shared.decoration.FlexibleGridSpacingItemDecoration
 import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.auth.AuthActivity
+import com.vtnd.lus.ui.main.container.addCard.AddCoinFragment
 import com.vtnd.lus.ui.main.container.history.HistoryFragment
+import com.vtnd.lus.ui.main.container.historyIdol.HistoryIdolFragment
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuIdolAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuSettingAdapter
 import com.vtnd.lus.ui.main.container.profile.adapter.MenuUserAdapter
@@ -83,7 +85,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     private fun handleItemOfUser(id: Int?) {
         when (id) {
             R.string.wallet -> {
-
+                replaceFragment(
+                    containerId = R.id.container,
+                    fragment = AddCoinFragment.newInstance(),
+                    addToBackStack = true
+                )
             }
             R.string.image_gallery -> {
 
@@ -91,10 +97,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
             R.string.bill -> {
 
             }
-            R.string.history -> {
+            R.string.history_idol-> {
                 replaceFragment(
                     R.id.container,
-                    HistoryFragment.newInstance(),
+                    HistoryIdolFragment.newInstance(),
                     addToBackStack = true,
                     animateType = AnimateType.SLIDE_TO_RIGHT
                 )
@@ -105,6 +111,38 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     private val menuSettingAdapter by lazy {
         MenuSettingAdapter {
             when (it.title) {
+                R.string.change_password -> {
+                    viewModel.checkLogin { isLogin ->
+                        if (isLogin) {
+                        } else activity?.apply {
+                            showLoading(true)
+                            delayTask({
+                                showLoading(false)
+                                startActivity(Intent(this, AuthActivity::class.java))
+                                overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
+                            }, 800)
+                        }
+                    }
+                }
+                R.string.history -> {
+                    viewModel.checkLogin { isLogin ->
+                        if (isLogin) {
+                            replaceFragment(
+                                R.id.container,
+                                HistoryFragment.newInstance(),
+                                addToBackStack = true,
+                                animateType = AnimateType.SLIDE_TO_RIGHT
+                            )
+                        } else activity?.apply {
+                            showLoading(true)
+                            delayTask({
+                                showLoading(false)
+                                startActivity(Intent(this, AuthActivity::class.java))
+                                overridePendingTransition(R.anim.bottom_up, R.anim.nothing)
+                            }, 800)
+                        }
+                    }
+                }
                 R.string.log_out -> {
                     requireActivity().showAlertDialog {
                         title("Logout")
