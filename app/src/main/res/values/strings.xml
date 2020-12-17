@@ -60,6 +60,7 @@
     <string name="no">No</string>
     <string name="rent">Rent</string>
     <string name="are_you_sure_to_rent">Are you sure to rent?</string>
+    <string name="add_more_coin">You don\'t have enough coins. Let\'s add coins!</string>
     <string name="present_to">Give gifts to %1$s</string>
     <string name="choose_a_gift_to_impress">Choose a gift to impress</string>
     <string name="search_on_Lus">Search on Lus</string>
@@ -81,6 +82,7 @@
     <string name="gallery">Image Gallery</string>
     <string name="bill">Bill</string>
     <string name="history">History</string>
+    <string name="add_coin">Add coin</string>
     <string name="invite_friends">Invite friends</string>
     <string name="feedback">Feedback</string>
     <string name="success">Success</string>
@@ -97,4 +99,9 @@
     <string name="nickname">Nickname</string>
     <string name="relationship">Relationship (Alone,..)</string>
     <string name="introduce_yourself">Introduce yourself</string>
+    <string name="card_holder_name">Card holder name</string>
+    <string name="card_number">Card number</string>
+    <string name="expire_date_mm_yy">Expire date (MM/yy)</string>
+    <string name="cvc">CVC</string>
+    <string name="check_wallet">Not enough coins. Please add Coins to your account.</string>
 </resources>

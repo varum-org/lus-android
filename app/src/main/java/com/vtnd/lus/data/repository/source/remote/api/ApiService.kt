@@ -4,10 +4,7 @@ import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Message
 import com.vtnd.lus.data.model.Room
 import com.vtnd.lus.data.model.Service
-import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.SignInRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
+import com.vtnd.lus.data.repository.source.remote.api.request.*
 import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponse
@@ -37,8 +34,8 @@ interface ApiService {
     @GET("api/v1/idols")
     suspend fun getIdols(@Query("category") category: String): BaseResponse<List<IdolResponse>>
 
-    @GET("api/v1/user/{id}")
-    suspend fun getUser(@Path("id") id: String): BaseResponse<IdolResponse>
+    @GET("api/v1/user")
+    suspend fun getUser(): BaseResponse<IdolResponse>
 
     @GET("api/v1/services")
     suspend fun getServices(): BaseResponse<List<Service>?>
@@ -82,6 +79,13 @@ interface ApiService {
 
     @POST("api/v1/idol")
     suspend fun registerIdol(@Body idol: Idol): BaseResponse<Idol>
+
+    @POST("api/v1/user/order")
+    suspend fun order(@Body order: OrderRequest): BaseResponse<Any>
+
+    @FormUrlEncoded
+    @POST("api/v1/wallet")
+    suspend fun addCoin(@Field("coin") coin: Int): BaseResponse<Any>
 
     companion object Factory {
         operator fun invoke(retrofit: Retrofit) = retrofit.create<ApiService>()

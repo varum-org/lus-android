@@ -8,6 +8,7 @@ import com.vtnd.lus.ui.auth.welcome.WelcomeViewModel
 import com.vtnd.lus.ui.intro.IntroSlideViewModel
 import com.vtnd.lus.ui.main.MainViewModel
 import com.vtnd.lus.ui.main.container.ContainerViewModel
+import com.vtnd.lus.ui.main.container.addCard.AddCoinViewModel
 import com.vtnd.lus.ui.main.container.favorite.FavoriteViewModel
 import com.vtnd.lus.ui.main.container.history.HistoryViewModel
 import com.vtnd.lus.ui.main.container.history.tab.TabHistoryViewModel
@@ -59,6 +60,7 @@ val viewModelModule = module {
         )
     }
     viewModel { ContainerViewModel() }
+    viewModel { AddCoinViewModel(userRepository = get()) }
     viewModel {
         HomeViewModel(
             userRepository = get(),

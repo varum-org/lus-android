@@ -13,7 +13,6 @@
         android:id="@+id/messageLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <include layout="@layout/layout_toolbar_base" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

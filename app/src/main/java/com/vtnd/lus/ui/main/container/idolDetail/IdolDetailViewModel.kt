@@ -7,8 +7,10 @@ import com.vtnd.lus.data.UserRepository
 import com.vtnd.lus.data.model.Room
 import com.vtnd.lus.data.model.RoomJsonAdapter
 import com.vtnd.lus.data.model.Service
+import com.vtnd.lus.data.repository.source.remote.api.request.OrderRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
+import com.vtnd.lus.shared.extensions.sumPrice
 import com.vtnd.lus.shared.liveData.SingleLiveData
 import com.vtnd.lus.shared.scheduler.dispatcher.AppDispatchers
 import com.vtnd.lus.shared.scheduler.dispatcher.DispatchersProvider
@@ -39,6 +41,7 @@ class IdolDetailViewModel(
     private var idolServices = mutableListOf<ItemService>()
     val room = SingleLiveData<Room>()
     val roomJson = SingleLiveData<String>()
+    val responseOrder = SingleLiveData<Any>()
 
     init {
         startDate.postValue(Date())
@@ -106,8 +109,10 @@ class IdolDetailViewModel(
 
     fun addServicesIdol(services: List<Service>) {
         viewModelScope.launch {
-            idolServices.addAll(services.map { ItemService(it) })
-            idolServicesLiveData.postValue(idolServices)
+            if (idolServices.isNullOrEmpty()) {
+                idolServices.addAll(services.map { ItemService(it) })
+                idolServicesLiveData.postValue(idolServices)
+            }
         }
     }
 
@@ -118,9 +123,35 @@ class IdolDetailViewModel(
             onError = { exception.postValue(it) })
     }
 
+    fun oderServices() {
+        viewModelScope(responseOrder,
+            onRequest = {
+                userRepository.order(OrderRequest(
+                    user_id = idolResponseLiveData.value?.idol?.userId!!,
+                    startDate = startDate.value!!,
+                    note = note.value.toString(),
+                    services = cardServices.map {
+                        Service(
+                            serviceCode = it.service.serviceCode,
+                            serviceName = it.service.serviceName,
+                            servicePrice = it.service.servicePrice,
+                            hour = it.hours
+                        )
+                    }
+                ))
+            },
+            onSuccess = { responseOrder.postValue(it) },
+            onError = { exception.postValue(it) })
+    }
+
     fun removeAllServiceFromCard() {
-        cardServices.clear()
-        cardServicesLiveData.postValue(cardServices)
+        cardServices = mutableListOf()
+        cardServicesLiveData.postValue(ArrayList(cardServices))
+        idolServices = ArrayList(idolServices.map {
+            if (it.selected) it.copy(selected = !it.selected)
+            else it
+        })
+        idolServicesLiveData.postValue(idolServices)
     }
 
     private fun updateIdolService(service: Service) {
@@ -130,5 +161,13 @@ class IdolDetailViewModel(
             else it
         })
         idolServicesLiveData.postValue(idolServices)
+    }
+
+    fun checkWallet(check: (Boolean) -> Unit) {
+        viewModelScope.launch(dispatchersProvider) {
+            userRepository.user()?.user?.wallet?.let {
+                check.invoke(cardServices.sumPrice() <= it)
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.vtnd.lus.ui.main.container.idolDetail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log.i
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ import com.vtnd.lus.shared.decoration.HorizontalMarginItemDecoration
 import com.vtnd.lus.shared.extensions.*
 import com.vtnd.lus.shared.liveData.observeLiveData
 import com.vtnd.lus.ui.auth.AuthActivity
+import com.vtnd.lus.ui.main.container.addCard.AddCoinFragment
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.CartAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.GalleryAdapter
 import com.vtnd.lus.ui.main.container.idolDetail.adapter.ServiceAdapter
@@ -38,6 +40,7 @@ import kotlinx.android.synthetic.main.layout_cart_bottom.*
 import kotlinx.android.synthetic.main.layout_information_idol.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import java.util.*
 
 class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailViewModel>(), View.OnClickListener {
@@ -52,7 +55,6 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         viewModel.addServiceToCard(d, p)
     }
     private var calendar = getCalendar()
-    private var idolResponse: IdolResponse? = null
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,12 +66,13 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
             FragmentIdolDetailBinding.inflate(inflater)
 
     override fun initialize() {
+        setupBottomSheet()
         socket = (activity?.application as MainApplication).socket
         setupDismissKeyBoard(activity, layout)
         arguments?.apply {
             getParcelable<IdolResponse>(ARGUMENT_IDOL)?.let {
                 idolImage.transitionName = it.idol!!.id
-                idolResponse = it
+                viewModel.idolResponseLiveData.postValue(it)
                 viewModel.addServicesIdol(it.idol.services)
             } ?: apply {
                 getString(ARGUMENT_IDOL_ID)?.let {
@@ -78,7 +81,6 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
                 }
             }
         }
-        setupBottomSheet()
         listenToViews(
             messageFAB,
             backImageButton,
@@ -88,7 +90,6 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
             noteText
         )
         setupRecyclerView()
-        binDataToView(idolResponse)
     }
 
     override fun registerLiveData() = with(viewModel) {
@@ -115,7 +116,6 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
             serviceAdapter.submitList(it)
         }
         idolResponseLiveData.observeLiveData(viewLifecycleOwner) {
-            idolResponse = it
             viewModel.addServicesIdol(it.idol!!.services)
             binDataToView(it)
         }
@@ -134,6 +134,9 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
                 }
             }
         }
+        responseOrder.observeLiveData(viewLifecycleOwner) {
+            showNotificationSuccessAlertDialog()
+        }
     }
 
     @ExperimentalCoroutinesApi
@@ -148,7 +151,9 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
             R.id.startDateImage -> onStartDateClick()
             R.id.noteText -> onNoteClick()
             R.id.messageFAB -> viewModel.checkLogin() {
-                if (it) idolResponse?.user?.id?.let { id -> viewModel.getRoom(id) }
+                if (it) viewModel.idolResponseLiveData.value?.user?.id?.let { id ->
+                    viewModel.getRoom(id)
+                }
                 else authentication()
             }
         }
@@ -166,11 +171,25 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
             leftButton(getString(R.string.no))
             rightButton(getString(R.string.yes)) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                showLoading(true)
-                delayTask({
-                    showLoading(false)
-                    showNotificationSuccessAlertDialog()
-                }, 800)
+                viewModel.checkWallet {
+                    if (it) viewModel.oderServices()
+                    else showAddCard()
+                }
+            }
+        }
+    }
+
+    private fun showAddCard() {
+        showAlertDialog {
+            title(getString(R.string.add_coin))
+            message(getString(R.string.add_more_coin))
+            leftButton(getString(R.string.no))
+            rightButton(getString(R.string.yes)) {
+                replaceFragment(
+                    containerId = R.id.container,
+                    fragment = AddCoinFragment.newInstance(),
+                    addToBackStack = true
+                )
             }
         }
     }
@@ -179,7 +198,9 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         showNotificationAlertDialog {
             icon(R.drawable.ic_check)
             statusMessage(getString(R.string.success))
-            button(getString(R.string.ok2))
+            button(getString(R.string.ok2)) {
+                viewModel.removeAllServiceFromCard()
+            }
         }
 //        showNotificationAlertDialog {
 //            icon(R.drawable.ic_cancel)
@@ -236,8 +257,8 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         }
     }
 
-    private fun binDataToView(idolResponse: IdolResponse?) {
-        setupViewPager2()
+    private fun binDataToView(idolResponse: IdolResponse) {
+        setupViewPager2(idolResponse)
         setupIndicators()
         setupCurrentIndicator(0)
         idolGalleryViewPager2.registerOnPageChangeCallback(object :
@@ -265,16 +286,14 @@ class IdolDetailFragment : BaseFragment<FragmentIdolDetailBinding, IdolDetailVie
         }
     }
 
-    private fun setupViewPager2() {
-        idolResponse?.let {
-            idolGalleryViewPager2.apply {
-                adapter = galleryAdapter.apply {
-                    it.idol!!.imageGallery.run { subList(1, this.size) }
-                        .let { submitList(it.map { imagePath -> ItemViewHolder(imagePath) }) }
-                }
-                addItemDecoration(HorizontalMarginItemDecoration(context, R.dimen.dp_16))
-                offscreenPageLimit = 1
+    private fun setupViewPager2(idolResponse: IdolResponse) {
+        idolGalleryViewPager2.apply {
+            adapter = galleryAdapter.apply {
+                idolResponse.idol!!.imageGallery.run { subList(1, this.size) }
+                    .let { submitList(it.map { imagePath -> ItemViewHolder(imagePath) }) }
             }
+            addItemDecoration(HorizontalMarginItemDecoration(context, R.dimen.dp_16))
+            offscreenPageLimit = 1
         }
     }
 

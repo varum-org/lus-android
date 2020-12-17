@@ -17,5 +17,7 @@ data class Service(
     @Json(name = "service_description")
     val serviceDescription: String? = null,
     @Json(name = "service_image_path")
-    val serviceImagePath: String? = null
+    val serviceImagePath: String? = null,
+    @Json(name = "hour")
+    val hour: Int? = null
 ) : Parcelable

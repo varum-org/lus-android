@@ -37,5 +37,7 @@ data class User(
     @Json(name = "__v")
     val v: Int?,
     @Json(name = "location")
-    val location: DomainLocation? = null
+    val location: DomainLocation? = null,
+    @Json(name = "wallet")
+    val wallet: Int? = 0
 ) : Parcelable

@@ -4,7 +4,7 @@ import android.net.Uri
 import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Message
 import com.vtnd.lus.data.model.Room
-import com.vtnd.lus.data.model.User
+import com.vtnd.lus.data.repository.source.remote.api.request.OrderRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
@@ -14,7 +14,6 @@ import com.vtnd.lus.data.repository.source.remote.api.response.RoomResponse
 import com.vtnd.lus.shared.scheduler.DataResult
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.flow.Flow
-import retrofit2.http.Body
 
 interface UserRepository {
 
@@ -31,7 +30,7 @@ interface UserRepository {
 
     suspend fun verifyAccount(verifyRequest: VerifyRequest): DataResult<Any>
 
-    suspend fun getUser(id: String): DataResult<Unit>
+    suspend fun getUser(): DataResult<Unit>
 
     suspend fun logout(): DataResult<Any>
 
@@ -50,7 +49,7 @@ interface UserRepository {
         id: String
     ): DataResult<IdolResponse>
 
-    suspend fun registerIdol(idol: Idol,uris: List<Uri>): DataResult<Any>
+    suspend fun registerIdol(idol: Idol, uris: List<Uri>): DataResult<Any>
 
     //Room
 
@@ -60,4 +59,9 @@ interface UserRepository {
     suspend fun getMessageFromRoom(id: String): DataResult<List<Message>>
 
     suspend fun getRooms(): DataResult<List<RoomResponse>>
+
+    // order
+    suspend fun order(order: OrderRequest): DataResult<Any>
+
+    suspend fun addCoin(coin: Int): DataResult<Any>
 }

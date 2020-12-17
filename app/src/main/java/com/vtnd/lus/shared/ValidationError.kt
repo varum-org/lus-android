@@ -55,6 +55,12 @@ class ValidateError {
         else -> ValidateResult(true, BaseErrorType.NONE)
     }
 
+
+    fun validateCoin(value: Int?) = when (value) {
+        null -> ValidateResult(false, BaseErrorType.IS_EMPTY)
+        else -> ValidateResult(true, BaseErrorType.NONE)
+    }
+
     fun validatePhone(phone: String?) = when {
         phone.isNullOrBlank() -> ValidateResult(false, PhoneErrorType.PHONE_EMPTY)
         !Patterns.PHONE.matcher(phone).matches() ->

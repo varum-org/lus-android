@@ -15,6 +15,8 @@
     <string name="favorite">Yêu thích</string>
     <string name="notification">Thông báo</string>
     <string name="message">Tin nhắn</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
     <string name="profile">Hồ sơ</string>
     <string name="skip_intro">Bỏ qua phần giới thiệu</string>
     <string name="next">Tiếp theo</string>
@@ -35,6 +37,8 @@
     <string name="you_will_get_a_otp_via_email">Bạn sẽ nhận được mã OTP qua Email</string>
     <string name="verification">Xác minh</string>
     <string name="verify_email_success">Xác minh email thành công!</string>
+    <string name="are_you_sure_to_rent">Bạn có chắc muốn thuê ?</string>
+    <string name="add_more_coin">Bạn không có đủ xu. Hãy thêm xu ngay!</string>
     <string name="idol_address">Quê quán %1$s</string>
     <string name="live_in">Đang ở %1$s</string>
     <string name="crush_national_citizen">Crush Quốc Dân</string>
@@ -71,6 +75,7 @@
     <string name="gallery">Thư viện ảnh</string>
     <string name="bill">Hóa đơn</string>
     <string name="history">Lịch sử</string>
+    <string name="add_coin">Thêm xu</string>
     <string name="invite_friends">Mời bạn bè</string>
     <string name="feedback">Phản hồi</string>
     <string name="success">Thành công</string>
@@ -86,4 +91,8 @@
     <string name="nickname">Biệt danh</string>
     <string name="relationship">Mối quan hệ (cô đơn,..)</string>
     <string name="introduce_yourself">Giới thiệu về bản thân</string>
+    <string name="card_holder_name">Tên chủ thẻ</string>
+    <string name="card_number">Số thẻ</string>
+    <string name="expire_date_mm_yy">Ngày hết hạn (MM/yy)</string>
+    <string name="check_wallet">Xu không đủ. Vui lòng nạp thêm Xu vào tài khoản.</string>
 </resources>

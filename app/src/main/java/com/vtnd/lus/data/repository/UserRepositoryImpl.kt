@@ -10,6 +10,7 @@ import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.repository.source.RepoDataSource
 import com.vtnd.lus.data.repository.source.TokenDataSource
 import com.vtnd.lus.data.repository.source.UserDataSource
+import com.vtnd.lus.data.repository.source.remote.api.request.OrderRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
@@ -48,7 +49,7 @@ class UserRepositoryImpl(
             val (token, user) = remote.signIn(email, password).data
             user?.id?.let { id ->
                 token?.let { tokenLocal.saveToken(it) } ?: tokenLocal.clearToken()
-                val profile = remote.getUser(id).data
+                val profile = remote.getUser().data
                 local.saveUser(profile)
             } ?: tokenLocal.clearToken()
         }
@@ -63,9 +64,9 @@ class UserRepositoryImpl(
             remote.verifyAccount(verifyRequest).data
         }
 
-    override suspend fun getUser(id: String) =
+    override suspend fun getUser() =
         withResultContext {
-            val user = remote.getUser(id).data
+            val user = remote.getUser().data
             user.user.id?.let { local.saveUser(user) } ?: tokenLocal.clearToken()
         }
 
@@ -111,6 +112,19 @@ class UserRepositoryImpl(
             remote.getRooms().data
         }
 
+    override suspend fun order(order: OrderRequest) =
+        withResultContext {
+            remote.order(order).data
+        }
+
+    override suspend fun addCoin(coin: Int) =
+        withResultContext {
+            remote.addCoin(coin).data.let {
+                val user = remote.getUser().data
+                user.user.id?.let { local.saveUser(user) } ?: tokenLocal.clearToken()
+            }
+        }
+
     override suspend fun search(nickName: String?, rating: Int?) =
         withResultContext {
             remote.search(nickName, rating).data
@@ -128,7 +142,7 @@ class UserRepositoryImpl(
             val newIdol =
                 remote.registerIdol(idol.copy(imageGallery = uploadImages(uris))).data
             try {
-                val user = remote.getUser(newIdol.userId).data
+                val user = remote.getUser().data
                 user.user.id?.let { local.saveUser(user) } ?: tokenLocal.clearToken()
             } catch (ex: Throwable) {
                 ex.printStackTrace()

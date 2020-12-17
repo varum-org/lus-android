@@ -1,9 +1,9 @@
 package com.vtnd.lus.data.repository.source
 
-import android.net.Uri
 import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.model.Message
 import com.vtnd.lus.data.model.Room
+import com.vtnd.lus.data.repository.source.remote.api.request.OrderRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
 import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
@@ -14,7 +14,7 @@ import com.vtnd.lus.data.repository.source.remote.api.response.SignInResponse
 import com.vtnd.lus.shared.type.CategoryIdolType
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
-import retrofit2.http.Part
+import retrofit2.http.Field
 
 interface UserDataSource {
 
@@ -38,7 +38,7 @@ interface UserDataSource {
 
         suspend fun verifyAccount(verifyRequest: VerifyRequest): BaseResponse<Any>
 
-        suspend fun getUser(id: String): BaseResponse<IdolResponse>
+        suspend fun getUser(): BaseResponse<IdolResponse>
 
         suspend fun logout(deviceToken: String): BaseResponse<Any>
 
@@ -65,8 +65,14 @@ interface UserDataSource {
             nickName: String?,
             rating: Int?
         ): BaseResponse<List<Idol>>
-        suspend fun uploadFile( body: List<MultipartBody.Part>): BaseResponse<List<String>>
+
+        suspend fun uploadFile(body: List<MultipartBody.Part>): BaseResponse<List<String>>
 
         suspend fun registerIdol(idol: Idol): BaseResponse<Idol>
+
+        suspend fun addCoin(coin: Int): BaseResponse<Any>
+
+        //order
+        suspend fun order(order: OrderRequest): BaseResponse<Any>
     }
 }

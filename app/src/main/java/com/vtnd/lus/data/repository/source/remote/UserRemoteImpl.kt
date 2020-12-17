@@ -4,10 +4,7 @@ import android.app.Application
 import com.vtnd.lus.data.model.Idol
 import com.vtnd.lus.data.repository.source.UserDataSource
 import com.vtnd.lus.data.repository.source.remote.api.ApiService
-import com.vtnd.lus.data.repository.source.remote.api.request.RoomRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.SignInRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.SignUpRequest
-import com.vtnd.lus.data.repository.source.remote.api.request.VerifyRequest
+import com.vtnd.lus.data.repository.source.remote.api.request.*
 import com.vtnd.lus.data.repository.source.remote.api.response.BaseResponse
 import com.vtnd.lus.data.repository.source.remote.api.response.IdolResponse
 import com.vtnd.lus.shared.scheduler.dispatcher.AppDispatchers
@@ -34,7 +31,7 @@ class UserRemoteImpl(
     override suspend fun verifyAccount(verifyRequest: VerifyRequest) =
         apiService.verifyAccount(verifyRequest)
 
-    override suspend fun getUser(id: String) = apiService.getUser(id)
+    override suspend fun getUser() = apiService.getUser()
 
     override suspend fun logout(deviceToken: String) = apiService.logout(deviceToken)
 
@@ -58,12 +55,18 @@ class UserRemoteImpl(
     override suspend fun registerIdol(idol: Idol) =
         apiService.registerIdol(idol)
 
+    override suspend fun addCoin(coin: Int) =
+        apiService.addCoin(coin)
 
-override suspend fun search(
-    nickName: String?,
-    rating: Int?
-) = apiService.search(nickName, rating)
+    override suspend fun order(order: OrderRequest) =
+        apiService.order(order)
 
-override suspend fun uploadFile(body: List<MultipartBody.Part>) =
-    apiService.uploadFile(body)
+
+    override suspend fun search(
+        nickName: String?,
+        rating: Int?
+    ) = apiService.search(nickName, rating)
+
+    override suspend fun uploadFile(body: List<MultipartBody.Part>) =
+        apiService.uploadFile(body)
 }

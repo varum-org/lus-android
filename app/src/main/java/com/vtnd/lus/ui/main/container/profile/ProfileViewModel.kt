@@ -118,7 +118,7 @@ class ProfileViewModel(
             isShowLoading = true,
             onRequest = {
                 userRepository.user()?.user?.let {
-                    userRepository.getUser(it.id!!)
+                    userRepository.getUser()
                 } ?: DataResult.Success(Any())
             },
             onSuccess = {

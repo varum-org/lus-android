@@ -10,8 +10,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/historyLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <include layout="@layout/layout_toolbar_base" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/historyTabLayout"
@@ -23,7 +26,7 @@
             app:tabIndicatorColor="@color/red_a400"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutToolbarBase" />
 
         <com.vtnd.lus.shared.widget.SwipeLockableViewPager
             android:id="@+id/historyViewPaper"
