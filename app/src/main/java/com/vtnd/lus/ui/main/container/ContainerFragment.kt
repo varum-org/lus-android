@@ -36,7 +36,6 @@ class ContainerFragment : BaseFragment<FragmentContainerBinding, ContainerViewMo
         containerViewPaper.apply {
             addOnPageChangeListener(this@ContainerFragment)
             setSwipePagingEnabled(false)
-            offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
             val fragments = listOf<Fragment>(home, search, favorite, notification, profile)
             adapter = ContainerViewPagerAdapter(childFragmentManager, fragments)
             currentItem = POSITION_NAVIGATE_HOME

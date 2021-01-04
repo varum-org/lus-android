@@ -56,7 +56,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
                 viewModel.search(s.toString())
             }
         })
-        setupDismissKeyBoard(requireActivity(), searchLayout)
         searchRecyclerView.apply {
             setHasFixedSize(true)
             addItemDecoration(VerticalSpaceItemDecoration(resources.getDimensionPixelOffset(R.dimen.dp_1)))

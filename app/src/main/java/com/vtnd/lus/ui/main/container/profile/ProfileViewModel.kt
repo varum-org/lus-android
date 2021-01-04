@@ -47,7 +47,7 @@ class ProfileViewModel(
         postMenuSetting()
     }
 
-    fun postMenuUser() {
+    private fun postMenuUser() {
         menuUserLiveData.postValue(
             listOf(
                 ItemMenu(
