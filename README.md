@@ -4,7 +4,7 @@
 
 **Framework:** Android Studio
 
-**Sever:** <a href="https://github.com/VTNPlusD/lus-sever" >Sever NodeJs</a>
+**Server:** <a href="https://github.com/VTNPlusD/lus-sever" >Sever NodeJs</a>
 
 **A Colection of samples using the Architechture Components:**
 - Lifecycle-aware components
